@@ -1268,10 +1268,10 @@
     btn.textContent = currentLang === 'es' ? 'Enviando...' : 'Sending...';
     btn.disabled = true;
     try {
-      const res = await fetch('https://formspree.io/f/meelrqeq', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name, email, business, type, message })
+        body: JSON.stringify({ access_key: '337075f5-4f51-4287-85f9-71d03aee9283', name, email, business, type, message })
       });
       if (res.ok) {
         document.getElementById('form-body').style.display = 'none';
