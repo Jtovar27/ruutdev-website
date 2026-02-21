@@ -1947,10 +1947,6 @@
     document.getElementById('res-bar').style.width = potential + '%';
   }
 
-  // Init on load — default to English
-  setLang("en");
-  updateCalc();
-
   /* ── FAQ ── */
   function toggleFaq(el) {
     const isOpen = el.classList.contains('open');
@@ -2253,6 +2249,10 @@
   }
 
   /* ── Scroll Reveal ── */
+
+  // Init — must run AFTER translations object and setLang are defined
+  setLang("en");
+  updateCalc();
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
