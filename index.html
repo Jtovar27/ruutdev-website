@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RuutDev — Web Development & AI Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f0f3f8;
+      --bg2: #e8ecf4;
+      --surface: #ffffff;
+      --border: rgba(0,0,0,0.07);
+      --text: #0a0d14;
+      --text2: #4a5568;
+      --blue: #1a6dff;
+      --blue-glow: rgba(26,109,255,0.25);
+      --blue-soft: rgba(26,109,255,0.08);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 16px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 6%;
+      background: rgba(240,243,248,0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .nav-logo span {
+      width: 10px; height: 10px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 12px var(--blue-glow);
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text2);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .lang-toggle {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px;
+    }
+
+    .lang-btn {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      background: transparent;
+      color: var(--text2);
+    }
+
+    .lang-btn.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px var(--blue-glow);
+    }
+
+    .nav-cta {
+      background: var(--text);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      text-decoration: none;
+      transition: all var(--transition) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue) !important;
+      color: #fff !important;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 140px 6% 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+    }
+
+    .blob-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,109,255,0.15) 0%, transparent 70%);
+      top: -200px; left: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(26,109,255,0.1) 0%, transparent 70%);
+      bottom: -100px; right: -50px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    /* Grid pattern */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(26,109,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,109,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue-soft);
+      border: 1px solid rgba(26,109,255,0.2);
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--text);
+      max-width: 900px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--blue);
+      position: relative;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300;
+      color: var(--text2);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 24px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+      margin-top: 44px;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--blue);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 20px var(--blue-glow);
+      transition: all var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(26,109,255,0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.04em;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text2);
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 6%; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--blue);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text);
+      max-width: 600px;
+    }
+
+    .section-intro {
+      font-size: 1.05rem;
+      color: var(--text2);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+
+    .services-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: rgba(26,109,255,0.2);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--blue-soft);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.4rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 0.92rem;
+      color: var(--text2);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .service-price {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-soft);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--bg2); }
+
+    .portfolio-header {
+      margin-bottom: 60px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.1);
+    }
+
+    .portfolio-preview {
+      height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-restaurant { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+    .preview-barbershop { background: linear-gradient(135deg, #2d1b00 0%, #5c3300 50%, #8b4513 100%); }
+    .preview-medical { background: linear-gradient(135deg, #003d5c 0%, #006494 50%, #1a8fe3 100%); }
+    .preview-store { background: linear-gradient(135deg, #1a0533 0%, #3d1066 50%, #6a1e9a 100%); }
+
+    .preview-label {
+      position: absolute;
+      bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
+    }
+
+    .portfolio-info {
+      padding: 24px;
+    }
+
+    .portfolio-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .portfolio-info p {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .portfolio-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--blue-soft);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .portfolio-coming {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 60px;
+      color: var(--text2);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--bg); }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      margin-top: 60px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .process-step {
+      background: var(--surface);
+      padding: 40px 32px;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--blue-soft);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -0.05em;
+    }
+
+    .process-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .process-step p {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem;
+      color: var(--text2);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #25D366;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    }
+
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .footer-logo span {
+      width: 8px; height: 8px;
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    footer p { font-size: 0.82rem; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .services-header { flex-direction: column; }
+      .hero-stats { gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 16px 4%; }
+      section { padding: 72px 4%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <span></span>RuutDev
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+    <li><a href="#process" data-i18n="nav.process">Proceso</a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+    </li>
+    <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Hablemos</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    <span data-i18n="hero.badge">Desarrollo Web & Soluciones AI</span>
+  </div>
+
+  <h1 data-i18n="hero.title">Tu negocio merece una<br /><em>presencia digital real</em></h1>
+
+  <p class="hero-sub" data-i18n="hero.sub">
+    Construimos sitios web modernos, rápidos y diseñados para convertir visitantes en clientes. Desde landing pages hasta herramientas con inteligencia artificial.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1">Ver demos →</a>
+    <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Contáctanos</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">48h</div>
+      <div class="stat-label" data-i18n="stat.1">Demo lista en</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$0</div>
+      <div class="stat-label" data-i18n="stat.2">Sin compromiso inicial</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label" data-i18n="stat.3">Personalizado</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">USA & VE</div>
+      <div class="stat-label" data-i18n="stat.4">Presencia en ambos mercados</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label" data-i18n="services.label">Servicios</div>
+      <h2 data-i18n="services.title">Todo lo que tu negocio necesita en línea</h2>
+    </div>
+    <p class="section-intro" data-i18n="services.sub">
+      No vendemos plantillas. Construimos cada sitio desde cero, adaptado a tu negocio específico.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🚀</div>
+      <h3 data-i18n="s1.title">Landing Page Profesional</h3>
+      <p data-i18n="s1.desc">Página de presentación diseñada para convertir. Incluye diseño responsivo, SEO básico y formulario de contacto.</p>
+      <span class="service-price" data-i18n="s1.price">Desde $500</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🛒</div>
+      <h3 data-i18n="s2.title">Tienda en Línea</h3>
+      <p data-i18n="s2.desc">E-commerce completo con carrito, pagos integrados y panel de administración para gestionar tus productos.</p>
+      <span class="service-price" data-i18n="s2.price">Desde $1,200</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🤖</div>
+      <h3 data-i18n="s3.title">Herramientas con AI</h3>
+      <p data-i18n="s3.desc">Chatbots, automatizaciones, análisis de datos y herramientas inteligentes que ahorran tiempo y aumentan tus ventas.</p>
+      <span class="service-price" data-i18n="s3.price">Desde $2,500</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📊</div>
+      <h3 data-i18n="s4.title">Dashboard & Sistemas</h3>
+      <p data-i18n="s4.desc">Paneles de control personalizados para gestionar tu negocio, ver métricas y tomar decisiones con datos reales.</p>
+      <span class="service-price" data-i18n="s4.price">Desde $2,000</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎨</div>
+      <h3 data-i18n="s5.title">Rediseño Web</h3>
+      <p data-i18n="s5.desc">¿Tu sitio ya existe pero se ve anticuado? Lo modernizamos, lo hacemos más rápido y lo optimizamos para móviles.</p>
+      <span class="service-price" data-i18n="s5.price">Desde $400</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🌐</div>
+      <h3 data-i18n="s6.title">Demo Gratuita — Sin Compromiso</h3>
+      <p data-i18n="s6.desc">Construimos una versión demo de tu sitio ideal. La ves, la pruebas, y solo pagas si decides seguir adelante.</p>
+      <span class="service-price" data-i18n="s6.price">Gratis</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTFOLIO ── -->
+<section id="portfolio">
+  <div class="portfolio-header reveal">
+    <div class="section-label" data-i18n="portfolio.label">Portfolio</div>
+    <h2 data-i18n="portfolio.title">Demos por industria</h2>
+    <p class="section-intro" data-i18n="portfolio.sub">
+      Así lucen nuestras soluciones. Cada demo es un ejemplo real de lo que podemos construir para tu negocio.
+    </p>
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="portfolio-card reveal">
+      <div class="portfolio-preview preview-restaurant">
+        🍽️
+        <span class="preview-label" data-i18n="demo.restaurant">Restaurante</span>
+      </div>
+      <div class="portfolio-info">
+        <h3 data-i18n="demo.restaurant.title">La Mesa — Restaurante</h3>
+        <p data-i18n="demo.restaurant.desc">Landing page con menú digital, reservas en línea y galería de platos. Diseño elegante y moderno.</p>
+        <div class="portfolio-tags">
+          <span class="tag">Reservas</span>
+          <span class="tag">Menú Digital</span>
+          <span class="tag">Responsive</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal">
+      <div class="portfolio-preview preview-barbershop">
+        ✂️
+        <span class="preview-label" data-i18n="demo.barbershop">Barbería</span>
+      </div>
+      <div class="portfolio-info">
+        <h3 data-i18n="demo.barbershop.title">UrbanCut — Barbería</h3>
+        <p data-i18n="demo.barbershop.desc">Sistema de citas online, galería de estilos, servicios y precios. Con integración a WhatsApp.</p>
+        <div class="portfolio-tags">
+          <span class="tag">Citas Online</span>
+          <span class="tag">WhatsApp</span>
+          <span class="tag">Galería</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal">
+      <div class="portfolio-preview preview-medical">
+        🏥
+        <span class="preview-label" data-i18n="demo.medical">Clínica</span>
+      </div>
+      <div class="portfolio-info">
+        <h3 data-i18n="demo.medical.title">MedCare — Clínica</h3>
+        <p data-i18n="demo.medical.desc">Presentación de servicios médicos, equipo de doctores, horarios y formulario de consultas.</p>
+        <div class="portfolio-tags">
+          <span class="tag">Consultas</span>
+          <span class="tag">Doctores</span>
+          <span class="tag">SEO</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-card reveal">
+      <div class="portfolio-preview preview-store">
+        👗
+        <span class="preview-label" data-i18n="demo.store">Tienda</span>
+      </div>
+      <div class="portfolio-info">
+        <h3 data-i18n="demo.store.title">StyleHub — Tienda</h3>
+        <p data-i18n="demo.store.desc">E-commerce con catálogo de productos, carrito de compras y proceso de pago integrado.</p>
+        <div class="portfolio-tags">
+          <span class="tag">E-commerce</span>
+          <span class="tag">Pagos</span>
+          <span class="tag">Catálogo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-coming reveal">
+      <span style="font-size:2rem">⚡</span>
+      <span data-i18n="portfolio.coming">Más demos próximamente...</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section id="process">
+  <div class="reveal">
+    <div class="section-label" data-i18n="process.label">Proceso</div>
+    <h2 data-i18n="process.title">Simple, rápido, sin sorpresas</h2>
+    <p class="section-intro" data-i18n="process.sub">
+      De la conversación a tu sitio en línea en días, no en meses.
+    </p>
+  </div>
+
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <h3 data-i18n="p1.title">Conversación</h3>
+      <p data-i18n="p1.desc">Nos cuentas sobre tu negocio, tus clientes y lo que necesitas. Sin tecnicismos.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">02</div>
+      <h3 data-i18n="p2.title">Demo Gratis</h3>
+      <p data-i18n="p2.desc">Construimos una demo de tu sitio en 48 horas. La ves en acción antes de pagar un dólar.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">03</div>
+      <h3 data-i18n="p3.title">Aprobación</h3>
+      <p data-i18n="p3.desc">¿Te gusta? Damos luz verde, ajustamos detalles y preparamos todo para publicar.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">04</div>
+      <h3 data-i18n="p4.title">En Línea</h3>
+      <p data-i18n="p4.desc">Tu sitio va al internet con dominio, hosting y optimización. Listo para recibir clientes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label" data-i18n="contact.label">Contacto</div>
+    <h2 data-i18n="contact.title">Empecemos a construir tu presencia digital</h2>
+  </div>
+
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <h3 data-i18n="contact.info.title">¿Hablamos?</h3>
+      <p data-i18n="contact.info.desc">
+        Ya sea que tengas un negocio establecido o estés empezando, podemos ayudarte. La primera consulta y la demo son completamente gratis. Sin letra pequeña.
+      </p>
+      <a href="https://wa.me/14071234567?text=Hola%20RuutDev%2C%20me%20interesa%20una%20demo%20gratis." class="whatsapp-btn" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="contact.whatsapp">Escribir por WhatsApp</span>
+      </a>
+    </div>
+
+    <div class="contact-form reveal">
+      <div id="form-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.name">Tu nombre</label>
+            <input type="text" id="fname" placeholder="Johan" />
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.business">Nombre del negocio</label>
+            <input type="text" id="fbusiness" placeholder="Mi Empresa" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.email">Correo electrónico</label>
+          <input type="email" id="femail" placeholder="hola@tunegocio.com" />
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.type">Tipo de negocio</label>
+          <select id="ftype">
+            <option value="" data-i18n="form.type.opt0">Selecciona...</option>
+            <option value="restaurant" data-i18n="form.type.opt1">Restaurante / Comida</option>
+            <option value="health" data-i18n="form.type.opt2">Salud / Clínica</option>
+            <option value="beauty" data-i18n="form.type.opt3">Belleza / Barbería</option>
+            <option value="store" data-i18n="form.type.opt4">Tienda / E-commerce</option>
+            <option value="services" data-i18n="form.type.opt5">Servicios Profesionales</option>
+            <option value="other" data-i18n="form.type.opt6">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form.message">Cuéntanos sobre tu negocio</label>
+          <textarea id="fmessage" placeholder="¿Qué necesitas? ¿Tienes sitio web actualmente?..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()" data-i18n="form.submit">
+          Solicitar demo gratuita →
+        </button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div style="font-size:2.5rem;margin-bottom:16px">✅</div>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-bottom:12px" data-i18n="form.success.title">¡Mensaje recibido!</div>
+        <div style="color:var(--text2);font-size:0.95rem;font-weight:300" data-i18n="form.success.sub">Nos ponemos en contacto contigo en menos de 24 horas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <span></span>RuutDev
+  </div>
+  <p data-i18n="footer.copy">© 2025 RuutDev. Todos los derechos reservados.</p>
+  <p data-i18n="footer.tagline">USA & Venezuela 🇺🇸🇻🇪</p>
+</footer>
+
+<script>
+  /* ── i18n ── */
+  const translations = {
+    es: {
+      "nav.services": "Servicios",
+      "nav.portfolio": "Portfolio",
+      "nav.process": "Proceso",
+      "nav.cta": "Hablemos",
+      "hero.badge": "Desarrollo Web & Soluciones AI",
+      "hero.title": "Tu negocio merece una<br /><em>presencia digital real</em>",
+      "hero.sub": "Construimos sitios web modernos, rápidos y diseñados para convertir visitantes en clientes. Desde landing pages hasta herramientas con inteligencia artificial.",
+      "hero.cta1": "Ver demos →",
+      "hero.cta2": "Contáctanos",
+      "stat.1": "Demo lista en",
+      "stat.2": "Sin compromiso inicial",
+      "stat.3": "Personalizado",
+      "stat.4": "Presencia en ambos mercados",
+      "services.label": "Servicios",
+      "services.title": "Todo lo que tu negocio necesita en línea",
+      "services.sub": "No vendemos plantillas. Construimos cada sitio desde cero, adaptado a tu negocio específico.",
+      "s1.title": "Landing Page Profesional",
+      "s1.desc": "Página de presentación diseñada para convertir. Incluye diseño responsivo, SEO básico y formulario de contacto.",
+      "s1.price": "Desde $500",
+      "s2.title": "Tienda en Línea",
+      "s2.desc": "E-commerce completo con carrito, pagos integrados y panel de administración para gestionar tus productos.",
+      "s2.price": "Desde $1,200",
+      "s3.title": "Herramientas con AI",
+      "s3.desc": "Chatbots, automatizaciones, análisis de datos y herramientas inteligentes que ahorran tiempo y aumentan tus ventas.",
+      "s3.price": "Desde $2,500",
+      "s4.title": "Dashboard & Sistemas",
+      "s4.desc": "Paneles de control personalizados para gestionar tu negocio, ver métricas y tomar decisiones con datos reales.",
+      "s4.price": "Desde $2,000",
+      "s5.title": "Rediseño Web",
+      "s5.desc": "¿Tu sitio ya existe pero se ve anticuado? Lo modernizamos, lo hacemos más rápido y lo optimizamos para móviles.",
+      "s5.price": "Desde $400",
+      "s6.title": "Demo Gratuita — Sin Compromiso",
+      "s6.desc": "Construimos una versión demo de tu sitio ideal. La ves, la pruebas, y solo pagas si decides seguir adelante.",
+      "s6.price": "Gratis",
+      "portfolio.label": "Portfolio",
+      "portfolio.title": "Demos por industria",
+      "portfolio.sub": "Así lucen nuestras soluciones. Cada demo es un ejemplo real de lo que podemos construir para tu negocio.",
+      "demo.restaurant": "Restaurante",
+      "demo.restaurant.title": "La Mesa — Restaurante",
+      "demo.restaurant.desc": "Landing page con menú digital, reservas en línea y galería de platos. Diseño elegante y moderno.",
+      "demo.barbershop": "Barbería",
+      "demo.barbershop.title": "UrbanCut — Barbería",
+      "demo.barbershop.desc": "Sistema de citas online, galería de estilos, servicios y precios. Con integración a WhatsApp.",
+      "demo.medical": "Clínica",
+      "demo.medical.title": "MedCare — Clínica",
+      "demo.medical.desc": "Presentación de servicios médicos, equipo de doctores, horarios y formulario de consultas.",
+      "demo.store": "Tienda",
+      "demo.store.title": "StyleHub — Tienda",
+      "demo.store.desc": "E-commerce con catálogo de productos, carrito de compras y proceso de pago integrado.",
+      "portfolio.coming": "Más demos próximamente...",
+      "process.label": "Proceso",
+      "process.title": "Simple, rápido, sin sorpresas",
+      "process.sub": "De la conversación a tu sitio en línea en días, no en meses.",
+      "p1.title": "Conversación",
+      "p1.desc": "Nos cuentas sobre tu negocio, tus clientes y lo que necesitas. Sin tecnicismos.",
+      "p2.title": "Demo Gratis",
+      "p2.desc": "Construimos una demo de tu sitio en 48 horas. La ves en acción antes de pagar un dólar.",
+      "p3.title": "Aprobación",
+      "p3.desc": "¿Te gusta? Damos luz verde, ajustamos detalles y preparamos todo para publicar.",
+      "p4.title": "En Línea",
+      "p4.desc": "Tu sitio va al internet con dominio, hosting y optimización. Listo para recibir clientes.",
+      "contact.label": "Contacto",
+      "contact.title": "Empecemos a construir tu presencia digital",
+      "contact.info.title": "¿Hablamos?",
+      "contact.info.desc": "Ya sea que tengas un negocio establecido o estés empezando, podemos ayudarte. La primera consulta y la demo son completamente gratis. Sin letra pequeña.",
+      "contact.whatsapp": "Escribir por WhatsApp",
+      "form.name": "Tu nombre",
+      "form.business": "Nombre del negocio",
+      "form.email": "Correo electrónico",
+      "form.type": "Tipo de negocio",
+      "form.type.opt0": "Selecciona...",
+      "form.type.opt1": "Restaurante / Comida",
+      "form.type.opt2": "Salud / Clínica",
+      "form.type.opt3": "Belleza / Barbería",
+      "form.type.opt4": "Tienda / E-commerce",
+      "form.type.opt5": "Servicios Profesionales",
+      "form.type.opt6": "Otro",
+      "form.message": "Cuéntanos sobre tu negocio",
+      "form.submit": "Solicitar demo gratuita →",
+      "form.success.title": "¡Mensaje recibido!",
+      "form.success.sub": "Nos ponemos en contacto contigo en menos de 24 horas.",
+      "footer.copy": "© 2025 RuutDev. Todos los derechos reservados.",
+      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪"
+    },
+    en: {
+      "nav.services": "Services",
+      "nav.portfolio": "Portfolio",
+      "nav.process": "Process",
+      "nav.cta": "Let's Talk",
+      "hero.badge": "Web Development & AI Solutions",
+      "hero.title": "Your business deserves a<br /><em>real digital presence</em>",
+      "hero.sub": "We build modern, fast websites designed to convert visitors into customers. From landing pages to AI-powered tools.",
+      "hero.cta1": "See demos →",
+      "hero.cta2": "Contact us",
+      "stat.1": "Demo ready in",
+      "stat.2": "No upfront commitment",
+      "stat.3": "100% Custom",
+      "stat.4": "Both markets covered",
+      "services.label": "Services",
+      "services.title": "Everything your business needs online",
+      "services.sub": "We don't sell templates. We build every site from scratch, tailored to your specific business.",
+      "s1.title": "Professional Landing Page",
+      "s1.desc": "A conversion-focused presentation page with responsive design, basic SEO, and contact form.",
+      "s1.price": "From $500",
+      "s2.title": "Online Store",
+      "s2.desc": "Full e-commerce with cart, integrated payments, and admin panel to manage your products.",
+      "s2.price": "From $1,200",
+      "s3.title": "AI-Powered Tools",
+      "s3.desc": "Chatbots, automations, data analysis, and smart tools that save time and increase your sales.",
+      "s3.price": "From $2,500",
+      "s4.title": "Dashboard & Systems",
+      "s4.desc": "Custom control panels to manage your business, see metrics, and make data-driven decisions.",
+      "s4.price": "From $2,000",
+      "s5.title": "Web Redesign",
+      "s5.desc": "Does your site look outdated? We modernize it, make it faster, and optimize it for mobile.",
+      "s5.price": "From $400",
+      "s6.title": "Free Demo — No Commitment",
+      "s6.desc": "We build a demo version of your ideal site. You see it, test it, and only pay if you decide to move forward.",
+      "s6.price": "Free",
+      "portfolio.label": "Portfolio",
+      "portfolio.title": "Demos by industry",
+      "portfolio.sub": "This is what our solutions look like. Each demo is a real example of what we can build for your business.",
+      "demo.restaurant": "Restaurant",
+      "demo.restaurant.title": "La Mesa — Restaurant",
+      "demo.restaurant.desc": "Landing page with digital menu, online reservations, and dish gallery. Elegant and modern design.",
+      "demo.barbershop": "Barbershop",
+      "demo.barbershop.title": "UrbanCut — Barbershop",
+      "demo.barbershop.desc": "Online appointment system, style gallery, services and pricing. With WhatsApp integration.",
+      "demo.medical": "Clinic",
+      "demo.medical.title": "MedCare — Clinic",
+      "demo.medical.desc": "Medical services presentation, doctor team, schedules, and consultation form.",
+      "demo.store": "Store",
+      "demo.store.title": "StyleHub — Store",
+      "demo.store.desc": "E-commerce with product catalog, shopping cart, and integrated checkout process.",
+      "portfolio.coming": "More demos coming soon...",
+      "process.label": "Process",
+      "process.title": "Simple, fast, no surprises",
+      "process.sub": "From conversation to your site live in days, not months.",
+      "p1.title": "Conversation",
+      "p1.desc": "Tell us about your business, your customers, and what you need. No tech jargon.",
+      "p2.title": "Free Demo",
+      "p2.desc": "We build a demo of your site in 48 hours. You see it in action before paying a dollar.",
+      "p3.title": "Approval",
+      "p3.desc": "Like it? We finalize details and prepare everything for launch.",
+      "p4.title": "Go Live",
+      "p4.desc": "Your site goes live with domain, hosting, and optimization. Ready to receive customers.",
+      "contact.label": "Contact",
+      "contact.title": "Let's start building your digital presence",
+      "contact.info.title": "Let's talk?",
+      "contact.info.desc": "Whether you have an established business or are just starting, we can help. The first consultation and demo are completely free. No fine print.",
+      "contact.whatsapp": "Message on WhatsApp",
+      "form.name": "Your name",
+      "form.business": "Business name",
+      "form.email": "Email address",
+      "form.type": "Business type",
+      "form.type.opt0": "Select...",
+      "form.type.opt1": "Restaurant / Food",
+      "form.type.opt2": "Health / Clinic",
+      "form.type.opt3": "Beauty / Barbershop",
+      "form.type.opt4": "Store / E-commerce",
+      "form.type.opt5": "Professional Services",
+      "form.type.opt6": "Other",
+      "form.message": "Tell us about your business",
+      "form.submit": "Request free demo →",
+      "form.success.title": "Message received!",
+      "form.success.sub": "We'll get in touch with you within 24 hours.",
+      "footer.copy": "© 2025 RuutDev. All rights reserved.",
+      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪"
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key] !== undefined) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+  }
+
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Form ── */
+  function submitForm() {
+    const name = document.getElementById('fname').value;
+    const email = document.getElementById('femail').value;
+    if (!name || !email) {
+      alert(currentLang === 'es' ? 'Por favor completa tu nombre y correo.' : 'Please fill in your name and email.');
+      return;
+    }
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  /* ── Mobile Menu ── */
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '70px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'var(--bg)';
+    links.style.padding = '20px 6%';
+    links.style.borderBottom = '1px solid var(--border)';
+    links.style.gap = '20px';
+  }
+</script>
+
+</body>
+</html>
