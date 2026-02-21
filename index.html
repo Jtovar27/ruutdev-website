@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -991,6 +991,292 @@
 
     .cta-guarantee i { color: #22c55e; }
 
+
+    /* ── CALCULATOR ── */
+    #calculator { background: var(--text); padding: 100px 6%; overflow: hidden; position: relative; }
+
+    #calculator::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,109,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .calc-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .calc-left .section-label {
+      color: var(--blue);
+      border-color: rgba(26,109,255,0.3);
+      background: rgba(26,109,255,0.1);
+    }
+
+    .calc-left h2 {
+      color: white;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+    }
+
+    .calc-left h2 em { color: var(--blue); font-style: normal; }
+
+    .calc-left p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-top: 14px;
+      max-width: 440px;
+    }
+
+    .calc-inputs {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .calc-input-group label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .calc-input-group label span {
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0;
+      text-transform: none;
+      font-family: var(--font-display);
+    }
+
+    .calc-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .calc-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue);
+      cursor: pointer;
+      box-shadow: 0 0 0 4px rgba(26,109,255,0.2);
+      transition: box-shadow 0.2s;
+    }
+
+    .calc-slider::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 8px rgba(26,109,255,0.2);
+    }
+
+    .calc-slider-track {
+      position: relative;
+    }
+
+    .calc-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .calc-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .calc-toggle-btn {
+      flex: 1;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .calc-toggle-btn.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* Results panel */
+    .calc-right {
+      position: sticky;
+      top: 100px;
+    }
+
+    .calc-result-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .calc-result-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .calc-result-dot {
+      width: 10px; height: 10px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    }
+
+    .calc-result-header span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .calc-metric {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .calc-metric:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .calc-metric-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .calc-metric-label.green { color: #22c55e; }
+    .calc-metric-label.red { color: #f87171; }
+    .calc-metric-label.blue { color: var(--blue); }
+    .calc-metric-label.white { color: rgba(255,255,255,0.4); }
+
+    .calc-metric-value {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: white;
+      transition: all 0.4s ease;
+    }
+
+    .calc-metric-value.green { color: #22c55e; }
+    .calc-metric-value.red { color: #f87171; }
+    .calc-metric-value.blue { color: #60a5fa; }
+
+    .calc-metric-sub {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+
+    /* Progress bar */
+    .calc-progress {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .calc-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 8px;
+    }
+
+    .calc-progress-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .calc-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), #22c55e);
+      border-radius: 4px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .calc-cta {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--blue);
+      color: white;
+      padding: 16px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      margin-top: 32px;
+      text-decoration: none;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px rgba(26,109,255,0.3);
+    }
+
+    .calc-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(26,109,255,0.5);
+    }
+
+    .calc-disclaimer {
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .calc-wrapper { grid-template-columns: 1fr; }
+      .calc-right { position: static; }
+    }
+
   </style>
 </head>
 <body>
@@ -1002,13 +1288,14 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#calculator" data-i18n="nav.calculator">Calculadora</a></li>
     <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonios</a></li>
     <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
     <li><a href="#process" data-i18n="nav.process">Proceso</a></li>
     <li>
       <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('es')">ES</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('es')">ES</button>
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
       </div>
     </li>
     <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Hablemos</a></li>
@@ -1235,6 +1522,138 @@
 </section>
 
 
+<!-- ── CALCULATOR ── -->
+<section id="calculator">
+  <div class="calc-wrapper">
+
+    <!-- LEFT: Inputs -->
+    <div class="calc-left">
+      <div class="section-label" data-i18n="calc.label">Calculadora</div>
+      <h2 data-i18n="calc.title">¿Cuánto dinero<br />estás <em>dejando ir</em>?</h2>
+      <p data-i18n="calc.desc">La mayoría de negocios sin sitio web pierden entre 30–70% de clientes potenciales. Calcula el impacto real para tu negocio.</p>
+
+      <div class="calc-inputs">
+
+        <!-- Slider 1: Clientes por mes -->
+        <div class="calc-input-group">
+          <label>
+            <span data-i18n="calc.s1">Clientes actuales / mes</span>
+            <span id="val-clients">50</span>
+          </label>
+          <div class="calc-slider-track">
+            <input type="range" class="calc-slider" id="slider-clients"
+              min="5" max="500" value="50" step="5"
+              oninput="updateCalc()" />
+          </div>
+          <div class="calc-labels"><span>5</span><span>500+</span></div>
+        </div>
+
+        <!-- Slider 2: Ticket promedio -->
+        <div class="calc-input-group">
+          <label>
+            <span data-i18n="calc.s2">Ingreso promedio por cliente</span>
+            <span id="val-ticket">$80</span>
+          </label>
+          <div class="calc-slider-track">
+            <input type="range" class="calc-slider" id="slider-ticket"
+              min="10" max="1000" value="80" step="10"
+              oninput="updateCalc()" />
+          </div>
+          <div class="calc-labels"><span>$10</span><span>$1,000+</span></div>
+        </div>
+
+        <!-- Slider 3: % clientes online -->
+        <div class="calc-input-group">
+          <label>
+            <span data-i18n="calc.s3">¿Cuántos clientes te buscan online?</span>
+            <span id="val-online">30%</span>
+          </label>
+          <div class="calc-slider-track">
+            <input type="range" class="calc-slider" id="slider-online"
+              min="10" max="90" value="30" step="5"
+              oninput="updateCalc()" />
+          </div>
+          <div class="calc-labels"><span>10%</span><span>90%</span></div>
+        </div>
+
+        <!-- Toggle: ¿Tienes sitio web? -->
+        <div class="calc-input-group">
+          <label><span data-i18n="calc.s4">¿Tienes sitio web actualmente?</span> <span id="val-hasweb">No</span></label>
+          <div class="calc-toggle">
+            <button class="calc-toggle-btn active" id="btn-no" onclick="setWeb(false)" data-i18n="calc.no">No tengo</button>
+            <button class="calc-toggle-btn" id="btn-yes" onclick="setWeb(true)" data-i18n="calc.yes">Tengo uno básico</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Results -->
+    <div class="calc-right">
+      <div class="calc-result-card">
+        <div class="calc-result-header">
+          <div class="calc-result-dot"></div>
+          <span data-i18n="calc.live">Resultados en tiempo real</span>
+        </div>
+
+        <!-- Ingresos actuales -->
+        <div class="calc-metric">
+          <div class="calc-metric-label white" data-i18n="calc.r1">Ingresos actuales / mes</div>
+          <div class="calc-metric-value white" id="res-current">$4,000</div>
+          <div class="calc-metric-sub" data-i18n="calc.r1sub">Basado en tus datos actuales</div>
+        </div>
+
+        <!-- Clientes que se pierden -->
+        <div class="calc-metric">
+          <div class="calc-metric-label red" data-i18n="calc.r2">⚠ Clientes perdidos / mes</div>
+          <div class="calc-metric-value red" id="res-lost-clients">15</div>
+          <div class="calc-metric-sub" id="res-lost-money-sub" data-i18n="calc.r2sub">que buscan online y no te encuentran</div>
+        </div>
+
+        <!-- Dinero que se pierde -->
+        <div class="calc-metric">
+          <div class="calc-metric-label red" data-i18n="calc.r3">Dinero que pierdes / mes</div>
+          <div class="calc-metric-value red" id="res-lost">$1,200</div>
+          <div class="calc-metric-sub" id="res-lost-year">= $14,400 al año</div>
+        </div>
+
+        <!-- Progress -->
+        <div class="calc-progress">
+          <div class="calc-progress-label">
+            <span data-i18n="calc.potential">Potencial actual</span>
+            <span id="res-pct">71%</span>
+          </div>
+          <div class="calc-progress-bar">
+            <div class="calc-progress-fill" id="res-bar" style="width:71%"></div>
+          </div>
+        </div>
+
+        <!-- Con RuutDev -->
+        <div class="calc-metric">
+          <div class="calc-metric-label green" data-i18n="calc.r4">✦ Con sitio web profesional</div>
+          <div class="calc-metric-value green" id="res-with">$5,200</div>
+          <div class="calc-metric-sub" id="res-extra">+$1,200/mes · +$14,400/año</div>
+        </div>
+
+        <!-- ROI -->
+        <div class="calc-metric">
+          <div class="calc-metric-label blue" data-i18n="calc.r5">ROI del sitio web</div>
+          <div class="calc-metric-value blue" id="res-roi">24x</div>
+          <div class="calc-metric-sub" data-i18n="calc.r5sub">Por cada $1 invertido, recuperas este monto</div>
+        </div>
+
+        <a href="#contact" class="calc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
+          <i class="fa-solid fa-rocket"></i>
+          <span data-i18n="calc.cta">Quiero recuperar ese dinero</span>
+        </a>
+
+        <p class="calc-disclaimer" data-i18n="calc.disclaimer">Estimado basado en promedios de la industria digital.<br />Los resultados reales pueden variar.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── TESTIMONIALS ── -->
 <section id="testimonials">
   <div class="services-header reveal">
@@ -1444,6 +1863,94 @@
 </footer>
 
 <script>
+
+  /* ── CALCULATOR ── */
+  let hasWeb = false;
+
+  function setWeb(val) {
+    hasWeb = val;
+    document.getElementById('val-hasweb').textContent = val ? (currentLang === 'es' ? 'Sí (básico)' : 'Yes (basic)') : (currentLang === 'es' ? 'No' : 'No');
+    document.getElementById('btn-yes').classList.toggle('active', val);
+    document.getElementById('btn-no').classList.toggle('active', !val);
+    updateCalc();
+  }
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function animateValue(el, newVal, isNumber, prefix = '', suffix = '') {
+    const current = parseFloat(el.dataset.val || 0);
+    const diff = newVal - current;
+    const steps = 20;
+    let step = 0;
+    clearInterval(el._anim);
+    el._anim = setInterval(() => {
+      step++;
+      const v = current + diff * (step / steps);
+      if (isNumber) {
+        el.textContent = prefix + Math.round(v).toLocaleString('en-US') + suffix;
+      } else {
+        el.textContent = prefix + Math.round(v) + suffix;
+      }
+      if (step >= steps) {
+        clearInterval(el._anim);
+        el.dataset.val = newVal;
+      }
+    }, 16);
+  }
+
+  function updateCalc() {
+    const clients = parseInt(document.getElementById('slider-clients').value);
+    const ticket  = parseInt(document.getElementById('slider-ticket').value);
+    const onlinePct = parseInt(document.getElementById('slider-online').value) / 100;
+
+    document.getElementById('val-clients').textContent = clients;
+    document.getElementById('val-ticket').textContent  = '$' + ticket;
+    document.getElementById('val-online').textContent  = Math.round(onlinePct * 100) + '%';
+
+    // Current monthly revenue
+    const currentRevenue = clients * ticket;
+
+    // Clients searching online but not finding them
+    // If they have a basic site, they capture 30% of online searchers
+    // If no site, they capture 0%
+    const capturePct = hasWeb ? 0.30 : 0;
+    const onlineClients = Math.round(clients * onlinePct);
+    const lostClients = Math.round(onlineClients * (1 - capturePct));
+
+    // Money lost
+    const lostMoney = lostClients * ticket;
+
+    // With professional site, capture 85% of online clients
+    const gainedClients = Math.round(onlineClients * 0.85) - Math.round(onlineClients * capturePct);
+    const withRevenue = currentRevenue + (gainedClients * ticket);
+    const extraPerMonth = withRevenue - currentRevenue;
+    const extraPerYear = extraPerMonth * 12;
+
+    // ROI — avg site cost $600
+    const siteCost = 600;
+    const roi = extraPerMonth > 0 ? Math.round(extraPerYear / siteCost) : 0;
+
+    // Potential pct
+    const potential = Math.round((currentRevenue / withRevenue) * 100);
+
+    // Update DOM
+    document.getElementById('res-current').textContent = fmt(currentRevenue);
+    document.getElementById('res-lost-clients').textContent = lostClients;
+    document.getElementById('res-lost').textContent = fmt(lostMoney);
+    document.getElementById('res-lost-year').textContent = '= ' + fmt(lostMoney * 12) + (currentLang === 'es' ? ' al año' : ' per year');
+    document.getElementById('res-with').textContent = fmt(withRevenue);
+    document.getElementById('res-extra').textContent = '+' + fmt(extraPerMonth) + (currentLang === 'es' ? '/mes · +' : '/mo · +') + fmt(extraPerYear) + (currentLang === 'es' ? '/año' : '/yr');
+    document.getElementById('res-roi').textContent = roi + 'x';
+    document.getElementById('res-pct').textContent = potential + '%';
+    document.getElementById('res-bar').style.width = potential + '%';
+  }
+
+  // Init on load — default to English
+  setLang("en");
+  updateCalc();
+
   /* ── FAQ ── */
   function toggleFaq(el) {
     const isOpen = el.classList.contains('open');
@@ -1456,6 +1963,7 @@
     es: {
       "nav.services": "Servicios",
       "nav.testimonials": "Testimonios",
+      "nav.calculator": "Calculadora",
       "nav.portfolio": "Portfolio",
       "nav.process": "Proceso",
       "nav.cta": "Hablemos",
@@ -1562,6 +2070,27 @@
       "faq.a5": "Sí. Ofrecemos mantenimiento y actualizaciones por una tarifa mensual. También podemos capacitarte para que hagas cambios simples tú mismo si lo prefieres.",
       "faq.q6": "¿Trabajan con negocios en Venezuela y USA?",
       "faq.a6": "Sí, ese es nuestro mercado principal. Manejamos pagos en dólares para ambos mercados. Para Venezuela aceptamos Zelle, PayPal y transferencias. Para USA, cualquier método digital.",
+      "calc.label": "Calculadora",
+      "calc.title": "¿Cuánto dinero<br />estás <em>dejando ir</em>?",
+      "calc.desc": "La mayoría de negocios sin sitio web pierden entre 30–70% de clientes potenciales. Calcula el impacto real para tu negocio.",
+      "calc.s1": "Clientes actuales / mes",
+      "calc.s2": "Ingreso promedio por cliente",
+      "calc.s3": "¿Cuántos clientes te buscan online?",
+      "calc.s4": "¿Tienes sitio web actualmente?",
+      "calc.no": "No tengo",
+      "calc.yes": "Tengo uno básico",
+      "calc.live": "Resultados en tiempo real",
+      "calc.r1": "Ingresos actuales / mes",
+      "calc.r1sub": "Basado en tus datos actuales",
+      "calc.r2": "⚠ Clientes perdidos / mes",
+      "calc.r2sub": "que buscan online y no te encuentran",
+      "calc.r3": "Dinero que pierdes / mes",
+      "calc.potential": "Potencial actual",
+      "calc.r4": "✦ Con sitio web profesional",
+      "calc.r5": "ROI del sitio web",
+      "calc.r5sub": "Por cada $1 invertido, recuperas este monto",
+      "calc.cta": "Quiero recuperar ese dinero",
+      "calc.disclaimer": "Estimado basado en promedios de la industria digital.<br />Los resultados reales pueden variar.",
       "cta.eyebrow": "Empieza hoy",
       "cta.title": "Tu negocio merece estar<br />en <em>internet ahora</em>",
       "cta.sub": "La demo es gratis. Sin compromisos. Sin letra pequeña. Solo resultados.",
@@ -1572,6 +2101,7 @@
     en: {
       "nav.services": "Services",
       "nav.testimonials": "Testimonials",
+      "nav.calculator": "Calculator",
       "nav.portfolio": "Portfolio",
       "nav.process": "Process",
       "nav.cta": "Let's Talk",
@@ -1678,6 +2208,27 @@
       "faq.a5": "Yes. We offer maintenance and updates for a monthly fee. We can also train you to make simple changes yourself if you prefer.",
       "faq.q6": "Do you work with businesses in Venezuela and the USA?",
       "faq.a6": "Yes, that's our main market. We handle dollar payments for both markets. For Venezuela we accept Zelle, PayPal, and transfers. For the USA, any digital payment method works.",
+      "calc.label": "Calculator",
+      "calc.title": "How much money are<br />you <em>leaving behind</em>?",
+      "calc.desc": "Most businesses without a website lose 30–70% of potential customers. Calculate the real impact for your business.",
+      "calc.s1": "Current clients / month",
+      "calc.s2": "Average revenue per client",
+      "calc.s3": "How many clients search online?",
+      "calc.s4": "Do you have a website?",
+      "calc.no": "No website",
+      "calc.yes": "Basic one",
+      "calc.live": "Live results",
+      "calc.r1": "Current monthly revenue",
+      "calc.r1sub": "Based on your current data",
+      "calc.r2": "⚠ Lost clients / month",
+      "calc.r2sub": "searching online but can't find you",
+      "calc.r3": "Money you're losing / month",
+      "calc.potential": "Current potential",
+      "calc.r4": "✦ With a professional website",
+      "calc.r5": "Website ROI",
+      "calc.r5sub": "For every $1 invested, you get back",
+      "calc.cta": "I want to recover that money",
+      "calc.disclaimer": "Estimated based on digital industry averages.<br />Real results may vary.",
       "cta.eyebrow": "Get started today",
       "cta.title": "Your business deserves to be<br /><em>online right now</em>",
       "cta.sub": "The demo is free. No commitments. No fine print. Just results.",
@@ -1687,7 +2238,7 @@
     }
   };
 
-  let currentLang = 'es';
+  let currentLang = 'en';
 
   function setLang(lang) {
     currentLang = lang;
