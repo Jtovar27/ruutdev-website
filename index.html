@@ -6,6 +6,7 @@
   <title>RuutDev — Web Development & AI Solutions</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -392,7 +393,8 @@
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+      color: var(--blue);
     }
 
     .service-card h3 {
@@ -825,37 +827,37 @@
 
   <div class="services-grid">
     <div class="service-card reveal">
-      <div class="service-icon">🚀</div>
+      <div class="service-icon"><i class="fa-solid fa-rocket"></i></div>
       <h3 data-i18n="s1.title">Landing Page Profesional</h3>
       <p data-i18n="s1.desc">Página de presentación diseñada para convertir. Incluye diseño responsivo, SEO básico y formulario de contacto.</p>
       <span class="service-price" data-i18n="s1.price">Desde $500</span>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon">🛒</div>
+      <div class="service-icon"><i class="fa-solid fa-bag-shopping"></i></div>
       <h3 data-i18n="s2.title">Tienda en Línea</h3>
       <p data-i18n="s2.desc">E-commerce completo con carrito, pagos integrados y panel de administración para gestionar tus productos.</p>
       <span class="service-price" data-i18n="s2.price">Desde $1,200</span>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon">🤖</div>
+      <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
       <h3 data-i18n="s3.title">Herramientas con AI</h3>
       <p data-i18n="s3.desc">Chatbots, automatizaciones, análisis de datos y herramientas inteligentes que ahorran tiempo y aumentan tus ventas.</p>
       <span class="service-price" data-i18n="s3.price">Desde $2,500</span>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon">📊</div>
+      <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
       <h3 data-i18n="s4.title">Dashboard & Sistemas</h3>
       <p data-i18n="s4.desc">Paneles de control personalizados para gestionar tu negocio, ver métricas y tomar decisiones con datos reales.</p>
       <span class="service-price" data-i18n="s4.price">Desde $2,000</span>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon">🎨</div>
+      <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
       <h3 data-i18n="s5.title">Rediseño Web</h3>
       <p data-i18n="s5.desc">¿Tu sitio ya existe pero se ve anticuado? Lo modernizamos, lo hacemos más rápido y lo optimizamos para móviles.</p>
       <span class="service-price" data-i18n="s5.price">Desde $400</span>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon">🌐</div>
+      <div class="service-icon"><i class="fa-solid fa-earth-americas"></i></div>
       <h3 data-i18n="s6.title">Demo Gratuita — Sin Compromiso</h3>
       <p data-i18n="s6.desc">Construimos una versión demo de tu sitio ideal. La ves, la pruebas, y solo pagas si decides seguir adelante.</p>
       <span class="service-price" data-i18n="s6.price">Gratis</span>
@@ -876,7 +878,7 @@
   <div class="portfolio-grid">
     <div class="portfolio-card reveal">
       <div class="portfolio-preview preview-restaurant">
-        🍽️
+        <i class="fa-solid fa-utensils" style="font-size:3rem;color:rgba(255,255,255,0.6)"></i>
         <span class="preview-label" data-i18n="demo.restaurant">Restaurante</span>
       </div>
       <div class="portfolio-info">
@@ -892,7 +894,7 @@
 
     <div class="portfolio-card reveal">
       <div class="portfolio-preview preview-barbershop">
-        ✂️
+        <i class="fa-solid fa-scissors" style="font-size:3rem;color:rgba(255,255,255,0.6)"></i>
         <span class="preview-label" data-i18n="demo.barbershop">Barbería</span>
       </div>
       <div class="portfolio-info">
@@ -908,7 +910,7 @@
 
     <div class="portfolio-card reveal">
       <div class="portfolio-preview preview-medical">
-        🏥
+        <i class="fa-solid fa-house-medical" style="font-size:3rem;color:rgba(255,255,255,0.6)"></i>
         <span class="preview-label" data-i18n="demo.medical">Clínica</span>
       </div>
       <div class="portfolio-info">
@@ -924,7 +926,7 @@
 
     <div class="portfolio-card reveal">
       <div class="portfolio-preview preview-store">
-        👗
+        <i class="fa-solid fa-shirt" style="font-size:3rem;color:rgba(255,255,255,0.6)"></i>
         <span class="preview-label" data-i18n="demo.store">Tienda</span>
       </div>
       <div class="portfolio-info">
@@ -939,7 +941,7 @@
     </div>
 
     <div class="portfolio-coming reveal">
-      <span style="font-size:2rem">⚡</span>
+      <i class="fa-solid fa-bolt" style="font-size:2rem;color:var(--blue)"></i>
       <span data-i18n="portfolio.coming">Más demos próximamente...</span>
     </div>
   </div>
@@ -1049,7 +1051,7 @@
     <span></span>RuutDev
   </div>
   <p data-i18n="footer.copy">© 2026 RuutDev. Todos los derechos reservados.</p>
-  <p data-i18n="footer.tagline">USA & Venezuela 🇺🇸🇻🇪</p>
+  <p data-i18n="footer.tagline">USA & Venezuela</p>
 </footer>
 
 <script>
@@ -1138,7 +1140,7 @@
       "form.success.title": "¡Mensaje recibido!",
       "form.success.sub": "Nos ponemos en contacto contigo en menos de 24 horas.",
       "footer.copy": "© 2026 RuutDev. Todos los derechos reservados.",
-      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪"
+      "footer.tagline": "USA & Venezuela"
     },
     en: {
       "nav.services": "Services",
@@ -1223,7 +1225,7 @@
       "form.success.title": "Message received!",
       "form.success.sub": "We'll get in touch with you within 24 hours.",
       "footer.copy": "© 2026 RuutDev. All rights reserved.",
-      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪"
+      "footer.tagline": "USA & Venezuela"
     }
   };
 
