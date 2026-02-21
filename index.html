@@ -1254,15 +1254,38 @@
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   /* ── Form ── */
-  function submitForm() {
+  async function submitForm() {
     const name = document.getElementById('fname').value;
     const email = document.getElementById('femail').value;
+    const business = document.getElementById('fbusiness').value;
+    const type = document.getElementById('ftype').value;
+    const message = document.getElementById('fmessage').value;
     if (!name || !email) {
       alert(currentLang === 'es' ? 'Por favor completa tu nombre y correo.' : 'Please fill in your name and email.');
       return;
     }
-    document.getElementById('form-body').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    const btn = document.querySelector('#form-body .btn-primary');
+    btn.textContent = currentLang === 'es' ? 'Enviando...' : 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/meelrqeq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, business, type, message })
+      });
+      if (res.ok) {
+        document.getElementById('form-body').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        alert(currentLang === 'es' ? 'Hubo un error. Intenta por WhatsApp.' : 'There was an error. Try via WhatsApp.');
+        btn.textContent = currentLang === 'es' ? 'Solicitar demo gratuita →' : 'Request free demo →';
+        btn.disabled = false;
+      }
+    } catch(e) {
+      alert(currentLang === 'es' ? 'Hubo un error. Intenta por WhatsApp.' : 'There was an error. Try via WhatsApp.');
+      btn.textContent = currentLang === 'es' ? 'Solicitar demo gratuita →' : 'Request free demo →';
+      btn.disabled = false;
+    }
   }
 
   /* ── Mobile Menu ── */
