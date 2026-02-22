@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RuutDev · Sales Qualifier</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07090f;
+  --surface:#0e1118;
+  --surface2:#141820;
+  --border:rgba(255,255,255,0.06);
+  --blue:#1a6dff;
+  --blue-dim:rgba(26,109,255,0.12);
+  --blue-border:rgba(26,109,255,0.25);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,0.1);
+  --yellow:#f59e0b;
+  --yellow-dim:rgba(245,158,11,0.1);
+  --red:#f87171;
+  --red-dim:rgba(248,113,113,0.1);
+  --text:#ffffff;
+  --text2:rgba(255,255,255,0.45);
+  --text3:rgba(255,255,255,0.2);
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── HEADER ── */
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;
+  border-bottom:1px solid var(--border);
+  background:rgba(7,9,15,0.9);
+  backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-family:var(--font-display);font-size:1.1rem;font-weight:800;letter-spacing:-0.03em;display:flex;align-items:center;gap:8px}
+.logo-dot{width:8px;height:8px;background:var(--blue);border-radius:50%}
+.header-badge{
+  font-family:var(--font-mono);font-size:0.68rem;font-weight:500;
+  color:var(--text2);letter-spacing:0.08em;
+  background:var(--surface2);border:1px solid var(--border);
+  padding:4px 12px;border-radius:100px;
+}
+
+/* ── MAIN LAYOUT ── */
+main{max-width:680px;margin:0 auto;padding:40px 24px 80px}
+
+/* ── PROGRESS ── */
+.progress-wrap{margin-bottom:40px}
+.progress-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;
+}
+.progress-label{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2)}
+.progress-count{font-family:var(--font-mono);font-size:0.72rem;color:var(--text3)}
+.progress-bar{height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:var(--blue);border-radius:2px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1)}
+
+/* ── CATEGORY LABEL ── */
+.category-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--blue-dim);border:1px solid var(--blue-border);
+  padding:4px 12px;border-radius:100px;
+  margin-bottom:20px;
+}
+
+/* ── QUESTION ── */
+.question-wrap{
+  animation:slideIn 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes slideIn{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.question-text{
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,4vw,2rem);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.15;
+  margin-bottom:8px;
+}
+.question-hint{
+  font-size:0.85rem;font-weight:300;
+  color:var(--text2);line-height:1.6;
+  margin-bottom:32px;
+}
+
+/* ── OPTIONS ── */
+.options{display:flex;flex-direction:column;gap:10px}
+.option{
+  display:flex;align-items:center;gap:16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;padding:18px 20px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  text-align:left;width:100%;
+  position:relative;overflow:hidden;
+  color:var(--text);
+  font-family:var(--font-body);
+}
+.option::before{
+  content:'';position:absolute;inset:0;
+  background:var(--blue);opacity:0;
+  transition:opacity 0.2s;
+}
+.option:hover{border-color:rgba(26,109,255,0.4);background:rgba(26,109,255,0.05)}
+.option:hover::before{opacity:0.03}
+.option.selected{
+  border-color:var(--blue);
+  background:var(--blue-dim);
+}
+.option-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+  transition:all 0.2s;
+  position:relative;z-index:1;
+}
+.option.selected .option-icon{background:var(--blue-dim);border-color:var(--blue-border)}
+.option-text{flex:1;position:relative;z-index:1}
+.option-title{font-size:0.92rem;font-weight:600;margin-bottom:2px;color:var(--text)}
+.option-desc{font-size:0.78rem;font-weight:300;color:var(--text2);line-height:1.5}
+.option-check{
+  width:22px;height:22px;flex-shrink:0;
+  border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  transition:all 0.2s;
+}
+.option.selected .option-check{
+  background:var(--blue);border-color:var(--blue);
+}
+.option.selected .option-check::after{
+  content:'✓';font-size:0.65rem;font-weight:700;color:white;
+}
+
+/* ── INPUT ── */
+.input-wrap{position:relative;margin-bottom:8px}
+.text-input{
+  width:100%;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px 20px;
+  font-family:var(--font-body);
+  font-size:0.95rem;
+  font-weight:400;
+  color:var(--text);
+  outline:none;
+  transition:border-color 0.2s;
+  resize:none;
+}
+.text-input:focus{border-color:rgba(26,109,255,0.5)}
+.text-input::placeholder{color:var(--text3)}
+
+/* ── NAV BUTTONS ── */
+.nav-buttons{
+  display:flex;gap:10px;margin-top:32px;
+}
+.btn-back{
+  display:flex;align-items:center;gap:6px;
+  padding:14px 20px;
+  background:transparent;border:1px solid var(--border);
+  border-radius:100px;
+  font-family:var(--font-body);font-size:0.85rem;font-weight:600;
+  color:var(--text2);cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-back:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
+.btn-next{
+  flex:1;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 24px;
+  background:var(--blue);border:none;
+  border-radius:100px;
+  font-family:var(--font-body);font-size:0.9rem;font-weight:700;
+  color:white;cursor:pointer;
+  transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(26,109,255,0.3);
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(26,109,255,0.45)}
+.btn-next:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+
+/* ── RESULT ── */
+.result-wrap{animation:slideIn 0.4s cubic-bezier(0.4,0,0.2,1)}
+
+.result-hero{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px;
+  margin-bottom:16px;
+  position:relative;overflow:hidden;
+}
+.result-hero::before{
+  content:'';position:absolute;
+  top:-80px;right:-80px;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(26,109,255,0.08) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.result-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;
+  margin-bottom:20px;
+}
+.badge-green{color:var(--green);background:var(--green-dim);border:1px solid rgba(34,197,94,0.25)}
+.badge-blue{color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-border)}
+.badge-yellow{color:var(--yellow);background:var(--yellow-dim);border:1px solid rgba(245,158,11,0.25)}
+
+.result-product{
+  font-family:var(--font-display);
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:800;letter-spacing:-0.04em;
+  line-height:1.1;margin-bottom:12px;
+}
+.result-desc{
+  font-size:0.9rem;font-weight:300;
+  color:var(--text2);line-height:1.75;
+  margin-bottom:24px;
+}
+
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.result-stat{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;
+}
+.stat-label{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);margin-bottom:6px}
+.stat-value{font-family:var(--font-display);font-size:1.2rem;font-weight:800;letter-spacing:-0.03em}
+.stat-value.green{color:var(--green)}
+.stat-value.blue{color:#60a5fa}
+.stat-value.yellow{color:var(--yellow)}
+
+.result-includes{margin-bottom:24px}
+.includes-title{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:12px;
+}
+.include-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:0.85rem;line-height:1.5;
+}
+.include-item:last-child{border-bottom:none}
+.include-dot{
+  width:20px;height:20px;flex-shrink:0;
+  background:var(--green-dim);border:1px solid rgba(34,197,94,0.25);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;color:var(--green);margin-top:1px;
+}
+
+/* Client Brief Card */
+.brief-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:28px;margin-bottom:16px;
+}
+.brief-title{
+  font-family:var(--font-mono);font-size:0.7rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text2);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.brief-title::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+.brief-row{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:16px;padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:0.85rem;
+}
+.brief-row:last-child{border-bottom:none}
+.brief-key{color:var(--text2);font-weight:400;flex-shrink:0;min-width:140px}
+.brief-val{color:var(--text);font-weight:600;text-align:right}
+
+/* Notes for vendor */
+.vendor-notes{
+  background:rgba(245,158,11,0.05);
+  border:1px solid rgba(245,158,11,0.15);
+  border-radius:14px;padding:20px;margin-bottom:16px;
+}
+.vendor-notes-title{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+.vendor-note-item{
+  font-size:0.82rem;font-weight:300;color:rgba(255,255,255,0.6);
+  line-height:1.6;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;gap:8px;
+}
+.vendor-note-item:last-child{border-bottom:none}
+.vendor-note-item::before{content:'→';color:var(--yellow);flex-shrink:0}
+
+.result-actions{display:flex;gap:10px;margin-top:8px}
+.btn-restart{
+  flex:1;padding:14px;
+  background:transparent;border:1px solid var(--border);
+  border-radius:100px;
+  font-family:var(--font-body);font-size:0.85rem;font-weight:600;
+  color:var(--text2);cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-restart:hover{border-color:rgba(255,255,255,0.2);color:var(--text)}
+.btn-copy{
+  flex:2;padding:14px;
+  background:var(--blue);border:none;
+  border-radius:100px;
+  font-family:var(--font-body);font-size:0.85rem;font-weight:700;
+  color:white;cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 20px rgba(26,109,255,0.3);
+}
+.btn-copy:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(26,109,255,0.45)}
+
+/* Urgency tag */
+.urgency-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.72rem;font-weight:700;
+  padding:4px 10px;border-radius:100px;margin-left:8px;
+}
+.urgency-alta{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.25)}
+.urgency-media{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(245,158,11,0.25)}
+.urgency-baja{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,0.25)}
+
+@media(max-width:480px){
+  .result-grid{grid-template-columns:1fr}
+  .brief-row{flex-direction:column;gap:4px}
+  .brief-val{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><div class="logo-dot"></div>RuutDev</div>
+  <div class="header-badge">SALES QUALIFIER v1.0</div>
+</header>
+
+<main>
+  <div id="app"></div>
+</main>
+
+<script>
+const questions = [
+  // BLOQUE 1: NEGOCIO
+  {
+    id: 'business_name',
+    category: '📋 Cliente',
+    text: '¿Cuál es el nombre del negocio?',
+    hint: 'Escribe el nombre tal como el cliente lo llama.',
+    type: 'text',
+    placeholder: 'Ej: Barbería El Barón, Clínica Salud Total...',
+  },
+  {
+    id: 'industry',
+    category: '📋 Cliente',
+    text: '¿A qué se dedica el negocio?',
+    hint: 'Selecciona la categoría que mejor describe al cliente.',
+    type: 'single',
+    options: [
+      { value: 'restaurant', icon: '🍽️', title: 'Restaurante / Comida', desc: 'Restaurante, cafetería, panadería, delivery' },
+      { value: 'health', icon: '🏥', title: 'Salud / Bienestar', desc: 'Clínica, consultorio, dentista, spa, gym' },
+      { value: 'beauty', icon: '✂️', title: 'Belleza / Cuidado personal', desc: 'Barbería, salón, uñas, estética' },
+      { value: 'retail', icon: '🛍️', title: 'Tienda / Comercio', desc: 'Ropa, calzado, productos, accesorios' },
+      { value: 'services', icon: '🔧', title: 'Servicios profesionales', desc: 'Abogado, contador, consultor, agencia' },
+      { value: 'real_estate', icon: '🏠', title: 'Inmobiliaria / Construcción', desc: 'Venta, renta, remodelación, arquitectura' },
+      { value: 'education', icon: '📚', title: 'Educación / Formación', desc: 'Academia, cursos, tutorías, coaching' },
+      { value: 'other', icon: '💼', title: 'Otro tipo de negocio', desc: 'No está en la lista anterior' },
+    ],
+  },
+  {
+    id: 'location',
+    category: '📋 Cliente',
+    text: '¿Dónde está ubicado el negocio?',
+    hint: 'Esto determina el mercado y el rango de precios.',
+    type: 'single',
+    options: [
+      { value: 'usa', icon: '🇺🇸', title: 'Estados Unidos', desc: 'Cualquier ciudad o estado de USA' },
+      { value: 'venezuela', icon: '🇻🇪', title: 'Venezuela', desc: 'Cualquier ciudad de Venezuela' },
+      { value: 'latam', icon: '🌎', title: 'Otro país de Latinoamérica', desc: 'Colombia, México, Argentina, etc.' },
+    ],
+  },
+  // BLOQUE 2: SITUACIÓN ACTUAL
+  {
+    id: 'has_website',
+    category: '🌐 Situación actual',
+    text: '¿El negocio tiene sitio web actualmente?',
+    hint: 'Sé preciso — un perfil de Facebook NO es un sitio web.',
+    type: 'single',
+    options: [
+      { value: 'none', icon: '❌', title: 'No tiene ninguno', desc: 'Solo redes sociales o boca a boca' },
+      { value: 'bad', icon: '😕', title: 'Tiene uno pero está desactualizado', desc: 'Viejo, lento, o no funciona bien en celular' },
+      { value: 'basic', icon: '📄', title: 'Tiene uno básico', desc: 'Funciona pero es simple, sin diseño profesional' },
+      { value: 'good', icon: '✅', title: 'Tiene uno pero quiere mejorarlo', desc: 'Está bien pero quiere algo mejor o agregar funciones' },
+    ],
+  },
+  {
+    id: 'social_media',
+    category: '🌐 Situación actual',
+    text: '¿En qué redes sociales tiene presencia?',
+    hint: 'Puedes seleccionar varias.',
+    type: 'multi',
+    options: [
+      { value: 'instagram', icon: '📸', title: 'Instagram', desc: '' },
+      { value: 'facebook', icon: '📘', title: 'Facebook', desc: '' },
+      { value: 'whatsapp', icon: '💬', title: 'WhatsApp Business', desc: '' },
+      { value: 'tiktok', icon: '🎵', title: 'TikTok', desc: '' },
+      { value: 'none', icon: '🚫', title: 'Ninguna', desc: '' },
+    ],
+  },
+  // BLOQUE 3: OBJETIVOS
+  {
+    id: 'main_goal',
+    category: '🎯 Objetivo',
+    text: '¿Cuál es el objetivo principal del cliente?',
+    hint: 'La respuesta a esta pregunta determina qué producto recomendar.',
+    type: 'single',
+    options: [
+      { value: 'visibility', icon: '👁️', title: 'Que más gente lo encuentre', desc: 'Quiere aparecer en Google y llegar a nuevos clientes' },
+      { value: 'sell_online', icon: '🛒', title: 'Vender productos por internet', desc: 'Quiere una tienda online donde la gente pueda comprar' },
+      { value: 'credibility', icon: '🏆', title: 'Verse más profesional', desc: 'Quiere proyectar confianza y diferenciarse de la competencia' },
+      { value: 'automate', icon: '🤖', title: 'Automatizar y ahorrar tiempo', desc: 'Quiere que la tecnología trabaje por él — citas, respuestas, etc.' },
+      { value: 'all', icon: '🚀', title: 'Todo lo anterior', desc: 'Quiere crecer en todos los aspectos digitales' },
+    ],
+  },
+  {
+    id: 'clients_source',
+    category: '🎯 Objetivo',
+    text: '¿Cómo consigue clientes actualmente?',
+    hint: 'Entender de dónde vienen los clientes ayuda a ver el potencial de crecimiento.',
+    type: 'multi',
+    options: [
+      { value: 'word_mouth', icon: '🗣️', title: 'Boca a boca', desc: 'Recomendaciones de clientes actuales' },
+      { value: 'social', icon: '📱', title: 'Redes sociales', desc: 'Instagram, Facebook, TikTok' },
+      { value: 'google', icon: '🔍', title: 'Google / búsquedas', desc: 'La gente lo encuentra buscando online' },
+      { value: 'walk_in', icon: '🚶', title: 'Clientes que pasan por el local', desc: 'Tráfico físico de la calle' },
+      { value: 'ads', icon: '📢', title: 'Publicidad pagada', desc: 'Facebook Ads, Google Ads, etc.' },
+    ],
+  },
+  // BLOQUE 4: PRODUCTO
+  {
+    id: 'sell_products',
+    category: '🛒 Producto',
+    text: '¿El negocio vende productos físicos o solo servicios?',
+    hint: 'Esto determina si necesita funciones de tienda online.',
+    type: 'single',
+    options: [
+      { value: 'services_only', icon: '🔧', title: 'Solo servicios', desc: 'No vende productos físicos, cobra por servicio o consulta' },
+      { value: 'products', icon: '📦', title: 'Productos físicos', desc: 'Tiene inventario de productos que quiere vender online' },
+      { value: 'both', icon: '⚡', title: 'Productos y servicios', desc: 'Vende ambos — servicios más productos relacionados' },
+      { value: 'digital', icon: '💻', title: 'Productos digitales o cursos', desc: 'E-books, cursos online, membresías' },
+    ],
+  },
+  {
+    id: 'special_features',
+    category: '🛒 Producto',
+    text: '¿Necesita alguna función especial en el sitio?',
+    hint: 'Puedes seleccionar varias — esto afecta el precio y tiempo de entrega.',
+    type: 'multi',
+    options: [
+      { value: 'booking', icon: '📅', title: 'Sistema de citas / reservaciones', desc: 'El cliente agenda directamente desde el sitio' },
+      { value: 'menu', icon: '🍽️', title: 'Menú o catálogo de productos', desc: 'Lista de servicios, platos, o productos con fotos' },
+      { value: 'chat', icon: '🤖', title: 'Chatbot / asistente con IA', desc: 'Responde preguntas automáticamente 24/7' },
+      { value: 'payments', icon: '💳', title: 'Pagos online', desc: 'El cliente paga directamente desde el sitio web' },
+      { value: 'multilang', icon: '🌐', title: 'Múltiples idiomas', desc: 'Sitio en inglés y español' },
+      { value: 'none', icon: '✨', title: 'Solo información básica', desc: 'Quién soy, qué ofrezco, cómo contactarme' },
+    ],
+  },
+  // BLOQUE 5: CONTEXTO COMERCIAL
+  {
+    id: 'budget',
+    category: '💰 Contexto comercial',
+    text: '¿El cliente tiene presupuesto definido?',
+    hint: 'Si el cliente da un número, úsalo. Si no, selecciona "No definido".',
+    type: 'single',
+    options: [
+      { value: 'under_300', icon: '💵', title: 'Menos de $300', desc: 'Presupuesto muy limitado' },
+      { value: '300_800', icon: '💵💵', title: '$300 – $800', desc: 'Presupuesto básico a medio' },
+      { value: '800_2000', icon: '💵💵💵', title: '$800 – $2,000', desc: 'Presupuesto medio a bueno' },
+      { value: 'over_2000', icon: '🏆', title: 'Más de $2,000', desc: 'Presupuesto amplio' },
+      { value: 'undefined', icon: '🤷', title: 'No definido', desc: 'El cliente no mencionó número' },
+    ],
+  },
+  {
+    id: 'urgency',
+    category: '💰 Contexto comercial',
+    text: '¿Qué tan urgente lo necesita?',
+    hint: 'La urgencia del cliente ayuda a priorizar proyectos.',
+    type: 'single',
+    options: [
+      { value: 'urgent', icon: '🔥', title: 'Lo necesita ya', desc: 'Quiere tenerlo en los próximos días' },
+      { value: 'soon', icon: '⏰', title: 'En las próximas 2-4 semanas', desc: 'Tiene tiempo pero quiere avanzar pronto' },
+      { value: 'exploring', icon: '🔍', title: 'Solo está explorando opciones', desc: 'No tiene prisa, está comparando proveedores' },
+    ],
+  },
+  {
+    id: 'decision_maker',
+    category: '💰 Contexto comercial',
+    text: '¿Con quién estás hablando?',
+    hint: 'Saber si es el dueño o alguien más cambia cómo se maneja la conversación.',
+    type: 'single',
+    options: [
+      { value: 'owner', icon: '👑', title: 'El dueño / dueña del negocio', desc: 'Toma la decisión de compra directamente' },
+      { value: 'manager', icon: '👔', title: 'Un gerente o encargado', desc: 'Tiene que consultar con el dueño' },
+      { value: 'other', icon: '👥', title: 'Otra persona del equipo', desc: 'Empleado, asistente, o familiar del dueño' },
+    ],
+  },
+];
+
+let current = 0;
+let answers = {};
+let multiSelections = {};
+
+function getEl(id){ return document.getElementById(id) }
+function app(){ return getEl('app') }
+
+function render(){
+  if(current < questions.length){
+    renderQuestion();
+  } else {
+    renderResult();
+  }
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  const pct = Math.round((current / questions.length) * 100);
+  const isMulti = q.type === 'multi';
+  if(!multiSelections[q.id]) multiSelections[q.id] = [];
+
+  let optionsHTML = '';
+  if(q.type === 'text'){
+    const val = answers[q.id] || '';
+    optionsHTML = `
+      <div class="input-wrap">
+        <input class="text-input" id="textInput" type="text" 
+          placeholder="${q.placeholder}" value="${val}"
+          oninput="answers['${q.id}']=this.value;updateNextBtn()"
+          onkeydown="if(event.key==='Enter'&&this.value.trim())nextQ()"
+        />
+      </div>`;
+  } else if(q.type === 'single'){
+    optionsHTML = '<div class="options">' + q.options.map(o => {
+      const sel = answers[q.id] === o.value ? 'selected' : '';
+      return `<button class="option ${sel}" onclick="selectSingle('${q.id}','${o.value}')">
+        <div class="option-icon">${o.icon}</div>
+        <div class="option-text">
+          <div class="option-title">${o.title}</div>
+          ${o.desc ? `<div class="option-desc">${o.desc}</div>` : ''}
+        </div>
+        <div class="option-check"></div>
+      </button>`;
+    }).join('') + '</div>';
+  } else if(isMulti){
+    const sel = multiSelections[q.id];
+    optionsHTML = '<div class="options">' + q.options.map(o => {
+      const selected = sel.includes(o.value) ? 'selected' : '';
+      return `<button class="option ${selected}" onclick="toggleMulti('${q.id}','${o.value}')">
+        <div class="option-icon">${o.icon}</div>
+        <div class="option-text">
+          <div class="option-title">${o.title}</div>
+          ${o.desc ? `<div class="option-desc">${o.desc}</div>` : ''}
+        </div>
+        <div class="option-check"></div>
+      </button>`;
+    }).join('') + '</div>';
+  }
+
+  const canNext = canProceed(q);
+
+  app().innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label">Progreso</span>
+        <span class="progress-count">${current + 1} / ${questions.length}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="question-wrap">
+      <div class="category-label">${q.category}</div>
+      <div class="question-text">${q.text}</div>
+      ${q.hint ? `<div class="question-hint">${q.hint}${isMulti ? ' <strong style="color:rgba(255,255,255,0.6)">Puedes elegir varias.</strong>' : ''}</div>` : ''}
+      ${optionsHTML}
+      <div class="nav-buttons">
+        ${current > 0 ? `<button class="btn-back" onclick="prevQ()">← Atrás</button>` : ''}
+        <button class="btn-next" id="nextBtn" onclick="nextQ()" ${canNext ? '' : 'disabled'}>
+          ${current === questions.length - 1 ? '🎯 Ver resultado' : 'Siguiente →'}
+        </button>
+      </div>
+    </div>`;
+}
+
+function canProceed(q){
+  if(q.type === 'text') return (answers[q.id] || '').trim().length > 0;
+  if(q.type === 'single') return answers[q.id] !== undefined;
+  if(q.type === 'multi') return (multiSelections[q.id] || []).length > 0;
+  return false;
+}
+
+function updateNextBtn(){
+  const btn = getEl('nextBtn');
+  if(btn) btn.disabled = !canProceed(questions[current]);
+}
+
+function selectSingle(id, val){
+  answers[id] = val;
+  render();
+  // Auto-advance after short delay for single select
+  setTimeout(()=>{ if(canProceed(questions[current])) nextQ(); }, 400);
+}
+
+function toggleMulti(id, val){
+  const arr = multiSelections[id] || [];
+  // If "none" selected, clear others
+  if(val === 'none'){
+    multiSelections[id] = arr.includes('none') ? [] : ['none'];
+  } else {
+    // Remove 'none' if other selected
+    const filtered = arr.filter(v => v !== 'none');
+    const idx = filtered.indexOf(val);
+    if(idx > -1) filtered.splice(idx,1); else filtered.push(val);
+    multiSelections[id] = filtered;
+  }
+  answers[id] = multiSelections[id];
+  render();
+}
+
+function nextQ(){
+  const q = questions[current];
+  if(!canProceed(q)) return;
+  current++;
+  window.scrollTo({top:0,behavior:'smooth'});
+  render();
+}
+
+function prevQ(){
+  if(current > 0){ current--; window.scrollTo({top:0,behavior:'smooth'}); render(); }
+}
+
+// ── RESULT LOGIC ──
+function computeResult(){
+  const a = answers;
+  const multi = multiSelections;
+
+  // Determine product
+  let product = 'landing';
+  let complexity = 'basic';
+
+  const goal = a.main_goal;
+  const sells = a.sell_products;
+  const features = multi.special_features || [];
+  const budget = a.budget;
+
+  // E-commerce path
+  if(sells === 'products' || sells === 'both' || sells === 'digital' || goal === 'sell_online'){
+    product = 'ecommerce';
+    complexity = 'medium';
+  }
+  // AI / automation path
+  else if(goal === 'automate' || features.includes('chat')){
+    product = 'ai_tool';
+    complexity = 'advanced';
+  }
+  // Landing page path
+  else {
+    product = 'landing';
+    complexity = features.filter(f => f !== 'none').length >= 3 ? 'medium' : 'basic';
+  }
+
+  // Adjust by budget
+  if(budget === 'under_300' && product !== 'landing'){
+    product = 'landing';
+    complexity = 'basic';
+  }
+
+  const products = {
+    landing: {
+      name: 'Landing Page Profesional',
+      emoji: '🌐',
+      badgeClass: 'badge-blue',
+      badgeText: 'PRODUCTO RECOMENDADO',
+      desc: 'Un sitio web profesional de una o varias páginas, diseñado para convertir visitantes en clientes. Incluye todo lo esencial para que el negocio se vea serio y confiable en internet.',
+      timeline: complexity === 'basic' ? '3 – 5 días' : '5 – 10 días',
+      includes: complexity === 'basic' ? [
+        'Diseño moderno y adaptado al celular',
+        'Sección de servicios / información',
+        'Formulario de contacto + botón de WhatsApp',
+        'Dominio y hosting incluidos (1er año)',
+        'Velocidad optimizada para SEO básico',
+      ] : [
+        'Todo lo del plan básico',
+        'Múltiples secciones (Equipo, FAQ, Testimonios)',
+        'Galería de fotos o portafolio',
+        'Integración de redes sociales',
+        'Optimización SEO avanzada',
+        features.includes('booking') ? 'Sistema de citas / reservaciones' : null,
+        features.includes('multilang') ? 'Versión en inglés y español' : null,
+      ].filter(Boolean),
+    },
+    ecommerce: {
+      name: 'Tienda Online (E-commerce)',
+      emoji: '🛒',
+      badgeClass: 'badge-green',
+      badgeText: 'PRODUCTO RECOMENDADO',
+      desc: 'Una tienda online completa donde los clientes pueden ver productos, agregarlos al carrito y pagar. Ideal para negocios que quieren vender sin límite de horario ni ubicación.',
+      timeline: '10 – 18 días',
+      includes: [
+        'Catálogo de productos con fotos y precios',
+        'Carrito de compras funcional',
+        'Integración de pagos (PayPal, Stripe, Zelle)',
+        'Panel de administración para el dueño',
+        'Filtros por categoría y búsqueda de productos',
+        'Diseño adaptado a celular y tablet',
+        features.includes('multilang') ? 'Versión en inglés y español' : null,
+      ].filter(Boolean),
+    },
+    ai_tool: {
+      name: 'Sitio Web + Herramienta con IA',
+      emoji: '🤖',
+      badgeClass: 'badge-yellow',
+      badgeText: 'PRODUCTO RECOMENDADO',
+      desc: 'Un sitio web profesional potenciado con inteligencia artificial. Incluye un chatbot que responde preguntas, agenda citas, y atiende clientes automáticamente las 24 horas del día.',
+      timeline: '14 – 25 días',
+      includes: [
+        'Landing page o sitio profesional completo',
+        'Chatbot con IA entrenado para el negocio',
+        'Respuestas automáticas a preguntas frecuentes',
+        'Sistema de agendamiento de citas (si aplica)',
+        'Integración con WhatsApp Business',
+        'Panel de control para ver conversaciones',
+        'Entrenamiento del modelo con datos del negocio',
+      ],
+    },
+  };
+
+  // Price range by location and product
+  const priceMap = {
+    usa: { landing: complexity === 'basic' ? '$800 – $1,500' : '$1,200 – $2,500', ecommerce: '$2,000 – $4,000', ai_tool: '$2,500 – $5,000+' },
+    venezuela: { landing: complexity === 'basic' ? '$200 – $400' : '$350 – $700', ecommerce: '$600 – $1,200', ai_tool: '$800 – $1,800' },
+    latam: { landing: complexity === 'basic' ? '$400 – $900' : '$700 – $1,500', ecommerce: '$1,000 – $2,500', ai_tool: '$1,500 – $3,000' },
+  };
+
+  const location = a.location || 'undefined';
+  const priceRange = priceMap[location]?.[product] || 'A cotizar';
+
+  // Vendor notes
+  const notes = [];
+  if(a.decision_maker !== 'owner') notes.push('No hablas con el dueño — pide una reunión con quien toma decisiones.');
+  if(a.urgency === 'urgent') notes.push('Alta urgencia: priorizar y responder rápido para no perder el cliente.');
+  if(a.urgency === 'exploring') notes.push('Solo explorando — usa la demo gratis para generar compromiso emocional.');
+  if(budget === 'under_300' && location === 'usa') notes.push('Presupuesto muy bajo para USA — considera solo una landing básica.');
+  if(!a.has_website || a.has_website === 'none') notes.push('No tiene sitio web — énfasis en pérdida de clientes actuales por no tener presencia online.');
+  if(a.has_website === 'bad') notes.push('Tiene un sitio malo — muéstrale el contraste con la demo para que vea la diferencia.');
+  if((multi.clients_source || []).includes('word_mouth') && !(multi.clients_source || []).includes('google')) notes.push('Depende del boca a boca — explica que un sitio web multiplica ese alcance sin esfuerzo extra.');
+  if(features.includes('payments') && location === 'venezuela') notes.push('Pagos online en Venezuela — confirmar qué métodos de pago acepta (Zelle, Binance, etc.).');
+
+  return { product: products[product], priceRange, notes, location, budget, urgency: a.urgency };
+}
+
+function renderResult(){
+  const { product, priceRange, notes, location, budget, urgency } = computeResult();
+  const a = answers;
+
+  const urgencyConfig = {
+    urgent: { label: 'ALTA', cls: 'urgency-alta' },
+    soon:   { label: 'MEDIA', cls: 'urgency-media' },
+    exploring: { label: 'BAJA', cls: 'urgency-baja' },
+  };
+  const urg = urgencyConfig[urgency] || urgencyConfig.soon;
+
+  const locationLabels = { usa: '🇺🇸 USA', venezuela: '🇻🇪 Venezuela', latam: '🌎 Latinoamérica' };
+
+  const includesHTML = product.includes.map(item =>
+    `<div class="include-item"><div class="include-dot">✓</div><span>${item}</span></div>`
+  ).join('');
+
+  const notesHTML = notes.length > 0 ? `
+    <div class="vendor-notes">
+      <div class="vendor-notes-title">⚡ Notas para el vendedor</div>
+      ${notes.map(n => `<div class="vendor-note-item">${n}</div>`).join('')}
+    </div>` : '';
+
+  const socialList = (multiSelections.social_media || []).join(', ') || 'Ninguna';
+  const featureList = (multiSelections.special_features || []).length > 0 
+    ? (multiSelections.special_features || []).map(f => ({
+        booking:'Citas', menu:'Catálogo', chat:'Chatbot IA', payments:'Pagos', multilang:'Bilingüe', none:'Básico'
+      }[f]||f)).join(', ')
+    : 'Básico';
+
+  const industryLabel = {
+    restaurant:'Restaurante/Comida', health:'Salud/Bienestar', beauty:'Belleza', retail:'Tienda/Comercio',
+    services:'Servicios profesionales', real_estate:'Inmobiliaria', education:'Educación', other:'Otro'
+  }[a.industry] || a.industry;
+
+  app().innerHTML = `
+    <div class="result-wrap">
+      <div class="result-hero">
+        <div class="result-badge ${product.badgeClass}">${product.badgeText}</div>
+        <div class="result-product">${product.emoji} ${product.name}</div>
+        <div class="result-desc">${product.desc}</div>
+        
+        <div class="result-grid">
+          <div class="result-stat">
+            <div class="stat-label">Precio estimado</div>
+            <div class="stat-value green">${priceRange}</div>
+          </div>
+          <div class="result-stat">
+            <div class="stat-label">Tiempo de entrega</div>
+            <div class="stat-value blue">${product.timeline}</div>
+          </div>
+          <div class="result-stat">
+            <div class="stat-label">Urgencia</div>
+            <div class="stat-value"><span class="urgency-tag ${urg.cls}">${urg.label}</span></div>
+          </div>
+          <div class="result-stat">
+            <div class="stat-label">Mercado</div>
+            <div class="stat-value yellow">${locationLabels[a.location] || '—'}</div>
+          </div>
+        </div>
+
+        <div class="result-includes">
+          <div class="includes-title">✦ Qué incluye este producto</div>
+          ${includesHTML}
+        </div>
+      </div>
+
+      <div class="brief-card">
+        <div class="brief-title">Brief del cliente</div>
+        <div class="brief-row"><span class="brief-key">Negocio</span><span class="brief-val">${a.business_name || '—'}</span></div>
+        <div class="brief-row"><span class="brief-key">Industria</span><span class="brief-val">${industryLabel}</span></div>
+        <div class="brief-row"><span class="brief-key">Ubicación</span><span class="brief-val">${locationLabels[a.location] || '—'}</span></div>
+        <div class="brief-row"><span class="brief-key">Sitio web actual</span><span class="brief-val">${{none:'Ninguno',bad:'Desactualizado',basic:'Básico',good:'Quiere mejorar'}[a.has_website]||'—'}</span></div>
+        <div class="brief-row"><span class="brief-key">Redes sociales</span><span class="brief-val">${socialList}</span></div>
+        <div class="brief-row"><span class="brief-key">Objetivo principal</span><span class="brief-val">${{visibility:'Ser encontrado en Google',sell_online:'Vender online',credibility:'Verse profesional',automate:'Automatizar',all:'Todo'}[a.main_goal]||'—'}</span></div>
+        <div class="brief-row"><span class="brief-key">Funciones requeridas</span><span class="brief-val">${featureList}</span></div>
+        <div class="brief-row"><span class="brief-key">Presupuesto</span><span class="brief-val">${{under_300:'Menos de $300','300_800':'$300–$800','800_2000':'$800–$2,000',over_2000:'Más de $2,000',undefined:'No definido'}[a.budget]||'—'}</span></div>
+        <div class="brief-row"><span class="brief-key">Quién decide</span><span class="brief-val">${{owner:'El dueño',manager:'Gerente (consulta al dueño)',other:'Empleado / otro'}[a.decision_maker]||'—'}</span></div>
+      </div>
+
+      ${notesHTML}
+
+      <div class="result-actions">
+        <button class="btn-restart" onclick="restart()">↩ Nuevo cliente</button>
+        <button class="btn-copy" onclick="copyBrief()">📋 Copiar brief</button>
+      </div>
+    </div>`;
+}
+
+function restart(){
+  current = 0; answers = {}; multiSelections = {};
+  window.scrollTo({top:0,behavior:'smooth'});
+  render();
+}
+
+function copyBrief(){
+  const a = answers;
+  const { product, priceRange, notes } = computeResult();
+  const locationLabels = { usa:'USA', venezuela:'Venezuela', latam:'Latinoamérica' };
+  const socialList = (multiSelections.social_media || []).join(', ') || 'Ninguna';
+
+  const text = `
+━━━━━━━━━━━━━━━━━━━━━━━━
+BRIEF RUUTDEV — ${new Date().toLocaleDateString('es')}
+━━━━━━━━━━━━━━━━━━━━━━━━
+Negocio: ${a.business_name || '—'}
+Producto recomendado: ${product.name}
+Precio estimado: ${priceRange}
+Tiempo de entrega: ${product.timeline}
+Mercado: ${locationLabels[a.location]||'—'}
+Urgencia: ${{ urgent:'Alta', soon:'Media', exploring:'Baja' }[a.urgency]||'—'}
+
+BRIEF CLIENTE:
+• Industria: ${a.industry}
+• Sitio web actual: ${{none:'Ninguno',bad:'Desactualizado',basic:'Básico',good:'Quiere mejorar'}[a.has_website]||'—'}
+• Redes sociales: ${socialList}
+• Objetivo: ${{visibility:'Ser encontrado en Google',sell_online:'Vender online',credibility:'Verse profesional',automate:'Automatizar',all:'Todo'}[a.main_goal]||'—'}
+• Presupuesto: ${{under_300:'<$300','300_800':'$300–$800','800_2000':'$800–$2,000',over_2000:'>$2,000',undefined:'No definido'}[a.budget]||'—'}
+• Toma decisión: ${{owner:'El dueño',manager:'Gerente',other:'Empleado'}[a.decision_maker]||'—'}
+
+${notes.length > 0 ? 'NOTAS VENDEDOR:\n' + notes.map(n=>`• ${n}`).join('\n') : ''}
+━━━━━━━━━━━━━━━━━━━━━━━━`.trim();
+
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '✅ Copiado al portapapeles';
+    setTimeout(()=>{ btn.innerHTML = '📋 Copiar brief'; },2000);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
