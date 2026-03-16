@@ -38,27 +38,32 @@
 <nav>
   <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+    <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="contact.html" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <ul class="nav-mobile" id="nav-mobile">
-  <li><a href="services.html">Services</a></li>
-  <li><a href="pricing.html">Pricing</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+  <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
 </ul>
 
 <div class="page-hero" style="padding-bottom:60px;">
   <div class="page-hero-content">
-    <div class="hero-badge">Legal</div>
-    <h1>Privacy<br /><em>Policy</em></h1>
-    <p>We collect only what we need, we don't sell your data, and you can request deletion at any time.</p>
+    <div class="hero-badge" data-en="Legal" data-es="Legal">Legal</div>
+    <h1 data-en="Privacy<br /><em>Policy</em>" data-es="Política de<br /><em>Privacidad</em>">Privacy<br /><em>Policy</em></h1>
+    <p data-en="We collect only what we need, we don't sell your data, and you can request deletion at any time." data-es="Recopilamos solo lo que necesitamos, no vendemos tus datos y puedes solicitar su eliminación en cualquier momento.">We collect only what we need, we don't sell your data, and you can request deletion at any time.</p>
     <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);">
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);"><strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Last Updated</strong>March 2026</div>
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);"><strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Controller</strong>Johan Tovar / RuutDev</div>
@@ -87,14 +92,14 @@
   <div class="legal-content">
 
     <div class="legal-section" id="p-who">
-      <div class="legal-section-num">Section 1</div>
-      <h2>Who We Are</h2>
+      <div class="legal-section-num" data-en="Section 1" data-es="Sección 1">Section 1</div>
+      <h2 data-en="Who We Are" data-es="Quiénes Somos">Who We Are</h2>
       <p>RuutDev is operated by <strong>Johan Tovar</strong>, a web development and software services business based in Florida, USA, operating at ruutdev.com. This Privacy Policy explains how we handle personal information when you interact with our website or engage our services.</p>
     </div>
 
     <div class="legal-section" id="p-collect">
-      <div class="legal-section-num">Section 2</div>
-      <h2>Data We Collect</h2>
+      <div class="legal-section-num" data-en="Section 2" data-es="Sección 2">Section 2</div>
+      <h2 data-en="Data We Collect" data-es="Datos que Recopilamos">Data We Collect</h2>
       <p>We only collect information you provide voluntarily. We do not use tracking pixels, behavioral analytics, or data brokers.</p>
       <ul>
         <li><strong>Contact form submissions:</strong> Name, business name, email, business type, and project description.</li>
@@ -105,15 +110,15 @@
     </div>
 
     <div class="legal-section" id="p-use">
-      <div class="legal-section-num">Section 3</div>
-      <h2>How We Use Your Data</h2>
+      <div class="legal-section-num" data-en="Section 3" data-es="Sección 3">Section 3</div>
+      <h2 data-en="How We Use Your Data" data-es="Cómo Usamos Tus Datos">How We Use Your Data</h2>
       <p>We use your information to: respond to inquiries; prepare proposals and invoices; deliver and manage your project; process payments; provide maintenance and support; and comply with legal obligations.</p>
       <p>We do not use your data for advertising, remarketing, or sale to third parties.</p>
     </div>
 
     <div class="legal-section" id="p-share">
-      <div class="legal-section-num">Section 4</div>
-      <h2>Data Sharing</h2>
+      <div class="legal-section-num" data-en="Section 4" data-es="Sección 4">Section 4</div>
+      <h2 data-en="Data Sharing" data-es="Compartición de Datos">Data Sharing</h2>
       <p>We do not sell, rent, or trade your personal information. We share data only with:</p>
       <ul>
         <li><strong>Web3Forms:</strong> Processes contact form submissions and forwards them to us.</li>
@@ -124,14 +129,14 @@
     </div>
 
     <div class="legal-section" id="p-retention">
-      <div class="legal-section-num">Section 5</div>
-      <h2>Data Retention</h2>
+      <div class="legal-section-num" data-en="Section 5" data-es="Sección 5">Section 5</div>
+      <h2 data-en="Data Retention" data-es="Retención de Datos">Data Retention</h2>
       <p>Contact form data is retained for up to 2 years. Project files and communications are kept for the duration of the project and up to 2 years afterward. Payment records are kept as required by applicable tax law. You may request deletion at any time (see Section 6).</p>
     </div>
 
     <div class="legal-section" id="p-rights">
-      <div class="legal-section-num">Section 6</div>
-      <h2>Your Rights</h2>
+      <div class="legal-section-num" data-en="Section 6" data-es="Sección 6">Section 6</div>
+      <h2 data-en="Your Rights" data-es="Tus Derechos">Your Rights</h2>
       <p>You have the right to: access the data we hold about you; request correction of inaccurate data; request deletion ("right to be forgotten"); receive your data in a portable format; and object to our processing in certain circumstances.</p>
       <p>To exercise any of these rights, email <a href="mailto:helloruutdev@hotmail.com" style="color:var(--blue);">helloruutdev@hotmail.com</a>. We respond within 30 days.</p>
     </div>

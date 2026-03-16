@@ -41,6 +41,31 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
+// ── LANGUAGE SYSTEM ──
+const LANG_KEY = 'ruutdev_lang';
+
+function applyLang(lang) {
+  document.documentElement.setAttribute('lang', lang === 'es' ? 'es' : 'en');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = lang === 'es' ? (el.dataset.es || el.dataset.en) : el.dataset.en;
+  });
+  // Update toggle button state
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  localStorage.setItem(LANG_KEY, lang);
+}
+
+function toggleLang(lang) {
+  applyLang(lang);
+}
+
+// Apply saved language on every page load
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem(LANG_KEY) || 'en';
+  applyLang(saved);
+});
+
 /* ── Contact Form (shared) ── */
 window.submitContactForm = async function() {
   const name     = document.getElementById('fname')?.value;

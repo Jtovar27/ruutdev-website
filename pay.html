@@ -123,28 +123,33 @@
 <nav>
   <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+    <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="contact.html" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <ul class="nav-mobile" id="nav-mobile">
-  <li><a href="services.html">Services</a></li>
-  <li><a href="pricing.html">Pricing</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+  <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
 </ul>
 
 <!-- ── PAGE HERO ── -->
 <div class="page-hero">
   <div class="page-hero-content">
-    <div class="hero-badge">Payments</div>
-    <h1>Make a <em>payment</em></h1>
-    <p>Pay your project deposit, remaining balance, monthly maintenance, or an outstanding invoice — securely and in just a few steps.</p>
+    <div class="hero-badge" data-en="Payments" data-es="Pagos">Payments</div>
+    <h1 data-en="Make a <em>payment</em>" data-es="Realizar un <em>pago</em>">Make a <em>payment</em></h1>
+    <p data-en="Pay your project deposit, remaining balance, monthly maintenance, or an outstanding invoice — securely and in just a few steps." data-es="Paga tu depósito del proyecto, saldo restante, mantenimiento mensual o una factura pendiente — de forma segura y en pocos pasos.">Pay your project deposit, remaining balance, monthly maintenance, or an outstanding invoice — securely and in just a few steps.</p>
   </div>
 </div>
 
@@ -154,8 +159,8 @@
 
     <!-- LEFT: Form -->
     <div class="payment-form-card reveal">
-      <div class="payment-form-title">Payment Details</div>
-      <div class="payment-form-subtitle">Select what you're paying for, enter the amount, and complete the checkout.</div>
+      <div class="payment-form-title" data-en="Payment Details" data-es="Detalles del Pago">Payment Details</div>
+      <div class="payment-form-subtitle" data-en="Select what you're paying for, enter the amount, and complete the checkout." data-es="Selecciona por qué estás pagando, ingresa el monto y completa el pago.">Select what you're paying for, enter the amount, and complete the checkout.</div>
 
       <!-- Payment Type Selector -->
       <div class="payment-types">
@@ -163,24 +168,24 @@
           <input type="radio" name="payment_type" value="deposit" checked />
           <div class="pt-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
           <div class="pt-text">
-            <strong>Project Deposit</strong>
-            <span>To begin a new project</span>
+            <strong data-en="Project Deposit" data-es="Depósito del Proyecto">Project Deposit</strong>
+            <span data-en="To begin a new project" data-es="Para iniciar un nuevo proyecto">To begin a new project</span>
           </div>
         </label>
         <label class="payment-type-option" onclick="selectPaymentType(this, 'Project Balance')">
           <input type="radio" name="payment_type" value="balance" />
           <div class="pt-icon"><i class="fa-solid fa-check-circle"></i></div>
           <div class="pt-text">
-            <strong>Project Balance</strong>
-            <span>Milestone or final payment</span>
+            <strong data-en="Project Balance" data-es="Saldo del Proyecto">Project Balance</strong>
+            <span data-en="Milestone or final payment" data-es="Pago de hito o pago final">Milestone or final payment</span>
           </div>
         </label>
         <label class="payment-type-option" onclick="selectPaymentType(this, 'Monthly Maintenance')">
           <input type="radio" name="payment_type" value="maintenance" />
           <div class="pt-icon"><i class="fa-solid fa-shield-halved"></i></div>
           <div class="pt-text">
-            <strong>Monthly Maintenance</strong>
-            <span>Care plan subscription</span>
+            <strong data-en="Monthly Maintenance" data-es="Mantenimiento Mensual">Monthly Maintenance</strong>
+            <span data-en="Care plan subscription" data-es="Suscripción al plan de cuidado">Care plan subscription</span>
           </div>
         </label>
 
@@ -206,15 +211,15 @@
           <input type="radio" name="payment_type" value="invoice" />
           <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
           <div class="pt-text">
-            <strong>Invoice / Other</strong>
-            <span>Manual or custom payment</span>
+            <strong data-en="Invoice / Other" data-es="Factura / Otro">Invoice / Other</strong>
+            <span data-en="Manual or custom payment" data-es="Pago manual o personalizado">Manual or custom payment</span>
           </div>
         </label>
       </div>
 
       <!-- Amount & Info -->
       <div class="form-group">
-        <label>Payment amount (USD) *</label>
+        <label data-en="Payment amount (USD) *" data-es="Monto del pago (USD) *">Payment amount (USD) *</label>
         <div class="amount-input-wrap">
           <span class="currency-symbol">$</span>
           <input type="number" id="pay-amount" placeholder="0.00" min="1" step="0.01" />
@@ -222,21 +227,21 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Your name *</label>
+          <label data-en="Your name *" data-es="Tu nombre *">Your name *</label>
           <input type="text" id="pay-name" placeholder="John Smith" />
         </div>
         <div class="form-group">
-          <label>Email address *</label>
+          <label data-en="Email address *" data-es="Correo electrónico *">Email address *</label>
           <input type="email" id="pay-email" placeholder="hello@yourbusiness.com" />
         </div>
       </div>
       <div class="form-group">
-        <label>Notes (optional)</label>
+        <label data-en="Notes (optional)" data-es="Notas (opcional)">Notes (optional)</label>
         <input type="text" id="pay-notes" placeholder="Project name, invoice number, or any reference" />
       </div>
 
       <button type="button" class="btn-primary" id="pay-btn" onclick="goToCheckout()" style="width:100%;justify-content:center;margin-bottom:16px;font-size:1rem;padding:16px 24px;">
-        <i class="fa-brands fa-stripe"></i> Proceed to Secure Checkout
+        <i class="fa-brands fa-stripe"></i> <span data-en="Proceed to Secure Checkout" data-es="Ir al Pago Seguro">Proceed to Secure Checkout</span>
       </button>
 
       <div class="security-row">
@@ -250,37 +255,38 @@
     <div class="payment-info">
 
       <div class="info-card reveal">
-        <h3>Payment types explained</h3>
+        <h3 data-en="Payment types explained" data-es="Tipos de pago explicados">Payment types explained</h3>
         <ul>
-          <li><i class="fa-solid fa-circle-dot"></i> <strong>Project Deposit:</strong> Paid upfront to begin work. Amount determined in your proposal (typically 33–50% of total).</li>
-          <li><i class="fa-solid fa-circle-dot"></i> <strong>Project Balance:</strong> Milestone or final payment. Amount and timing per your contract.</li>
-          <li><i class="fa-solid fa-circle-dot"></i> <strong>Monthly Maintenance:</strong> Recurring payment for your care plan ($97, $197, or $297/mo).</li>
-          <li><i class="fa-solid fa-circle-dot"></i> <strong>Invoice / Other:</strong> Any other payment with a specific reference number.</li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Project Deposit:" data-es="Depósito del Proyecto:">Project Deposit:</strong> <span data-en="Paid upfront to begin work. Amount determined in your proposal (typically 33–50% of total)." data-es="Pago anticipado para comenzar el trabajo. Monto determinado en tu propuesta (generalmente 33–50% del total).">Paid upfront to begin work. Amount determined in your proposal (typically 33–50% of total).</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Project Balance:" data-es="Saldo del Proyecto:">Project Balance:</strong> <span data-en="Milestone or final payment. Amount and timing per your contract." data-es="Pago de hito o pago final. Monto y fecha según tu contrato.">Milestone or final payment. Amount and timing per your contract.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Monthly Maintenance:" data-es="Mantenimiento Mensual:">Monthly Maintenance:</strong> <span data-en="Recurring payment for your care plan ($97, $197, or $297/mo)." data-es="Pago recurrente para tu plan de cuidado ($97, $197 o $297/mes).">Recurring payment for your care plan ($97, $197, or $297/mo).</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Invoice / Other:" data-es="Factura / Otro:">Invoice / Other:</strong> <span data-en="Any other payment with a specific reference number." data-es="Cualquier otro pago con un número de referencia específico.">Any other payment with a specific reference number.</span></li>
         </ul>
       </div>
 
       <div class="alt-payment reveal">
-        <h3>Alternative payment methods</h3>
+        <h3 data-en="Alternative payment methods" data-es="Métodos de pago alternativos">Alternative payment methods</h3>
         <ul>
-          <li><i class="fa-solid fa-check"></i> Credit / Debit Card — via button above</li>
+          <li><i class="fa-solid fa-check"></i> <span data-en="Credit / Debit Card — via button above" data-es="Tarjeta de Crédito / Débito — mediante el botón de arriba">Credit / Debit Card — via button above</span></li>
           <li><i class="fa-solid fa-check"></i> Zelle — helloruutdev@hotmail.com</li>
           <li><i class="fa-solid fa-check"></i> PayPal — helloruutdev@hotmail.com</li>
-          <li><i class="fa-solid fa-check"></i> Bank Transfer (USD) — details on request</li>
+          <li><i class="fa-solid fa-check"></i> <span data-en="Bank Transfer (USD) — details on request" data-es="Transferencia Bancaria (USD) — detalles bajo solicitud">Bank Transfer (USD) — details on request</span></li>
         </ul>
-        <p>All payments must be in US dollars. Please include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation.</p>
+        <p data-en="All payments must be in US dollars. Please include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation." data-es="Todos los pagos deben ser en dólares estadounidenses. Por favor incluye tu nombre y referencia del proyecto al enviar. Contáctanos por WhatsApp si necesitas confirmación de pago.">All payments must be in US dollars. Please include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation.</p>
       </div>
 
       <div class="info-card reveal">
-        <h3>Refund & cancellation policy</h3>
-        <p>Project deposits are non-refundable after work begins. Maintenance plan payments are non-refundable for the current billing period. See our <a href="terms.html" style="color:var(--blue);">Terms & Conditions</a> for full details including the cancellation notice requirement.</p>
+        <h3 data-en="Refund &amp; cancellation policy" data-es="Política de reembolso y cancelación">Refund &amp; cancellation policy</h3>
+        <p data-en="Project deposits are non-refundable after work begins. Maintenance plan payments are non-refundable for the current billing period. See our" data-es="Los depósitos del proyecto no son reembolsables una vez que comienza el trabajo. Los pagos del plan de mantenimiento no son reembolsables para el período de facturación actual. Consulta nuestros">Project deposits are non-refundable after work begins. Maintenance plan payments are non-refundable for the current billing period. See our</p>
+        <p><a href="terms.html" style="color:var(--blue);" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms &amp; Conditions</a> <span data-en="for full details including the cancellation notice requirement." data-es="para todos los detalles incluyendo el requisito de aviso de cancelación.">for full details including the cancellation notice requirement.</span></p>
       </div>
 
       <div class="info-card reveal">
-        <h3>Questions about your payment?</h3>
-        <p style="margin-bottom:16px;">Contact us directly and we'll resolve it immediately.</p>
+        <h3 data-en="Questions about your payment?" data-es="¿Preguntas sobre tu pago?">Questions about your payment?</h3>
+        <p style="margin-bottom:16px;" data-en="Contact us directly and we'll resolve it immediately." data-es="Contáctanos directamente y lo resolveremos de inmediato.">Contact us directly and we'll resolve it immediately.</p>
         <a href="https://wa.me/14076946371" target="_blank" class="whatsapp-btn" style="font-size:0.85rem;padding:10px 20px;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Chat on WhatsApp
+          <span data-en="Chat on WhatsApp" data-es="Chatear por WhatsApp">Chat on WhatsApp</span>
         </a>
       </div>
     </div>
@@ -293,38 +299,38 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
-      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
       <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
         <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
       </a>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
       <ul>
-        <li><a href="services.html">Website Development</a></li>
-        <li><a href="services.html">Software & Web Apps</a></li>
-        <li><a href="services.html">AI Integrations</a></li>
-        <li><a href="pricing.html">Maintenance Plans</a></li>
+        <li><a href="services.html" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="services.html" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="services.html" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="pricing.html" data-en="Maintenance Plans" data-es="Planes de Mantenimiento">Maintenance Plans</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
       <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="pay.html">Make a Payment</a></li>
+        <li><a href="about.html" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="pay.html" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
       <ul>
-        <li><a href="terms.html">Terms & Conditions</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="privacy.html" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
     <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
   </div>
 </footer>

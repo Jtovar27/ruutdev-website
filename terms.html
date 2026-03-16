@@ -123,28 +123,33 @@
 <nav>
   <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+    <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="contact.html" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <ul class="nav-mobile" id="nav-mobile">
-  <li><a href="services.html">Services</a></li>
-  <li><a href="pricing.html">Pricing</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+  <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
 </ul>
 
 <!-- ── PAGE HERO ── -->
 <div class="page-hero" style="padding-bottom:60px;">
   <div class="page-hero-content">
-    <div class="hero-badge">Legal</div>
-    <h1>Terms &amp;<br /><em>Conditions</em></h1>
-    <p>These terms govern all services provided by RuutDev. Please read them carefully before engaging with our services.</p>
+    <div class="hero-badge" data-en="Legal" data-es="Legal">Legal</div>
+    <h1 data-en="Terms &amp;<br /><em>Conditions</em>" data-es="Términos y<br /><em>Condiciones</em>">Terms &amp;<br /><em>Conditions</em></h1>
+    <p data-en="These terms govern all services provided by RuutDev. Please read them carefully before engaging with our services." data-es="Estos términos rigen todos los servicios proporcionados por RuutDev. Por favor léelos cuidadosamente antes de contratar nuestros servicios.">These terms govern all services provided by RuutDev. Please read them carefully before engaging with our services.</p>
     <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);">
       <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);">
         <strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Last Updated</strong>
@@ -194,16 +199,16 @@
   <div class="legal-content">
 
     <div class="legal-section" id="sec-overview">
-      <div class="legal-section-num">Section 1</div>
-      <h2>Overview</h2>
+      <div class="legal-section-num" data-en="Section 1" data-es="Sección 1">Section 1</div>
+      <h2 data-en="Overview" data-es="Resumen">Overview</h2>
       <p>These Terms &amp; Conditions ("Terms") govern the relationship between RuutDev ("we," "us," "RuutDev") — operated by Johan Tovar — and any individual or business ("Client," "you") that engages our services, whether through our website, email, WhatsApp, or any other channel.</p>
       <p>By requesting a demo, signing a proposal, or making a payment, you agree to be bound by these Terms. If you do not agree with any part of these Terms, do not engage our services.</p>
       <p>These Terms apply to all services including, but not limited to: website development, software and web application development, AI integrations, automations, hosting, technical support, and monthly maintenance plans.</p>
     </div>
 
     <div class="legal-section" id="sec-services">
-      <div class="legal-section-num">Section 2</div>
-      <h2>Services</h2>
+      <div class="legal-section-num" data-en="Section 2" data-es="Sección 2">Section 2</div>
+      <h2 data-en="Services" data-es="Servicios">Services</h2>
       <p>RuutDev provides the following categories of services:</p>
       <ul>
         <li><strong>Website Development:</strong> Landing pages, business websites, portfolio sites, and web redesigns. Custom-built from scratch for each client.</li>
@@ -217,8 +222,8 @@
     </div>
 
     <div class="legal-section" id="sec-demo">
-      <div class="legal-section-num">Section 3</div>
-      <h2>Free Demo</h2>
+      <div class="legal-section-num" data-en="Section 3" data-es="Sección 3">Section 3</div>
+      <h2 data-en="Free Demo" data-es="Demo Gratis">Free Demo</h2>
       <p>RuutDev offers a complimentary working demo of a proposed website or project, delivered within approximately 48 hours of the initial consultation. The demo is provided at no cost and with no obligation to proceed.</p>
       <ul>
         <li>The demo is a real, functional prototype — not a static mockup.</li>
@@ -230,8 +235,8 @@
     </div>
 
     <div class="legal-section" id="sec-project-payments">
-      <div class="legal-section-num">Section 4</div>
-      <h2>Project Payments</h2>
+      <div class="legal-section-num" data-en="Section 4" data-es="Sección 4">Section 4</div>
+      <h2 data-en="Project Payments" data-es="Pagos de Proyectos">Project Payments</h2>
       <p>All project costs are quoted in US dollars (USD) and confirmed in a written proposal. Payments are split into milestones based on project value:</p>
 
       <table class="terms-table">
@@ -268,8 +273,8 @@
     </div>
 
     <div class="legal-section" id="sec-maintenance">
-      <div class="legal-section-num">Section 5</div>
-      <h2>Monthly Maintenance Plans</h2>
+      <div class="legal-section-num" data-en="Section 5" data-es="Sección 5">Section 5</div>
+      <h2 data-en="Monthly Maintenance Plans" data-es="Planes de Mantenimiento Mensual">Monthly Maintenance Plans</h2>
       <p>RuutDev offers optional monthly maintenance plans for ongoing care of websites, software, and advanced systems. These plans are separate from and independent of the one-time project cost.</p>
 
       <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Plan Tiers</h3>
@@ -290,8 +295,8 @@
     </div>
 
     <div class="legal-section" id="sec-cancellation">
-      <div class="legal-section-num">Section 6</div>
-      <h2>Cancellation &amp; Suspension</h2>
+      <div class="legal-section-num" data-en="Section 6" data-es="Sección 6">Section 6</div>
+      <h2 data-en="Cancellation &amp; Suspension" data-es="Cancelación y Suspensión">Cancellation &amp; Suspension</h2>
 
       <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Client Cancellation of Maintenance Plans</h3>
       <p>The Client may cancel a maintenance plan at any time by providing <strong>30 days' written notice</strong> via email or WhatsApp. The plan will remain active through the end of the current billing period and will not renew after the cancellation date. No refunds are issued for the current billing period.</p>
@@ -315,8 +320,8 @@
     </div>
 
     <div class="legal-section" id="sec-buyout">
-      <div class="legal-section-num">Section 7</div>
-      <h2>Buyout Clause</h2>
+      <div class="legal-section-num" data-en="Section 7" data-es="Sección 7">Section 7</div>
+      <h2 data-en="Buyout Clause" data-es="Cláusula de Compra">Buyout Clause</h2>
       <p>In some arrangements — particularly for software, dashboards, or systems under a monthly maintenance or licensing model — full ownership of the project deliverables may be contingent on a separate buyout payment.</p>
 
       <div class="legal-highlight">
@@ -328,8 +333,8 @@
     </div>
 
     <div class="legal-section" id="sec-process">
-      <div class="legal-section-num">Section 8</div>
-      <h2>Project Process</h2>
+      <div class="legal-section-num" data-en="Section 8" data-es="Sección 8">Section 8</div>
+      <h2 data-en="Project Process" data-es="Proceso del Proyecto">Project Process</h2>
       <p>The typical project lifecycle consists of the following stages:</p>
       <ol>
         <li><strong>Discovery:</strong> Initial consultation to understand scope, goals, and requirements.</li>
@@ -344,8 +349,8 @@
     </div>
 
     <div class="legal-section" id="sec-revisions">
-      <div class="legal-section-num">Section 9</div>
-      <h2>Revisions</h2>
+      <div class="legal-section-num" data-en="Section 9" data-es="Sección 9">Section 9</div>
+      <h2 data-en="Revisions" data-es="Revisiones">Revisions</h2>
       <p>The number of included revision rounds is defined in the Client's proposal. As a general guideline:</p>
       <ul>
         <li><strong>Landing pages and websites:</strong> 2–3 rounds of revisions.</li>
@@ -357,8 +362,8 @@
     </div>
 
     <div class="legal-section" id="sec-ip">
-      <div class="legal-section-num">Section 10</div>
-      <h2>Intellectual Property</h2>
+      <div class="legal-section-num" data-en="Section 10" data-es="Sección 10">Section 10</div>
+      <h2 data-en="Intellectual Property" data-es="Propiedad Intelectual">Intellectual Property</h2>
 
       <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Transfer of Ownership</h3>
       <p>Upon receipt of <strong>all project payments in full</strong>, RuutDev transfers to the Client all rights to the custom-built deliverables specific to that project, including design files, code, and content created by RuutDev for the Client.</p>
@@ -372,8 +377,8 @@
     </div>
 
     <div class="legal-section" id="sec-client">
-      <div class="legal-section-num">Section 11</div>
-      <h2>Client Responsibilities</h2>
+      <div class="legal-section-num" data-en="Section 11" data-es="Sección 11">Section 11</div>
+      <h2 data-en="Client Responsibilities" data-es="Responsabilidades del Cliente">Client Responsibilities</h2>
       <p>The Client agrees to:</p>
       <ul>
         <li>Provide all required content (text, images, logos, brand guidelines) in a timely manner. Delays caused by late content delivery may affect project timelines without liability to RuutDev.</li>
@@ -385,8 +390,8 @@
     </div>
 
     <div class="legal-section" id="sec-third-party">
-      <div class="legal-section-num">Section 12</div>
-      <h2>Third-Party Services</h2>
+      <div class="legal-section-num" data-en="Section 12" data-es="Sección 12">Section 12</div>
+      <h2 data-en="Third-Party Services" data-es="Servicios de Terceros">Third-Party Services</h2>
       <p>RuutDev may integrate or recommend third-party services including but not limited to: Stripe, PayPal, Vercel, Cloudflare, Google services, Zapier, Make, OpenAI, and others.</p>
 
       <div class="legal-warning">
@@ -398,8 +403,8 @@
     </div>
 
     <div class="legal-section" id="sec-liability">
-      <div class="legal-section-num">Section 13</div>
-      <h2>Limitation of Liability</h2>
+      <div class="legal-section-num" data-en="Section 13" data-es="Sección 13">Section 13</div>
+      <h2 data-en="Limitation of Liability" data-es="Limitación de Responsabilidad">Limitation of Liability</h2>
       <p>To the maximum extent permitted by applicable law, RuutDev's total liability to the Client for any claim arising from or related to these Terms or any service provided shall not exceed the total amount paid by the Client to RuutDev in the 90 days preceding the claim.</p>
       <p>RuutDev shall not be liable for:</p>
       <ul>
@@ -412,16 +417,16 @@
     </div>
 
     <div class="legal-section" id="sec-results">
-      <div class="legal-section-num">Section 14</div>
-      <h2>No Guarantee of Business Results</h2>
+      <div class="legal-section-num" data-en="Section 14" data-es="Sección 14">Section 14</div>
+      <h2 data-en="No Guarantee of Business Results" data-es="Sin Garantía de Resultados Empresariales">No Guarantee of Business Results</h2>
       <p>RuutDev builds professional, high-quality digital products. However, <strong>RuutDev does not guarantee any specific business outcome</strong>, including but not limited to: increased traffic, leads, sales, revenue, search engine ranking, or return on investment.</p>
       <p>Business results depend on many factors outside RuutDev's control, including market conditions, competition, the Client's products or services, pricing, marketing efforts, and other operational factors.</p>
       <p>Any projections, estimates, or examples discussed during the sales process are illustrative only and not contractual commitments.</p>
     </div>
 
     <div class="legal-section" id="sec-chargebacks">
-      <div class="legal-section-num">Section 15</div>
-      <h2>Chargebacks</h2>
+      <div class="legal-section-num" data-en="Section 15" data-es="Sección 15">Section 15</div>
+      <h2 data-en="Chargebacks" data-es="Contracargos">Chargebacks</h2>
       <p>Filing a chargeback or payment dispute without first contacting RuutDev to attempt resolution is considered a breach of these Terms.</p>
       <p>If a Client initiates a chargeback in bad faith — particularly after work has been delivered, approved, or launched — RuutDev reserves the right to:</p>
       <ul>
@@ -433,8 +438,8 @@
     </div>
 
     <div class="legal-section" id="sec-support">
-      <div class="legal-section-num">Section 16</div>
-      <h2>Support &amp; Response Times</h2>
+      <div class="legal-section-num" data-en="Section 16" data-es="Sección 16">Section 16</div>
+      <h2 data-en="Support &amp; Response Times" data-es="Soporte y Tiempos de Respuesta">Support &amp; Response Times</h2>
       <p>Support availability and response times depend on the Client's plan:</p>
       <ul>
         <li><strong>No active maintenance plan:</strong> Support is provided on a best-effort basis. Response times are not guaranteed.</li>
@@ -446,16 +451,16 @@
     </div>
 
     <div class="legal-section" id="sec-law">
-      <div class="legal-section-num">Section 17</div>
-      <h2>Governing Law</h2>
+      <div class="legal-section-num" data-en="Section 17" data-es="Sección 17">Section 17</div>
+      <h2 data-en="Governing Law" data-es="Ley Aplicable">Governing Law</h2>
       <p>These Terms and any disputes arising from them shall be governed by and construed in accordance with the laws of the <strong>State of Florida, United States of America</strong>, without regard to its conflict of law provisions.</p>
       <p>Any legal action or proceeding shall be brought exclusively in the courts of Florida. Both parties consent to the personal jurisdiction of such courts.</p>
       <p>RuutDev reserves the right to amend these Terms at any time. Changes will be communicated via the website and via direct notice to active Clients. Continued use of services after changes are posted constitutes acceptance.</p>
     </div>
 
     <div class="legal-section" id="sec-contact">
-      <div class="legal-section-num">Section 18</div>
-      <h2>Contact</h2>
+      <div class="legal-section-num" data-en="Section 18" data-es="Sección 18">Section 18</div>
+      <h2 data-en="Contact" data-es="Contacto">Contact</h2>
       <p>For questions about these Terms, please contact:</p>
       <ul>
         <li><strong>Business:</strong> RuutDev</li>
@@ -475,38 +480,38 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
-      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
       <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
         <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
       </a>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
       <ul>
-        <li><a href="services.html">Website Development</a></li>
-        <li><a href="services.html">Software & Web Apps</a></li>
-        <li><a href="services.html">AI Integrations</a></li>
-        <li><a href="pricing.html">Maintenance Plans</a></li>
+        <li><a href="services.html" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="services.html" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="services.html" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="pricing.html" data-en="Maintenance Plans" data-es="Planes de Mantenimiento">Maintenance Plans</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
       <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="pay.html">Make a Payment</a></li>
+        <li><a href="about.html" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="pay.html" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
       <ul>
-        <li><a href="terms.html">Terms & Conditions</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="privacy.html" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
     <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
   </div>
 </footer>

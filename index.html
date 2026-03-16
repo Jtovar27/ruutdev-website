@@ -147,22 +147,27 @@
 <nav>
   <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="services.html">Services</a></li>
-    <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+    <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="contact.html" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
   </ul>
   <div class="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
 <ul class="nav-mobile" id="nav-mobile">
-  <li><a href="services.html">Services</a></li>
-  <li><a href="pricing.html">Pricing</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+  <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
 </ul>
 
 <!-- ── HERO ── -->
@@ -178,34 +183,34 @@
     Web Development &amp; AI Solutions
   </div>
 
-  <h1>Your business deserves a<br /><em>real digital presence</em></h1>
+  <h1 data-en="Your business deserves a<br /><em>real digital presence</em>" data-es="Tu negocio merece una<br /><em>presencia digital real</em>">Your business deserves a<br /><em>real digital presence</em></h1>
 
-  <p class="hero-sub">
+  <p class="hero-sub" data-en="We build modern, fast websites and software designed to convert visitors into customers — from professional landing pages to AI-powered tools and custom systems." data-es="Construimos sitios web modernos y rápidos diseñados para convertir visitantes en clientes — desde páginas de aterrizaje profesionales hasta herramientas con IA y sistemas a medida.">
     We build modern, fast websites and software designed to convert visitors into customers —
     from professional landing pages to AI-powered tools and custom systems.
   </p>
 
   <div class="hero-actions">
-    <a href="services.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Explore Services</a>
-    <a href="contact.html" class="btn-secondary">Get a Free Demo</a>
+    <a href="services.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> <span data-en="Explore Services" data-es="Explorar Servicios">Explore Services</span></a>
+    <a href="contact.html" class="btn-secondary" data-en="Get a Free Demo" data-es="Obtén un Demo Gratis">Get a Free Demo</a>
   </div>
 
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">48h</div>
-      <div class="stat-label">Free demo delivery</div>
+      <div class="stat-label" data-en="Free demo delivery" data-es="Entrega del demo gratis">Free demo delivery</div>
     </div>
     <div class="stat">
       <div class="stat-num">$0</div>
-      <div class="stat-label">No upfront commitment</div>
+      <div class="stat-label" data-en="No upfront commitment" data-es="Sin compromiso inicial">No upfront commitment</div>
     </div>
     <div class="stat">
       <div class="stat-num">100%</div>
-      <div class="stat-label">Custom built</div>
+      <div class="stat-label" data-en="Custom built" data-es="Construido a medida">Custom built</div>
     </div>
     <div class="stat">
       <div class="stat-num">USA & VE</div>
-      <div class="stat-label">Both markets served</div>
+      <div class="stat-label" data-en="Both markets served" data-es="Ambos mercados atendidos">Both markets served</div>
     </div>
   </div>
 </section>
@@ -214,54 +219,54 @@
 <section id="services" style="background:var(--bg);">
   <div class="section-header reveal">
     <div>
-      <div class="section-label">What We Build</div>
-      <h2 class="section-title">Everything your business needs online</h2>
+      <div class="section-label" data-en="What We Build" data-es="Qué Construimos">What We Build</div>
+      <h2 class="section-title" data-en="Everything your business needs online" data-es="Todo lo que tu negocio necesita en línea">Everything your business needs online</h2>
     </div>
-    <a href="services.html" class="btn-outline">View all services <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="services.html" class="btn-outline"><span data-en="View all services" data-es="Ver todos los servicios">View all services</span> <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-rocket"></i></div>
-      <h3>Professional Website</h3>
-      <p>Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites.</p>
+      <h3 data-en="Professional Website" data-es="Sitio Web Profesional">Professional Website</h3>
+      <p data-en="Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites." data-es="Sitios web enfocados en conversión con diseño responsivo, SEO básico y formularios de contacto. Desde páginas de aterrizaje hasta sitios completos.">Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites.</p>
       <span class="service-price">From $500</span>
-      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-      <h3>Software & Web Apps</h3>
-      <p>Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow.</p>
+      <h3 data-en="Software &amp; Web Apps" data-es="Software &amp; Aplicaciones Web">Software & Web Apps</h3>
+      <p data-en="Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow." data-es="Dashboards personalizados, sistemas internos, tiendas de comercio electrónico y aplicaciones web construidas para tu flujo de trabajo específico.">Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow.</p>
       <span class="service-price">$1,200–$4,500</span>
-      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
-      <h3>AI Integrations</h3>
-      <p>Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions.</p>
+      <h3 data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</h3>
+      <p data-en="Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions." data-es="Chatbots, automatizaciones, flujos de trabajo inteligentes y herramientas con IA que ahorran tiempo y aumentan las conversiones.">Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions.</p>
       <span class="service-price">$2,500–$8,000</span>
-      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
-      <h3>Monthly Maintenance</h3>
-      <p>Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support.</p>
+      <h3 data-en="Monthly Maintenance" data-es="Mantenimiento Mensual">Monthly Maintenance</h3>
+      <p data-en="Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support." data-es="Mantén tu sitio seguro, actualizado y funcionando sin problemas. Nos encargamos del hosting, actualizaciones, copias de seguridad y soporte continuo.">Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support.</p>
       <span class="service-price">From $45/mo</span>
-      <br/><a href="pricing.html" class="learn-more">See plans <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="pricing.html" class="learn-more"><span data-en="See plans" data-es="Ver planes">See plans</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-plug"></i></div>
-      <h3>Integrations & Automations</h3>
-      <p>Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow.</p>
+      <h3 data-en="Integrations &amp; Automations" data-es="Integraciones y Automatizaciones">Integrations & Automations</h3>
+      <p data-en="Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow." data-es="Conecta tus herramientas — Stripe, Zapier, CRMs, sistemas de pago y APIs de terceros — en un flujo de trabajo perfecto.">Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow.</p>
       <span class="service-price">From $500</span>
-      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-earth-americas"></i></div>
-      <h3>Free Demo — No Commitment</h3>
-      <p>We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward.</p>
+      <h3 data-en="Free Demo — No Commitment" data-es="Demo Gratis — Sin Compromiso">Free Demo — No Commitment</h3>
+      <p data-en="We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo, pruébalo y solo paga si decides seguir adelante.">We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward.</p>
       <span class="service-price">Free</span>
-      <br/><a href="contact.html" class="learn-more">Get your demo <i class="fa-solid fa-arrow-right"></i></a>
+      <br/><a href="contact.html" class="learn-more"><span data-en="Get your demo" data-es="Obtén tu demo">Get your demo</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -270,30 +275,30 @@
 <section id="why">
   <div class="section-header reveal">
     <div>
-      <div class="section-label">Why RuutDev</div>
-      <h2 class="section-title">Built for results, not just looks</h2>
+      <div class="section-label" data-en="Why RuutDev" data-es="Por Qué RuutDev">Why RuutDev</div>
+      <h2 class="section-title" data-en="Built for results, not just looks" data-es="Construido para resultados, no solo apariencia">Built for results, not just looks</h2>
     </div>
   </div>
   <div class="why-grid">
     <div class="why-card reveal">
       <div class="why-num">01</div>
-      <h3>Demo Before You Pay</h3>
-      <p>See a real, working version of your site before committing to anything. Zero risk, zero surprise.</p>
+      <h3 data-en="Demo Before You Pay" data-es="Demo Antes de Pagar">Demo Before You Pay</h3>
+      <p data-en="See a real, working version of your site before committing to anything. Zero risk, zero surprise." data-es="Ve una versión real y funcional de tu sitio antes de comprometerte con nada. Cero riesgo, cero sorpresas.">See a real, working version of your site before committing to anything. Zero risk, zero surprise.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">02</div>
-      <h3>100% Custom</h3>
-      <p>No templates. Every project is built from scratch to match your brand, your audience, and your goals.</p>
+      <h3 data-en="100% Custom" data-es="100% Personalizado">100% Custom</h3>
+      <p data-en="No templates. Every project is built from scratch to match your brand, your audience, and your goals." data-es="Sin plantillas. Cada proyecto se construye desde cero para adaptarse a tu marca, tu audiencia y tus objetivos.">No templates. Every project is built from scratch to match your brand, your audience, and your goals.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">03</div>
-      <h3>Ongoing Care Available</h3>
-      <p>Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch.</p>
+      <h3 data-en="Ongoing Care Available" data-es="Cuidado Continuo Disponible">Ongoing Care Available</h3>
+      <p data-en="Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch." data-es="Planes de mantenimiento mensual flexibles para que tu sitio se mantenga rápido, seguro y actualizado mucho después del lanzamiento.">Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">04</div>
-      <h3>USA & Venezuela</h3>
-      <p>We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries.</p>
+      <h3 data-en="USA &amp; Venezuela" data-es="EE.UU. &amp; Venezuela">USA & Venezuela</h3>
+      <p data-en="We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries." data-es="Entendemos ambos mercados. Soporte bilingüe, pagos en dólares y experiencia atendiendo clientes en ambos países.">We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries.</p>
     </div>
   </div>
 </section>
@@ -302,10 +307,10 @@
 <section id="testimonials" style="background:var(--bg2);">
   <div class="section-header reveal">
     <div>
-      <div class="section-label">Testimonials</div>
-      <h2 class="section-title">What our clients say</h2>
+      <div class="section-label" data-en="Testimonials" data-es="Testimonios">Testimonials</div>
+      <h2 class="section-title" data-en="What our clients say" data-es="Lo que dicen nuestros clientes">What our clients say</h2>
     </div>
-    <p class="section-intro">Real results from real businesses that trusted RuutDev.</p>
+    <p class="section-intro" data-en="Real results from real businesses that trusted RuutDev." data-es="Resultados reales de negocios reales que confiaron en RuutDev.">Real results from real businesses that trusted RuutDev.</p>
   </div>
 
   <div class="testimonials-grid">
@@ -313,12 +318,12 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text">"We had no online presence before. RuutDev built us an amazing page in just a few days and we're already getting new customers through it. The free demo was key to convincing us."</p>
+      <p class="testimonial-text" data-en='"We had no online presence before. RuutDev built us an amazing page in just a few days and we&apos;re already getting new customers through it. The free demo was key to convincing us."' data-es='"Antes no teníamos presencia en línea. RuutDev nos construyó una página increíble en solo unos días y ya estamos consiguiendo nuevos clientes. El demo gratis fue clave para convencernos."'>"We had no online presence before. RuutDev built us an amazing page in just a few days and we're already getting new customers through it. The free demo was key to convincing us."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Carlos Mendoza</div>
-          <div class="author-detail">Restaurant Owner · Caracas, VE</div>
+          <div class="author-detail" data-en="Restaurant Owner · Caracas, VE" data-es="Dueño de Restaurante · Caracas, VE">Restaurant Owner · Caracas, VE</div>
         </div>
       </div>
     </div>
@@ -327,12 +332,12 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text">"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."</p>
+      <p class="testimonial-text" data-en='"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."' data-es='"Super profesional y rápido. Entregaron exactamente lo que necesitaba para mi barbería. El sistema de reservas en línea redujo mis llamadas telefónicas y mis clientes lo adoran."'>"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Miguel Torres</div>
-          <div class="author-detail">Barbershop Owner · Orlando, FL</div>
+          <div class="author-detail" data-en="Barbershop Owner · Orlando, FL" data-es="Dueño de Barbería · Orlando, FL">Barbershop Owner · Orlando, FL</div>
         </div>
       </div>
     </div>
@@ -341,12 +346,12 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text">"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."</p>
+      <p class="testimonial-text" data-en='"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."' data-es='"Lo que más me gustó fue ver el demo antes de pagar. Pude ver que sabían lo que hacían y el resultado final superó mis expectativas. Muy recomendado."'>"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Ana González</div>
-          <div class="author-detail">Clinic Director · Miami, FL</div>
+          <div class="author-detail" data-en="Clinic Director · Miami, FL" data-es="Directora de Clínica · Miami, FL">Clinic Director · Miami, FL</div>
         </div>
       </div>
     </div>
@@ -357,49 +362,49 @@
 <section id="pricing-preview">
   <div class="section-header reveal">
     <div>
-      <div class="section-label">Pricing</div>
-      <h2 class="section-title">Two ways to work with us</h2>
+      <div class="section-label" data-en="Pricing" data-es="Precios">Pricing</div>
+      <h2 class="section-title" data-en="Two ways to work with us" data-es="Dos formas de trabajar con nosotros">Two ways to work with us</h2>
     </div>
-    <a href="pricing.html" class="btn-outline">See full pricing <i class="fa-solid fa-arrow-right"></i></a>
+    <a href="pricing.html" class="btn-outline"><span data-en="See full pricing" data-es="Ver precios completos">See full pricing</span> <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 
   <div class="plans-row">
     <div class="plan-card featured reveal">
-      <div class="plan-badge">Most Accessible</div>
-      <div class="plan-label">Monthly Plan</div>
+      <div class="plan-badge" data-en="Most Accessible" data-es="Más Accesible">Most Accessible</div>
+      <div class="plan-label" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
       <div class="plan-price">$45<sub>/mo</sub></div>
-      <p class="plan-desc">We build, host, and maintain your site. Low entry cost — start with just the setup fee.</p>
+      <p class="plan-desc" data-en="We build, host, and maintain your site. Low entry cost — start with just the setup fee." data-es="Construimos, alojamos y mantenemos tu sitio. Bajo costo de entrada — comienza solo con la tarifa de configuración.">We build, host, and maintain your site. Low entry cost — start with just the setup fee.</p>
       <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> We build your site from scratch</li>
-        <li><i class="fa-solid fa-check"></i> Hosting, SSL & domain included</li>
-        <li><i class="fa-solid fa-check"></i> Security & monthly updates</li>
-        <li><i class="fa-solid fa-check"></i> Buy out your site anytime ($540)</li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="We build your site from scratch" data-es="Construimos tu sitio desde cero">We build your site from scratch</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Hosting, SSL &amp; domain included" data-es="Hosting, SSL y dominio incluidos">Hosting, SSL & domain included</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Security &amp; monthly updates" data-es="Seguridad y actualizaciones mensuales">Security & monthly updates</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Buy out your site anytime ($540)" data-es="Compra tu sitio cuando quieras ($540)">Buy out your site anytime ($540)</span></li>
       </ul>
-      <a href="pricing.html" class="btn-primary" style="margin-top:20px;width:100%;justify-content:center;">See monthly plans</a>
+      <a href="pricing.html" class="btn-primary" style="margin-top:20px;width:100%;justify-content:center;" data-en="See monthly plans" data-es="Ver planes mensuales">See monthly plans</a>
     </div>
     <div class="plan-card reveal">
-      <div class="plan-label">One-Time Project</div>
+      <div class="plan-label" data-en="One-Time Project" data-es="Proyecto de Pago Único">One-Time Project</div>
       <div class="plan-price" style="font-size:1.9rem;line-height:1.1;">$700<span style="font-size:1rem;font-weight:400;">+</span></div>
-      <p class="plan-desc">Pay in milestones, own it outright. Full IP transfer on final payment. No recurring fees required.</p>
+      <p class="plan-desc" data-en="Pay in milestones, own it outright. Full IP transfer on final payment. No recurring fees required." data-es="Paga por hitos, sé el dueño total. Transferencia completa de propiedad intelectual al pago final. Sin tarifas recurrentes.">Pay in milestones, own it outright. Full IP transfer on final payment. No recurring fees required.</p>
       <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> Website: $700–$900</li>
-        <li><i class="fa-solid fa-check"></i> Software / Web App: $1,200–$4,500</li>
-        <li><i class="fa-solid fa-check"></i> AI & Automations: $2,500–$8,000</li>
-        <li><i class="fa-solid fa-check"></i> Full ownership on final payment</li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Website: $700–$900" data-es="Sitio Web: $700–$900">Website: $700–$900</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Software / Web App: $1,200–$4,500" data-es="Software / App Web: $1,200–$4,500">Software / Web App: $1,200–$4,500</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="AI &amp; Automations: $2,500–$8,000" data-es="IA y Automatizaciones: $2,500–$8,000">AI & Automations: $2,500–$8,000</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Full ownership on final payment" data-es="Propiedad total al pago final">Full ownership on final payment</span></li>
       </ul>
-      <a href="pricing.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;">See one-time pricing</a>
+      <a href="pricing.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;" data-en="See one-time pricing" data-es="Ver precios de pago único">See one-time pricing</a>
     </div>
     <div class="plan-card reveal">
-      <div class="plan-label">Not sure yet?</div>
-      <div class="plan-price" style="font-size:1.5rem;line-height:1.2;padding-top:4px;">Free<br/>Demo</div>
-      <p class="plan-desc">We build a working demo of your site in 48 hours. See it, test it, and only pay if you move forward.</p>
+      <div class="plan-label" data-en="Not sure yet?" data-es="¿No estás seguro?">Not sure yet?</div>
+      <div class="plan-price" style="font-size:1.5rem;line-height:1.2;padding-top:4px;" data-en="Free<br/>Demo" data-es="Demo<br/>Gratis">Free<br/>Demo</div>
+      <p class="plan-desc" data-en="We build a working demo of your site in 48 hours. See it, test it, and only pay if you move forward." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo, pruébalo y solo paga si decides continuar.">We build a working demo of your site in 48 hours. See it, test it, and only pay if you move forward.</p>
       <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> Real working preview — not a mockup</li>
-        <li><i class="fa-solid fa-check"></i> No payment until you approve</li>
-        <li><i class="fa-solid fa-check"></i> We confirm your price on the call</li>
-        <li><i class="fa-solid fa-check"></i> Zero commitment, zero pressure</li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Real working preview — not a mockup" data-es="Vista previa funcional real — no un mockup">Real working preview — not a mockup</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="No payment until you approve" data-es="Sin pago hasta que apruebes">No payment until you approve</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="We confirm your price on the call" data-es="Confirmamos tu precio en la llamada">We confirm your price on the call</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Zero commitment, zero pressure" data-es="Cero compromiso, cero presión">Zero commitment, zero pressure</span></li>
       </ul>
-      <a href="contact.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;">Get your free demo</a>
+      <a href="contact.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;" data-en="Get your free demo" data-es="Obtén tu demo gratis">Get your free demo</a>
     </div>
   </div>
 </section>
@@ -407,48 +412,48 @@
 <!-- ── PROCESS ── -->
 <section style="background:var(--bg2);">
   <div class="reveal">
-    <div class="section-label">How It Works</div>
-    <h2 class="section-title">Simple, fast, no surprises</h2>
-    <p class="section-intro">From first conversation to live site in days, not months.</p>
+    <div class="section-label" data-en="How It Works" data-es="Cómo Funciona">How It Works</div>
+    <h2 class="section-title" data-en="Simple, fast, no surprises" data-es="Simple, rápido, sin sorpresas">Simple, fast, no surprises</h2>
+    <p class="section-intro" data-en="From first conversation to live site in days, not months." data-es="Desde la primera conversación hasta el sitio en vivo en días, no meses.">From first conversation to live site in days, not months.</p>
   </div>
   <div class="process-grid">
     <div class="process-step reveal">
       <div class="step-num">01</div>
-      <h3>Conversation</h3>
-      <p>Tell us about your business and goals. No tech jargon — just a straightforward chat.</p>
+      <h3 data-en="Conversation" data-es="Conversación">Conversation</h3>
+      <p data-en="Tell us about your business and goals. No tech jargon — just a straightforward chat." data-es="Cuéntanos sobre tu negocio y tus objetivos. Sin tecnicismos — solo una conversación directa.">Tell us about your business and goals. No tech jargon — just a straightforward chat.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">02</div>
-      <h3>Free Demo</h3>
-      <p>We build a working demo of your site in 48 hours. See it in action before paying a dollar.</p>
+      <h3 data-en="Free Demo" data-es="Demo Gratis">Free Demo</h3>
+      <p data-en="We build a working demo of your site in 48 hours. See it in action before paying a dollar." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo en acción antes de pagar un centavo.">We build a working demo of your site in 48 hours. See it in action before paying a dollar.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">03</div>
-      <h3>Approval</h3>
-      <p>You approve, we finalize every detail and prepare everything for launch.</p>
+      <h3 data-en="Approval" data-es="Aprobación">Approval</h3>
+      <p data-en="You approve, we finalize every detail and prepare everything for launch." data-es="Tú apruebas, nosotros finalizamos cada detalle y preparamos todo para el lanzamiento.">You approve, we finalize every detail and prepare everything for launch.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">04</div>
-      <h3>Go Live</h3>
-      <p>Your site launches with domain, hosting, and optimization — ready to bring in clients.</p>
+      <h3 data-en="Go Live" data-es="¡En Línea!">Go Live</h3>
+      <p data-en="Your site launches with domain, hosting, and optimization — ready to bring in clients." data-es="Tu sitio se lanza con dominio, hosting y optimización — listo para atraer clientes.">Your site launches with domain, hosting, and optimization — ready to bring in clients.</p>
     </div>
   </div>
 </section>
 
 <!-- ── FINAL CTA ── -->
 <section class="cta-section">
-  <p class="cta-eyebrow reveal">Get started today</p>
-  <h2 class="cta-title reveal">Your business deserves to be<br /><em>online right now</em></h2>
-  <p class="cta-sub reveal">The demo is free. No commitments. No fine print. Just results.</p>
+  <p class="cta-eyebrow reveal" data-en="Get started today" data-es="Comienza hoy">Get started today</p>
+  <h2 class="cta-title reveal" data-en="Your business deserves to be<br /><em>online right now</em>" data-es="Tu negocio merece estar<br /><em>en línea ahora mismo</em>">Your business deserves to be<br /><em>online right now</em></h2>
+  <p class="cta-sub reveal" data-en="The demo is free. No commitments. No fine print. Just results." data-es="El demo es gratis. Sin compromisos. Sin letra pequeña. Solo resultados.">The demo is free. No commitments. No fine print. Just results.</p>
   <div class="cta-actions reveal">
-    <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Get my free demo</a>
+    <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> <span data-en="Get my free demo" data-es="Obtén mi demo gratis">Get my free demo</span></a>
     <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27m%20interested%20in%20a%20free%20demo." target="_blank" class="btn-secondary">
-      <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
+      <i class="fa-brands fa-whatsapp"></i> <span data-en="Message on WhatsApp" data-es="Mensaje por WhatsApp">Message on WhatsApp</span>
     </a>
   </div>
   <div class="cta-guarantee reveal">
     <i class="fa-solid fa-circle-check"></i>
-    Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract
+    <span data-en="Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract" data-es="Demo en 48 horas &nbsp;·&nbsp; Sin pago anticipado &nbsp;·&nbsp; Sin contrato">Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract</span>
   </div>
 </section>
 
@@ -457,38 +462,38 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
-      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
       <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
         <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
       </a>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
       <ul>
-        <li><a href="services.html">Website Development</a></li>
-        <li><a href="services.html">Software & Web Apps</a></li>
-        <li><a href="services.html">AI Integrations</a></li>
-        <li><a href="pricing.html">Maintenance Plans</a></li>
+        <li><a href="services.html" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="services.html" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="services.html" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="pricing.html" data-en="Maintenance Plans" data-es="Planes de Mantenimiento">Maintenance Plans</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Company</h4>
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
       <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="pay.html">Make a Payment</a></li>
+        <li><a href="about.html" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="pay.html" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Legal</h4>
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
       <ul>
-        <li><a href="terms.html">Terms & Conditions</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="privacy.html" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
     <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
   </div>
 </footer>
