@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing — RuutDev</title>
-  <meta name="description" content="Get your website from $45/month or own it outright from $400. Transparent 3-tier pricing for simple, standard, and advanced projects." />
+  <meta name="description" content="Get your website from $45/month (+ $149 setup) or own it outright from $700. Transparent 3-tier pricing for simple, standard, and advanced projects." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -280,7 +280,10 @@
       <div>
         <div class="entry-eyebrow">Monthly Plan — Starting at</div>
         <div class="entry-title">$45<em>/mo</em></div>
-        <p class="entry-sub">We build your website, keep it running, secure, and up to date — every month. No big upfront cost, no technical headaches. Just results.</p>
+        <p style="display:inline-flex;align-items:center;gap:8px;background:rgba(26,109,255,0.12);border:1px solid rgba(26,109,255,0.25);border-radius:100px;padding:4px 14px;font-size:0.78rem;font-weight:600;color:#93c5fd;margin-bottom:14px;">
+          <i class="fa-solid fa-circle-info"></i> One-time $149 setup fee · then $45/mo
+        </p>
+        <p class="entry-sub">We build your website, keep it running, secure, and up to date — every month. Low entry cost, zero technical headaches. Just results.</p>
         <div class="entry-cta">
           <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Get Started Today</a>
           <a href="#buyout-section" class="btn-secondary" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:white;">
@@ -345,7 +348,10 @@
         <div class="complexity-label complexity-simple"><i class="fa-solid fa-seedling"></i> Simple</div>
         <div class="price-name">Simple Site Plan</div>
         <div class="price-amount">$45<span style="font-size:1.2rem;font-weight:500;">/mo</span></div>
-        <div class="price-note">For small businesses, freelancers & local services</div>
+        <div class="price-note" style="display:flex;flex-direction:column;gap:2px;">
+          <span>For small businesses, freelancers & local services</span>
+          <span style="color:var(--blue);font-weight:600;">+ $149 one-time setup fee</span>
+        </div>
         <hr class="price-divider" />
         <ul class="price-features">
           <li><i class="fa-solid fa-check"></i> Up to 5 pages (Home, About, Services, Contact, +1)</li>
@@ -356,7 +362,7 @@
           <li><i class="fa-solid fa-check"></i> Up to 1 hr of content edits/month</li>
           <li><i class="fa-solid fa-check"></i> Buyout option available</li>
         </ul>
-        <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get Started — $45/mo</a>
+        <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get Started — $149 + $45/mo</a>
       </div>
 
       <!-- Standard -->
@@ -365,7 +371,10 @@
         <div class="complexity-label complexity-standard"><i class="fa-solid fa-chart-line"></i> Standard</div>
         <div class="price-name">Standard Site Plan</div>
         <div class="price-amount">$97<span style="font-size:1.2rem;font-weight:500;color:rgba(255,255,255,0.6);">/mo</span></div>
-        <div class="price-note">For growing businesses needing more features</div>
+        <div class="price-note" style="display:flex;flex-direction:column;gap:2px;">
+          <span>For growing businesses needing more features</span>
+          <span style="color:#60a5fa;font-weight:600;">+ $199 one-time setup fee</span>
+        </div>
         <hr class="price-divider" />
         <ul class="price-features">
           <li><i class="fa-solid fa-check"></i> Up to 10 pages + blog or portfolio section</li>
@@ -376,7 +385,7 @@
           <li><i class="fa-solid fa-check"></i> Up to 2 hrs of content edits/month</li>
           <li><i class="fa-solid fa-check"></i> Buyout option available</li>
         </ul>
-        <a href="contact.html" class="btn-primary price-cta">Get Started — $97/mo</a>
+        <a href="contact.html" class="btn-primary price-cta">Get Started — $199 + $97/mo</a>
       </div>
 
       <!-- Advanced -->
@@ -407,15 +416,32 @@
         <h4>Want to own your site? The buyout option.</h4>
         <p>
           At any point during your monthly plan, you can choose to buy out your website and receive full ownership — including the source code, design files, and intellectual property.
-          The <strong>buyout price is agreed in your contract upfront</strong> so there are no surprises. Once paid, the IP transfers to you completely.
-          Your monthly plan can continue as a standard maintenance plan, or you can take it in-house. Your call.
+          The buyout price follows a simple public formula: <strong>12× your monthly rate.</strong>
         </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;">
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Simple Plan</div>
+            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);">$540</div>
+            <div style="font-size:0.75rem;color:var(--text2);">12 × $45/mo</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Standard Plan</div>
+            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);">$1,164</div>
+            <div style="font-size:0.75rem;color:var(--text2);">12 × $97/mo</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
+            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Advanced Plan</div>
+            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);">Custom</div>
+            <div style="font-size:0.75rem;color:var(--text2);">Agreed in contract</div>
+          </div>
+        </div>
+        <p>Once the buyout is paid, the IP transfers to you completely. Your monthly plan can continue as optional maintenance, or you take it fully in-house. Your call.</p>
       </div>
     </div>
 
     <div class="notice-box reveal" style="margin-top:20px;">
       <i class="fa-solid fa-circle-info"></i>
-      <p>The <strong>$45/mo Simple plan</strong> requires the project to meet certain scope requirements (up to 5 pages, no complex backend). We confirm eligibility on our first call. Sites that exceed the scope are quoted under the Standard or Advanced plans.</p>
+      <p>The <strong>$45/mo Simple plan</strong> includes a one-time <strong>$149 setup fee</strong> on your first invoice, then $45/mo from month 2. Requires the project to meet scope requirements (up to 5 pages, no complex backend). We confirm eligibility on our first free call. Sites that exceed scope are quoted under the Standard plan ($199 setup + $97/mo).</p>
     </div>
 
   </div><!-- /panel-monthly -->
@@ -444,7 +470,7 @@
       <div class="price-card reveal">
         <div class="complexity-label complexity-simple"><i class="fa-solid fa-seedling"></i> Simple</div>
         <div class="price-name">Website</div>
-        <div class="price-amount">$400+</div>
+        <div class="price-amount" style="font-size:2rem;">$700–$900</div>
         <div class="price-note">One-time, paid in milestones</div>
         <hr class="price-divider" />
         <ul class="price-features">
@@ -464,7 +490,7 @@
         <div class="price-badge">Most Requested</div>
         <div class="complexity-label complexity-standard"><i class="fa-solid fa-chart-line"></i> Standard</div>
         <div class="price-name">Software & Web App</div>
-        <div class="price-amount">$1,200+</div>
+        <div class="price-amount" style="font-size:1.9rem;">$1,200–$4,500</div>
         <div class="price-note">One-time, paid in milestones</div>
         <hr class="price-divider" />
         <ul class="price-features">
@@ -483,7 +509,7 @@
       <div class="price-card reveal">
         <div class="complexity-label complexity-advanced"><i class="fa-solid fa-bolt"></i> Advanced</div>
         <div class="price-name">AI & Automations</div>
-        <div class="price-amount">$2,500+</div>
+        <div class="price-amount" style="font-size:1.9rem;">$2,500–$8,000</div>
         <div class="price-note">One-time, quoted per scope</div>
         <hr class="price-divider" />
         <ul class="price-features">
@@ -551,7 +577,7 @@
 
     <div class="notice-box reveal" style="margin-top:28px;">
       <i class="fa-solid fa-circle-info"></i>
-      <p>After your project is delivered, you can add an <strong>optional monthly maintenance plan</strong> ($97–$297/mo) for hosting, updates, and support. It's never required — you own the code and can manage it yourself.</p>
+      <p>After your project is delivered, you can add an <strong>optional monthly maintenance plan</strong> for hosting, updates, and support — separate from the monthly subscription model above. <strong>Website Care $97/mo · Software Care $197/mo · Advanced Care $297/mo.</strong> It's never required — you own the code and can manage it yourself.</p>
     </div>
 
   </div><!-- /panel-onetime -->
@@ -571,7 +597,7 @@
         <h4>What qualifies for the $45/month plan?</h4>
         <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
       </div>
-      <p class="faq-answer">The $45/mo plan is designed for simple informational websites — up to 5 pages, no complex backend, no e-commerce, no user login. Think: a local restaurant, a freelancer portfolio, a small service business. We confirm eligibility on our first free call. If your project needs more, we'll quote the Standard plan instead.</p>
+      <p class="faq-answer">The $45/mo plan is designed for simple informational websites — up to 5 pages, no complex backend, no e-commerce, no user login. Think: a local restaurant, a freelancer portfolio, a small service business. There is a one-time $149 setup fee on the first invoice, then $45/mo from month 2 onward. We confirm eligibility on our first free call. If your project needs more, we'll quote the Standard plan ($199 setup + $97/mo) instead.</p>
     </div>
     <div class="faq-item reveal">
       <div class="faq-question">
