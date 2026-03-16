@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — RuutDev</title>
+  <meta name="description" content="Transparent pricing for website development, software, and monthly maintenance plans. No hidden fees. Custom quotes based on scope." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── PRICING TABS ── */
+    .pricing-tabs {
+      display: flex; gap: 8px; margin-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .pricing-tab {
+      padding: 12px 24px;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+      color: var(--text2); background: transparent; border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer; transition: all var(--transition);
+      margin-bottom: -1px;
+    }
+    .pricing-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ── PRICE CARD GRID ── */
+    .price-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .price-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px;
+      transition: all var(--transition); position: relative;
+      display: flex; flex-direction: column;
+    }
+    .price-card.featured {
+      background: var(--text); border-color: var(--blue);
+      box-shadow: 0 24px 56px rgba(26,109,255,0.2);
+    }
+    .price-card:hover:not(.featured) { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .price-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: white;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 16px; border-radius: 100px; white-space: nowrap;
+    }
+    .price-type {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .price-card.featured .price-type { color: #60a5fa; }
+    .price-name {
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .price-card.featured .price-name { color: white; }
+    .price-amount {
+      font-family: var(--font-display); font-size: 2.6rem; font-weight: 800;
+      letter-spacing: -0.04em; color: var(--text); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .price-card.featured .price-amount { color: white; }
+    .price-note { font-size: 0.82rem; color: var(--text2); margin-bottom: 24px; }
+    .price-card.featured .price-note { color: rgba(255,255,255,0.45); }
+    .price-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .price-card.featured .price-divider { border-top-color: rgba(255,255,255,0.1); }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .price-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.875rem; color: var(--text2); font-weight: 300; line-height: 1.45;
+    }
+    .price-card.featured .price-features li { color: rgba(255,255,255,0.65); }
+    .price-features li i { color: var(--blue); flex-shrink: 0; margin-top: 2px; font-size: 0.8rem; }
+    .price-card.featured .price-features li i { color: #60a5fa; }
+    .price-cta {
+      margin-top: 28px; width: 100%; justify-content: center;
+    }
+    .price-card.featured .price-cta { background: var(--blue); }
+
+    /* ── PAYMENT STRUCTURE ── */
+    .payment-table {
+      width: 100%; border-collapse: collapse;
+      margin-top: 40px;
+    }
+    .payment-table th {
+      font-family: var(--font-display); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text2); padding: 12px 16px; text-align: left;
+      border-bottom: 2px solid var(--border);
+    }
+    .payment-table td {
+      padding: 16px; font-size: 0.9rem; color: var(--text2);
+      border-bottom: 1px solid var(--border); vertical-align: top;
+    }
+    .payment-table tr:last-child td { border-bottom: none; }
+    .payment-table td:first-child {
+      font-family: var(--font-display); font-weight: 700;
+      color: var(--text); font-size: 0.95rem; white-space: nowrap;
+    }
+    .payment-table .milestone {
+      display: inline-block; background: var(--blue-soft); color: var(--blue);
+      font-size: 0.78rem; font-weight: 600; padding: 2px 10px; border-radius: 100px;
+      margin-right: 4px; margin-bottom: 4px;
+    }
+    .payment-table tr:hover td { background: var(--bg2); }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-table {
+      width: 100%; border-collapse: collapse; margin-top: 40px;
+    }
+    .compare-table th {
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
+      padding: 16px; text-align: center; border-bottom: 2px solid var(--border);
+      background: var(--surface);
+    }
+    .compare-table th:first-child { text-align: left; }
+    .compare-table td {
+      padding: 14px 16px; font-size: 0.875rem; color: var(--text2);
+      border-bottom: 1px solid var(--border); text-align: center;
+    }
+    .compare-table td:first-child { text-align: left; color: var(--text); font-weight: 500; }
+    .compare-table .yes { color: var(--blue); font-size: 1rem; }
+    .compare-table .no { color: #9ca3af; font-size: 1rem; }
+    .compare-table .th-featured { background: var(--blue); color: white !important; }
+
+    /* ── NOTICE BOX ── */
+    .notice-box {
+      background: var(--blue-soft); border: 1px solid var(--blue-border);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .notice-box i { color: var(--blue); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+    .notice-box p { font-size: 0.9rem; color: var(--text); line-height: 1.65; font-weight: 400; }
+    .notice-box strong { color: var(--blue); }
+
+    @media (max-width: 768px) {
+      .price-cards { grid-template-columns: 1fr; }
+      .payment-table, .compare-table { font-size: 0.82rem; }
+      .payment-table th, .payment-table td { padding: 10px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="services.html">Services</a></li>
+  <li><a href="pricing.html">Pricing</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+</ul>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge">Transparent Pricing</div>
+    <h1>Honest prices,<br /><em>no surprises</em></h1>
+    <p>All projects are quoted individually based on scope. These ranges give you a clear starting point — your final proposal will be exact.</p>
+    <div class="page-hero-actions">
+      <a href="contact.html" class="btn-primary"><i class="fa-solid fa-file-invoice"></i> Get a Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── ONE-TIME PROJECTS ── -->
+<section style="background:var(--bg);">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">One-Time Development</div>
+      <h2 class="section-title">Project pricing</h2>
+    </div>
+    <p class="section-intro">Paid in milestones. Exact price confirmed in your proposal.</p>
+  </div>
+
+  <div class="price-cards">
+    <div class="price-card reveal">
+      <div class="price-type">Websites</div>
+      <div class="price-name">Website Development</div>
+      <div class="price-amount">$400+</div>
+      <div class="price-note">One-time, paid in milestones</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> Custom design from scratch</li>
+        <li><i class="fa-solid fa-check"></i> Fully responsive & mobile-optimized</li>
+        <li><i class="fa-solid fa-check"></i> SEO-ready structure</li>
+        <li><i class="fa-solid fa-check"></i> Contact forms and CTAs</li>
+        <li><i class="fa-solid fa-check"></i> Basic hosting setup included</li>
+        <li><i class="fa-solid fa-check"></i> 2–3 revision rounds</li>
+      </ul>
+      <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get a Quote</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="price-badge">Most Requested</div>
+      <div class="price-type">Software & Web Apps</div>
+      <div class="price-name">Custom Software</div>
+      <div class="price-amount">$1,200+</div>
+      <div class="price-note">One-time, paid in milestones</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> Custom-built to your workflow</li>
+        <li><i class="fa-solid fa-check"></i> Admin panel / dashboard</li>
+        <li><i class="fa-solid fa-check"></i> Database and backend logic</li>
+        <li><i class="fa-solid fa-check"></i> User authentication if needed</li>
+        <li><i class="fa-solid fa-check"></i> Payment or subscription integration</li>
+        <li><i class="fa-solid fa-check"></i> 3+ revision rounds</li>
+      </ul>
+      <a href="contact.html" class="btn-primary price-cta">Get a Quote</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-type">AI &amp; Automations</div>
+      <div class="price-name">Advanced Systems</div>
+      <div class="price-amount">$2,500+</div>
+      <div class="price-note">One-time, quoted per scope</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> AI/LLM integration (chatbots, tools)</li>
+        <li><i class="fa-solid fa-check"></i> Automated workflows and pipelines</li>
+        <li><i class="fa-solid fa-check"></i> Third-party API connections</li>
+        <li><i class="fa-solid fa-check"></i> Payment processing / Stripe setup</li>
+        <li><i class="fa-solid fa-check"></i> Monitoring and error handling</li>
+        <li><i class="fa-solid fa-check"></i> Documentation and handover</li>
+      </ul>
+      <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get a Quote</a>
+    </div>
+  </div>
+
+  <div class="notice-box reveal" style="margin-top:32px;">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>Project prices are <strong>one-time costs</strong> and do not include ongoing maintenance. Maintenance plans are optional and billed separately. Exact pricing is confirmed in your written proposal after we understand your full scope.</p>
+  </div>
+</section>
+
+<!-- ── PAYMENT STRUCTURE ── -->
+<section style="background:var(--bg2);">
+  <div class="reveal">
+    <div class="section-label">Payment Structure</div>
+    <h2 class="section-title">How project payments work</h2>
+    <p class="section-intro">We split project payments into milestones so you only pay as work is delivered and approved.</p>
+  </div>
+
+  <table class="payment-table reveal">
+    <thead>
+      <tr>
+        <th>Plan</th>
+        <th>Project Size</th>
+        <th>Payment Schedule</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Plan A</td>
+        <td>Under $800</td>
+        <td>
+          <span class="milestone">50% deposit</span>
+          <span class="milestone">50% on launch</span>
+        </td>
+        <td>Deposit due to start work. Balance due before final delivery.</td>
+      </tr>
+      <tr>
+        <td>Plan B</td>
+        <td>$800 – $2,000</td>
+        <td>
+          <span class="milestone">40% deposit</span>
+          <span class="milestone">30% at delivery</span>
+          <span class="milestone">30% on launch</span>
+        </td>
+        <td>Deposit to start. Second payment when draft is delivered. Final on approval and launch.</td>
+      </tr>
+      <tr>
+        <td>Plan C</td>
+        <td>Over $2,000</td>
+        <td>
+          <span class="milestone">33% deposit</span>
+          <span class="milestone">33% at delivery</span>
+          <span class="milestone">34% after 30 days</span>
+        </td>
+        <td>Same as Plan B, with final payment 30 days after launch once everything is confirmed working.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="notice-box reveal" style="margin-top:28px;">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>Accepted payments: <strong>Zelle, PayPal, and bank transfer (USD only)</strong>. All payments must be in US dollars. Late payments incur a 10% fee after a 14-day grace period. Deposits are non-refundable after work begins.</p>
+  </div>
+</section>
+
+<!-- ── MAINTENANCE PLANS ── -->
+<section style="background:var(--bg);">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Monthly Maintenance</div>
+      <h2 class="section-title">Ongoing care plans</h2>
+    </div>
+    <p class="section-intro">Optional. Cancel anytime with 30 days' notice.</p>
+  </div>
+
+  <div class="price-cards">
+    <div class="price-card reveal">
+      <div class="price-type">Websites</div>
+      <div class="price-name">Website Care</div>
+      <div class="price-amount">$97<span style="font-size:1.2rem;font-weight:500;">/mo</span></div>
+      <div class="price-note">Auto-renews monthly. Cancel with 30-day notice.</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> Managed hosting & uptime monitoring</li>
+        <li><i class="fa-solid fa-check"></i> SSL certificate management</li>
+        <li><i class="fa-solid fa-check"></i> Security patches & updates</li>
+        <li><i class="fa-solid fa-check"></i> Monthly content edits (up to 2 hours)</li>
+        <li><i class="fa-solid fa-check"></i> Technical support via email/WhatsApp</li>
+        <li><i class="fa-solid fa-check"></i> Monthly performance report</li>
+      </ul>
+      <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get Started</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-type">Software & Web Apps</div>
+      <div class="price-name">Software Care</div>
+      <div class="price-amount">$197<span style="font-size:1.2rem;font-weight:500;color:rgba(255,255,255,0.6);">/mo</span></div>
+      <div class="price-note">Auto-renews monthly. Cancel with 30-day notice.</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> Everything in Website Care</li>
+        <li><i class="fa-solid fa-check"></i> Bug fixes and patch releases</li>
+        <li><i class="fa-solid fa-check"></i> Dependency & framework updates</li>
+        <li><i class="fa-solid fa-check"></i> Database backups</li>
+        <li><i class="fa-solid fa-check"></i> Performance monitoring & optimization</li>
+        <li><i class="fa-solid fa-check"></i> Priority support (24–48h response)</li>
+      </ul>
+      <a href="contact.html" class="btn-primary price-cta">Get Started</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-type">AI &amp; Advanced Systems</div>
+      <div class="price-name">Advanced Care</div>
+      <div class="price-amount">$297<span style="font-size:1.2rem;font-weight:500;">/mo</span></div>
+      <div class="price-note">Auto-renews monthly. Cancel with 30-day notice.</div>
+      <hr class="price-divider" />
+      <ul class="price-features">
+        <li><i class="fa-solid fa-check"></i> Everything in Software Care</li>
+        <li><i class="fa-solid fa-check"></i> AI model & API maintenance</li>
+        <li><i class="fa-solid fa-check"></i> Payment system & automation upkeep</li>
+        <li><i class="fa-solid fa-check"></i> Integration health monitoring</li>
+        <li><i class="fa-solid fa-check"></i> SLA-backed response time</li>
+        <li><i class="fa-solid fa-check"></i> Quarterly review call</li>
+      </ul>
+      <a href="contact.html" class="btn-outline price-cta" style="margin-top:28px;width:100%;justify-content:center;">Get Started</a>
+    </div>
+  </div>
+
+  <div class="notice-box reveal" style="margin-top:32px;">
+    <i class="fa-solid fa-circle-info"></i>
+    <p>Maintenance plans <strong>do not replace the initial project cost</strong> and do not automatically apply toward purchasing ownership of the project. Monthly payments fund ongoing service, not buyout of intellectual property. See <a href="terms.html" style="color:var(--blue);">Terms & Conditions</a> for full details.</p>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section style="background:var(--bg2);">
+  <div class="reveal">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Pricing questions answered</h2>
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>Is maintenance required?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">No. Maintenance is completely optional. You can take full ownership of your project after payment is complete and manage it yourself, or opt into a plan for ongoing support.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>Can I cancel maintenance anytime?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">Yes. You can cancel with 30 days' written notice. The plan will not renew after the current period ends. No refunds are issued for partial months.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>Do monthly payments count toward buying my project?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">No. Monthly maintenance fees cover ongoing service (hosting, support, updates) — they are not credited toward project ownership. If you wish to buy out a project, that is handled separately in your contract.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>What happens if I stop paying maintenance?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">After a 14-day grace period, services may be suspended. We'll notify you before any action is taken and work with you to find a resolution. See our Terms & Conditions for full details.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>How is the final project price determined?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">After our initial conversation, we send you a written proposal with the exact price, timeline, and scope. There are no surprises — you approve everything before work begins.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4>What payment methods do you accept?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer">We accept Zelle, PayPal, and bank transfer in USD. For recurring maintenance, we're also integrating Stripe for automatic billing — available soon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <p class="cta-eyebrow reveal">Ready to get started?</p>
+  <h2 class="cta-title reveal">Let's build something<br /><em>great together</em></h2>
+  <p class="cta-sub reveal">Get a free demo and a custom quote — no commitment required.</p>
+  <div class="cta-actions reveal">
+    <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Get a Free Demo</a>
+    <a href="pay.html" class="btn-secondary"><i class="fa-solid fa-credit-card"></i> Make a Payment</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
+      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Software & Web Apps</a></li>
+        <li><a href="services.html">AI Integrations</a></li>
+        <li><a href="pricing.html">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pay.html">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

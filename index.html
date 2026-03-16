@@ -3,1307 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RuutDev — Web Development & AI Solutions</title>
+  <title>RuutDev — Web Development & Software Solutions</title>
+  <meta name="description" content="RuutDev builds professional websites, software, and AI-powered tools for businesses in the USA and Venezuela. Custom development, maintenance plans, and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
   <style>
-    :root {
-      --bg: #f0f3f8;
-      --bg2: #e8ecf4;
-      --surface: #ffffff;
-      --border: rgba(0,0,0,0.07);
-      --text: #0a0d14;
-      --text2: #4a5568;
-      --blue: #1a6dff;
-      --blue-glow: rgba(26,109,255,0.25);
-      --blue-soft: rgba(26,109,255,0.08);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-      --radius: 16px;
-      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 6%;
-      background: rgba(240,243,248,0.8);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-    }
-
-    .nav-logo span {
-      width: 10px; height: 10px;
-      background: var(--blue);
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 12px var(--blue-glow);
-    }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text2);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color var(--transition);
-    }
-
-    .nav-links a:hover { color: var(--blue); }
-
-    .lang-toggle {
-      display: flex; align-items: center; gap: 4px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 4px;
-    }
-
-    .lang-btn {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      padding: 5px 12px;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-      transition: all var(--transition);
-      background: transparent;
-      color: var(--text2);
-    }
-
-    .lang-btn.active {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 2px 8px var(--blue-glow);
-    }
-
-    .nav-cta {
-      background: var(--text);
-      color: #fff !important;
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 0.85rem !important;
-      font-weight: 600 !important;
-      text-decoration: none;
-      transition: all var(--transition) !important;
-    }
-
-    .nav-cta:hover {
-      background: var(--blue) !important;
-      color: #fff !important;
-    }
-
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
       text-align: center;
       padding: 140px 6% 80px;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-
-    .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
-    }
-
-    .hero-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
-    }
-
-    .blob-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(26,109,255,0.15) 0%, transparent 70%);
-      top: -200px; left: -100px;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .blob-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(26,109,255,0.1) 0%, transparent 70%);
-      bottom: -100px; right: -50px;
-      animation: float 10s ease-in-out infinite reverse;
-    }
-
-    /* Grid pattern */
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(26,109,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26,109,255,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-30px) scale(1.05); }
-    }
-
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue-soft);
-      border: 1px solid rgba(26,109,255,0.2);
-      color: var(--blue);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 32px;
+      background: var(--blue-soft); border: 1px solid var(--blue-border);
+      color: var(--blue); font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 30px;
       animation: fadeUp 0.6s ease both;
     }
-
     .hero-badge-dot {
-      width: 6px; height: 6px;
-      background: var(--blue);
-      border-radius: 50%;
-      animation: pulse 2s ease infinite;
+      width: 6px; height: 6px; background: var(--blue);
+      border-radius: 50%; animation: pulse 2s ease infinite;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-      color: var(--text);
-      max-width: 900px;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.0;
+      color: var(--text); max-width: 860px;
       animation: fadeUp 0.6s 0.1s ease both;
     }
-
-    h1 em {
-      font-style: normal;
-      color: var(--blue);
-      position: relative;
-    }
-
+    h1 em { font-style: normal; color: var(--blue); }
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      font-weight: 300;
-      color: var(--text2);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-top: 24px;
+      font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 300;
+      color: var(--text2); max-width: 540px; line-height: 1.75;
+      margin-top: 22px;
       animation: fadeUp 0.6s 0.2s ease both;
     }
-
     .hero-actions {
-      display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-      margin-top: 44px;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      margin-top: 40px;
       animation: fadeUp 0.6s 0.3s ease both;
     }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--blue);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 100px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: none; cursor: pointer;
-      box-shadow: 0 4px 20px var(--blue-glow);
-      transition: all var(--transition);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(26,109,255,0.4);
-    }
-
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--surface);
-      color: var(--text);
-      padding: 14px 32px;
-      border-radius: 100px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-2px);
-    }
-
     .hero-stats {
       display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
-      margin-top: 72px;
-      padding-top: 40px;
+      margin-top: 72px; padding-top: 40px;
       border-top: 1px solid var(--border);
       animation: fadeUp 0.6s 0.4s ease both;
     }
-
     .stat { text-align: center; }
-
     .stat-num {
       font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -0.04em;
+      font-size: 2rem; font-weight: 800;
+      color: var(--text); letter-spacing: -0.04em;
     }
+    .stat-label { font-size: 0.78rem; color: var(--text2); margin-top: 3px; }
 
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text2);
-      font-weight: 400;
-      margin-top: 4px;
+    /* ── WHY US ── */
+    #why { background: var(--bg2); }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px; margin-top: 56px;
     }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 100px 6%; }
-
-    .section-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
-    }
-
-    .section-label::before {
-      content: '';
-      width: 20px; height: 2px;
-      background: var(--blue);
-    }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-      color: var(--text);
-      max-width: 600px;
-    }
-
-    .section-intro {
-      font-size: 1.05rem;
-      color: var(--text2);
-      line-height: 1.7;
-      max-width: 520px;
-      margin-top: 16px;
-      font-weight: 300;
-    }
-
-    /* ── SERVICES ── */
-    #services { background: var(--bg); }
-
-    .services-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 32px;
-      margin-bottom: 60px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
-    .service-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      transition: all var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-color: rgba(26,109,255,0.2);
-    }
-
-    .service-card:hover::before { opacity: 1; }
-
-    .service-icon {
-      width: 48px; height: 48px;
-      background: var(--blue-soft);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 24px;
-      font-size: 1.2rem;
-      color: var(--blue);
-    }
-
-    .service-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .service-card p {
-      font-size: 0.92rem;
-      color: var(--text2);
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    .service-price {
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--blue);
-      background: var(--blue-soft);
-      padding: 4px 12px;
-      border-radius: 100px;
-    }
-
-    /* ── PORTFOLIO ── */
-    #portfolio { background: var(--bg2); }
-
-    .portfolio-header {
-      margin-bottom: 60px;
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .portfolio-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: all var(--transition);
-      cursor: pointer;
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0,0,0,0.1);
-    }
-
-    .portfolio-preview {
-      height: 200px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .preview-restaurant { background: #1a1a2e; }
-    .preview-barbershop { background: #2d1b00; }
-    .preview-medical { background: #003d5c; }
-    .preview-store { background: #0d0d0d; }
-
-    .preview-label {
-      position: absolute;
-      bottom: 12px; left: 12px;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 100px;
-      backdrop-filter: blur(8px);
-    }
-
-    .portfolio-info {
-      padding: 24px;
-    }
-
-    .portfolio-info h3 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .portfolio-info p {
-      font-size: 0.88rem;
-      color: var(--text2);
-      line-height: 1.6;
-      font-weight: 300;
-    }
-
-    .portfolio-tags {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      margin-top: 16px;
-    }
-
-    .tag {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--blue);
-      background: var(--blue-soft);
-      padding: 3px 10px;
-      border-radius: 100px;
-    }
-
-    .portfolio-coming {
-      display: flex; align-items: center; justify-content: center;
-      background: var(--surface);
-      border: 2px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 60px;
-      color: var(--text2);
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-align: center;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    /* ── PROCESS ── */
-    #process { background: var(--bg); }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2px;
-      margin-top: 60px;
-      background: var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    .process-step {
-      background: var(--surface);
-      padding: 40px 32px;
-      position: relative;
-    }
-
-    .step-num {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--blue-soft);
-      line-height: 1;
-      margin-bottom: 16px;
-      letter-spacing: -0.05em;
-    }
-
-    .process-step h3 {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .process-step p {
-      font-size: 0.88rem;
-      color: var(--text2);
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--bg2); }
-
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-      margin-top: 60px;
-    }
-
-    .contact-info h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-    }
-
-    .contact-info p {
-      font-size: 0.95rem;
-      color: var(--text2);
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 32px;
-    }
-
-    .whatsapp-btn {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: #25D366;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all var(--transition);
-      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-    }
-
-    .whatsapp-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(37,211,102,0.4);
-    }
-
-    .contact-form {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-      letter-spacing: 0.01em;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      font-size: 0.92rem;
-      color: var(--text);
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      -webkit-appearance: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px var(--blue-glow);
-    }
-
-    .form-group textarea { resize: vertical; min-height: 120px; }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 40px;
-      color: var(--blue);
-      font-weight: 600;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--text);
-      color: rgba(255,255,255,0.5);
-      padding: 40px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.03em;
-      display: flex; align-items: center; gap: 8px;
-    }
-
-    .footer-logo span {
-      width: 8px; height: 8px;
-      background: var(--blue);
-      border-radius: 50%;
-    }
-
-    footer p { font-size: 0.82rem; }
-
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      width: 22px; height: 2px;
-      background: var(--text);
-      border-radius: 2px;
+    .why-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px;
       transition: all var(--transition);
     }
+    .why-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.07); }
+    .why-num {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 800; color: var(--blue-soft);
+      letter-spacing: -0.05em; margin-bottom: 12px;
+    }
+    .why-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .why-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    /* ── PRICING TEASER ── */
+    #pricing-preview { background: var(--bg); }
+    .plans-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-top: 56px;
+    }
+    .plan-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px;
+      transition: all var(--transition); position: relative;
+    }
+    .plan-card.featured {
+      background: var(--text); border-color: var(--blue);
+      box-shadow: 0 20px 48px rgba(26,109,255,0.18);
+    }
+    .plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .plan-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .plan-card.featured .plan-label { color: #60a5fa; }
+    .plan-price {
+      font-family: var(--font-display); font-size: 2.4rem; font-weight: 800;
+      letter-spacing: -0.04em; color: var(--text); line-height: 1;
+    }
+    .plan-card.featured .plan-price { color: white; }
+    .plan-price sub { font-size: 1rem; font-weight: 500; }
+    .plan-desc {
+      font-size: 0.875rem; color: var(--text2); font-weight: 300;
+      line-height: 1.65; margin-top: 12px; margin-bottom: 24px;
+    }
+    .plan-card.featured .plan-desc { color: rgba(255,255,255,0.55); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .plan-features li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.875rem; color: var(--text2); font-weight: 400;
+    }
+    .plan-card.featured .plan-features li { color: rgba(255,255,255,0.7); }
+    .plan-features li i { color: var(--blue); font-size: 0.8rem; flex-shrink: 0; }
+    .plan-card.featured .plan-features li i { color: #60a5fa; }
+    .plan-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: white;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 100px;
+      white-space: nowrap;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .contact-wrapper { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .services-header { flex-direction: column; }
-      .hero-stats { gap: 32px; }
+      .plans-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 28px; }
     }
-
-    @media (max-width: 480px) {
-      nav { padding: 16px 4%; }
-      section { padding: 72px 4%; }
-    }
-
-    /* ── TESTIMONIALS ── */
-    #testimonials { background: var(--bg2); }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 60px;
-    }
-
-    .testimonial-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      position: relative;
-      transition: all var(--transition);
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-      border-color: rgba(26,109,255,0.2);
-    }
-
-    .testimonial-card.featured {
-      background: var(--blue);
-      border-color: var(--blue);
-    }
-
-    .testimonial-stars {
-      display: flex; gap: 3px;
-      color: #f59e0b;
-      font-size: 0.85rem;
-      margin-bottom: 16px;
-    }
-
-    .testimonial-card.featured .testimonial-stars { color: #fde68a; }
-
-    .testimonial-text {
-      font-size: 0.95rem;
-      font-weight: 300;
-      color: var(--text2);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    .testimonial-card.featured .testimonial-text { color: rgba(255,255,255,0.85); }
-
-    .testimonial-author {
-      display: flex; align-items: center; gap: 12px;
-    }
-
-    .author-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--blue-soft);
-      border: 2px solid var(--blue-border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .testimonial-card.featured .author-avatar {
-      background: rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.3);
-      color: white;
-    }
-
-    .author-name {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .testimonial-card.featured .author-name { color: white; }
-
-    .author-detail {
-      font-size: 0.75rem;
-      color: var(--text2);
-      margin-top: 2px;
-    }
-
-    .testimonial-card.featured .author-detail { color: rgba(255,255,255,0.6); }
-
-    /* ── FAQ ── */
-    #faq { background: var(--surface); }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 60px;
-    }
-
-    .faq-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .faq-item:hover {
-      border-color: rgba(26,109,255,0.3);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-    }
-
-    .faq-item.open {
-      border-color: var(--blue);
-      background: var(--surface);
-    }
-
-    .faq-question {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
-    }
-
-    .faq-question h4 {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      line-height: 1.4;
-    }
-
-    .faq-icon {
-      width: 28px; height: 28px;
-      background: var(--blue-soft);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue);
-      font-size: 0.75rem;
-      flex-shrink: 0;
-      transition: all var(--transition);
-    }
-
-    .faq-item.open .faq-icon {
-      background: var(--blue);
-      color: white;
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      font-size: 0.88rem;
-      font-weight: 300;
-      color: var(--text2);
-      line-height: 1.7;
-      margin-top: 14px;
-      display: none;
-    }
-
-    .faq-item.open .faq-answer { display: block; }
-
-    /* ── FINAL CTA ── */
-    #cta-final {
-      background: var(--text);
-      padding: 100px 6%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #cta-final::before {
-      content: '';
-      position: absolute;
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(26,109,255,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .cta-final-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
-    }
-
-    .cta-final-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      color: white;
-      max-width: 700px;
-      margin: 0 auto 20px;
-    }
-
-    .cta-final-title em {
-      font-style: normal;
-      color: var(--blue);
-    }
-
-    .cta-final-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.5);
-      max-width: 480px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-
-    .cta-final-actions {
-      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-    }
-
-    .cta-final-actions .btn-primary {
-      background: var(--blue);
-      color: white;
-      box-shadow: 0 4px 20px rgba(26,109,255,0.4);
-    }
-
-    .cta-final-actions .btn-primary:hover {
-      box-shadow: 0 8px 32px rgba(26,109,255,0.6);
-    }
-
-    .cta-final-actions .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .cta-final-actions .btn-secondary:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: rgba(255,255,255,0.3);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .cta-guarantee {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: 28px;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .cta-guarantee i { color: #22c55e; }
-
-
-    /* ── CALCULATOR ── */
-    #calculator { background: var(--text); padding: 100px 6%; overflow: hidden; position: relative; }
-
-    #calculator::before {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(26,109,255,0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .calc-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      position: relative;
-      z-index: 1;
-    }
-
-    .calc-left .section-label {
-      color: var(--blue);
-      border-color: rgba(26,109,255,0.3);
-      background: rgba(26,109,255,0.1);
-    }
-
-    .calc-left h2 {
-      color: white;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-    }
-
-    .calc-left h2 em { color: var(--blue); font-style: normal; }
-
-    .calc-left p {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.95rem;
-      line-height: 1.75;
-      font-weight: 300;
-      margin-top: 14px;
-      max-width: 440px;
-    }
-
-    .calc-inputs {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .calc-input-group label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.5);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .calc-input-group label span {
-      font-size: 1rem;
-      font-weight: 800;
-      color: white;
-      letter-spacing: 0;
-      text-transform: none;
-      font-family: var(--font-display);
-    }
-
-    .calc-slider {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 4px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.1);
-      outline: none;
-      cursor: pointer;
-    }
-
-    .calc-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--blue);
-      cursor: pointer;
-      box-shadow: 0 0 0 4px rgba(26,109,255,0.2);
-      transition: box-shadow 0.2s;
-    }
-
-    .calc-slider::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 0 8px rgba(26,109,255,0.2);
-    }
-
-    .calc-slider-track {
-      position: relative;
-    }
-
-    .calc-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.25);
-    }
-
-    .calc-toggle {
-      display: flex;
-      gap: 0;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      margin-top: 4px;
-    }
-
-    .calc-toggle-btn {
-      flex: 1;
-      padding: 10px;
-      background: transparent;
-      border: none;
-      color: rgba(255,255,255,0.4);
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .calc-toggle-btn.active {
-      background: var(--blue);
-      color: white;
-    }
-
-    /* Results panel */
-    .calc-right {
-      position: sticky;
-      top: 100px;
-    }
-
-    .calc-result-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 40px;
-      backdrop-filter: blur(10px);
-    }
-
-    .calc-result-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 32px;
-    }
-
-    .calc-result-dot {
-      width: 10px; height: 10px;
-      background: #22c55e;
-      border-radius: 50%;
-      animation: pulse-dot 2s ease infinite;
-    }
-
-    @keyframes pulse-dot {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
-    }
-
-    .calc-result-header span {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .calc-metric {
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .calc-metric:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-    .calc-metric-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .calc-metric-label.green { color: #22c55e; }
-    .calc-metric-label.red { color: #f87171; }
-    .calc-metric-label.blue { color: var(--blue); }
-    .calc-metric-label.white { color: rgba(255,255,255,0.4); }
-
-    .calc-metric-value {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: white;
-      transition: all 0.4s ease;
-    }
-
-    .calc-metric-value.green { color: #22c55e; }
-    .calc-metric-value.red { color: #f87171; }
-    .calc-metric-value.blue { color: #60a5fa; }
-
-    .calc-metric-sub {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-      margin-top: 4px;
-    }
-
-    /* Progress bar */
-    .calc-progress {
-      margin-top: 24px;
-      margin-bottom: 24px;
-    }
-
-    .calc-progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 8px;
-    }
-
-    .calc-progress-bar {
-      height: 8px;
-      background: rgba(255,255,255,0.07);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .calc-progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue), #22c55e);
-      border-radius: 4px;
-      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .calc-cta {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--blue);
-      color: white;
-      padding: 16px;
-      border-radius: 100px;
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      margin-top: 32px;
-      text-decoration: none;
-      transition: all var(--transition);
-      box-shadow: 0 4px 20px rgba(26,109,255,0.3);
-    }
-
-    .calc-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(26,109,255,0.5);
-    }
-
-    .calc-disclaimer {
-      text-align: center;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.2);
-      margin-top: 14px;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 900px) {
-      .calc-wrapper { grid-template-columns: 1fr; }
-      .calc-right { position: static; }
-    }
-
   </style>
 </head>
 <body>
 
 <!-- ── NAV ── -->
 <nav>
-  <a href="#hero" class="nav-logo">
-    <span></span>RuutDev
-  </a>
+  <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
-    <li><a href="#calculator" data-i18n="nav.calculator">Calculadora</a></li>
-    <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonios</a></li>
-    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
-    <li><a href="#process" data-i18n="nav.process">Proceso</a></li>
-    <li>
-      <div class="lang-toggle">
-        <button class="lang-btn" onclick="setLang('es')">ES</button>
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      </div>
-    </li>
-    <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Hablemos</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
 </nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="services.html">Services</a></li>
+  <li><a href="pricing.html">Pricing</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+</ul>
 
 <!-- ── HERO ── -->
 <section id="hero">
@@ -1315,353 +175,137 @@
 
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    <span data-i18n="hero.badge">Desarrollo Web & Soluciones AI</span>
+    Web Development &amp; AI Solutions
   </div>
 
-  <h1 data-i18n="hero.title">Tu negocio merece una<br /><em>presencia digital real</em></h1>
+  <h1>Your business deserves a<br /><em>real digital presence</em></h1>
 
-  <p class="hero-sub" data-i18n="hero.sub">
-    Construimos sitios web modernos, rápidos y diseñados para convertir visitantes en clientes. Desde landing pages hasta herramientas con inteligencia artificial.
+  <p class="hero-sub">
+    We build modern, fast websites and software designed to convert visitors into customers —
+    from professional landing pages to AI-powered tools and custom systems.
   </p>
 
   <div class="hero-actions">
-    <a href="#portfolio" class="btn-primary" data-i18n="hero.cta1">Ver demos →</a>
-    <a href="#contact" class="btn-secondary" data-i18n="hero.cta2">Contáctanos</a>
+    <a href="services.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Explore Services</a>
+    <a href="contact.html" class="btn-secondary">Get a Free Demo</a>
   </div>
 
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">48h</div>
-      <div class="stat-label" data-i18n="stat.1">Demo lista en</div>
+      <div class="stat-label">Free demo delivery</div>
     </div>
     <div class="stat">
       <div class="stat-num">$0</div>
-      <div class="stat-label" data-i18n="stat.2">Sin compromiso inicial</div>
+      <div class="stat-label">No upfront commitment</div>
     </div>
     <div class="stat">
       <div class="stat-num">100%</div>
-      <div class="stat-label" data-i18n="stat.3">Personalizado</div>
+      <div class="stat-label">Custom built</div>
     </div>
     <div class="stat">
       <div class="stat-num">USA & VE</div>
-      <div class="stat-label" data-i18n="stat.4">Presencia en ambos mercados</div>
+      <div class="stat-label">Both markets served</div>
     </div>
   </div>
 </section>
 
-<!-- ── SERVICES ── -->
-<section id="services">
-  <div class="services-header reveal">
+<!-- ── SERVICES OVERVIEW ── -->
+<section id="services" style="background:var(--bg);">
+  <div class="section-header reveal">
     <div>
-      <div class="section-label" data-i18n="services.label">Servicios</div>
-      <h2 data-i18n="services.title">Todo lo que tu negocio necesita en línea</h2>
+      <div class="section-label">What We Build</div>
+      <h2 class="section-title">Everything your business needs online</h2>
     </div>
-    <p class="section-intro" data-i18n="services.sub">
-      No vendemos plantillas. Construimos cada sitio desde cero, adaptado a tu negocio específico.
-    </p>
+    <a href="services.html" class="btn-outline">View all services <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-rocket"></i></div>
-      <h3 data-i18n="s1.title">Landing Page Profesional</h3>
-      <p data-i18n="s1.desc">Página de presentación diseñada para convertir. Incluye diseño responsivo, SEO básico y formulario de contacto.</p>
-      <span class="service-price" data-i18n="s1.price">Desde $500</span>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fa-solid fa-bag-shopping"></i></div>
-      <h3 data-i18n="s2.title">Tienda en Línea</h3>
-      <p data-i18n="s2.desc">E-commerce completo con carrito, pagos integrados y panel de administración para gestionar tus productos.</p>
-      <span class="service-price" data-i18n="s2.price">Desde $1,200</span>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
-      <h3 data-i18n="s3.title">Herramientas con AI</h3>
-      <p data-i18n="s3.desc">Chatbots, automatizaciones, análisis de datos y herramientas inteligentes que ahorran tiempo y aumentan tus ventas.</p>
-      <span class="service-price" data-i18n="s3.price">Desde $2,500</span>
+      <h3>Professional Website</h3>
+      <p>Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites.</p>
+      <span class="service-price">From $500</span>
+      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-      <h3 data-i18n="s4.title">Dashboard & Sistemas</h3>
-      <p data-i18n="s4.desc">Paneles de control personalizados para gestionar tu negocio, ver métricas y tomar decisiones con datos reales.</p>
-      <span class="service-price" data-i18n="s4.price">Desde $2,000</span>
+      <h3>Software & Web Apps</h3>
+      <p>Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow.</p>
+      <span class="service-price">From $1,200</span>
+      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
-      <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-      <h3 data-i18n="s5.title">Rediseño Web</h3>
-      <p data-i18n="s5.desc">¿Tu sitio ya existe pero se ve anticuado? Lo modernizamos, lo hacemos más rápido y lo optimizamos para móviles.</p>
-      <span class="service-price" data-i18n="s5.price">Desde $400</span>
+      <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
+      <h3>AI Integrations</h3>
+      <p>Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions.</p>
+      <span class="service-price">From $2,500</span>
+      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <h3>Monthly Maintenance</h3>
+      <p>Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support.</p>
+      <span class="service-price">From $97/mo</span>
+      <br/><a href="pricing.html" class="learn-more">See plans <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fa-solid fa-plug"></i></div>
+      <h3>Integrations & Automations</h3>
+      <p>Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow.</p>
+      <span class="service-price">From $500</span>
+      <br/><a href="services.html" class="learn-more">Learn more <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-earth-americas"></i></div>
-      <h3 data-i18n="s6.title">Demo Gratuita — Sin Compromiso</h3>
-      <p data-i18n="s6.desc">Construimos una versión demo de tu sitio ideal. La ves, la pruebas, y solo pagas si decides seguir adelante.</p>
-      <span class="service-price" data-i18n="s6.price">Gratis</span>
+      <h3>Free Demo — No Commitment</h3>
+      <p>We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward.</p>
+      <span class="service-price">Free</span>
+      <br/><a href="contact.html" class="learn-more">Get your demo <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
 
-<!-- ── PORTFOLIO ── -->
-<section id="portfolio">
-  <div class="portfolio-header reveal">
-    <div class="section-label" data-i18n="portfolio.label">Portfolio</div>
-    <h2 data-i18n="portfolio.title">Demos por industria</h2>
-    <p class="section-intro" data-i18n="portfolio.sub">
-      Así lucen nuestras soluciones. Cada demo es un ejemplo real de lo que podemos construir para tu negocio.
-    </p>
-  </div>
-
-  <div class="portfolio-grid">
-    <div class="portfolio-card reveal" onclick="window.open('https://demo-restaurante-mu.vercel.app/','_blank')" style="cursor:pointer;">
-      <div class="portfolio-preview preview-restaurant" style="padding:0;overflow:hidden;">
-        <img src="https://image.thum.io/get/width/600/crop/400/https://demo-restaurante-mu.vercel.app/" alt="La Mesa Demo" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
-        <span class="preview-label" data-i18n="demo.restaurant">Restaurante</span>
-      </div>
-      <div class="portfolio-info">
-        <h3 data-i18n="demo.restaurant.title">La Mesa — Restaurante</h3>
-        <p data-i18n="demo.restaurant.desc">Landing page con menú digital, reservas en línea y galería de platos. Diseño elegante y moderno.</p>
-        <div class="portfolio-tags">
-          <span class="tag">Reservas</span>
-          <span class="tag">Menú Digital</span>
-          <span class="tag">Responsive</span>
-        </div>
-        <a href="https://demo-restaurante-mu.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Ver demo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem"></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" onclick="window.open('https://demo-barberia-iota.vercel.app/','_blank')" style="cursor:pointer;">
-      <div class="portfolio-preview preview-barbershop" style="padding:0;overflow:hidden;">
-        <img src="https://image.thum.io/get/width/600/crop/400/https://demo-barberia-iota.vercel.app/" alt="UrbanCut Demo" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
-        <span class="preview-label" data-i18n="demo.barbershop">Barbería</span>
-      </div>
-      <div class="portfolio-info">
-        <h3 data-i18n="demo.barbershop.title">UrbanCut — Barbería</h3>
-        <p data-i18n="demo.barbershop.desc">Sistema de citas online, galería de estilos, servicios y precios. Con integración a WhatsApp.</p>
-        <div class="portfolio-tags">
-          <span class="tag">Citas Online</span>
-          <span class="tag">WhatsApp</span>
-          <span class="tag">Galería</span>
-        </div>
-        <a href="https://demo-barberia-iota.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Ver demo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem"></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" onclick="window.open('https://demo-clinica-six.vercel.app/','_blank')" style="cursor:pointer;">
-      <div class="portfolio-preview preview-medical" style="padding:0;overflow:hidden;">
-        <img src="https://image.thum.io/get/width/600/crop/400/https://demo-clinica-six.vercel.app/" alt="MedCare Demo" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
-        <span class="preview-label" data-i18n="demo.medical">Clínica</span>
-      </div>
-      <div class="portfolio-info">
-        <h3 data-i18n="demo.medical.title">MedCare — Clínica</h3>
-        <p data-i18n="demo.medical.desc">Presentación de servicios médicos, equipo de doctores, horarios y formulario de consultas.</p>
-        <div class="portfolio-tags">
-          <span class="tag">Consultas</span>
-          <span class="tag">Doctores</span>
-          <span class="tag">SEO</span>
-        </div>
-        <a href="https://demo-clinica-six.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Ver demo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem"></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-card reveal" onclick="window.open('https://demo-tienda-mu.vercel.app/','_blank')" style="cursor:pointer;">
-      <div class="portfolio-preview preview-store" style="padding:0;overflow:hidden;">
-        <img src="https://image.thum.io/get/width/600/crop/400/https://demo-tienda-mu.vercel.app/" alt="StyleHub Demo" style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
-        <span class="preview-label" data-i18n="demo.store">Tienda</span>
-      </div>
-      <div class="portfolio-info">
-        <h3 data-i18n="demo.store.title">StyleHub — Tienda</h3>
-        <p data-i18n="demo.store.desc">E-commerce con catálogo de productos, carrito de compras y proceso de pago integrado.</p>
-        <div class="portfolio-tags">
-          <span class="tag">E-commerce</span>
-          <span class="tag">Pagos</span>
-          <span class="tag">Catálogo</span>
-        </div>
-        <a href="https://demo-tienda-mu.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:0.82rem;font-weight:600;color:var(--blue);text-decoration:none;">Ver demo <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75rem"></i></a>
-      </div>
-    </div>
-
-    <div class="portfolio-coming reveal">
-      <i class="fa-solid fa-bolt" style="font-size:2rem;color:var(--blue)"></i>
-      <span data-i18n="portfolio.coming">Más demos próximamente...</span>
+<!-- ── WHY RUUTDEV ── -->
+<section id="why">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Why RuutDev</div>
+      <h2 class="section-title">Built for results, not just looks</h2>
     </div>
   </div>
-</section>
-
-<!-- ── PROCESS ── -->
-<section id="process">
-  <div class="reveal">
-    <div class="section-label" data-i18n="process.label">Proceso</div>
-    <h2 data-i18n="process.title">Simple, rápido, sin sorpresas</h2>
-    <p class="section-intro" data-i18n="process.sub">
-      De la conversación a tu sitio en línea en días, no en meses.
-    </p>
-  </div>
-
-  <div class="process-grid">
-    <div class="process-step reveal">
-      <div class="step-num">01</div>
-      <h3 data-i18n="p1.title">Conversación</h3>
-      <p data-i18n="p1.desc">Nos cuentas sobre tu negocio, tus clientes y lo que necesitas. Sin tecnicismos.</p>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <h3>Demo Before You Pay</h3>
+      <p>See a real, working version of your site before committing to anything. Zero risk, zero surprise.</p>
     </div>
-    <div class="process-step reveal">
-      <div class="step-num">02</div>
-      <h3 data-i18n="p2.title">Demo Gratis</h3>
-      <p data-i18n="p2.desc">Construimos una demo de tu sitio en 48 horas. La ves en acción antes de pagar un dólar.</p>
+    <div class="why-card reveal">
+      <div class="why-num">02</div>
+      <h3>100% Custom</h3>
+      <p>No templates. Every project is built from scratch to match your brand, your audience, and your goals.</p>
     </div>
-    <div class="process-step reveal">
-      <div class="step-num">03</div>
-      <h3 data-i18n="p3.title">Aprobación</h3>
-      <p data-i18n="p3.desc">¿Te gusta? Damos luz verde, ajustamos detalles y preparamos todo para publicar.</p>
+    <div class="why-card reveal">
+      <div class="why-num">03</div>
+      <h3>Ongoing Care Available</h3>
+      <p>Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch.</p>
     </div>
-    <div class="process-step reveal">
-      <div class="step-num">04</div>
-      <h3 data-i18n="p4.title">En Línea</h3>
-      <p data-i18n="p4.desc">Tu sitio va al internet con dominio, hosting y optimización. Listo para recibir clientes.</p>
+    <div class="why-card reveal">
+      <div class="why-num">04</div>
+      <h3>USA & Venezuela</h3>
+      <p>We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries.</p>
     </div>
-  </div>
-</section>
-
-
-<!-- ── CALCULATOR ── -->
-<section id="calculator">
-  <div class="calc-wrapper">
-
-    <!-- LEFT: Inputs -->
-    <div class="calc-left">
-      <div class="section-label" data-i18n="calc.label">Calculadora</div>
-      <h2 data-i18n="calc.title">¿Cuánto dinero<br />estás <em>dejando ir</em>?</h2>
-      <p data-i18n="calc.desc">La mayoría de negocios sin sitio web pierden entre 30–70% de clientes potenciales. Calcula el impacto real para tu negocio.</p>
-
-      <div class="calc-inputs">
-
-        <!-- Slider 1: Clientes por mes -->
-        <div class="calc-input-group">
-          <label>
-            <span data-i18n="calc.s1">Clientes actuales / mes</span>
-            <span id="val-clients">50</span>
-          </label>
-          <div class="calc-slider-track">
-            <input type="range" class="calc-slider" id="slider-clients"
-              min="5" max="500" value="50" step="5"
-              oninput="updateCalc()" />
-          </div>
-          <div class="calc-labels"><span>5</span><span>500+</span></div>
-        </div>
-
-        <!-- Slider 2: Ticket promedio -->
-        <div class="calc-input-group">
-          <label>
-            <span data-i18n="calc.s2">Ingreso promedio por cliente</span>
-            <span id="val-ticket">$80</span>
-          </label>
-          <div class="calc-slider-track">
-            <input type="range" class="calc-slider" id="slider-ticket"
-              min="10" max="1000" value="80" step="10"
-              oninput="updateCalc()" />
-          </div>
-          <div class="calc-labels"><span>$10</span><span>$1,000+</span></div>
-        </div>
-
-        <!-- Slider 3: % clientes online -->
-        <div class="calc-input-group">
-          <label>
-            <span data-i18n="calc.s3">¿Cuántos clientes te buscan online?</span>
-            <span id="val-online">30%</span>
-          </label>
-          <div class="calc-slider-track">
-            <input type="range" class="calc-slider" id="slider-online"
-              min="10" max="90" value="30" step="5"
-              oninput="updateCalc()" />
-          </div>
-          <div class="calc-labels"><span>10%</span><span>90%</span></div>
-        </div>
-
-        <!-- Toggle: ¿Tienes sitio web? -->
-        <div class="calc-input-group">
-          <label><span data-i18n="calc.s4">¿Tienes sitio web actualmente?</span> <span id="val-hasweb">No</span></label>
-          <div class="calc-toggle">
-            <button class="calc-toggle-btn active" id="btn-no" onclick="setWeb(false)" data-i18n="calc.no">No tengo</button>
-            <button class="calc-toggle-btn" id="btn-yes" onclick="setWeb(true)" data-i18n="calc.yes">Tengo uno básico</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- RIGHT: Results -->
-    <div class="calc-right">
-      <div class="calc-result-card">
-        <div class="calc-result-header">
-          <div class="calc-result-dot"></div>
-          <span data-i18n="calc.live">Resultados en tiempo real</span>
-        </div>
-
-        <!-- Ingresos actuales -->
-        <div class="calc-metric">
-          <div class="calc-metric-label white" data-i18n="calc.r1">Ingresos actuales / mes</div>
-          <div class="calc-metric-value white" id="res-current">$4,000</div>
-          <div class="calc-metric-sub" data-i18n="calc.r1sub">Basado en tus datos actuales</div>
-        </div>
-
-        <!-- Clientes que se pierden -->
-        <div class="calc-metric">
-          <div class="calc-metric-label red" data-i18n="calc.r2">⚠ Clientes perdidos / mes</div>
-          <div class="calc-metric-value red" id="res-lost-clients">15</div>
-          <div class="calc-metric-sub" id="res-lost-money-sub" data-i18n="calc.r2sub">que buscan online y no te encuentran</div>
-        </div>
-
-        <!-- Dinero que se pierde -->
-        <div class="calc-metric">
-          <div class="calc-metric-label red" data-i18n="calc.r3">Dinero que pierdes / mes</div>
-          <div class="calc-metric-value red" id="res-lost">$1,200</div>
-          <div class="calc-metric-sub" id="res-lost-year">= $14,400 al año</div>
-        </div>
-
-        <!-- Progress -->
-        <div class="calc-progress">
-          <div class="calc-progress-label">
-            <span data-i18n="calc.potential">Potencial actual</span>
-            <span id="res-pct">71%</span>
-          </div>
-          <div class="calc-progress-bar">
-            <div class="calc-progress-fill" id="res-bar" style="width:71%"></div>
-          </div>
-        </div>
-
-        <!-- Con RuutDev -->
-        <div class="calc-metric">
-          <div class="calc-metric-label green" data-i18n="calc.r4">✦ Con sitio web profesional</div>
-          <div class="calc-metric-value green" id="res-with">$5,200</div>
-          <div class="calc-metric-sub" id="res-extra">+$1,200/mes · +$14,400/año</div>
-        </div>
-
-        <!-- ROI -->
-        <div class="calc-metric">
-          <div class="calc-metric-label blue" data-i18n="calc.r5">ROI del sitio web</div>
-          <div class="calc-metric-value blue" id="res-roi">24x</div>
-          <div class="calc-metric-sub" data-i18n="calc.r5sub">Por cada $1 invertido, recuperas este monto</div>
-        </div>
-
-        <a href="#contact" class="calc-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">
-          <i class="fa-solid fa-rocket"></i>
-          <span data-i18n="calc.cta">Quiero recuperar ese dinero</span>
-        </a>
-
-        <p class="calc-disclaimer" data-i18n="calc.disclaimer">Estimado basado en promedios de la industria digital.<br />Los resultados reales pueden variar.</p>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- ── TESTIMONIALS ── -->
-<section id="testimonials">
-  <div class="services-header reveal">
+<section id="testimonials" style="background:var(--bg2);">
+  <div class="section-header reveal">
     <div>
-      <div class="section-label" data-i18n="testimonials.label">Testimonios</div>
-      <h2 data-i18n="testimonials.title">Lo que dicen<br />nuestros clientes</h2>
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">What our clients say</h2>
     </div>
-    <p class="section-intro" data-i18n="testimonials.sub">Resultados reales de negocios reales que confiaron en RuutDev.</p>
+    <p class="section-intro">Real results from real businesses that trusted RuutDev.</p>
   </div>
 
   <div class="testimonials-grid">
@@ -1669,12 +313,12 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text" data-i18n="t1.text">"Antes no teníamos presencia en internet. RuutDev nos hizo una página increíble en pocos días y ya estamos recibiendo clientes nuevos por esa vía. La demo gratuita fue clave para convencernos."</p>
+      <p class="testimonial-text">"We had no online presence before. RuutDev built us an amazing page in just a few days and we're already getting new customers through it. The free demo was key to convincing us."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Carlos Mendoza</div>
-          <div class="author-detail" data-i18n="t1.role">Dueño de Restaurante · Caracas, VE</div>
+          <div class="author-detail">Restaurant Owner · Caracas, VE</div>
         </div>
       </div>
     </div>
@@ -1683,12 +327,12 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text" data-i18n="t2.text">"Súper profesionales y rápidos. Me entregaron exactamente lo que necesitaba para mi barbería. El sistema de citas online redujo las llamadas y mis clientes están encantados."</p>
+      <p class="testimonial-text">"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Miguel Torres</div>
-          <div class="author-detail" data-i18n="t2.role">Propietario de Barbería · Orlando, FL</div>
+          <div class="author-detail">Barbershop Owner · Orlando, FL</div>
         </div>
       </div>
     </div>
@@ -1697,633 +341,160 @@
       <div class="testimonial-stars">
         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
       </div>
-      <p class="testimonial-text" data-i18n="t3.text">"Lo que más me gustó fue ver la demo antes de pagar. Vi que sí sabían lo que hacían y el resultado final superó mis expectativas. Totalmente recomendados."</p>
+      <p class="testimonial-text">"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."</p>
       <div class="testimonial-author">
         <div class="author-avatar"><i class="fa-solid fa-user"></i></div>
         <div>
           <div class="author-name">Ana González</div>
-          <div class="author-detail" data-i18n="t3.role">Directora de Clínica · Miami, FL</div>
+          <div class="author-detail">Clinic Director · Miami, FL</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FAQ ── -->
-<section id="faq">
-  <div class="services-header reveal">
+<!-- ── PRICING PREVIEW ── -->
+<section id="pricing-preview">
+  <div class="section-header reveal">
     <div>
-      <div class="section-label" data-i18n="faq.label">FAQ</div>
-      <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+      <div class="section-label">Maintenance Plans</div>
+      <h2 class="section-title">Ongoing care for your site</h2>
     </div>
-    <p class="section-intro" data-i18n="faq.sub">Todo lo que necesitas saber antes de empezar.</p>
+    <a href="pricing.html" class="btn-outline">See full pricing <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 
-  <div class="faq-grid reveal">
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q1">¿Cuánto tiempo tarda en estar lista mi página?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a1">La demo gratuita la tendrás lista en 48 horas. El proyecto completo, dependiendo de la complejidad, entre 5 y 14 días. Siempre te damos una fecha exacta antes de empezar.</p>
+  <div class="plans-row">
+    <div class="plan-card reveal">
+      <div class="plan-label">Websites</div>
+      <div class="plan-price">$97<sub>/mo</sub></div>
+      <p class="plan-desc">Perfect for professional websites, landing pages, and brochure sites.</p>
+      <ul class="plan-features">
+        <li><i class="fa-solid fa-check"></i> Hosting & uptime monitoring</li>
+        <li><i class="fa-solid fa-check"></i> Security updates</li>
+        <li><i class="fa-solid fa-check"></i> Monthly content edits</li>
+        <li><i class="fa-solid fa-check"></i> Technical support</li>
+      </ul>
     </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q2">¿Qué necesito para que empiecen?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a2">Solo necesitas contarnos sobre tu negocio — qué haces, a quién le vendes y qué quieres lograr con el sitio. Nosotros nos encargamos del resto: diseño, textos, imágenes y publicación.</p>
+    <div class="plan-card featured reveal">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-label">Software & Web Apps</div>
+      <div class="plan-price">$197<sub>/mo</sub></div>
+      <p class="plan-desc">For dashboards, internal systems, and custom web applications.</p>
+      <ul class="plan-features">
+        <li><i class="fa-solid fa-check"></i> Everything in Websites plan</li>
+        <li><i class="fa-solid fa-check"></i> Bug fixes & patches</li>
+        <li><i class="fa-solid fa-check"></i> Performance optimization</li>
+        <li><i class="fa-solid fa-check"></i> Priority support</li>
+      </ul>
     </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q3">¿Qué pasa si no me gusta el resultado?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a3">Por eso existe la demo gratuita — para que veas cómo quedará antes de comprometerte. Una vez aprobado el proyecto, incluimos rondas de revisiones para ajustar cualquier detalle hasta que estés 100% satisfecho.</p>
+    <div class="plan-card reveal">
+      <div class="plan-label">Advanced Systems</div>
+      <div class="plan-price">$297<sub>/mo</sub></div>
+      <p class="plan-desc">AI integrations, payment systems, automations, and complex logic.</p>
+      <ul class="plan-features">
+        <li><i class="fa-solid fa-check"></i> Everything in Software plan</li>
+        <li><i class="fa-solid fa-check"></i> AI model & integration upkeep</li>
+        <li><i class="fa-solid fa-check"></i> Payment & automation monitoring</li>
+        <li><i class="fa-solid fa-check"></i> Dedicated response SLA</li>
+      </ul>
     </div>
+  </div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q4">¿El hosting y dominio están incluidos?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a4">El hosting básico está incluido y es gratuito. El dominio personalizado (ej: tunegocio.com) tiene un costo de $10–15/año y te ayudamos a configurarlo. También podemos manejar todo por ti si prefieres.</p>
+  <p style="text-align:center;margin-top:28px;font-size:0.85rem;color:var(--text2);">
+    Maintenance is optional. One-time project costs are quoted separately.
+    <a href="pricing.html" style="color:var(--blue);font-weight:600;text-decoration:none;"> View full pricing →</a>
+  </p>
+</section>
+
+<!-- ── PROCESS ── -->
+<section style="background:var(--bg2);">
+  <div class="reveal">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Simple, fast, no surprises</h2>
+    <p class="section-intro">From first conversation to live site in days, not months.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <h3>Conversation</h3>
+      <p>Tell us about your business and goals. No tech jargon — just a straightforward chat.</p>
     </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q5">¿Pueden hacer cambios después de entregar el sitio?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a5">Sí. Ofrecemos mantenimiento y actualizaciones por una tarifa mensual. También podemos capacitarte para que hagas cambios simples tú mismo si lo prefieres.</p>
+    <div class="process-step reveal">
+      <div class="step-num">02</div>
+      <h3>Free Demo</h3>
+      <p>We build a working demo of your site in 48 hours. See it in action before paying a dollar.</p>
     </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-question">
-        <h4 data-i18n="faq.q6">¿Trabajan con negocios en Venezuela y USA?</h4>
-        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
-      </div>
-      <p class="faq-answer" data-i18n="faq.a6">Sí, ese es nuestro mercado principal. Manejamos pagos en dólares para ambos mercados. Para Venezuela aceptamos Zelle, PayPal y transferencias. Para USA, cualquier método digital.</p>
+    <div class="process-step reveal">
+      <div class="step-num">03</div>
+      <h3>Approval</h3>
+      <p>You approve, we finalize every detail and prepare everything for launch.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="step-num">04</div>
+      <h3>Go Live</h3>
+      <p>Your site launches with domain, hosting, and optimization — ready to bring in clients.</p>
     </div>
   </div>
 </section>
 
 <!-- ── FINAL CTA ── -->
-<section id="cta-final">
-  <p class="cta-final-eyebrow reveal" data-i18n="cta.eyebrow">Empieza hoy</p>
-  <h2 class="cta-final-title reveal" data-i18n="cta.title">Tu negocio merece estar<br />en <em>internet ahora</em></h2>
-  <p class="cta-final-sub reveal" data-i18n="cta.sub">La demo es gratis. Sin compromisos. Sin letra pequeña. Solo resultados.</p>
-  <div class="cta-final-actions reveal">
-    <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
-      <i class="fa-solid fa-rocket"></i> <span data-i18n="cta.btn1">Pedir mi demo gratis</span>
-    </a>
-    <a href="https://wa.me/14076946371?text=Hola%20RuutDev%2C%20me%20interesa%20una%20demo%20gratis." target="_blank" class="btn-secondary" style="display:inline-flex;align-items:center;gap:8px;">
-      <i class="fa-brands fa-whatsapp"></i> <span data-i18n="cta.btn2">Escribir por WhatsApp</span>
+<section class="cta-section">
+  <p class="cta-eyebrow reveal">Get started today</p>
+  <h2 class="cta-title reveal">Your business deserves to be<br /><em>online right now</em></h2>
+  <p class="cta-sub reveal">The demo is free. No commitments. No fine print. Just results.</p>
+  <div class="cta-actions reveal">
+    <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> Get my free demo</a>
+    <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27m%20interested%20in%20a%20free%20demo." target="_blank" class="btn-secondary">
+      <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
     </a>
   </div>
   <div class="cta-guarantee reveal">
     <i class="fa-solid fa-circle-check"></i>
-    <span data-i18n="cta.guarantee">Demo en 48 horas · Sin pago inicial · Sin contrato</span>
-  </div>
-</section>
-
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="reveal">
-    <div class="section-label" data-i18n="contact.label">Contacto</div>
-    <h2 data-i18n="contact.title">Empecemos a construir tu presencia digital</h2>
-  </div>
-
-  <div class="contact-wrapper">
-    <div class="contact-info reveal">
-      <h3 data-i18n="contact.info.title">¿Hablamos?</h3>
-      <p data-i18n="contact.info.desc">
-        Ya sea que tengas un negocio establecido o estés empezando, podemos ayudarte. La primera consulta y la demo son completamente gratis. Sin letra pequeña.
-      </p>
-      <a href="https://wa.me/14076946371?text=Hola%20RuutDev%2C%20me%20interesa%20una%20demo%20gratis." class="whatsapp-btn" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span data-i18n="contact.whatsapp">Escribir por WhatsApp</span>
-      </a>
-    </div>
-
-    <div class="contact-form reveal">
-      <div id="form-body">
-        <div class="form-row">
-          <div class="form-group">
-            <label data-i18n="form.name">Tu nombre</label>
-            <input type="text" id="fname" placeholder="Nombre" />
-          </div>
-          <div class="form-group">
-            <label data-i18n="form.business">Nombre del negocio</label>
-            <input type="text" id="fbusiness" placeholder="Empresa" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label data-i18n="form.email">Correo electrónico</label>
-          <input type="email" id="femail" placeholder="hola@tunegocio.com" />
-        </div>
-        <div class="form-group">
-          <label data-i18n="form.type">Tipo de negocio</label>
-          <select id="ftype">
-            <option value="" data-i18n="form.type.opt0">Selecciona...</option>
-            <option value="restaurant" data-i18n="form.type.opt1">Restaurante / Comida</option>
-            <option value="health" data-i18n="form.type.opt2">Salud / Clínica</option>
-            <option value="beauty" data-i18n="form.type.opt3">Belleza / Barbería</option>
-            <option value="store" data-i18n="form.type.opt4">Tienda / E-commerce</option>
-            <option value="services" data-i18n="form.type.opt5">Servicios Profesionales</option>
-            <option value="other" data-i18n="form.type.opt6">Otro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label data-i18n="form.message">Cuéntanos sobre tu negocio</label>
-          <textarea id="fmessage" placeholder="¿Qué necesitas? ¿Tienes sitio web actualmente?..."></textarea>
-        </div>
-        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm()" data-i18n="form.submit">
-          Solicitar demo gratuita →
-        </button>
-      </div>
-      <div class="form-success" id="form-success">
-        <div style="font-size:2.5rem;margin-bottom:16px">✅</div>
-        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-bottom:12px" data-i18n="form.success.title">¡Mensaje recibido!</div>
-        <div style="color:var(--text2);font-size:0.95rem;font-weight:300" data-i18n="form.success.sub">Nos ponemos en contacto contigo en menos de 24 horas.</div>
-      </div>
-    </div>
+    Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract
   </div>
 </section>
 
 <!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-logo">
-    <span></span>RuutDev
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-    <p data-i18n="footer.copy" style="font-size:0.78rem;color:rgba(255,255,255,0.35);">© 2026 RuutDev. Todos los derechos reservados.</p>
-    <div style="display:flex;gap:20px;">
-      <a href="/privacy.html" data-i18n="footer.privacy" style="font-size:0.78rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Política de Privacidad</a>
-      <a href="/terms.html" data-i18n="footer.terms" style="font-size:0.78rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Términos y Condiciones</a>
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
+      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
     </div>
-    <p data-i18n="footer.tagline" style="font-size:0.78rem;color:rgba(255,255,255,0.35);">USA & Venezuela 🇺🇸🇻🇪</p>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Software & Web Apps</a></li>
+        <li><a href="services.html">AI Integrations</a></li>
+        <li><a href="pricing.html">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pay.html">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
   </div>
 </footer>
 
-<script>
-
-  /* ── CALCULATOR ── */
-  let hasWeb = false;
-
-  function setWeb(val) {
-    hasWeb = val;
-    document.getElementById('val-hasweb').textContent = val ? (currentLang === 'es' ? 'Sí (básico)' : 'Yes (basic)') : (currentLang === 'es' ? 'No' : 'No');
-    document.getElementById('btn-yes').classList.toggle('active', val);
-    document.getElementById('btn-no').classList.toggle('active', !val);
-    updateCalc();
-  }
-
-  function fmt(n) {
-    return '$' + Math.round(n).toLocaleString('en-US');
-  }
-
-  function animateValue(el, newVal, isNumber, prefix = '', suffix = '') {
-    const current = parseFloat(el.dataset.val || 0);
-    const diff = newVal - current;
-    const steps = 20;
-    let step = 0;
-    clearInterval(el._anim);
-    el._anim = setInterval(() => {
-      step++;
-      const v = current + diff * (step / steps);
-      if (isNumber) {
-        el.textContent = prefix + Math.round(v).toLocaleString('en-US') + suffix;
-      } else {
-        el.textContent = prefix + Math.round(v) + suffix;
-      }
-      if (step >= steps) {
-        clearInterval(el._anim);
-        el.dataset.val = newVal;
-      }
-    }, 16);
-  }
-
-  function updateCalc() {
-    const clients = parseInt(document.getElementById('slider-clients').value);
-    const ticket  = parseInt(document.getElementById('slider-ticket').value);
-    const onlinePct = parseInt(document.getElementById('slider-online').value) / 100;
-
-    document.getElementById('val-clients').textContent = clients;
-    document.getElementById('val-ticket').textContent  = '$' + ticket;
-    document.getElementById('val-online').textContent  = Math.round(onlinePct * 100) + '%';
-
-    // Current monthly revenue
-    const currentRevenue = clients * ticket;
-
-    // Clients searching online but not finding them
-    // If they have a basic site, they capture 30% of online searchers
-    // If no site, they capture 0%
-    const capturePct = hasWeb ? 0.30 : 0;
-    const onlineClients = Math.round(clients * onlinePct);
-    const lostClients = Math.round(onlineClients * (1 - capturePct));
-
-    // Money lost
-    const lostMoney = lostClients * ticket;
-
-    // With professional site, capture 85% of online clients
-    const gainedClients = Math.round(onlineClients * 0.85) - Math.round(onlineClients * capturePct);
-    const withRevenue = currentRevenue + (gainedClients * ticket);
-    const extraPerMonth = withRevenue - currentRevenue;
-    const extraPerYear = extraPerMonth * 12;
-
-    // ROI — avg site cost $600
-    const siteCost = 600;
-    const roi = extraPerMonth > 0 ? Math.round(extraPerYear / siteCost) : 0;
-
-    // Potential pct
-    const potential = Math.round((currentRevenue / withRevenue) * 100);
-
-    // Update DOM
-    document.getElementById('res-current').textContent = fmt(currentRevenue);
-    document.getElementById('res-lost-clients').textContent = lostClients;
-    document.getElementById('res-lost').textContent = fmt(lostMoney);
-    document.getElementById('res-lost-year').textContent = '= ' + fmt(lostMoney * 12) + (currentLang === 'es' ? ' al año' : ' per year');
-    document.getElementById('res-with').textContent = fmt(withRevenue);
-    document.getElementById('res-extra').textContent = '+' + fmt(extraPerMonth) + (currentLang === 'es' ? '/mes · +' : '/mo · +') + fmt(extraPerYear) + (currentLang === 'es' ? '/año' : '/yr');
-    document.getElementById('res-roi').textContent = roi + 'x';
-    document.getElementById('res-pct').textContent = potential + '%';
-    document.getElementById('res-bar').style.width = potential + '%';
-  }
-
-  /* ── FAQ ── */
-  function toggleFaq(el) {
-    const isOpen = el.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
-    if (!isOpen) el.classList.add('open');
-  }
-
-  /* ── i18n ── */
-  const translations = {
-    es: {
-      "nav.services": "Servicios",
-      "nav.testimonials": "Testimonios",
-      "nav.calculator": "Calculadora",
-      "nav.portfolio": "Portfolio",
-      "nav.process": "Proceso",
-      "nav.cta": "Hablemos",
-      "hero.badge": "Desarrollo Web & Soluciones AI",
-      "hero.title": "Tu negocio merece una<br /><em>presencia digital real</em>",
-      "hero.sub": "Construimos sitios web modernos, rápidos y diseñados para convertir visitantes en clientes. Desde landing pages hasta herramientas con inteligencia artificial.",
-      "hero.cta1": "Ver demos →",
-      "hero.cta2": "Contáctanos",
-      "stat.1": "Demo lista en",
-      "stat.2": "Sin compromiso inicial",
-      "stat.3": "Personalizado",
-      "stat.4": "Presencia en ambos mercados",
-      "services.label": "Servicios",
-      "services.title": "Todo lo que tu negocio necesita en línea",
-      "services.sub": "No vendemos plantillas. Construimos cada sitio desde cero, adaptado a tu negocio específico.",
-      "s1.title": "Landing Page Profesional",
-      "s1.desc": "Página de presentación diseñada para convertir. Incluye diseño responsivo, SEO básico y formulario de contacto.",
-      "s1.price": "Desde $500",
-      "s2.title": "Tienda en Línea",
-      "s2.desc": "E-commerce completo con carrito, pagos integrados y panel de administración para gestionar tus productos.",
-      "s2.price": "Desde $1,200",
-      "s3.title": "Herramientas con AI",
-      "s3.desc": "Chatbots, automatizaciones, análisis de datos y herramientas inteligentes que ahorran tiempo y aumentan tus ventas.",
-      "s3.price": "Desde $2,500",
-      "s4.title": "Dashboard & Sistemas",
-      "s4.desc": "Paneles de control personalizados para gestionar tu negocio, ver métricas y tomar decisiones con datos reales.",
-      "s4.price": "Desde $2,000",
-      "s5.title": "Rediseño Web",
-      "s5.desc": "¿Tu sitio ya existe pero se ve anticuado? Lo modernizamos, lo hacemos más rápido y lo optimizamos para móviles.",
-      "s5.price": "Desde $400",
-      "s6.title": "Demo Gratuita — Sin Compromiso",
-      "s6.desc": "Construimos una versión demo de tu sitio ideal. La ves, la pruebas, y solo pagas si decides seguir adelante.",
-      "s6.price": "Gratis",
-      "portfolio.label": "Portfolio",
-      "portfolio.title": "Demos por industria",
-      "portfolio.sub": "Así lucen nuestras soluciones. Cada demo es un ejemplo real de lo que podemos construir para tu negocio.",
-      "demo.restaurant": "Restaurante",
-      "demo.restaurant.title": "La Mesa — Restaurante",
-      "demo.restaurant.desc": "Landing page con menú digital, reservas en línea y galería de platos. Diseño elegante y moderno.",
-      "demo.barbershop": "Barbería",
-      "demo.barbershop.title": "UrbanCut — Barbería",
-      "demo.barbershop.desc": "Sistema de citas online, galería de estilos, servicios y precios. Con integración a WhatsApp.",
-      "demo.medical": "Clínica",
-      "demo.medical.title": "MedCare — Clínica",
-      "demo.medical.desc": "Presentación de servicios médicos, equipo de doctores, horarios y formulario de consultas.",
-      "demo.store": "Tienda",
-      "demo.store.title": "StyleHub — Tienda",
-      "demo.store.desc": "E-commerce con catálogo de productos, carrito de compras y proceso de pago integrado.",
-      "portfolio.coming": "Más demos próximamente...",
-      "process.label": "Proceso",
-      "process.title": "Simple, rápido, sin sorpresas",
-      "process.sub": "De la conversación a tu sitio en línea en días, no en meses.",
-      "p1.title": "Conversación",
-      "p1.desc": "Nos cuentas sobre tu negocio, tus clientes y lo que necesitas. Sin tecnicismos.",
-      "p2.title": "Demo Gratis",
-      "p2.desc": "Construimos una demo de tu sitio en 48 horas. La ves en acción antes de pagar un dólar.",
-      "p3.title": "Aprobación",
-      "p3.desc": "¿Te gusta? Damos luz verde, ajustamos detalles y preparamos todo para publicar.",
-      "p4.title": "En Línea",
-      "p4.desc": "Tu sitio va al internet con dominio, hosting y optimización. Listo para recibir clientes.",
-      "contact.label": "Contacto",
-      "contact.title": "Empecemos a construir tu presencia digital",
-      "contact.info.title": "¿Hablamos?",
-      "contact.info.desc": "Ya sea que tengas un negocio establecido o estés empezando, podemos ayudarte. La primera consulta y la demo son completamente gratis. Sin letra pequeña.",
-      "contact.whatsapp": "Escribir por WhatsApp",
-      "form.name": "Tu nombre",
-      "form.business": "Nombre del negocio",
-      "form.email": "Correo electrónico",
-      "form.type": "Tipo de negocio",
-      "form.type.opt0": "Selecciona...",
-      "form.type.opt1": "Restaurante / Comida",
-      "form.type.opt2": "Salud / Clínica",
-      "form.type.opt3": "Belleza / Barbería",
-      "form.type.opt4": "Tienda / E-commerce",
-      "form.type.opt5": "Servicios Profesionales",
-      "form.type.opt6": "Otro",
-      "form.message": "Cuéntanos sobre tu negocio",
-      "form.submit": "Solicitar demo gratuita →",
-      "form.success.title": "¡Mensaje recibido!",
-      "form.success.sub": "Nos ponemos en contacto contigo en menos de 24 horas.",
-      "footer.copy": "© 2026 RuutDev. Todos los derechos reservados.",
-      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪",
-      "footer.privacy": "Política de Privacidad",
-      "footer.terms": "Términos y Condiciones",
-      "testimonials.label": "Testimonios",
-      "testimonials.title": "Lo que dicen<br />nuestros clientes",
-      "testimonials.sub": "Resultados reales de negocios reales que confiaron en RuutDev.",
-      "t1.text": "\"Antes no teníamos presencia en internet. RuutDev nos hizo una página increíble en pocos días y ya estamos recibiendo clientes nuevos por esa vía. La demo gratuita fue clave para convencernos.\"",
-      "t1.role": "Dueño de Restaurante · Caracas, VE",
-      "t2.text": "\"Súper profesionales y rápidos. Me entregaron exactamente lo que necesitaba para mi barbería. El sistema de citas online redujo las llamadas y mis clientes están encantados.\"",
-      "t2.role": "Propietario de Barbería · Orlando, FL",
-      "t3.text": "\"Lo que más me gustó fue ver la demo antes de pagar. Vi que sí sabían lo que hacían y el resultado final superó mis expectativas. Totalmente recomendados.\"",
-      "t3.role": "Directora de Clínica · Miami, FL",
-      "faq.label": "FAQ",
-      "faq.title": "Preguntas frecuentes",
-      "faq.sub": "Todo lo que necesitas saber antes de empezar.",
-      "faq.q1": "¿Cuánto tiempo tarda en estar lista mi página?",
-      "faq.a1": "La demo gratuita la tendrás lista en 48 horas. El proyecto completo, dependiendo de la complejidad, entre 5 y 14 días. Siempre te damos una fecha exacta antes de empezar.",
-      "faq.q2": "¿Qué necesito para que empiecen?",
-      "faq.a2": "Solo necesitas contarnos sobre tu negocio — qué haces, a quién le vendes y qué quieres lograr con el sitio. Nosotros nos encargamos del resto: diseño, textos, imágenes y publicación.",
-      "faq.q3": "¿Qué pasa si no me gusta el resultado?",
-      "faq.a3": "Por eso existe la demo gratuita — para que veas cómo quedará antes de comprometerte. Una vez aprobado el proyecto, incluimos rondas de revisiones para ajustar cualquier detalle hasta que estés 100% satisfecho.",
-      "faq.q4": "¿El hosting y dominio están incluidos?",
-      "faq.a4": "El hosting básico está incluido y es gratuito. El dominio personalizado (ej: tunegocio.com) tiene un costo de $10–15/año y te ayudamos a configurarlo. También podemos manejar todo por ti si prefieres.",
-      "faq.q5": "¿Pueden hacer cambios después de entregar el sitio?",
-      "faq.a5": "Sí. Ofrecemos mantenimiento y actualizaciones por una tarifa mensual. También podemos capacitarte para que hagas cambios simples tú mismo si lo prefieres.",
-      "faq.q6": "¿Trabajan con negocios en Venezuela y USA?",
-      "faq.a6": "Sí, ese es nuestro mercado principal. Manejamos pagos en dólares para ambos mercados. Para Venezuela aceptamos Zelle, PayPal y transferencias. Para USA, cualquier método digital.",
-      "calc.label": "Calculadora",
-      "calc.title": "¿Cuánto dinero<br />estás <em>dejando ir</em>?",
-      "calc.desc": "La mayoría de negocios sin sitio web pierden entre 30–70% de clientes potenciales. Calcula el impacto real para tu negocio.",
-      "calc.s1": "Clientes actuales / mes",
-      "calc.s2": "Ingreso promedio por cliente",
-      "calc.s3": "¿Cuántos clientes te buscan online?",
-      "calc.s4": "¿Tienes sitio web actualmente?",
-      "calc.no": "No tengo",
-      "calc.yes": "Tengo uno básico",
-      "calc.live": "Resultados en tiempo real",
-      "calc.r1": "Ingresos actuales / mes",
-      "calc.r1sub": "Basado en tus datos actuales",
-      "calc.r2": "⚠ Clientes perdidos / mes",
-      "calc.r2sub": "que buscan online y no te encuentran",
-      "calc.r3": "Dinero que pierdes / mes",
-      "calc.potential": "Potencial actual",
-      "calc.r4": "✦ Con sitio web profesional",
-      "calc.r5": "ROI del sitio web",
-      "calc.r5sub": "Por cada $1 invertido, recuperas este monto",
-      "calc.cta": "Quiero recuperar ese dinero",
-      "calc.disclaimer": "Estimado basado en promedios de la industria digital.<br />Los resultados reales pueden variar.",
-      "cta.eyebrow": "Empieza hoy",
-      "cta.title": "Tu negocio merece estar<br />en <em>internet ahora</em>",
-      "cta.sub": "La demo es gratis. Sin compromisos. Sin letra pequeña. Solo resultados.",
-      "cta.btn1": "Pedir mi demo gratis",
-      "cta.btn2": "Escribir por WhatsApp",
-      "cta.guarantee": "Demo en 48 horas · Sin pago inicial · Sin contrato"
-    },
-    en: {
-      "nav.services": "Services",
-      "nav.testimonials": "Testimonials",
-      "nav.calculator": "Calculator",
-      "nav.portfolio": "Portfolio",
-      "nav.process": "Process",
-      "nav.cta": "Let's Talk",
-      "hero.badge": "Web Development & AI Solutions",
-      "hero.title": "Your business deserves a<br /><em>real digital presence</em>",
-      "hero.sub": "We build modern, fast websites designed to convert visitors into customers. From landing pages to AI-powered tools.",
-      "hero.cta1": "See demos →",
-      "hero.cta2": "Contact us",
-      "stat.1": "Demo ready in",
-      "stat.2": "No upfront commitment",
-      "stat.3": "100% Custom",
-      "stat.4": "Both markets covered",
-      "services.label": "Services",
-      "services.title": "Everything your business needs online",
-      "services.sub": "We don't sell templates. We build every site from scratch, tailored to your specific business.",
-      "s1.title": "Professional Landing Page",
-      "s1.desc": "A conversion-focused presentation page with responsive design, basic SEO, and contact form.",
-      "s1.price": "From $500",
-      "s2.title": "Online Store",
-      "s2.desc": "Full e-commerce with cart, integrated payments, and admin panel to manage your products.",
-      "s2.price": "From $1,200",
-      "s3.title": "AI-Powered Tools",
-      "s3.desc": "Chatbots, automations, data analysis, and smart tools that save time and increase your sales.",
-      "s3.price": "From $2,500",
-      "s4.title": "Dashboard & Systems",
-      "s4.desc": "Custom control panels to manage your business, see metrics, and make data-driven decisions.",
-      "s4.price": "From $2,000",
-      "s5.title": "Web Redesign",
-      "s5.desc": "Does your site look outdated? We modernize it, make it faster, and optimize it for mobile.",
-      "s5.price": "From $400",
-      "s6.title": "Free Demo — No Commitment",
-      "s6.desc": "We build a demo version of your ideal site. You see it, test it, and only pay if you decide to move forward.",
-      "s6.price": "Free",
-      "portfolio.label": "Portfolio",
-      "portfolio.title": "Demos by industry",
-      "portfolio.sub": "This is what our solutions look like. Each demo is a real example of what we can build for your business.",
-      "demo.restaurant": "Restaurant",
-      "demo.restaurant.title": "La Mesa — Restaurant",
-      "demo.restaurant.desc": "Landing page with digital menu, online reservations, and dish gallery. Elegant and modern design.",
-      "demo.barbershop": "Barbershop",
-      "demo.barbershop.title": "UrbanCut — Barbershop",
-      "demo.barbershop.desc": "Online appointment system, style gallery, services and pricing. With WhatsApp integration.",
-      "demo.medical": "Clinic",
-      "demo.medical.title": "MedCare — Clinic",
-      "demo.medical.desc": "Medical services presentation, doctor team, schedules, and consultation form.",
-      "demo.store": "Store",
-      "demo.store.title": "StyleHub — Store",
-      "demo.store.desc": "E-commerce with product catalog, shopping cart, and integrated checkout process.",
-      "portfolio.coming": "More demos coming soon...",
-      "process.label": "Process",
-      "process.title": "Simple, fast, no surprises",
-      "process.sub": "From conversation to your site live in days, not months.",
-      "p1.title": "Conversation",
-      "p1.desc": "Tell us about your business, your customers, and what you need. No tech jargon.",
-      "p2.title": "Free Demo",
-      "p2.desc": "We build a demo of your site in 48 hours. You see it in action before paying a dollar.",
-      "p3.title": "Approval",
-      "p3.desc": "Like it? We finalize details and prepare everything for launch.",
-      "p4.title": "Go Live",
-      "p4.desc": "Your site goes live with domain, hosting, and optimization. Ready to receive customers.",
-      "contact.label": "Contact",
-      "contact.title": "Let's start building your digital presence",
-      "contact.info.title": "Let's talk?",
-      "contact.info.desc": "Whether you have an established business or are just starting, we can help. The first consultation and demo are completely free. No fine print.",
-      "contact.whatsapp": "Message on WhatsApp",
-      "form.name": "Your name",
-      "form.business": "Business name",
-      "form.email": "Email address",
-      "form.type": "Business type",
-      "form.type.opt0": "Select...",
-      "form.type.opt1": "Restaurant / Food",
-      "form.type.opt2": "Health / Clinic",
-      "form.type.opt3": "Beauty / Barbershop",
-      "form.type.opt4": "Store / E-commerce",
-      "form.type.opt5": "Professional Services",
-      "form.type.opt6": "Other",
-      "form.message": "Tell us about your business",
-      "form.submit": "Request free demo →",
-      "form.success.title": "Message received!",
-      "form.success.sub": "We'll get in touch with you within 24 hours.",
-      "footer.copy": "© 2026 RuutDev. All rights reserved.",
-      "footer.tagline": "USA & Venezuela 🇺🇸🇻🇪",
-      "footer.privacy": "Privacy Policy",
-      "footer.terms": "Terms & Conditions",
-      "testimonials.label": "Testimonials",
-      "testimonials.title": "What our<br />clients say",
-      "testimonials.sub": "Real results from real businesses that trusted RuutDev.",
-      "t1.text": "\"We had no online presence before. RuutDev built us an amazing page in just a few days and we're already getting new customers through it. The free demo was key to convincing us.\"",
-      "t1.role": "Restaurant Owner · Caracas, VE",
-      "t2.text": "\"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my calls and my clients love it.\"",
-      "t2.role": "Barbershop Owner · Orlando, FL",
-      "t3.text": "\"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended.\"",
-      "t3.role": "Clinic Director · Miami, FL",
-      "faq.label": "FAQ",
-      "faq.title": "Frequently asked questions",
-      "faq.sub": "Everything you need to know before getting started.",
-      "faq.q1": "How long does it take to build my website?",
-      "faq.a1": "The free demo will be ready in 48 hours. The full project, depending on complexity, takes between 5 and 14 days. We always give you an exact date before we start.",
-      "faq.q2": "What do I need to get started?",
-      "faq.a2": "You just need to tell us about your business — what you do, who your customers are, and what you want to achieve. We handle the rest: design, copy, images, and publishing.",
-      "faq.q3": "What if I don't like the result?",
-      "faq.a3": "That's exactly why the free demo exists — so you can see how it will look before committing. Once the project is approved, we include revision rounds to adjust any detail until you're 100% satisfied.",
-      "faq.q4": "Are hosting and domain included?",
-      "faq.a4": "Basic hosting is included and free. A custom domain (e.g. yourbusiness.com) costs $10–15/year and we help you set it up. We can also manage everything for you if you prefer.",
-      "faq.q5": "Can you make changes after the site is delivered?",
-      "faq.a5": "Yes. We offer maintenance and updates for a monthly fee. We can also train you to make simple changes yourself if you prefer.",
-      "faq.q6": "Do you work with businesses in Venezuela and the USA?",
-      "faq.a6": "Yes, that's our main market. We handle dollar payments for both markets. For Venezuela we accept Zelle, PayPal, and transfers. For the USA, any digital payment method works.",
-      "calc.label": "Calculator",
-      "calc.title": "How much money are<br />you <em>leaving behind</em>?",
-      "calc.desc": "Most businesses without a website lose 30–70% of potential customers. Calculate the real impact for your business.",
-      "calc.s1": "Current clients / month",
-      "calc.s2": "Average revenue per client",
-      "calc.s3": "How many clients search online?",
-      "calc.s4": "Do you have a website?",
-      "calc.no": "No website",
-      "calc.yes": "Basic one",
-      "calc.live": "Live results",
-      "calc.r1": "Current monthly revenue",
-      "calc.r1sub": "Based on your current data",
-      "calc.r2": "⚠ Lost clients / month",
-      "calc.r2sub": "searching online but can't find you",
-      "calc.r3": "Money you're losing / month",
-      "calc.potential": "Current potential",
-      "calc.r4": "✦ With a professional website",
-      "calc.r5": "Website ROI",
-      "calc.r5sub": "For every $1 invested, you get back",
-      "calc.cta": "I want to recover that money",
-      "calc.disclaimer": "Estimated based on digital industry averages.<br />Real results may vary.",
-      "cta.eyebrow": "Get started today",
-      "cta.title": "Your business deserves to be<br /><em>online right now</em>",
-      "cta.sub": "The demo is free. No commitments. No fine print. Just results.",
-      "cta.btn1": "Get my free demo",
-      "cta.btn2": "Message on WhatsApp",
-      "cta.guarantee": "Demo in 48 hours · No upfront payment · No contract"
-    }
-  };
-
-  let currentLang = 'en';
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[lang][key] !== undefined) {
-        el.innerHTML = translations[lang][key];
-      }
-    });
-  }
-
-  /* ── Scroll Reveal ── */
-
-  // Init — must run AFTER translations object and setLang are defined
-  setLang("en");
-  updateCalc();
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* ── Form ── */
-  async function submitForm() {
-    const name = document.getElementById('fname').value;
-    const email = document.getElementById('femail').value;
-    const business = document.getElementById('fbusiness').value;
-    const type = document.getElementById('ftype').value;
-    const message = document.getElementById('fmessage').value;
-    if (!name || !email) {
-      alert(currentLang === 'es' ? 'Por favor completa tu nombre y correo.' : 'Please fill in your name and email.');
-      return;
-    }
-    const btn = document.querySelector('#form-body .btn-primary');
-    btn.textContent = currentLang === 'es' ? 'Enviando...' : 'Sending...';
-    btn.disabled = true;
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ access_key: '337075f5-4f51-4287-85f9-71d03aee9283', name, email, business, type, message })
-      });
-      if (res.ok) {
-        document.getElementById('form-body').style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-      } else {
-        alert(currentLang === 'es' ? 'Hubo un error. Intenta por WhatsApp.' : 'There was an error. Try via WhatsApp.');
-        btn.textContent = currentLang === 'es' ? 'Solicitar demo gratuita →' : 'Request free demo →';
-        btn.disabled = false;
-      }
-    } catch(e) {
-      alert(currentLang === 'es' ? 'Hubo un error. Intenta por WhatsApp.' : 'There was an error. Try via WhatsApp.');
-      btn.textContent = currentLang === 'es' ? 'Solicitar demo gratuita →' : 'Request free demo →';
-      btn.disabled = false;
-    }
-  }
-
-  /* ── Mobile Menu ── */
-  function toggleMenu() {
-    const links = document.querySelector('.nav-links');
-    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '70px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = 'var(--bg)';
-    links.style.padding = '20px 6%';
-    links.style.borderBottom = '1px solid var(--border)';
-    links.style.gap = '20px';
-  }
-</script>
-
+<script src="js/main.js"></script>
 </body>
 </html>

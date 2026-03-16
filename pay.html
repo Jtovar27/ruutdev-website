@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make a Payment — RuutDev</title>
+  <meta name="description" content="Pay your project deposit, remaining balance, maintenance plan, or invoice securely through RuutDev." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── PAYMENT LAYOUT ── */
+    .payment-wrapper {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 48px; align-items: start;
+      max-width: 960px; margin: 0 auto;
+    }
+
+    /* ── PAYMENT TYPE SELECTOR ── */
+    .payment-types {
+      display: flex; flex-direction: column; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .payment-type-option {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 16px 20px;
+      cursor: pointer; transition: all var(--transition);
+    }
+    .payment-type-option:hover { border-color: var(--blue-border); }
+    .payment-type-option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .payment-type-option .pt-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--blue); flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .payment-type-option.selected .pt-icon { background: var(--blue); color: white; border-color: var(--blue); }
+    .payment-type-option .pt-text { display: flex; flex-direction: column; gap: 2px; }
+    .payment-type-option .pt-text strong { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .payment-type-option .pt-text span { font-size: 0.78rem; color: var(--text2); }
+    .payment-type-option input[type="radio"] { display: none; }
+
+    /* ── PAYMENT FORM ── */
+    .payment-form-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 40px;
+    }
+    .payment-form-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 6px; }
+    .payment-form-subtitle { font-size: 0.875rem; color: var(--text2); font-weight: 300; margin-bottom: 28px; }
+
+    .amount-input-wrap { position: relative; }
+    .amount-input-wrap .currency-symbol {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 1rem; font-weight: 600; color: var(--text);
+    }
+    .amount-input-wrap input { padding-left: 30px; font-size: 1.1rem; font-weight: 600; }
+
+    /* ── STRIPE PLACEHOLDER ── */
+    .stripe-placeholder {
+      background: var(--bg); border: 1.5px dashed rgba(26,109,255,0.3);
+      border-radius: 10px; padding: 24px 20px;
+      text-align: center; color: var(--text2);
+      font-size: 0.85rem; line-height: 1.65;
+      margin: 20px 0;
+    }
+    .stripe-placeholder i { font-size: 1.5rem; color: var(--blue); margin-bottom: 10px; display: block; }
+    .stripe-placeholder strong { color: var(--text); display: block; margin-bottom: 6px; }
+
+    /* ── SECURITY BADGES ── */
+    .security-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .security-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.75rem; color: var(--text2);
+    }
+    .security-badge i { color: #22c55e; }
+
+    /* ── INFO PANEL ── */
+    .payment-info { display: flex; flex-direction: column; gap: 20px; }
+    .info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .info-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
+    .info-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .info-card ul li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--text2); font-weight: 300; line-height: 1.5; }
+    .info-card ul li i { color: var(--blue); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; }
+    .info-card p { font-size: 0.875rem; color: var(--text2); line-height: 1.65; font-weight: 300; }
+
+    .alt-payment {
+      background: var(--text); border-radius: var(--radius); padding: 28px;
+    }
+    .alt-payment h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: white; margin-bottom: 12px; }
+    .alt-payment ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .alt-payment ul li { font-size: 0.875rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 10px; }
+    .alt-payment ul li i { color: #60a5fa; font-size: 0.8rem; }
+    .alt-payment p { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 14px; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .payment-wrapper { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="services.html">Services</a></li>
+  <li><a href="pricing.html">Pricing</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+</ul>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge">Payments</div>
+    <h1>Make a <em>payment</em></h1>
+    <p>Pay your project deposit, remaining balance, monthly maintenance, or an outstanding invoice — securely and in just a few steps.</p>
+  </div>
+</div>
+
+<!-- ── PAYMENT SECTION ── -->
+<section style="background:var(--bg);">
+  <div class="payment-wrapper">
+
+    <!-- LEFT: Form -->
+    <div class="payment-form-card reveal">
+      <div class="payment-form-title">Payment Details</div>
+      <div class="payment-form-subtitle">Select what you're paying for, enter the amount, and complete the checkout.</div>
+
+      <!-- Payment Type Selector -->
+      <div class="payment-types">
+        <label class="payment-type-option selected" onclick="selectPaymentType(this, 'Project Deposit')">
+          <input type="radio" name="payment_type" value="deposit" checked />
+          <div class="pt-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <div class="pt-text">
+            <strong>Project Deposit</strong>
+            <span>To begin a new project</span>
+          </div>
+        </label>
+        <label class="payment-type-option" onclick="selectPaymentType(this, 'Project Balance')">
+          <input type="radio" name="payment_type" value="balance" />
+          <div class="pt-icon"><i class="fa-solid fa-check-circle"></i></div>
+          <div class="pt-text">
+            <strong>Project Balance</strong>
+            <span>Milestone or final payment</span>
+          </div>
+        </label>
+        <label class="payment-type-option" onclick="selectPaymentType(this, 'Monthly Maintenance')">
+          <input type="radio" name="payment_type" value="maintenance" />
+          <div class="pt-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="pt-text">
+            <strong>Monthly Maintenance</strong>
+            <span>Care plan subscription</span>
+          </div>
+        </label>
+        <label class="payment-type-option" onclick="selectPaymentType(this, 'Invoice / Other')">
+          <input type="radio" name="payment_type" value="invoice" />
+          <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
+          <div class="pt-text">
+            <strong>Invoice / Other</strong>
+            <span>Manual or custom payment</span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Amount & Info -->
+      <div class="form-group">
+        <label>Payment amount (USD) *</label>
+        <div class="amount-input-wrap">
+          <span class="currency-symbol">$</span>
+          <input type="number" id="pay-amount" placeholder="0.00" min="1" step="0.01" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name *</label>
+          <input type="text" id="pay-name" placeholder="John Smith" />
+        </div>
+        <div class="form-group">
+          <label>Email address *</label>
+          <input type="email" id="pay-email" placeholder="hello@yourbusiness.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <input type="text" id="pay-notes" placeholder="Project name, invoice number, or any reference" />
+      </div>
+
+      <!-- ════════════════════════════════════════
+           STRIPE INTEGRATION POINT
+           ════════════════════════════════════════
+           Replace this placeholder with:
+
+           OPTION A — Stripe Checkout (redirect):
+           - Create a PaymentIntent or Checkout Session on your backend
+           - Redirect to Stripe-hosted checkout page
+           - Handle success/cancel redirects
+
+           OPTION B — Stripe Elements (embedded):
+           - Load Stripe.js: <script src="https://js.stripe.com/v3/"></script>
+           - Mount CardElement into #stripe-card-element
+           - On submit: stripe.confirmPayment() with clientSecret from backend
+
+           OPTION C — Stripe Payment Link:
+           - Create Payment Links in Stripe dashboard for each payment type
+           - Map payment type selection to the correct link
+           - Redirect or open in new tab
+
+           BACKEND NEEDED:
+           - POST /create-payment-intent  → returns { clientSecret }
+           - POST /create-subscription    → for maintenance plans
+           - Stripe webhook handler       → for confirming payments
+
+           ENV VARIABLES REQUIRED:
+           - STRIPE_PUBLISHABLE_KEY (frontend)
+           - STRIPE_SECRET_KEY      (backend only, never expose)
+           ════════════════════════════════════════ -->
+
+      <div class="stripe-placeholder" id="stripe-placeholder">
+        <i class="fa-brands fa-stripe"></i>
+        <strong>Secure card payment — coming soon</strong>
+        Online card payments via Stripe are being configured. In the meantime, please pay using the alternative methods listed on the right, or <a href="https://wa.me/14076946371" style="color:var(--blue);">contact us on WhatsApp</a> for immediate assistance.
+      </div>
+
+      <!-- Fallback CTA (remove once Stripe is live) -->
+      <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27d%20like%20to%20make%20a%20payment." target="_blank" class="btn-primary" style="width:100%;justify-content:center;margin-bottom:16px;">
+        <i class="fa-brands fa-whatsapp"></i> Arrange Payment via WhatsApp
+      </a>
+
+      <div class="security-row">
+        <div class="security-badge"><i class="fa-solid fa-lock"></i> SSL Encrypted</div>
+        <div class="security-badge"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</div>
+        <div class="security-badge"><i class="fa-brands fa-stripe"></i> Powered by Stripe</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Info -->
+    <div class="payment-info">
+
+      <div class="info-card reveal">
+        <h3>Payment types explained</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong>Project Deposit:</strong> Paid upfront to begin work. Amount determined in your proposal (typically 33–50% of total).</li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong>Project Balance:</strong> Milestone or final payment. Amount and timing per your contract.</li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong>Monthly Maintenance:</strong> Recurring payment for your care plan ($97, $197, or $297/mo).</li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong>Invoice / Other:</strong> Any other payment with a specific reference number.</li>
+        </ul>
+      </div>
+
+      <div class="alt-payment reveal">
+        <h3>Alternative payment methods</h3>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Zelle — helloruutdev@hotmail.com</li>
+          <li><i class="fa-solid fa-check"></i> PayPal — helloruutdev@hotmail.com</li>
+          <li><i class="fa-solid fa-check"></i> Bank Transfer (USD) — details on request</li>
+          <li><i class="fa-solid fa-check"></i> Stripe (card) — coming soon</li>
+        </ul>
+        <p>All payments must be in US dollars. Please include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation.</p>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>Refund & cancellation policy</h3>
+        <p>Project deposits are non-refundable after work begins. Maintenance plan payments are non-refundable for the current billing period. See our <a href="terms.html" style="color:var(--blue);">Terms & Conditions</a> for full details including the cancellation notice requirement.</p>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>Questions about your payment?</h3>
+        <p style="margin-bottom:16px;">Contact us directly and we'll resolve it immediately.</p>
+        <a href="https://wa.me/14076946371" target="_blank" class="whatsapp-btn" style="font-size:0.85rem;padding:10px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
+      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Software & Web Apps</a></li>
+        <li><a href="services.html">AI Integrations</a></li>
+        <li><a href="pricing.html">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pay.html">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  /* Payment type selector */
+  function selectPaymentType(el, label) {
+    document.querySelectorAll('.payment-type-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    // When Stripe is integrated, use `label` to select the right PaymentIntent type
+    // or route to the correct Stripe Payment Link
+  }
+</script>
+</body>
+</html>

@@ -4,430 +4,528 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms & Conditions — RuutDev</title>
+  <meta name="description" content="RuutDev Terms & Conditions — governing web development, software projects, maintenance plans, payments, intellectual property, and limitations of liability." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
   <style>
-    :root {
-      --bg: #f0f3f8; --bg2: #e8ecf4; --surface: #ffffff;
-      --text: #0a0d14; --text2: #4a5568; --blue: #1a6dff;
-      --blue-soft: rgba(26,109,255,0.08); --blue-border: rgba(26,109,255,0.15);
-      --border: rgba(10,13,20,0.08);
-      --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
-      --radius: 16px; --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+    /* ── LEGAL PAGE LAYOUT ── */
+    .legal-wrapper {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 6% 100px;
+      align-items: start;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
 
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 6%;
-      background: rgba(240,243,248,0.92);
-      backdrop-filter: blur(20px);
+    /* ── TOC SIDEBAR ── */
+    .toc-sidebar {
+      position: sticky;
+      top: 90px;
+    }
+    .toc-header {
+      font-family: var(--font-display);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text2); margin-bottom: 16px;
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list a {
+      display: block; padding: 8px 12px;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--text2); text-decoration: none;
+      border-radius: 8px; border-left: 2px solid transparent;
+      transition: all var(--transition);
+      line-height: 1.4;
+    }
+    .toc-list a:hover { color: var(--blue); background: var(--blue-soft); border-left-color: var(--blue-border); }
+    .toc-list a.active { color: var(--blue); background: var(--blue-soft); border-left-color: var(--blue); font-weight: 600; }
+
+    /* ── LEGAL CONTENT ── */
+    .legal-content { max-width: 700px; }
+
+    .legal-section {
+      padding-bottom: 48px;
       border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
     }
-    .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .nav-logo-dot { width: 10px; height: 10px; background: var(--blue); border-radius: 50%; flex-shrink:0; }
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-    .nav-back { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text2); text-decoration: none; transition: color var(--transition); }
-    .nav-back:hover { color: var(--blue); }
-    .lang-toggle { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 100px; overflow: hidden; }
-    .lang-btn { padding: 6px 14px; background: transparent; border: none; color: var(--text2); font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all var(--transition); }
-    .lang-btn.active { background: var(--blue); color: white; }
+    .legal-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-    .legal-hero { background: var(--text); padding: 80px 6%; position: relative; overflow: hidden; }
-    .legal-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,109,255,0.12) 0%, transparent 70%); border-radius: 50%; }
-    .legal-hero-content { position: relative; z-index: 1; max-width: 760px; }
-    .legal-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-soft); border: 1px solid var(--blue-border); color: var(--blue); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 24px; }
-    .legal-hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; color: white; margin-bottom: 16px; }
-    .legal-hero p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.7; }
-    .legal-hero-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .legal-meta-item { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
-    .legal-meta-item strong { display: block; color: rgba(255,255,255,0.7); font-weight: 600; margin-bottom: 2px; }
-
-    .legal-wrapper { display: grid; grid-template-columns: 240px 1fr; gap: 48px; max-width: 1100px; margin: 0 auto; padding: 64px 6%; }
-    .legal-toc { position: sticky; top: 88px; height: fit-content; }
-    .toc-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text2); margin-bottom: 16px; }
-    .toc-list { list-style: none; }
-    .toc-list li { margin-bottom: 8px; }
-    .toc-list a { font-size: 0.82rem; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 12px; border-radius: 8px; display: block; transition: all var(--transition); border-left: 2px solid transparent; }
-    .toc-list a:hover { color: var(--blue); background: var(--blue-soft); border-left-color: var(--blue); }
-
-    .legal-content { min-width: 0; }
-    .legal-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; margin-bottom: 20px; }
-    .legal-section h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-    .section-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--blue-soft); border: 1px solid var(--blue-border); color: var(--blue); font-size: 0.72rem; font-weight: 700; border-radius: 8px; flex-shrink: 0; }
-    .legal-section p { font-size: 0.9rem; font-weight: 300; color: var(--text2); line-height: 1.8; margin-bottom: 14px; }
+    .legal-section-num {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+    }
+    .legal-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: -0.03em; color: var(--text);
+      margin-bottom: 20px; line-height: 1.2;
+    }
+    .legal-section p {
+      font-size: 0.9rem; color: var(--text2); line-height: 1.8; font-weight: 400;
+      margin-bottom: 14px;
+    }
     .legal-section p:last-child { margin-bottom: 0; }
-    .legal-section ul { margin: 14px 0; padding-left: 0; list-style: none; }
-    .legal-section ul li { font-size: 0.9rem; font-weight: 300; color: var(--text2); line-height: 1.75; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid var(--border); }
-    .legal-section ul li:last-child { border-bottom: none; }
-    .legal-section ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
     .legal-section strong { color: var(--text); font-weight: 600; }
-    .highlight-box { background: var(--blue-soft); border: 1px solid var(--blue-border); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.88rem; color: var(--text); line-height: 1.7; }
-    .highlight-box i { color: var(--blue); margin-right: 8px; }
-    .warning-box { background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.2); border-radius: 10px; padding: 16px 20px; margin: 16px 0; font-size: 0.88rem; color: var(--text); line-height: 1.7; }
-    .warning-box i { color: #ff6b35; margin-right: 8px; }
-    .payment-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.88rem; }
-    .payment-table th { background: var(--bg); padding: 10px 16px; text-align: left; font-weight: 600; color: var(--text); font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; }
-    .payment-table td { padding: 12px 16px; border-top: 1px solid var(--border); color: var(--text2); font-weight: 300; }
-    .payment-table tr:last-child td { border-bottom: 1px solid var(--border); }
+    .legal-section ul, .legal-section ol {
+      margin: 10px 0 16px 0; padding-left: 20px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .legal-section li { font-size: 0.9rem; color: var(--text2); line-height: 1.7; }
+    .legal-section li strong { color: var(--text); }
 
-    .legal-contact { background: var(--text); border-radius: var(--radius); padding: 40px; text-align: center; margin-top: 20px; }
-    .legal-contact h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 10px; }
-    .legal-contact p { font-size: 0.88rem; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
-    .legal-contact a { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 12px 28px; border-radius: 100px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: all var(--transition); }
-    .legal-contact a:hover { opacity: 0.85; transform: translateY(-2px); }
+    .legal-highlight {
+      background: var(--blue-soft); border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0;
+    }
+    .legal-highlight p { margin: 0; color: var(--text); font-weight: 500; }
 
-    footer { background: var(--text); padding: 32px 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
-    footer span { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { color: rgba(255,255,255,0.35); font-weight: 400; font-size: 0.78rem; text-decoration: none; }
-    .footer-links a:hover { color: white; }
-    .footer-links a.highlight { color: var(--blue); }
+    .legal-warning {
+      background: rgba(239,68,68,0.06); border-left: 3px solid #ef4444;
+      border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 18px 0;
+    }
+    .legal-warning p { margin: 0; color: #b91c1c; font-size: 0.875rem; }
 
-    [data-lang="es"] { display: none; }
-    body.lang-es [data-lang="en"] { display: none; }
-    body.lang-es [data-lang="es"] { display: block; }
-    span[data-lang="es"] { display: none; }
-    body.lang-es span[data-lang="en"] { display: none; }
-    body.lang-es span[data-lang="es"] { display: inline; }
+    /* ── PAYMENT TABLE ── */
+    .terms-table {
+      width: 100%; border-collapse: collapse; margin: 20px 0;
+      font-size: 0.875rem;
+    }
+    .terms-table th {
+      background: var(--bg2); padding: 10px 14px;
+      text-align: left; font-weight: 700; color: var(--text);
+      border-bottom: 2px solid var(--border); font-size: 0.82rem;
+    }
+    .terms-table td {
+      padding: 12px 14px; border-bottom: 1px solid var(--border);
+      color: var(--text2); vertical-align: top; line-height: 1.55;
+    }
+    .terms-table tr:last-child td { border-bottom: none; }
+    .terms-table td:first-child { font-weight: 600; color: var(--text); }
 
-    @media (max-width: 768px) { .legal-wrapper { grid-template-columns: 1fr; } .legal-toc { display: none; } }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .legal-wrapper { grid-template-columns: 1fr; padding: 40px 4%; }
+      .toc-sidebar { position: static; }
+      .toc-list { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+      .toc-list a { padding: 6px 12px; border-left: none; border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; }
+      .toc-list a.active { border-color: var(--blue); }
+    }
   </style>
 </head>
 <body>
 
+<!-- ── NAV ── -->
 <nav>
-  <a href="/" class="nav-logo"><div class="nav-logo-dot"></div>RuutDev</a>
-  <div class="nav-right">
-    <a href="/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> <span data-lang="en">Back to site</span><span data-lang="es">Volver al sitio</span></a>
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
-    </div>
-  </div>
+  <a href="index.html" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Start Your Project</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="services.html">Services</a></li>
+  <li><a href="pricing.html">Pricing</a></li>
+  <li><a href="about.html">About</a></li>
+  <li><a href="contact.html">Contact</a></li>
+  <li><a href="contact.html" class="nav-cta btn-primary">Start Your Project</a></li>
+</ul>
 
-<div class="legal-hero">
-  <div class="legal-hero-content">
-    <div class="legal-badge"><i class="fa-solid fa-file-contract"></i> <span data-lang="en">Legal</span><span data-lang="es">Legal</span></div>
-    <h1><span data-lang="en">Terms & Conditions</span><span data-lang="es">Términos y Condiciones</span></h1>
-    <p><span data-lang="en">These terms govern the relationship between RuutDev and its clients. Please read them carefully before proceeding.</span><span data-lang="es">Estos términos rigen la relación entre RuutDev y sus clientes. Por favor léelos detenidamente antes de proceder.</span></p>
-    <div class="legal-hero-meta">
-      <div class="legal-meta-item">
-        <strong><span data-lang="en">Last updated</span><span data-lang="es">Última actualización</span></strong>
-        February 21, 2026
+<!-- ── PAGE HERO ── -->
+<div class="page-hero" style="padding-bottom:60px;">
+  <div class="page-hero-content">
+    <div class="hero-badge">Legal</div>
+    <h1>Terms &amp;<br /><em>Conditions</em></h1>
+    <p>These terms govern all services provided by RuutDev. Please read them carefully before engaging with our services.</p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);">
+        <strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Last Updated</strong>
+        March 2026
       </div>
-      <div class="legal-meta-item">
-        <strong><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></strong>
-        Tovar_1803@hotmail.com
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);">
+        <strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Governing Law</strong>
+        Florida, USA
+      </div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);">
+        <strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Operated By</strong>
+        Johan Tovar / RuutDev
       </div>
     </div>
   </div>
 </div>
 
+<!-- ── LEGAL BODY ── -->
 <div class="legal-wrapper">
-  <aside class="legal-toc">
-    <p class="toc-title"><span data-lang="en">Contents</span><span data-lang="es">Contenido</span></p>
-    <ul class="toc-list" data-lang="en"><li><a href="#s1-about">1. About RuutDev</a></li>
-<li><a href="#s2-services">2. Services</a></li>
-<li><a href="#s3-demo">3. Free Demo</a></li>
-<li><a href="#s4-payment">4. Payment Terms</a></li>
-<li><a href="#s5-process">5. Project Process</a></li>
-<li><a href="#s6-revisions">6. Revisions</a></li>
-<li><a href="#s7-ip">7. Intellectual Property</a></li>
-<li><a href="#s8-client">8. Client Responsibilities</a></li>
-<li><a href="#s9-cancellation">9. Cancellations & Refunds</a></li>
-<li><a href="#s10-liability">10. Limitation of Liability</a></li>
-<li><a href="#s11-law">11. Governing Law</a></li>
-<li><a href="#s12-contact">12. Contact</a></li>
-</ul>
-    <ul class="toc-list" data-lang="es"><li><a href="#s1-about">1. Sobre RuutDev</a></li>
-<li><a href="#s2-services">2. Servicios</a></li>
-<li><a href="#s3-demo">3. Demo Gratuita</a></li>
-<li><a href="#s4-payment">4. Términos de Pago</a></li>
-<li><a href="#s5-process">5. Proceso del Proyecto</a></li>
-<li><a href="#s6-revisions">6. Revisiones</a></li>
-<li><a href="#s7-ip">7. Propiedad Intelectual</a></li>
-<li><a href="#s8-client">8. Responsabilidades del Cliente</a></li>
-<li><a href="#s9-cancellation">9. Cancelaciones y Reembolsos</a></li>
-<li><a href="#s10-liability">10. Limitación de Responsabilidad</a></li>
-<li><a href="#s11-law">11. Ley Aplicable</a></li>
-<li><a href="#s12-contact">12. Contacto</a></li>
-</ul>
-  </aside>
 
-  <main class="legal-content">
-    <div data-lang="en">
-    <div class="legal-section" id="s1-about">
-      <h2><span class="section-num">1</span> About RuutDev</h2>
-      
-      <p>RuutDev is a web development and digital solutions business operated by Johan Tovar ("we", "us", "our"), serving clients in Venezuela and the United States.</p>
-      <p>By engaging our services — through our contact form, WhatsApp, email, or any other channel — you ("client", "you") agree to be bound by these Terms and Conditions.</p>
-    
-    </div>
-    <div class="legal-section" id="s2-services">
-      <h2><span class="section-num">2</span> Services</h2>
-      
-      <p>RuutDev offers: professional landing pages, e-commerce stores, AI-powered tools, custom dashboards, website redesigns, and free demo websites. The exact scope, deliverables, and pricing will be agreed upon in writing before work begins.</p>
-    
-    </div>
-    <div class="legal-section" id="s3-demo">
-      <h2><span class="section-num">3</span> Free Demo</h2>
-      
-      <p>RuutDev offers a free demo website with no obligation to purchase. The demo is delivered within 48 hours, remains available for 30 days, and does not constitute a binding contract.</p>
-      <div class="highlight-box"><i class="fa-solid fa-circle-check"></i> You are under no obligation to proceed with a paid project after receiving a free demo.</div>
-    
-    </div>
-    <div class="legal-section" id="s4-payment">
-      <h2><span class="section-num">4</span> Payment Terms</h2>
+  <!-- TOC -->
+  <nav class="toc-sidebar">
+    <div class="toc-header">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#sec-overview">1. Overview</a></li>
+      <li><a href="#sec-services">2. Services</a></li>
+      <li><a href="#sec-demo">3. Free Demo</a></li>
+      <li><a href="#sec-project-payments">4. Project Payments</a></li>
+      <li><a href="#sec-maintenance">5. Maintenance Plans</a></li>
+      <li><a href="#sec-cancellation">6. Cancellation & Suspension</a></li>
+      <li><a href="#sec-buyout">7. Buyout Clause</a></li>
+      <li><a href="#sec-process">8. Project Process</a></li>
+      <li><a href="#sec-revisions">9. Revisions</a></li>
+      <li><a href="#sec-ip">10. Intellectual Property</a></li>
+      <li><a href="#sec-client">11. Client Responsibilities</a></li>
+      <li><a href="#sec-third-party">12. Third-Party Services</a></li>
+      <li><a href="#sec-liability">13. Limitation of Liability</a></li>
+      <li><a href="#sec-results">14. No Guarantee of Results</a></li>
+      <li><a href="#sec-chargebacks">15. Chargebacks</a></li>
+      <li><a href="#sec-support">16. Support & Response Times</a></li>
+      <li><a href="#sec-law">17. Governing Law</a></li>
+      <li><a href="#sec-contact">18. Contact</a></li>
+    </ul>
+  </nav>
 
-      <p>All prices are quoted and invoiced in US Dollars (USD). RuutDev offers three payment structures depending on project size. The applicable plan will be specified in the written agreement before work begins.</p>
+  <!-- Content -->
+  <div class="legal-content">
 
-      <p><strong>Plan A — Standard (projects under $800)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Milestone</th><th>Amount</th><th>When</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Deposit</strong></td><td>50% of total</td><td>Before work begins</td></tr>
-          <tr><td><strong>Final payment</strong></td><td>50% of total</td><td>Before site goes live</td></tr>
-        </tbody>
-      </table>
-
-      <p><strong>Plan B — Three milestones (projects $800 – $2,000)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Milestone</th><th>Amount</th><th>When</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Deposit</strong></td><td>40% of total</td><td>Before work begins</td></tr>
-          <tr><td><strong>Mid-project</strong></td><td>30% of total</td><td>Upon delivery of first working version</td></tr>
-          <tr><td><strong>Final payment</strong></td><td>30% of total</td><td>Before site goes live</td></tr>
-        </tbody>
-      </table>
-
-      <p><strong>Plan C — Monthly installments (projects over $2,000)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Milestone</th><th>Amount</th><th>When</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Deposit</strong></td><td>33% of total</td><td>Before work begins</td></tr>
-          <tr><td><strong>Upon delivery</strong></td><td>33% of total</td><td>When site is delivered for review</td></tr>
-          <tr><td><strong>Final installment</strong></td><td>34% of total</td><td>30 days after site goes live</td></tr>
-        </tbody>
-      </table>
-
-      <div class="highlight-box"><i class="fa-solid fa-circle-info"></i> For Plan C, the domain and hosting remain registered under RuutDev's accounts until the final installment is received in full. Upon complete payment, all credentials and ownership are transferred to the client.</div>
-
-      <p>Accepted payment methods: Zelle, PayPal, and bank transfer. Work will not begin until the initial deposit is received and confirmed.</p>
-
-      <div class="warning-box"><i class="fa-solid fa-triangle-exclamation"></i> The deposit is non-refundable once development has begun. Any installment unpaid for more than <strong>14 calendar days</strong> past its due date may result in immediate project suspension and the site being taken offline until the outstanding balance is settled. RuutDev reserves the right to charge a <strong>10% late fee</strong> on overdue installments after the 14-day grace period.</div>
+    <div class="legal-section" id="sec-overview">
+      <div class="legal-section-num">Section 1</div>
+      <h2>Overview</h2>
+      <p>These Terms &amp; Conditions ("Terms") govern the relationship between RuutDev ("we," "us," "RuutDev") — operated by Johan Tovar — and any individual or business ("Client," "you") that engages our services, whether through our website, email, WhatsApp, or any other channel.</p>
+      <p>By requesting a demo, signing a proposal, or making a payment, you agree to be bound by these Terms. If you do not agree with any part of these Terms, do not engage our services.</p>
+      <p>These Terms apply to all services including, but not limited to: website development, software and web application development, AI integrations, automations, hosting, technical support, and monthly maintenance plans.</p>
     </div>
-    <div class="legal-section" id="s5-process">
-      <h2><span class="section-num">5</span> Project Process</h2>
-      
-      <p>Every project follows: Discovery → Demo/Proposal → Agreement → Deposit → Development → Review → Launch. Timelines provided upfront. Delays from late client feedback do not penalize RuutDev.</p>
-    
-    </div>
-    <div class="legal-section" id="s6-revisions">
-      <h2><span class="section-num">6</span> Revisions</h2>
-      
-      <p>Standard projects include <strong>2 revision rounds</strong> (landing pages) or <strong>3 rounds</strong> (e-commerce/complex). Additional rounds are billed separately. Feedback must be submitted in a single consolidated list per round.</p>
-    
-    </div>
-    <div class="legal-section" id="s7-ip">
-      <h2><span class="section-num">7</span> Intellectual Property</h2>
-      
-      <p>Upon receipt of full payment, the client receives full ownership of the final website. RuutDev retains the right to display the work in our portfolio unless the client objects in writing before project completion.</p>
-      <div class="warning-box"><i class="fa-solid fa-triangle-exclamation"></i> Intellectual property does NOT transfer until full payment is received.</div>
-    
-    </div>
-    <div class="legal-section" id="s8-client">
-      <h2><span class="section-num">8</span> Client Responsibilities</h2>
-      
-      <p>The client agrees to: provide required content within the agreed timeframe, respond to feedback requests within 5 business days, ensure all provided content is legally owned or licensed, and not use the website for illegal or deceptive purposes.</p>
-    
-    </div>
-    <div class="legal-section" id="s9-cancellation">
-      <h2><span class="section-num">9</span> Cancellations & Refunds</h2>
+
+    <div class="legal-section" id="sec-services">
+      <div class="legal-section-num">Section 2</div>
+      <h2>Services</h2>
+      <p>RuutDev provides the following categories of services:</p>
       <ul>
-        <li><strong>Before deposit</strong> — cancel anytime, no charge</li>
-        <li><strong>After deposit, before work begins</strong> — full deposit refund</li>
-        <li><strong>After work has begun</strong> — deposit is non-refundable. Work completed to that point may be billed proportionally</li>
-        <li><strong>After delivery (Plan B or C)</strong> — installments already paid are non-refundable. Outstanding installments remain due per the agreed schedule</li>
-        <li><strong>After site goes live</strong> — no refunds once the site is published and accessible to the public</li>
+        <li><strong>Website Development:</strong> Landing pages, business websites, portfolio sites, and web redesigns. Custom-built from scratch for each client.</li>
+        <li><strong>Software &amp; Web App Development:</strong> E-commerce stores, admin dashboards, internal business tools, client portals, and custom web applications.</li>
+        <li><strong>AI Integrations &amp; Automations:</strong> AI-powered tools, chatbots, workflow automations, and third-party API integrations.</li>
+        <li><strong>Managed Hosting:</strong> Hosting, domain management, SSL certificates, and server infrastructure management.</li>
+        <li><strong>Monthly Maintenance Plans:</strong> Ongoing care and support services described in Section 5.</li>
+        <li><strong>Technical Support:</strong> Bug fixes, troubleshooting, and on-demand assistance.</li>
       </ul>
-      <p>In the event of client non-payment under Plan B or Plan C, RuutDev reserves the right to suspend the site, retain the domain and hosting credentials, and pursue recovery of the outstanding balance. RuutDev will provide written notice before taking any of these actions.</p>
-      <p>If RuutDev cancels a project without cause, the client will receive a full refund of all amounts paid.</p>
+      <p>The exact scope of any project is defined in a written proposal provided to the Client before work begins. Work is governed by the scope in the accepted proposal.</p>
     </div>
-    <div class="legal-section" id="s10-liability">
-      <h2><span class="section-num">10</span> Limitation of Liability</h2>
-      
-      <p>RuutDev's total liability shall not exceed the total amount paid for the specific project. We are not liable for third-party service failures, content provided by the client that infringes third-party rights, or business results from the website.</p>
-    
-    </div>
-    <div class="legal-section" id="s11-law">
-      <h2><span class="section-num">11</span> Governing Law</h2>
-      
-      <p>These Terms are governed by the laws of the State of Florida, USA. Disputes will be resolved by binding arbitration in Orlando, Florida, after good-faith resolution attempts.</p>
-    
-    </div>
-    <div class="legal-section" id="s12-contact">
-      <h2><span class="section-num">12</span> Contact</h2>
-      
+
+    <div class="legal-section" id="sec-demo">
+      <div class="legal-section-num">Section 3</div>
+      <h2>Free Demo</h2>
+      <p>RuutDev offers a complimentary working demo of a proposed website or project, delivered within approximately 48 hours of the initial consultation. The demo is provided at no cost and with no obligation to proceed.</p>
       <ul>
-        <li><strong>Email</strong> — Tovar_1803@hotmail.com</li>
-        <li><strong>WhatsApp</strong> — +1 (407) 694-6371</li>
-        <li><strong>Website</strong> — ruutdev.com</li>
+        <li>The demo is a real, functional prototype — not a static mockup.</li>
+        <li>The demo remains accessible for up to 30 days after delivery.</li>
+        <li>The demo does not constitute a binding agreement or project commencement.</li>
+        <li>RuutDev retains full ownership of all demo work until a project agreement is signed and a deposit is received.</li>
+        <li>Requesting a demo does not create any obligation for the Client to proceed.</li>
       </ul>
-    
-    </div></div>
-    <div data-lang="es">
-    <div class="legal-section" id="s1-about">
-      <h2><span class="section-num">1</span> Sobre RuutDev</h2>
-      
-      <p>RuutDev es un negocio de desarrollo web y soluciones digitales operado por Johan Tovar ("nosotros", "nuestro"), atendiendo clientes en Venezuela y Estados Unidos.</p>
-      <p>Al contratar nuestros servicios — a través del formulario de contacto, WhatsApp, email u otro canal — el cliente ("tú") acepta estos Términos y Condiciones.</p>
-    
     </div>
-    <div class="legal-section" id="s2-services">
-      <h2><span class="section-num">2</span> Servicios</h2>
-      
-      <p>RuutDev ofrece: landing pages profesionales, tiendas e-commerce, herramientas con IA, dashboards personalizados, rediseños de sitios web y demos gratuitas. El alcance exacto, entregables y precios se acordarán por escrito antes de comenzar el trabajo.</p>
-    
-    </div>
-    <div class="legal-section" id="s3-demo">
-      <h2><span class="section-num">3</span> Demo Gratuita</h2>
-      
-      <p>RuutDev ofrece una demo gratuita sin obligación de compra. La demo se entrega en 48 horas, permanece disponible por 30 días y no constituye un contrato vinculante.</p>
-      <div class="highlight-box"><i class="fa-solid fa-circle-check"></i> No tienes ninguna obligación de continuar con un proyecto pagado después de recibir la demo gratuita.</div>
-    
-    </div>
-    <div class="legal-section" id="s4-payment">
-      <h2><span class="section-num">4</span> Términos de Pago</h2>
 
-      <p>Todos los precios se cotizan y facturan en dólares estadounidenses (USD). RuutDev ofrece tres estructuras de pago según el tamaño del proyecto. El plan aplicable se especificará en el acuerdo escrito antes de comenzar el trabajo.</p>
+    <div class="legal-section" id="sec-project-payments">
+      <div class="legal-section-num">Section 4</div>
+      <h2>Project Payments</h2>
+      <p>All project costs are quoted in US dollars (USD) and confirmed in a written proposal. Payments are split into milestones based on project value:</p>
 
-      <p><strong>Plan A — Estándar (proyectos menores de $800)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Hito</th><th>Monto</th><th>Cuándo</th></tr></thead>
+      <table class="terms-table">
+        <thead>
+          <tr><th>Plan</th><th>Project Value</th><th>Payment Schedule</th></tr>
+        </thead>
         <tbody>
-          <tr><td><strong>Depósito inicial</strong></td><td>50% del total</td><td>Antes de comenzar</td></tr>
-          <tr><td><strong>Pago final</strong></td><td>50% del total</td><td>Antes de publicar el sitio</td></tr>
+          <tr>
+            <td>Plan A</td>
+            <td>Under $800</td>
+            <td>50% deposit to start · 50% on launch</td>
+          </tr>
+          <tr>
+            <td>Plan B</td>
+            <td>$800–$2,000</td>
+            <td>40% deposit · 30% at delivery · 30% on launch</td>
+          </tr>
+          <tr>
+            <td>Plan C</td>
+            <td>Over $2,000</td>
+            <td>33% deposit · 33% at delivery · 34% within 30 days of launch</td>
+          </tr>
         </tbody>
       </table>
 
-      <p><strong>Plan B — Tres hitos (proyectos de $800 a $2,000)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Hito</th><th>Monto</th><th>Cuándo</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Depósito inicial</strong></td><td>40% del total</td><td>Antes de comenzar</td></tr>
-          <tr><td><strong>Pago intermedio</strong></td><td>30% del total</td><td>Al entregar la primera versión funcional</td></tr>
-          <tr><td><strong>Pago final</strong></td><td>30% del total</td><td>Antes de publicar el sitio</td></tr>
-        </tbody>
-      </table>
+      <p><strong>Accepted payment methods:</strong> Zelle, PayPal, and bank transfer (USD only). Credit/debit card payments via Stripe are available when active.</p>
+      <p><strong>Late payments:</strong> A 10% late fee applies to invoices unpaid after a 14-day grace period.</p>
 
-      <p><strong>Plan C — Cuotas mensuales (proyectos mayores de $2,000)</strong></p>
-      <table class="payment-table">
-        <thead><tr><th>Hito</th><th>Monto</th><th>Cuándo</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Depósito inicial</strong></td><td>33% del total</td><td>Antes de comenzar</td></tr>
-          <tr><td><strong>Al entregar</strong></td><td>33% del total</td><td>Cuando el sitio es entregado para revisión</td></tr>
-          <tr><td><strong>Cuota final</strong></td><td>34% del total</td><td>30 días después de la publicación del sitio</td></tr>
-        </tbody>
-      </table>
+      <div class="legal-warning">
+        <p><strong>Deposits are non-refundable once work has commenced.</strong> Once RuutDev begins development — including research, design, or architecture work — the deposit is earned and will not be refunded, regardless of whether the project is completed.</p>
+      </div>
 
-      <div class="highlight-box"><i class="fa-solid fa-circle-info"></i> En el Plan C, el dominio y el hosting permanecen registrados bajo las cuentas de RuutDev hasta que se reciba la cuota final completa. Una vez completado el pago total, se transfieren al cliente todas las credenciales y la propiedad del sitio.</div>
+      <p><strong>Project commencement:</strong> Work begins only after the Client has signed or accepted the written proposal and the deposit has cleared.</p>
+    </div>
 
-      <p>Métodos de pago aceptados: Zelle, PayPal y transferencia bancaria. El trabajo no comienza hasta recibir y confirmar el depósito inicial.</p>
+    <div class="legal-section" id="sec-maintenance">
+      <div class="legal-section-num">Section 5</div>
+      <h2>Monthly Maintenance Plans</h2>
+      <p>RuutDev offers optional monthly maintenance plans for ongoing care of websites, software, and advanced systems. These plans are separate from and independent of the one-time project cost.</p>
 
-      <div class="warning-box"><i class="fa-solid fa-triangle-exclamation"></i> El depósito no es reembolsable una vez iniciado el desarrollo. Cualquier cuota no pagada después de <strong>14 días calendario</strong> de su fecha de vencimiento puede resultar en la suspensión inmediata del proyecto y la desconexión del sitio hasta que se salde el monto pendiente. RuutDev se reserva el derecho de cobrar un <strong>recargo del 10%</strong> sobre cuotas vencidas después del período de gracia de 14 días.</div>
-    </div>
-    <div class="legal-section" id="s5-process">
-      <h2><span class="section-num">5</span> Proceso del Proyecto</h2>
-      
-      <p>Cada proyecto sigue: Consulta → Demo/Propuesta → Acuerdo → Depósito → Desarrollo → Revisión → Publicación. Los plazos se definen desde el inicio. Los retrasos causados por retroalimentación tardía del cliente no penalizan a RuutDev.</p>
-    
-    </div>
-    <div class="legal-section" id="s6-revisions">
-      <h2><span class="section-num">6</span> Revisiones</h2>
-      
-      <p>Los proyectos estándar incluyen <strong>2 rondas de revisiones</strong> (landing pages) o <strong>3 rondas</strong> (e-commerce/proyectos complejos). Las rondas adicionales se cobran por separado. La retroalimentación debe enviarse en una lista consolidada por ronda.</p>
-    
-    </div>
-    <div class="legal-section" id="s7-ip">
-      <h2><span class="section-num">7</span> Propiedad Intelectual</h2>
-      
-      <p>Al recibir el pago completo, el cliente recibe la propiedad total del sitio web final. RuutDev se reserva el derecho de mostrar el trabajo en nuestro portafolio, salvo que el cliente objete por escrito antes de completar el proyecto.</p>
-      <div class="warning-box"><i class="fa-solid fa-triangle-exclamation"></i> La propiedad intelectual NO se transfiere hasta recibir el pago completo.</div>
-    
-    </div>
-    <div class="legal-section" id="s8-client">
-      <h2><span class="section-num">8</span> Responsabilidades del Cliente</h2>
-      
-      <p>El cliente se compromete a: proporcionar el contenido requerido en el plazo acordado, responder a solicitudes de retroalimentación en 5 días hábiles, asegurarse de que todo el contenido proporcionado sea legal o con licencia, y no usar el sitio para fines ilegales o engañosos.</p>
-    
-    </div>
-    <div class="legal-section" id="s9-cancellation">
-      <h2><span class="section-num">9</span> Cancelaciones y Reembolsos</h2>
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Plan Tiers</h3>
       <ul>
-        <li><strong>Antes del depósito</strong> — puedes cancelar en cualquier momento sin cargo</li>
-        <li><strong>Después del depósito, antes de comenzar</strong> — reembolso completo del depósito</li>
-        <li><strong>Una vez iniciado el trabajo</strong> — el depósito no es reembolsable. El trabajo completado hasta ese momento puede facturarse proporcionalmente</li>
-        <li><strong>Después de la entrega (Plan B o C)</strong> — las cuotas ya pagadas no son reembolsables. Las cuotas pendientes siguen siendo exigibles según el calendario acordado</li>
-        <li><strong>Después de la publicación</strong> — sin reembolsos una vez que el sitio esté publicado y accesible al público</li>
+        <li><strong>Website Care — $97/month:</strong> Hosted sites, uptime monitoring, security updates, SSL management, monthly content edits.</li>
+        <li><strong>Software Care — $197/month:</strong> All of Website Care plus bug fixes, dependency updates, performance monitoring, and priority support.</li>
+        <li><strong>Advanced Care — $297/month:</strong> All of Software Care plus AI integration upkeep, payment system monitoring, automation maintenance, and SLA-backed response times.</li>
       </ul>
-      <p>En caso de incumplimiento de pago bajo el Plan B o Plan C, RuutDev se reserva el derecho de suspender el sitio, retener las credenciales del dominio y hosting, y gestionar el cobro del saldo pendiente. RuutDev enviará una notificación por escrito antes de tomar cualquiera de estas acciones.</p>
-      <p>Si RuutDev cancela un proyecto sin causa justificada, el cliente recibirá el reembolso total de todos los montos pagados.</p>
-    </div>
-    <div class="legal-section" id="s10-liability">
-      <h2><span class="section-num">10</span> Limitación de Responsabilidad</h2>
-      
-      <p>La responsabilidad total de RuutDev no excederá el monto total pagado por el proyecto específico. No somos responsables por fallos de servicios de terceros, contenido del cliente que infrinja derechos de terceros, ni por resultados comerciales del sitio web.</p>
-    
-    </div>
-    <div class="legal-section" id="s11-law">
-      <h2><span class="section-num">11</span> Ley Aplicable</h2>
-      
-      <p>Estos Términos se rigen por las leyes del Estado de Florida, EE. UU. Las disputas se resolverán mediante arbitraje vinculante en Orlando, Florida, después de intentos de resolución de buena fe.</p>
-    
-    </div>
-    <div class="legal-section" id="s12-contact">
-      <h2><span class="section-num">12</span> Contacto</h2>
-      
-      <ul>
-        <li><strong>Email</strong> — Tovar_1803@hotmail.com</li>
-        <li><strong>WhatsApp</strong> — +1 (407) 694-6371</li>
-        <li><strong>Sitio web</strong> — ruutdev.com</li>
-      </ul>
-    
-    </div></div>
 
-    <div class="legal-contact">
-      <h3><span data-lang="en">Have questions?</span><span data-lang="es">¿Tienes preguntas?</span></h3>
-      <p><span data-lang="en">We're a small team — reach out directly and we'll explain anything in plain language.</span><span data-lang="es">Somos un equipo pequeño — contáctanos directamente y te explicamos cualquier duda.</span></p>
-      <a href="https://wa.me/14076946371" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <p>Pricing may vary based on scope. The exact plan and price will be confirmed in writing before the plan begins.</p>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Billing & Auto-Renewal</h3>
+      <p>Maintenance plans bill monthly on the same date each month. Plans <strong>automatically renew</strong> each billing period unless cancelled with proper notice (see Section 6). The Client is responsible for ensuring payment is made on time each cycle.</p>
+
+      <div class="legal-highlight">
+        <p><strong>Important:</strong> Monthly maintenance payments are payment for services rendered during that billing period. They are not credits toward project ownership, and they do not reduce, replace, or substitute for any buyout fee. See Section 7.</p>
+      </div>
     </div>
-  </main>
+
+    <div class="legal-section" id="sec-cancellation">
+      <div class="legal-section-num">Section 6</div>
+      <h2>Cancellation &amp; Suspension</h2>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Client Cancellation of Maintenance Plans</h3>
+      <p>The Client may cancel a maintenance plan at any time by providing <strong>30 days' written notice</strong> via email or WhatsApp. The plan will remain active through the end of the current billing period and will not renew after the cancellation date. No refunds are issued for the current billing period.</p>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Cancellation of a Project in Progress</h3>
+      <p>If a Client cancels a project after work has begun:</p>
+      <ul>
+        <li>The deposit is non-refundable.</li>
+        <li>Any work completed beyond the deposit percentage will be billed proportionally at the agreed project rate.</li>
+        <li>Delivered work products remain the property of RuutDev until all outstanding balances are paid in full.</li>
+      </ul>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Suspension for Non-Payment</h3>
+      <p>If a payment (project milestone or maintenance) is more than <strong>14 days past due</strong>, RuutDev reserves the right to:</p>
+      <ul>
+        <li>Suspend hosting, maintenance, or other managed services;</li>
+        <li>Withhold delivery of final project files or access credentials;</li>
+        <li>Suspend access to any RuutDev-managed infrastructure.</li>
+      </ul>
+      <p>RuutDev will provide written notice before suspension. Services will be restored promptly upon receipt of all outstanding payments plus any applicable late fees.</p>
+    </div>
+
+    <div class="legal-section" id="sec-buyout">
+      <div class="legal-section-num">Section 7</div>
+      <h2>Buyout Clause</h2>
+      <p>In some arrangements — particularly for software, dashboards, or systems under a monthly maintenance or licensing model — full ownership of the project deliverables may be contingent on a separate buyout payment.</p>
+
+      <div class="legal-highlight">
+        <p><strong>Monthly maintenance fees do not constitute payment toward project buyout.</strong> Prior monthly payments are not credited, deducted from, or applied toward any buyout amount, unless explicitly stated in writing in the original project agreement.</p>
+      </div>
+
+      <p>If a buyout option is available, it will be documented in the Client's written proposal or contract, including the buyout amount and conditions. Absent such written documentation, no buyout option exists by default.</p>
+      <p>Until a buyout is completed and confirmed in writing, RuutDev retains intellectual property rights as described in Section 10.</p>
+    </div>
+
+    <div class="legal-section" id="sec-process">
+      <div class="legal-section-num">Section 8</div>
+      <h2>Project Process</h2>
+      <p>The typical project lifecycle consists of the following stages:</p>
+      <ol>
+        <li><strong>Discovery:</strong> Initial consultation to understand scope, goals, and requirements.</li>
+        <li><strong>Free Demo:</strong> A working prototype delivered within approximately 48 hours (for website projects).</li>
+        <li><strong>Proposal:</strong> A written proposal detailing scope, timeline, deliverables, and payment schedule.</li>
+        <li><strong>Agreement &amp; Deposit:</strong> Client accepts the proposal and pays the initial deposit to commence work.</li>
+        <li><strong>Development:</strong> Active build phase. Client is available for feedback within reasonable timeframes.</li>
+        <li><strong>Review &amp; Revisions:</strong> Client reviews deliverables and requests revisions within the included revision rounds.</li>
+        <li><strong>Launch &amp; Final Payment:</strong> Project goes live; final payment milestone is due.</li>
+      </ol>
+      <p>Any modifications to scope after the proposal is accepted may require a revised proposal and additional charges.</p>
+    </div>
+
+    <div class="legal-section" id="sec-revisions">
+      <div class="legal-section-num">Section 9</div>
+      <h2>Revisions</h2>
+      <p>The number of included revision rounds is defined in the Client's proposal. As a general guideline:</p>
+      <ul>
+        <li><strong>Landing pages and websites:</strong> 2–3 rounds of revisions.</li>
+        <li><strong>E-commerce stores:</strong> 3 rounds of revisions.</li>
+        <li><strong>Software and custom systems:</strong> As defined in the project proposal.</li>
+      </ul>
+      <p>A "revision round" consists of a consolidated set of feedback submitted in a single communication. Each round of revisions must be submitted before the next begins. Revisions that change the original scope may be billed as additional work.</p>
+      <p>Revisions requested after launch or after the included rounds are exhausted will be billed at RuutDev's hourly or project rate.</p>
+    </div>
+
+    <div class="legal-section" id="sec-ip">
+      <div class="legal-section-num">Section 10</div>
+      <h2>Intellectual Property</h2>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Transfer of Ownership</h3>
+      <p>Upon receipt of <strong>all project payments in full</strong>, RuutDev transfers to the Client all rights to the custom-built deliverables specific to that project, including design files, code, and content created by RuutDev for the Client.</p>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Retained Rights</h3>
+      <p>Until final payment is received, RuutDev retains full ownership of all work products, including the right to withhold delivery of source code, files, access credentials, and domain/hosting control.</p>
+      <p>RuutDev reserves the right to display completed work in its portfolio, case studies, and marketing materials, unless the Client requests confidentiality in writing.</p>
+
+      <h3 style="font-family:var(--font-display);font-size:1rem;font-weight:700;margin:20px 0 10px;">Third-Party &amp; Open Source Components</h3>
+      <p>Projects may incorporate third-party libraries, frameworks, fonts, icons, stock images, or APIs that are governed by their own licenses. RuutDev will disclose the major third-party components used, but the Client is responsible for reviewing and complying with those licenses independently.</p>
+    </div>
+
+    <div class="legal-section" id="sec-client">
+      <div class="legal-section-num">Section 11</div>
+      <h2>Client Responsibilities</h2>
+      <p>The Client agrees to:</p>
+      <ul>
+        <li>Provide all required content (text, images, logos, brand guidelines) in a timely manner. Delays caused by late content delivery may affect project timelines without liability to RuutDev.</li>
+        <li>Respond to requests for feedback, approvals, or clarification within <strong>5 business days</strong>. Extended non-response may result in project delay or suspension.</li>
+        <li>Ensure that all content provided — including images, trademarks, and business information — is legally owned or licensed by the Client. RuutDev assumes no liability for intellectual property violations arising from Client-supplied content.</li>
+        <li>Promptly review and approve deliverables at each project stage to avoid bottlenecks.</li>
+        <li>Maintain secure access to any credentials shared during the project and notify RuutDev immediately of any unauthorized access.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="sec-third-party">
+      <div class="legal-section-num">Section 12</div>
+      <h2>Third-Party Services</h2>
+      <p>RuutDev may integrate or recommend third-party services including but not limited to: Stripe, PayPal, Vercel, Cloudflare, Google services, Zapier, Make, OpenAI, and others.</p>
+
+      <div class="legal-warning">
+        <p><strong>RuutDev is not responsible for the availability, performance, pricing changes, policy changes, or outages of third-party services.</strong> These services operate under their own independent terms and conditions.</p>
+      </div>
+
+      <p>If a third-party service becomes unavailable, changes pricing, or discontinues a feature, RuutDev will work with the Client to identify alternatives, but any additional development cost to replace or migrate to a new service is not included in the original project price.</p>
+      <p>Clients are encouraged to review and accept the terms of any third-party services used in their project.</p>
+    </div>
+
+    <div class="legal-section" id="sec-liability">
+      <div class="legal-section-num">Section 13</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, RuutDev's total liability to the Client for any claim arising from or related to these Terms or any service provided shall not exceed the total amount paid by the Client to RuutDev in the 90 days preceding the claim.</p>
+      <p>RuutDev shall not be liable for:</p>
+      <ul>
+        <li>Loss of revenue, profits, data, or business opportunities;</li>
+        <li>Downtime or outages caused by third-party hosting or infrastructure providers;</li>
+        <li>Security breaches or data loss resulting from third-party vulnerabilities;</li>
+        <li>Errors or omissions in content provided by the Client;</li>
+        <li>Indirect, incidental, consequential, or punitive damages of any kind.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="sec-results">
+      <div class="legal-section-num">Section 14</div>
+      <h2>No Guarantee of Business Results</h2>
+      <p>RuutDev builds professional, high-quality digital products. However, <strong>RuutDev does not guarantee any specific business outcome</strong>, including but not limited to: increased traffic, leads, sales, revenue, search engine ranking, or return on investment.</p>
+      <p>Business results depend on many factors outside RuutDev's control, including market conditions, competition, the Client's products or services, pricing, marketing efforts, and other operational factors.</p>
+      <p>Any projections, estimates, or examples discussed during the sales process are illustrative only and not contractual commitments.</p>
+    </div>
+
+    <div class="legal-section" id="sec-chargebacks">
+      <div class="legal-section-num">Section 15</div>
+      <h2>Chargebacks</h2>
+      <p>Filing a chargeback or payment dispute without first contacting RuutDev to attempt resolution is considered a breach of these Terms.</p>
+      <p>If a Client initiates a chargeback in bad faith — particularly after work has been delivered, approved, or launched — RuutDev reserves the right to:</p>
+      <ul>
+        <li>Immediately suspend all services, hosting, and access;</li>
+        <li>Remove or take offline any RuutDev-managed deliverables;</li>
+        <li>Pursue recovery of all disputed amounts plus applicable fees through legal means.</li>
+      </ul>
+      <p>Clients with legitimate payment disputes are encouraged to contact RuutDev directly first at <a href="mailto:helloruutdev@hotmail.com" style="color:var(--blue);">helloruutdev@hotmail.com</a> or via WhatsApp at +1 (407) 694-6371.</p>
+    </div>
+
+    <div class="legal-section" id="sec-support">
+      <div class="legal-section-num">Section 16</div>
+      <h2>Support &amp; Response Times</h2>
+      <p>Support availability and response times depend on the Client's plan:</p>
+      <ul>
+        <li><strong>No active maintenance plan:</strong> Support is provided on a best-effort basis. Response times are not guaranteed.</li>
+        <li><strong>Website Care ($97/mo):</strong> Standard support via email/WhatsApp. Response within 48–72 business hours.</li>
+        <li><strong>Software Care ($197/mo):</strong> Priority support. Response within 24–48 business hours.</li>
+        <li><strong>Advanced Care ($297/mo):</strong> SLA-backed support. Response within 24 business hours for critical issues.</li>
+      </ul>
+      <p>Emergency issues (site down, critical security breach) are addressed as quickly as possible regardless of plan level. RuutDev operates primarily Monday–Friday during standard US Eastern business hours.</p>
+    </div>
+
+    <div class="legal-section" id="sec-law">
+      <div class="legal-section-num">Section 17</div>
+      <h2>Governing Law</h2>
+      <p>These Terms and any disputes arising from them shall be governed by and construed in accordance with the laws of the <strong>State of Florida, United States of America</strong>, without regard to its conflict of law provisions.</p>
+      <p>Any legal action or proceeding shall be brought exclusively in the courts of Florida. Both parties consent to the personal jurisdiction of such courts.</p>
+      <p>RuutDev reserves the right to amend these Terms at any time. Changes will be communicated via the website and via direct notice to active Clients. Continued use of services after changes are posted constitutes acceptance.</p>
+    </div>
+
+    <div class="legal-section" id="sec-contact">
+      <div class="legal-section-num">Section 18</div>
+      <h2>Contact</h2>
+      <p>For questions about these Terms, please contact:</p>
+      <ul>
+        <li><strong>Business:</strong> RuutDev</li>
+        <li><strong>Operator:</strong> Johan Tovar</li>
+        <li><strong>Email:</strong> <a href="mailto:helloruutdev@hotmail.com" style="color:var(--blue);">helloruutdev@hotmail.com</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/14076946371" style="color:var(--blue);">+1 (407) 694-6371</a></li>
+        <li><strong>Website:</strong> ruutdev.com</li>
+        <li><strong>Jurisdiction:</strong> Florida, USA</li>
+      </ul>
+    </div>
+
+  </div>
 </div>
 
-<footer>
-  <span>© 2026 RuutDev. <span data-lang="en">All rights reserved.</span><span data-lang="es">Todos los derechos reservados.</span></span>
-  <div class="footer-links">
-    <a href="/privacy.html"><span data-lang="en">Privacy Policy</span><span data-lang="es">Política de Privacidad</span></a>
-    <a href="/terms.html"><span data-lang="en">Terms & Conditions</span><span data-lang="es">Términos y Condiciones</span></a>
-    <a href="/" class="highlight"><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo"><span></span>RuutDev</a>
+      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Website Development</a></li>
+        <li><a href="services.html">Software & Web Apps</a></li>
+        <li><a href="services.html">AI Integrations</a></li>
+        <li><a href="pricing.html">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="pay.html">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
   </div>
 </footer>
 
+<script src="js/main.js"></script>
 <script>
-  function setLang(lang) {
-    document.body.classList.toggle('lang-es', lang === 'es');
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.title = lang === 'es' ? 'Términos y Condiciones — RuutDev' : 'Terms & Conditions — RuutDev';
-  }
-  // Default: EN
+  /* Highlight active TOC item on scroll */
+  const sections = document.querySelectorAll('.legal-section[id]');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
 </script>
 </body>
 </html>
