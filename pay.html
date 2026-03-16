@@ -59,16 +59,25 @@
     }
     .amount-input-wrap input { padding-left: 30px; font-size: 1.1rem; font-weight: 600; }
 
-    /* ── STRIPE PLACEHOLDER ── */
-    .stripe-placeholder {
-      background: var(--bg); border: 1.5px dashed rgba(26,109,255,0.3);
-      border-radius: 10px; padding: 24px 20px;
-      text-align: center; color: var(--text2);
-      font-size: 0.85rem; line-height: 1.65;
-      margin: 20px 0;
+    /* ── MAINTENANCE TIERS ── */
+    .maintenance-tiers {
+      display: none; flex-direction: column; gap: 8px;
+      margin: -4px 0 16px 0;
+      padding: 16px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 10px;
     }
-    .stripe-placeholder i { font-size: 1.5rem; color: var(--blue); margin-bottom: 10px; display: block; }
-    .stripe-placeholder strong { color: var(--text); display: block; margin-bottom: 6px; }
+    .maintenance-tiers.visible { display: flex; }
+    .tier-option {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-radius: 8px;
+      border: 1.5px solid var(--border); background: var(--surface);
+      cursor: pointer; transition: all var(--transition);
+    }
+    .tier-option:hover { border-color: var(--blue-border); }
+    .tier-option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .tier-option .tier-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .tier-option .tier-price { font-size: 0.875rem; font-weight: 700; color: var(--blue); }
+    .tier-option input[type="radio"] { display: none; }
 
     /* ── SECURITY BADGES ── */
     .security-row {
@@ -174,6 +183,25 @@
             <span>Care plan subscription</span>
           </div>
         </label>
+
+        <!-- Maintenance tier sub-selector -->
+        <div class="maintenance-tiers" id="maintenance-tiers">
+          <label class="tier-option selected" onclick="selectTier(this, 'starter')">
+            <input type="radio" name="maintenance_tier" value="starter" checked />
+            <span class="tier-name">Starter Care</span>
+            <span class="tier-price">$97 / mo</span>
+          </label>
+          <label class="tier-option" onclick="selectTier(this, 'growth')">
+            <input type="radio" name="maintenance_tier" value="growth" />
+            <span class="tier-name">Growth Care</span>
+            <span class="tier-price">$197 / mo</span>
+          </label>
+          <label class="tier-option" onclick="selectTier(this, 'premium')">
+            <input type="radio" name="maintenance_tier" value="premium" />
+            <span class="tier-name">Premium Care</span>
+            <span class="tier-price">$297 / mo</span>
+          </label>
+        </div>
         <label class="payment-type-option" onclick="selectPaymentType(this, 'Invoice / Other')">
           <input type="radio" name="payment_type" value="invoice" />
           <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
@@ -207,46 +235,9 @@
         <input type="text" id="pay-notes" placeholder="Project name, invoice number, or any reference" />
       </div>
 
-      <!-- ════════════════════════════════════════
-           STRIPE INTEGRATION POINT
-           ════════════════════════════════════════
-           Replace this placeholder with:
-
-           OPTION A — Stripe Checkout (redirect):
-           - Create a PaymentIntent or Checkout Session on your backend
-           - Redirect to Stripe-hosted checkout page
-           - Handle success/cancel redirects
-
-           OPTION B — Stripe Elements (embedded):
-           - Load Stripe.js: <script src="https://js.stripe.com/v3/"></script>
-           - Mount CardElement into #stripe-card-element
-           - On submit: stripe.confirmPayment() with clientSecret from backend
-
-           OPTION C — Stripe Payment Link:
-           - Create Payment Links in Stripe dashboard for each payment type
-           - Map payment type selection to the correct link
-           - Redirect or open in new tab
-
-           BACKEND NEEDED:
-           - POST /create-payment-intent  → returns { clientSecret }
-           - POST /create-subscription    → for maintenance plans
-           - Stripe webhook handler       → for confirming payments
-
-           ENV VARIABLES REQUIRED:
-           - STRIPE_PUBLISHABLE_KEY (frontend)
-           - STRIPE_SECRET_KEY      (backend only, never expose)
-           ════════════════════════════════════════ -->
-
-      <div class="stripe-placeholder" id="stripe-placeholder">
-        <i class="fa-brands fa-stripe"></i>
-        <strong>Secure card payment — coming soon</strong>
-        Online card payments via Stripe are being configured. In the meantime, please pay using the alternative methods listed on the right, or <a href="https://wa.me/14076946371" style="color:var(--blue);">contact us on WhatsApp</a> for immediate assistance.
-      </div>
-
-      <!-- Fallback CTA (remove once Stripe is live) -->
-      <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27d%20like%20to%20make%20a%20payment." target="_blank" class="btn-primary" style="width:100%;justify-content:center;margin-bottom:16px;">
-        <i class="fa-brands fa-whatsapp"></i> Arrange Payment via WhatsApp
-      </a>
+      <button type="button" class="btn-primary" id="pay-btn" onclick="goToCheckout()" style="width:100%;justify-content:center;margin-bottom:16px;font-size:1rem;padding:16px 24px;">
+        <i class="fa-brands fa-stripe"></i> Proceed to Secure Checkout
+      </button>
 
       <div class="security-row">
         <div class="security-badge"><i class="fa-solid fa-lock"></i> SSL Encrypted</div>
@@ -271,10 +262,10 @@
       <div class="alt-payment reveal">
         <h3>Alternative payment methods</h3>
         <ul>
+          <li><i class="fa-solid fa-check"></i> Credit / Debit Card — via button above</li>
           <li><i class="fa-solid fa-check"></i> Zelle — helloruutdev@hotmail.com</li>
           <li><i class="fa-solid fa-check"></i> PayPal — helloruutdev@hotmail.com</li>
           <li><i class="fa-solid fa-check"></i> Bank Transfer (USD) — details on request</li>
-          <li><i class="fa-solid fa-check"></i> Stripe (card) — coming soon</li>
         </ul>
         <p>All payments must be in US dollars. Please include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation.</p>
       </div>
@@ -340,12 +331,66 @@
 
 <script src="js/main.js"></script>
 <script>
-  /* Payment type selector */
+  // ─────────────────────────────────────────────────────
+  // STRIPE PAYMENT LINKS
+  // 1. Go to dashboard.stripe.com → Payment Links → Create
+  // 2. For deposits/balances/invoices: set price as "customer chooses amount"
+  // 3. For maintenance: create 3 separate recurring links ($97, $197, $297/mo)
+  // 4. Replace the placeholder URLs below with your real links
+  // ─────────────────────────────────────────────────────
+  const STRIPE_LINKS = {
+    deposit:     'https://buy.stripe.com/REPLACE_DEPOSIT_LINK',
+    balance:     'https://buy.stripe.com/REPLACE_BALANCE_LINK',
+    invoice:     'https://buy.stripe.com/REPLACE_INVOICE_LINK',
+    maintenance: {
+      starter:  'https://buy.stripe.com/REPLACE_MAINTENANCE_STARTER',
+      growth:   'https://buy.stripe.com/REPLACE_MAINTENANCE_GROWTH',
+      premium:  'https://buy.stripe.com/REPLACE_MAINTENANCE_PREMIUM',
+    }
+  };
+
+  let currentType = 'deposit';
+  let currentTier = 'starter';
+
   function selectPaymentType(el, label) {
     document.querySelectorAll('.payment-type-option').forEach(opt => opt.classList.remove('selected'));
     el.classList.add('selected');
-    // When Stripe is integrated, use `label` to select the right PaymentIntent type
-    // or route to the correct Stripe Payment Link
+    currentType = el.querySelector('input[type="radio"]').value;
+
+    const tiers = document.getElementById('maintenance-tiers');
+    if (currentType === 'maintenance') {
+      tiers.classList.add('visible');
+    } else {
+      tiers.classList.remove('visible');
+    }
+  }
+
+  function selectTier(el, tier) {
+    document.querySelectorAll('.tier-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    currentTier = tier;
+  }
+
+  function goToCheckout() {
+    const email = document.getElementById('pay-email').value.trim();
+    const name  = document.getElementById('pay-name').value.trim();
+
+    if (!email || !name) {
+      alert('Please enter your name and email before proceeding.');
+      return;
+    }
+
+    let url;
+    if (currentType === 'maintenance') {
+      url = STRIPE_LINKS.maintenance[currentTier];
+    } else {
+      url = STRIPE_LINKS[currentType];
+    }
+
+    // Pre-fill customer email on the Stripe checkout page
+    if (email) url += '?prefilled_email=' + encodeURIComponent(email);
+
+    window.location.href = url;
   }
 </script>
 </body>
