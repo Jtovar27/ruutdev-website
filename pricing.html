@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing — RuutDev</title>
   <meta name="description" content="Get your website from $45/month (+ $149 setup) or own it outright from $700. Transparent 3-tier pricing for simple, standard, and advanced projects." />
+  <link rel="canonical" href="https://ruutdev.com/pricing.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/pricing.html" />
+  <meta property="og:title" content="Pricing — RuutDev" />
+  <meta property="og:description" content="Get your website from $45/month (+ $149 setup) or own it outright from $700. Transparent 3-tier pricing for simple, standard, and advanced projects." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pricing — RuutDev" />
+  <meta name="twitter:description" content="Get your website from $45/month (+ $149 setup) or own it outright from $700." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -218,7 +227,9 @@
       .payment-table th, .payment-table td { padding: 10px 8px; }
       .entry-title { font-size: 1.8rem; }
       .model-btn { padding: 10px 18px; font-size: 0.82rem; }
+      .steps-row { grid-template-columns: 1fr; }
     }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   </style>
 </head>
 <body>
@@ -266,10 +277,10 @@
   <!-- MODEL TOGGLE -->
   <div class="model-toggle-wrap reveal">
     <div class="model-toggle">
-      <button class="model-btn active" onclick="switchModel('monthly')">
+      <button class="model-btn active" onclick="switchModel('monthly', this)">
         <i class="fa-solid fa-calendar-check"></i> <span data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</span>
       </button>
-      <button class="model-btn" onclick="switchModel('onetime')">
+      <button class="model-btn" onclick="switchModel('onetime', this)">
         <i class="fa-solid fa-key"></i> <span data-en="Buy It Outright" data-es="Pago Único">Buy It Outright</span>
       </button>
     </div>
@@ -538,6 +549,7 @@
       <p style="color:var(--text2);font-weight:300;margin-top:8px;margin-bottom:0;" data-en="You only pay as work is delivered and approved — no full payment upfront." data-es="Solo pagas a medida que el trabajo se entrega y aprueba — sin pago completo por adelantado.">You only pay as work is delivered and approved — no full payment upfront.</p>
     </div>
 
+    <div class="table-scroll">
     <table class="payment-table reveal">
       <thead>
         <tr>
@@ -579,6 +591,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <div class="notice-box reveal" style="margin-top:28px;">
       <i class="fa-solid fa-circle-info"></i>
@@ -696,17 +709,17 @@
 
 <script src="js/main.js"></script>
 <script>
-  function switchModel(model) {
-    document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
+  function switchModel(model, btn) {
+    document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.model-panel').forEach(panel => panel.classList.remove('active'));
 
     document.getElementById('panel-' + model).classList.add('active');
-    event.currentTarget.classList.add('active');
+    if (btn) btn.classList.add('active');
 
     // Re-trigger reveal animations for newly visible panel
     document.querySelectorAll('#panel-' + model + ' .reveal').forEach(el => {
-      el.classList.remove('revealed');
-      setTimeout(() => el.classList.add('revealed'), 50);
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 50);
     });
   }
 </script>

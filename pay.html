@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Make a Payment — RuutDev</title>
   <meta name="description" content="Pay your project deposit, remaining balance, maintenance plan, or invoice securely through RuutDev." />
+  <link rel="canonical" href="https://ruutdev.com/pay.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/pay.html" />
+  <meta property="og:title" content="Make a Payment — RuutDev" />
+  <meta property="og:description" content="Pay your project deposit, remaining balance, maintenance plan, or invoice securely through RuutDev." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Make a Payment — RuutDev" />
+  <meta name="twitter:description" content="Pay your project deposit, remaining balance, maintenance plan, or invoice securely through RuutDev." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -380,9 +389,14 @@
   function goToCheckout() {
     const email = document.getElementById('pay-email').value.trim();
     const name  = document.getElementById('pay-name').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!email || !name) {
+    if (!name || !email) {
       alert('Please enter your name and email before proceeding.');
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
       return;
     }
 
@@ -393,8 +407,13 @@
       url = STRIPE_LINKS[currentType];
     }
 
+    if (!url || url.includes('REPLACE_')) {
+      alert('Payment checkout is not yet configured. Please contact us via WhatsApp to complete your payment.');
+      return;
+    }
+
     // Pre-fill customer email on the Stripe checkout page
-    if (email) url += '?prefilled_email=' + encodeURIComponent(email);
+    url += '?prefilled_email=' + encodeURIComponent(email);
 
     window.location.href = url;
   }
