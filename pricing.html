@@ -205,6 +205,29 @@
     .notice-box p { font-size: 0.9rem; color: var(--text); line-height: 1.65; font-weight: 400; }
     .notice-box strong { color: var(--blue); }
 
+    /* ── BUYOUT GRID (inside buyout-callout) ── */
+    .buyout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .buyout-grid-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; text-align: center;
+    }
+    .buyout-grid-label {
+      font-size: 0.72rem; font-weight: 700; color: var(--text2);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;
+    }
+    .buyout-grid-amount {
+      font-family: var(--font-display); font-size: 1.3rem;
+      font-weight: 800; color: var(--text);
+    }
+    .buyout-grid-sub {
+      font-size: 0.75rem; color: var(--text2);
+    }
+
     /* ── COMPLEXITY LABELS ── */
     .complexity-label {
       display: inline-flex; align-items: center; gap: 6px;
@@ -221,6 +244,10 @@
       .entry-highlight { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 900px) {
+      .buyout-grid { grid-template-columns: 1fr; }
+      .buyout-callout { flex-direction: column; padding: 24px 20px; gap: 14px; }
+    }
     @media (max-width: 768px) {
       .price-cards { grid-template-columns: 1fr; }
       .payment-table { font-size: 0.82rem; }
@@ -228,6 +255,9 @@
       .entry-title { font-size: 1.8rem; }
       .model-btn { padding: 10px 18px; font-size: 0.82rem; }
       .steps-row { grid-template-columns: 1fr; }
+      .entry-highlight { padding: 32px 24px; }
+      .model-toggle-wrap { overflow-x: auto; justify-content: flex-start; padding-bottom: 4px; }
+      .model-toggle { flex-shrink: 0; }
     }
     .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   </style>
@@ -434,21 +464,21 @@
           At any point during your monthly plan, you can choose to buy out your website and receive full ownership — including the source code, design files, and intellectual property.
           The buyout price follows a simple public formula: <strong>12× your monthly rate.</strong>
         </p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;">
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;" data-en="Simple Plan" data-es="Plan Simple">Simple Plan</div>
-            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);">$540</div>
-            <div style="font-size:0.75rem;color:var(--text2);">12 × $45/mo</div>
+        <div class="buyout-grid">
+          <div class="buyout-grid-card">
+            <div class="buyout-grid-label" data-en="Simple Plan" data-es="Plan Simple">Simple Plan</div>
+            <div class="buyout-grid-amount">$540</div>
+            <div class="buyout-grid-sub">12 × $45/mo</div>
           </div>
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;" data-en="Standard Plan" data-es="Plan Estándar">Standard Plan</div>
-            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);">$1,164</div>
-            <div style="font-size:0.75rem;color:var(--text2);">12 × $97/mo</div>
+          <div class="buyout-grid-card">
+            <div class="buyout-grid-label" data-en="Standard Plan" data-es="Plan Estándar">Standard Plan</div>
+            <div class="buyout-grid-amount">$1,164</div>
+            <div class="buyout-grid-sub">12 × $97/mo</div>
           </div>
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-align:center;">
-            <div style="font-size:0.72rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;" data-en="Advanced Plan" data-es="Plan Avanzado">Advanced Plan</div>
-            <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--text);" data-en="Custom" data-es="Personalizado">Custom</div>
-            <div style="font-size:0.75rem;color:var(--text2);" data-en="Agreed in contract" data-es="Acordado en contrato">Agreed in contract</div>
+          <div class="buyout-grid-card">
+            <div class="buyout-grid-label" data-en="Advanced Plan" data-es="Plan Avanzado">Advanced Plan</div>
+            <div class="buyout-grid-amount" data-en="Custom" data-es="Personalizado">Custom</div>
+            <div class="buyout-grid-sub" data-en="Agreed in contract" data-es="Acordado en contrato">Agreed in contract</div>
           </div>
         </div>
         <p data-en="Once the buyout is paid, the IP transfers to you completely. Your monthly plan can continue as optional maintenance, or you take it fully in-house. Your call." data-es="Una vez pagada la compra, la propiedad intelectual se transfiere a ti por completo. Tu plan mensual puede continuar como mantenimiento opcional, o te lo llevas completamente a tu empresa. Tú decides.">Once the buyout is paid, the IP transfers to you completely. Your monthly plan can continue as optional maintenance, or you take it fully in-house. Your call.</p>
