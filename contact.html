@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — RuutDev</title>
-  <meta name="description" content="Start your project with a free demo. Contact RuutDev via form or WhatsApp. First consultation is completely free." />
+  <meta name="description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
   <link rel="canonical" href="https://ruutdev.com/contact.html" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ruutdev.com/contact.html" />
   <meta property="og:title" content="Contact — RuutDev" />
-  <meta property="og:description" content="Start your project with a free demo. Contact RuutDev via form or WhatsApp. First consultation is completely free." />
+  <meta property="og:description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
   <meta property="og:site_name" content="RuutDev" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact — RuutDev" />
-  <meta name="twitter:description" content="Start your project with a free demo. Contact RuutDev via form or WhatsApp. First consultation is completely free." />
+  <meta name="twitter:description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -54,6 +54,19 @@
     }
     .trust-badge i { color: var(--blue); font-size: 0.85rem; flex-shrink: 0; }
 
+    .contact-context {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-border);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .contact-context.visible { display: block; }
+
     @media (max-width: 900px) {
       .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
     }
@@ -67,6 +80,7 @@
   <ul class="nav-links">
     <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
     <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="pay.html"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
     <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
     <li><a href="contact.html" class="active"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
     <li><a href="contact.html" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
@@ -80,6 +94,7 @@
 <ul class="nav-mobile" id="nav-mobile">
   <li><a href="services.html"><span data-en="Services" data-es="Servicios">Services</span></a></li>
   <li><a href="pricing.html"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="pay.html"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
   <li><a href="about.html"><span data-en="About" data-es="Nosotros">About</span></a></li>
   <li><a href="contact.html"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
   <li><a href="contact.html" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
@@ -89,9 +104,9 @@
 <!-- ── PAGE HERO ── -->
 <div class="page-hero">
   <div class="page-hero-content">
-    <div class="hero-badge" data-en="Let's Talk" data-es="Hablemos">Let's Talk</div>
-    <h1 data-en="Start building<br /><em>your presence</em>" data-es="Comienza a construir<br /><em>tu presencia</em>">Start building<br /><em>your presence</em></h1>
-    <p data-en="Tell us about your project and we'll have a free demo ready in 48 hours. No commitment, no payment required." data-es="Cuéntanos sobre tu proyecto y tendremos un demo gratis listo en 48 horas. Sin compromiso, sin pago requerido.">Tell us about your project and we'll have a free demo ready in 48 hours. No commitment, no payment required.</p>
+    <div class="hero-badge" data-en="Project Intake" data-es="Inicio de Proyecto">Project Intake</div>
+    <h1 data-en="Talk through your<br /><em>next build</em>" data-es="Conversemos sobre tu<br /><em>proximo proyecto</em>">Talk through your<br /><em>next build</em></h1>
+    <p data-en="Tell us whether you need a monthly website plan or a full custom build. We&apos;ll recommend the right scope, timeline, and next step." data-es="Cuentanos si necesitas un plan mensual para tu sitio o un desarrollo a pago completo. Te recomendaremos el alcance, tiempo y siguiente paso correctos.">Tell us whether you need a monthly website plan or a full custom build. We'll recommend the right scope, timeline, and next step.</p>
   </div>
 </div>
 
@@ -101,8 +116,8 @@
     <!-- LEFT: Info -->
     <div class="contact-info reveal">
       <div>
-        <h2 data-en="Let's get started" data-es="Comencemos">Let's get started</h2>
-        <p style="margin-top:12px;" data-en="Whether you have a clear brief or just an idea, we can help. Fill out the form and we'll be in touch within 24 hours — or reach out directly via WhatsApp if you prefer to talk now." data-es="Ya sea que tengas un brief claro o solo una idea, podemos ayudarte. Completa el formulario y nos pondremos en contacto en 24 horas — o contáctanos directamente por WhatsApp si prefieres hablar ahora.">Whether you have a clear brief or just an idea, we can help. Fill out the form and we'll be in touch within 24 hours — or reach out directly via WhatsApp if you prefer to talk now.</p>
+        <h2 data-en="Share your goals" data-es="Comparte tus objetivos">Share your goals</h2>
+        <p style="margin-top:12px;" data-en="If you already know the plan you want, we&apos;ll confirm fit and next steps. If you&apos;re still deciding, we&apos;ll help you choose between a monthly plan and a one-time investment without wasting your time." data-es="Si ya sabes que plan quieres, confirmaremos si encaja y te diremos el siguiente paso. Si todavia estas decidiendo, te ayudaremos a elegir entre un plan mensual y una inversion a pago completo sin hacerte perder tiempo.">If you already know the plan you want, we'll confirm fit and next steps. If you're still deciding, we'll help you choose between a monthly plan and a one-time investment without wasting your time.</p>
       </div>
 
       <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27m%20interested%20in%20a%20free%20demo." target="_blank" class="contact-method wa">
@@ -122,10 +137,10 @@
       </a>
 
       <div class="trust-badges">
-        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Free demo delivered in 48 hours" data-es="Demo gratis entregado en 48 horas">Free demo delivered in 48 hours</span></div>
-        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="No payment required to start" data-es="Sin pago requerido para comenzar">No payment required to start</span></div>
-        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Response within 24 hours" data-es="Respuesta en 24 horas">Response within 24 hours</span></div>
-        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Bilingual support — English &amp; Spanish" data-es="Soporte bilingüe — Inglés y Español">Bilingual support — English &amp; Spanish</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Clear monthly plans and buyout pricing paths" data-es="Rutas claras de planes mensuales y proyectos a pago completo">Clear monthly plans and buyout pricing paths</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Response within 1 business day" data-es="Respuesta dentro de 1 dia habil">Response within 1 business day</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Direct founder communication from scope to launch" data-es="Comunicacion directa con el fundador desde el alcance hasta el lanzamiento">Direct founder communication from scope to launch</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Bilingual support for USA and LATAM clients" data-es="Soporte bilingue para clientes en USA y LATAM">Bilingual support for USA and LATAM clients</span></div>
       </div>
     </div>
 
@@ -133,9 +148,10 @@
     <div class="form-card reveal">
       <div id="form-body">
         <div style="margin-bottom:28px;">
-          <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;" data-en="Request a free demo" data-es="Solicita un demo gratis">Request a free demo</div>
-          <div style="font-size:0.875rem;color:var(--text2);font-weight:300;" data-en="Tell us about your project and we'll build a demo in 48 hours." data-es="Cuéntanos sobre tu proyecto y construiremos un demo en 48 horas.">Tell us about your project and we'll build a demo in 48 hours.</div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;" data-en="Start your project" data-es="Comienza tu proyecto">Start your project</div>
+          <div style="font-size:0.875rem;color:var(--text2);font-weight:300;" data-en="Tell us what you&apos;re building and whether you want a monthly plan or a full custom build." data-es="Cuentanos que quieres construir y si prefieres un plan mensual o un desarrollo a pago completo.">Tell us what you're building and whether you want a monthly plan or a full custom build.</div>
         </div>
+        <div class="contact-context" id="contact-context" hidden></div>
         <div class="form-row">
           <div class="form-group">
             <label data-en="Your name *" data-es="Tu nombre *">Your name *</label>
@@ -154,21 +170,22 @@
           <label data-en="Type of project" data-es="Tipo de proyecto">Type of project</label>
           <select id="ftype">
             <option value="" data-en="Select a type…" data-es="Selecciona un tipo…">Select a type…</option>
-            <option value="website" data-en="Website / Landing Page" data-es="Sitio Web / Página de Aterrizaje">Website / Landing Page</option>
-            <option value="ecommerce" data-en="E-commerce Store" data-es="Tienda en Línea">E-commerce Store</option>
-            <option value="software" data-en="Software / Web App / Dashboard" data-es="Software / App Web / Dashboard">Software / Web App / Dashboard</option>
-            <option value="ai" data-en="AI Integration / Automation" data-es="Integración de IA / Automatización">AI Integration / Automation</option>
-            <option value="maintenance" data-en="Maintenance Plan" data-es="Plan de Mantenimiento">Maintenance Plan</option>
-            <option value="other" data-en="Other / Not sure yet" data-es="Otro / Aún no estoy seguro">Other / Not sure yet</option>
+            <option value="monthly_plan" data-en="Monthly Website Plan" data-es="Plan Mensual para Sitio Web">Monthly Website Plan</option>
+            <option value="buyout_project" data-en="Full Payment Website Project" data-es="Proyecto Web a Pago Completo">Full Payment Website Project</option>
+            <option value="ecommerce_custom" data-en="E-commerce / Advanced Custom Build" data-es="E-commerce / Desarrollo Personalizado Avanzado">E-commerce / Advanced Custom Build</option>
+            <option value="software_ai" data-en="Software / AI / Automation" data-es="Software / IA / Automatizacion">Software / AI / Automation</option>
+            <option value="support" data-en="Ongoing Support / Maintenance" data-es="Soporte Continuo / Mantenimiento">Ongoing Support / Maintenance</option>
+            <option value="not_sure" data-en="Not sure yet" data-es="Aun no estoy seguro">Not sure yet</option>
           </select>
         </div>
         <div class="form-group">
           <label for="fmessage" data-en="Tell us about your project" data-es="Cuéntanos sobre tu proyecto">Tell us about your project</label>
-          <textarea id="fmessage" name="fmessage" placeholder="What do you do? What do you need? Do you have an existing site? Any deadline?"></textarea>
+          <textarea id="fmessage" name="fmessage" placeholder="What does your business do? What do you need built? Do you have an existing site, target launch date, or budget range?"></textarea>
         </div>
         <button class="btn-primary form-submit" onclick="submitContactForm()">
           <span data-en="Send Message" data-es="Enviar Mensaje">Send Message</span> <i class="fa-solid fa-arrow-right"></i>
         </button>
+        <p style="margin-top:12px;font-size:0.8rem;color:var(--text2);line-height:1.6;text-align:center;" data-en="If you&apos;re choosing a monthly plan, we&apos;ll confirm fit first and then send the secure checkout link." data-es="Si estas eligiendo un plan mensual, primero confirmaremos que encaje y luego te enviaremos el enlace de pago seguro.">If you're choosing a monthly plan, we'll confirm fit first and then send the secure checkout link.</p>
         <p style="margin-top:14px;font-size:0.78rem;color:var(--text2);text-align:center;">
           <span data-en="By submitting this form you agree to our" data-es="Al enviar este formulario aceptas nuestra">By submitting this form you agree to our</span> <a href="privacy.html" style="color:var(--blue);" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a>.
         </p>
@@ -236,7 +253,7 @@
         <li><a href="services.html" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
         <li><a href="services.html" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
         <li><a href="services.html" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
-        <li><a href="pricing.html" data-en="Maintenance Plans" data-es="Planes de Mantenimiento">Maintenance Plans</a></li>
+        <li><a href="pricing.html" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
       </ul>
     </div>
     <div class="footer-col">

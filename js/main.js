@@ -2,6 +2,15 @@
    RuutDev — Shared JavaScript
    ───────────────────────────────────────── */
 
+// Populate these with live Stripe Checkout or Payment Link URLs when ready.
+// Example:
+// window.RUUTDEV_CHECKOUT_LINKS = {
+//   'monthly-simple-setup': 'https://buy.stripe.com/...',
+//   'monthly-standard-setup': 'https://buy.stripe.com/...',
+//   'monthly-growth-setup': 'https://buy.stripe.com/...'
+// };
+window.RUUTDEV_CHECKOUT_LINKS = window.RUUTDEV_CHECKOUT_LINKS || {};
+
 /* ── Mobile Menu ── */
 function toggleMenu() {
   const mobile = document.getElementById('nav-mobile');
@@ -43,6 +52,36 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 // ── LANGUAGE SYSTEM ──
 const LANG_KEY = 'ruutdev_lang';
+const LEAD_PLAN_LABELS = {
+  'simple-site': {
+    en: 'Simple Site monthly plan',
+    es: 'plan mensual Simple Site'
+  },
+  'standard-site': {
+    en: 'Standard Site monthly plan',
+    es: 'plan mensual Standard Site'
+  },
+  'growth-advanced': {
+    en: 'Growth / Advanced monthly plan',
+    es: 'plan mensual Growth / Advanced'
+  },
+  'starter-website': {
+    en: 'Starter Website buyout project',
+    es: 'proyecto Starter Website'
+  },
+  'business-website': {
+    en: 'Business Website buyout project',
+    es: 'proyecto Business Website'
+  },
+  'ecommerce-custom': {
+    en: 'E-commerce / Advanced Custom build',
+    es: 'proyecto E-commerce / Advanced Custom'
+  },
+  'software-ai': {
+    en: 'Custom software / AI / automation project',
+    es: 'proyecto de software / IA / automatizacion'
+  }
+};
 
 function applyLang(lang) {
   document.documentElement.setAttribute('lang', lang === 'es' ? 'es' : 'en');
@@ -60,11 +99,88 @@ function toggleLang(lang) {
   applyLang(lang);
 }
 
+function initStripeReadyCtas() {
+  document.querySelectorAll('[data-checkout-id]').forEach(link => {
+    const checkoutId = link.dataset.checkoutId;
+    const fallbackHref = link.dataset.fallbackHref || link.getAttribute('href') || '#';
+    const liveHref = window.RUUTDEV_CHECKOUT_LINKS[checkoutId];
+
+    link.setAttribute('href', liveHref || fallbackHref);
+    link.dataset.checkoutState = liveHref ? 'live' : 'fallback';
+  });
+}
+
+function getPlanLabel(plan, lang) {
+  const labels = LEAD_PLAN_LABELS[plan];
+  return labels ? (labels[lang] || labels.en) : '';
+}
+
+function getLeadType(intent, plan) {
+  if (intent === 'monthly') return 'monthly_plan';
+  if (plan === 'software-ai') return 'software_ai';
+  if (plan === 'ecommerce-custom') return 'ecommerce_custom';
+  if (intent === 'buyout') return 'buyout_project';
+  if (intent === 'support') return 'support';
+  return '';
+}
+
+function initContactPrefill() {
+  const contactForm = document.getElementById('form-body');
+  if (!contactForm) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const intent = params.get('intent');
+  const plan = params.get('plan');
+  const source = params.get('source');
+  if (!intent && !plan && !source) return;
+
+  const lang = document.documentElement.getAttribute('lang') === 'es' ? 'es' : 'en';
+  const typeSelect = document.getElementById('ftype');
+  const messageField = document.getElementById('fmessage');
+  const contextBox = document.getElementById('contact-context');
+  const leadType = getLeadType(intent, plan);
+  const planLabel = getPlanLabel(plan, lang);
+  const contextLines = [];
+
+  if (typeSelect && leadType) {
+    const optionExists = Array.from(typeSelect.options).some(option => option.value === leadType);
+    if (optionExists) typeSelect.value = leadType;
+  }
+
+  if (planLabel) {
+    contextLines.push(
+      lang === 'es'
+        ? `Estoy consultando por el ${planLabel}.`
+        : `I am inquiring about the ${planLabel}.`
+    );
+  }
+
+  if (source === 'pricing') {
+    contextLines.push(
+      lang === 'es'
+        ? 'Vengo desde la pagina de precios y me gustaria confirmar alcance, tiempos y el siguiente paso.'
+        : 'I am coming from the pricing page and would like to confirm scope, timeline, and next steps.'
+    );
+  }
+
+  if (contextLines.length && messageField && !messageField.value.trim()) {
+    messageField.value = `${contextLines.join(' ')}\n\n`;
+  }
+
+  if (contextBox && contextLines.length) {
+    contextBox.hidden = false;
+    contextBox.classList.add('visible');
+    contextBox.textContent = contextLines.join(' ');
+  }
+}
+
 // Init on page load
 document.addEventListener('DOMContentLoaded', () => {
   // Apply saved language
   const saved = localStorage.getItem(LANG_KEY) || 'en';
   applyLang(saved);
+  initStripeReadyCtas();
+  initContactPrefill();
 
   // Close mobile menu when a nav link is clicked
   document.querySelectorAll('#nav-mobile a').forEach(link => {
