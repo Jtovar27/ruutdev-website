@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RuutDev — Web Development & Software Solutions</title>
-  <meta name="description" content="RuutDev builds professional websites, software, and AI-powered tools for businesses in the USA and Venezuela. Custom development, maintenance plans, and more." />
+  <meta name="description" content="RuutDev builds premium websites, software, AI, and automation systems with clear monthly plans and buyout pricing for serious businesses." />
   <link rel="canonical" href="https://ruutdev.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ruutdev.com/" />
@@ -144,9 +144,154 @@
       white-space: nowrap;
     }
 
+    .pricing-model-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .pricing-side {
+      display: grid;
+      gap: 20px;
+    }
+    .pricing-model-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .pricing-model-card.featured {
+      background: var(--text);
+      border-color: var(--blue);
+      box-shadow: 0 24px 56px rgba(26,109,255,0.18);
+    }
+    .pricing-model-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+    .pricing-model-card.featured:hover {
+      box-shadow: 0 24px 56px rgba(26,109,255,0.2);
+    }
+    .model-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .pricing-model-card.featured .model-eyebrow { color: #60a5fa; }
+    .model-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--text);
+    }
+    .pricing-model-card.featured .model-title { color: white; }
+    .model-summary {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text2);
+      font-weight: 300;
+    }
+    .pricing-model-card.featured .model-summary { color: rgba(255,255,255,0.62); }
+    .mini-plan-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .mini-plan {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px 14px;
+    }
+    .mini-plan-name {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.58);
+      margin-bottom: 8px;
+    }
+    .mini-plan-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: white;
+      line-height: 1.2;
+    }
+    .mini-plan-price span {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.56);
+      letter-spacing: 0;
+      margin-top: 4px;
+    }
+    .model-list,
+    .model-prices {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .model-list li,
+    .model-prices li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text2);
+    }
+    .pricing-model-card.featured .model-list li { color: rgba(255,255,255,0.7); }
+    .model-list i,
+    .model-prices i {
+      color: var(--blue);
+      font-size: 0.82rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .pricing-model-card.featured .model-list i { color: #60a5fa; }
+    .model-prices strong,
+    .helper-card strong { color: var(--text); }
+    .model-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .helper-card {
+      background: linear-gradient(135deg, rgba(26,109,255,0.08), rgba(255,255,255,0.7));
+    }
+    .helper-card p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text2);
+      font-weight: 300;
+    }
+
     @media (max-width: 768px) {
       .plans-row { grid-template-columns: 1fr; }
       .hero-stats { gap: 28px; }
+      .pricing-model-grid,
+      .mini-plan-row { grid-template-columns: 1fr; }
+      #hero { padding: 120px 4% 64px; }
+      h1 { font-size: clamp(2.5rem, 12vw, 4rem); line-height: 0.96; }
+      .hero-sub { max-width: 360px; }
+      .hero-actions a { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.35rem; }
+      .hero-sub { font-size: 0.98rem; }
+      .hero-stats { gap: 20px; }
+      .stat { min-width: 120px; }
     }
   </style>
 </head>
@@ -189,37 +334,37 @@
 
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    Web Development &amp; AI Solutions
+    Premium Websites, Software &amp; AI
   </div>
 
-  <h1 data-en="Your business deserves a<br /><em>real digital presence</em>" data-es="Tu negocio merece una<br /><em>presencia digital real</em>">Your business deserves a<br /><em>real digital presence</em></h1>
+  <h1 data-en="Digital systems that help<br /><em>serious businesses grow</em>" data-es="Sistemas digitales que ayudan a<br /><em>negocios serios a crecer</em>">Digital systems that help<br /><em>serious businesses grow</em></h1>
 
-  <p class="hero-sub" data-en="We build modern, fast websites and software designed to convert visitors into customers — from professional landing pages to AI-powered tools and custom systems." data-es="Construimos sitios web modernos y rápidos diseñados para convertir visitantes en clientes — desde páginas de aterrizaje profesionales hasta herramientas con IA y sistemas a medida.">
-    We build modern, fast websites and software designed to convert visitors into customers —
-    from professional landing pages to AI-powered tools and custom systems.
+  <p class="hero-sub" data-en="RuutDev builds websites, software, AI integrations, and automations with a cleaner sales structure: monthly plans for lower upfront cost, or buyout projects for businesses that want full ownership." data-es="RuutDev crea sitios web, software, integraciones de IA y automatizaciones con una estructura comercial mas clara: planes mensuales para una inversion inicial menor o proyectos a pago completo para negocios que quieren propiedad total.">
+    RuutDev builds websites, software, AI integrations, and automations with a cleaner sales structure:
+    monthly plans for lower upfront cost, or buyout projects for businesses that want full ownership.
   </p>
 
   <div class="hero-actions">
-    <a href="services.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> <span data-en="Explore Services" data-es="Explorar Servicios">Explore Services</span></a>
-    <a href="contact.html" class="btn-secondary" data-en="Get a Free Demo" data-es="Obtén un Demo Gratis">Get a Free Demo</a>
+    <a href="pricing.html" class="btn-primary"><i class="fa-solid fa-tags"></i> <span data-en="See Pricing" data-es="Ver Precios">See Pricing</span></a>
+    <a href="contact.html" class="btn-secondary" data-en="Book a Project Call" data-es="Reservar una Llamada">Book a Project Call</a>
   </div>
 
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">48h</div>
-      <div class="stat-label" data-en="Free demo delivery" data-es="Entrega del demo gratis">Free demo delivery</div>
+      <div class="stat-num">$149</div>
+      <div class="stat-label" data-en="Monthly setup starts" data-es="Configuracion mensual desde">Monthly setup starts</div>
     </div>
     <div class="stat">
-      <div class="stat-num">$0</div>
-      <div class="stat-label" data-en="No upfront commitment" data-es="Sin compromiso inicial">No upfront commitment</div>
+      <div class="stat-num">$45/mo</div>
+      <div class="stat-label" data-en="Support-included plan" data-es="Plan con soporte incluido">Support-included plan</div>
     </div>
     <div class="stat">
-      <div class="stat-num">100%</div>
-      <div class="stat-label" data-en="Custom built" data-es="Construido a medida">Custom built</div>
+      <div class="stat-num">$800+</div>
+      <div class="stat-label" data-en="Starter buyout sites" data-es="Sitios starter a pago completo">Starter buyout sites</div>
     </div>
     <div class="stat">
-      <div class="stat-num">USA & VE</div>
-      <div class="stat-label" data-en="Both markets served" data-es="Ambos mercados atendidos">Both markets served</div>
+      <div class="stat-num">1:1</div>
+      <div class="stat-label" data-en="Direct founder communication" data-es="Comunicacion directa con el fundador">Direct founder communication</div>
     </div>
   </div>
 </section>
@@ -238,44 +383,44 @@
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-rocket"></i></div>
       <h3 data-en="Professional Website" data-es="Sitio Web Profesional">Professional Website</h3>
-      <p data-en="Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites." data-es="Sitios web enfocados en conversión con diseño responsivo, SEO básico y formularios de contacto. Desde páginas de aterrizaje hasta sitios completos.">Conversion-focused websites with responsive design, SEO basics, and contact forms. Landing pages to full multi-page sites.</p>
-      <span class="service-price">From $500</span>
+      <p data-en="Conversion-focused sites with responsive design, SEO structure, and sharp CTA flow. Available as monthly plans or full buyout projects." data-es="Sitios enfocados en conversion con diseno responsivo, estructura SEO y un flujo de CTA mas claro. Disponibles como planes mensuales o proyectos a pago completo.">Conversion-focused sites with responsive design, SEO structure, and sharp CTA flow. Available as monthly plans or full buyout projects.</p>
+      <span class="service-price" data-en="From $149 setup + $45/mo or $800+" data-es="Desde $149 de configuracion + $45/mes o $800+">From $149 setup + $45/mo or $800+</span>
       <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
       <h3 data-en="Software &amp; Web Apps" data-es="Software &amp; Aplicaciones Web">Software & Web Apps</h3>
-      <p data-en="Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow." data-es="Dashboards personalizados, sistemas internos, tiendas de comercio electrónico y aplicaciones web construidas para tu flujo de trabajo específico.">Custom dashboards, internal systems, e-commerce stores, and web applications built for your specific workflow.</p>
-      <span class="service-price">$1,200–$4,500</span>
+      <p data-en="Dashboards, portals, advanced commerce, and custom workflow systems built around how your business actually operates." data-es="Dashboards, portales, comercio avanzado y sistemas de flujo de trabajo personalizados construidos alrededor de como opera tu negocio.">Dashboards, portals, advanced commerce, and custom workflow systems built around how your business actually operates.</p>
+      <span class="service-price" data-en="From $1,500" data-es="Desde $1,500">From $1,500</span>
       <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
       <h3 data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</h3>
-      <p data-en="Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions." data-es="Chatbots, automatizaciones, flujos de trabajo inteligentes y herramientas con IA que ahorran tiempo y aumentan las conversiones.">Chatbots, automations, intelligent workflows, and AI-powered tools that save time and increase conversions.</p>
-      <span class="service-price">$2,500–$8,000</span>
+      <p data-en="AI assistants, automations, and operational tooling that reduce manual work and strengthen your customer journey." data-es="Asistentes con IA, automatizaciones y herramientas operativas que reducen el trabajo manual y fortalecen el recorrido del cliente.">AI assistants, automations, and operational tooling that reduce manual work and strengthen your customer journey.</p>
+      <span class="service-price" data-en="Custom quote" data-es="Cotizacion personalizada">Custom quote</span>
       <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div>
-      <h3 data-en="Monthly Maintenance" data-es="Mantenimiento Mensual">Monthly Maintenance</h3>
-      <p data-en="Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support." data-es="Mantén tu sitio seguro, actualizado y funcionando sin problemas. Nos encargamos del hosting, actualizaciones, copias de seguridad y soporte continuo.">Keep your site secure, updated, and running smoothly. We handle hosting, updates, backups, and ongoing support.</p>
-      <span class="service-price">From $45/mo</span>
-      <br/><a href="pricing.html" class="learn-more"><span data-en="See plans" data-es="Ver planes">See plans</span> <i class="fa-solid fa-arrow-right"></i></a>
+      <h3 data-en="Monthly Site Plans" data-es="Planes Mensuales para Sitios">Monthly Site Plans</h3>
+      <p data-en="Lower upfront cost for businesses that want a managed website with support, maintenance, and monthly edits already included." data-es="Menor inversion inicial para negocios que quieren un sitio administrado con soporte, mantenimiento y ediciones mensuales ya incluidas.">Lower upfront cost for businesses that want a managed website with support, maintenance, and monthly edits already included.</p>
+      <span class="service-price" data-en="$149 setup + $45/mo" data-es="$149 de configuracion + $45/mes">$149 setup + $45/mo</span>
+      <br/><a href="pricing.html" class="learn-more"><span data-en="Compare plans" data-es="Comparar planes">Compare plans</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-plug"></i></div>
       <h3 data-en="Integrations &amp; Automations" data-es="Integraciones y Automatizaciones">Integrations & Automations</h3>
-      <p data-en="Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow." data-es="Conecta tus herramientas — Stripe, Zapier, CRMs, sistemas de pago y APIs de terceros — en un flujo de trabajo perfecto.">Connect your tools — Stripe, Zapier, CRMs, payment systems, and third-party APIs — into a seamless workflow.</p>
-      <span class="service-price">From $500</span>
+      <p data-en="Connect Stripe, booking tools, CRMs, and third-party APIs into a cleaner system that saves time and creates less manual work." data-es="Conecta Stripe, herramientas de reservas, CRM y APIs de terceros en un sistema mas limpio que ahorra tiempo y reduce trabajo manual.">Connect Stripe, booking tools, CRMs, and third-party APIs into a cleaner system that saves time and creates less manual work.</p>
+      <span class="service-price" data-en="From $2,500" data-es="Desde $2,500">From $2,500</span>
       <br/><a href="services.html" class="learn-more"><span data-en="Learn more" data-es="Ver más">Learn more</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="service-card reveal">
       <div class="service-icon"><i class="fa-solid fa-earth-americas"></i></div>
-      <h3 data-en="Free Demo — No Commitment" data-es="Demo Gratis — Sin Compromiso">Free Demo — No Commitment</h3>
-      <p data-en="We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo, pruébalo y solo paga si decides seguir adelante.">We build a working demo of your site in 48 hours. See it, test it, and only pay if you decide to move forward.</p>
-      <span class="service-price">Free</span>
-      <br/><a href="contact.html" class="learn-more"><span data-en="Get your demo" data-es="Obtén tu demo">Get your demo</span> <i class="fa-solid fa-arrow-right"></i></a>
+      <h3 data-en="Discovery &amp; Scoping" data-es="Descubrimiento y Alcance">Discovery &amp; Scoping</h3>
+      <p data-en="Need clarity before you commit? We can review your goals, recommend the right pricing path, and map the project before development starts." data-es="Necesitas claridad antes de comprometerte? Podemos revisar tus objetivos, recomendar la ruta de precios adecuada y definir el proyecto antes de comenzar el desarrollo.">Need clarity before you commit? We can review your goals, recommend the right pricing path, and map the project before development starts.</p>
+      <span class="service-price" data-en="Free consultation" data-es="Consulta gratuita">Free consultation</span>
+      <br/><a href="contact.html" class="learn-more"><span data-en="Talk through your project" data-es="Hablar de tu proyecto">Talk through your project</span> <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -291,23 +436,23 @@
   <div class="why-grid">
     <div class="why-card reveal">
       <div class="why-num">01</div>
-      <h3 data-en="Demo Before You Pay" data-es="Demo Antes de Pagar">Demo Before You Pay</h3>
-      <p data-en="See a real, working version of your site before committing to anything. Zero risk, zero surprise." data-es="Ve una versión real y funcional de tu sitio antes de comprometerte con nada. Cero riesgo, cero sorpresas.">See a real, working version of your site before committing to anything. Zero risk, zero surprise.</p>
+      <h3 data-en="Clear Commercial Paths" data-es="Rutas Comerciales Claras">Clear Commercial Paths</h3>
+      <p data-en="Monthly plans for lower upfront cost, buyout projects for full ownership. The pricing structure matches how different businesses actually buy." data-es="Planes mensuales para una inversion inicial menor y proyectos a pago completo para propiedad total. La estructura de precios coincide con como compran distintos negocios.">Monthly plans for lower upfront cost, buyout projects for full ownership. The pricing structure matches how different businesses actually buy.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">02</div>
-      <h3 data-en="100% Custom" data-es="100% Personalizado">100% Custom</h3>
-      <p data-en="No templates. Every project is built from scratch to match your brand, your audience, and your goals." data-es="Sin plantillas. Cada proyecto se construye desde cero para adaptarse a tu marca, tu audiencia y tus objetivos.">No templates. Every project is built from scratch to match your brand, your audience, and your goals.</p>
+      <h3 data-en="Built Around Growth" data-es="Construido para Crecer">Built Around Growth</h3>
+      <p data-en="From a simple site to a larger software system, RuutDev builds with business goals, CTA flow, and future changes in mind." data-es="Desde un sitio simple hasta un sistema de software mayor, RuutDev construye pensando en los objetivos del negocio, el flujo de conversion y los cambios futuros.">From a simple site to a larger software system, RuutDev builds with business goals, CTA flow, and future changes in mind.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">03</div>
-      <h3 data-en="Ongoing Care Available" data-es="Cuidado Continuo Disponible">Ongoing Care Available</h3>
-      <p data-en="Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch." data-es="Planes de mantenimiento mensual flexibles para que tu sitio se mantenga rápido, seguro y actualizado mucho después del lanzamiento.">Flexible monthly maintenance plans so your site stays fast, secure, and up-to-date long after launch.</p>
+      <h3 data-en="Support That Makes Sense" data-es="Soporte con Sentido">Support That Makes Sense</h3>
+      <p data-en="Monthly site plans already include maintenance, and buyout clients can add support after delivery when it actually helps." data-es="Los planes mensuales ya incluyen mantenimiento y los clientes de pago completo pueden agregar soporte despues de la entrega cuando realmente lo necesiten.">Monthly site plans already include maintenance, and buyout clients can add support after delivery when it actually helps.</p>
     </div>
     <div class="why-card reveal">
       <div class="why-num">04</div>
-      <h3 data-en="USA &amp; Venezuela" data-es="EE.UU. &amp; Venezuela">USA & Venezuela</h3>
-      <p data-en="We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries." data-es="Entendemos ambos mercados. Soporte bilingüe, pagos en dólares y experiencia atendiendo clientes en ambos países.">We understand both markets. Bilingual support, dollar payments, and experience serving clients across both countries.</p>
+      <h3 data-en="Direct, Bilingual Collaboration" data-es="Colaboracion Directa y Bilingue">Direct, Bilingual Collaboration</h3>
+      <p data-en="Work directly with the person building the project. Fast communication, written scope clarity, and support in English or Spanish." data-es="Trabaja directamente con quien construye el proyecto. Comunicacion rapida, claridad de alcance por escrito y soporte en ingles o espanol.">Work directly with the person building the project. Fast communication, written scope clarity, and support in English or Spanish.</p>
     </div>
   </div>
 </section>
@@ -372,48 +517,60 @@
   <div class="section-header reveal">
     <div>
       <div class="section-label" data-en="Pricing" data-es="Precios">Pricing</div>
-      <h2 class="section-title" data-en="Two ways to work with us" data-es="Dos formas de trabajar con nosotros">Two ways to work with us</h2>
+      <h2 class="section-title" data-en="Choose the pricing model that fits your stage" data-es="Elige el modelo de precios que encaja con tu etapa">Choose the pricing model that fits your stage</h2>
     </div>
     <a href="pricing.html" class="btn-outline"><span data-en="See full pricing" data-es="Ver precios completos">See full pricing</span> <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 
-  <div class="plans-row">
-    <div class="plan-card featured reveal">
-      <div class="plan-badge" data-en="Most Accessible" data-es="Más Accesible">Most Accessible</div>
-      <div class="plan-label" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
-      <div class="plan-price">$45<sub>/mo</sub></div>
-      <p class="plan-desc" data-en="We build, host, and maintain your site. Low entry cost — start with just the setup fee." data-es="Construimos, alojamos y mantenemos tu sitio. Bajo costo de entrada — comienza solo con la tarifa de configuración.">We build, host, and maintain your site. Low entry cost — start with just the setup fee.</p>
-      <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> <span data-en="We build your site from scratch" data-es="Construimos tu sitio desde cero">We build your site from scratch</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Hosting, SSL &amp; domain included" data-es="Hosting, SSL y dominio incluidos">Hosting, SSL & domain included</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Security &amp; monthly updates" data-es="Seguridad y actualizaciones mensuales">Security & monthly updates</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Buy out your site anytime ($540)" data-es="Compra tu sitio cuando quieras ($540)">Buy out your site anytime ($540)</span></li>
+  <div class="pricing-model-grid">
+    <div class="pricing-model-card featured reveal">
+      <div class="model-eyebrow" data-en="Monthly Plans" data-es="Planes Mensuales">Monthly Plans</div>
+      <div class="model-title" data-en="Lower upfront cost.<br />Support already included." data-es="Menor inversion inicial.<br />Soporte ya incluido.">Lower upfront cost.<br />Support already included.</div>
+      <p class="model-summary" data-en="Best for small businesses that want a professional site without taking on a full upfront project cost. Setup, hosting guidance, maintenance, and minor updates stay inside the monthly relationship." data-es="Ideal para pequenos negocios que quieren un sitio profesional sin asumir todo el costo inicial de un proyecto completo. La configuracion, la guia de hosting, el mantenimiento y las ediciones menores permanecen dentro de la relacion mensual.">Best for small businesses that want a professional site without taking on a full upfront project cost. Setup, hosting guidance, maintenance, and minor updates stay inside the monthly relationship.</p>
+      <div class="mini-plan-row">
+        <div class="mini-plan">
+          <div class="mini-plan-name">Simple</div>
+          <div class="mini-plan-price">$149<span>$45 / month</span></div>
+        </div>
+        <div class="mini-plan">
+          <div class="mini-plan-name">Standard</div>
+          <div class="mini-plan-price">$249<span>$97 / month</span></div>
+        </div>
+        <div class="mini-plan">
+          <div class="mini-plan-name">Growth</div>
+          <div class="mini-plan-price">$399+<span>$145 / month</span></div>
+        </div>
+      </div>
+      <ul class="model-list">
+        <li><i class="fa-solid fa-check"></i> <span data-en="Ideal when you want lower upfront investment and direct ongoing support" data-es="Ideal cuando quieres una inversion inicial menor y soporte directo continuo">Ideal when you want lower upfront investment and direct ongoing support</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Clear setup fee, predictable monthly billing, and room to scale up later" data-es="Tarifa de configuracion clara, facturacion mensual predecible y espacio para crecer despues">Clear setup fee, predictable monthly billing, and room to scale up later</span></li>
+        <li><i class="fa-solid fa-check"></i> <span data-en="Stripe-ready plan activation hooks prepared for checkout links" data-es="Hooks preparados para activar planes con Stripe cuando se conecten los enlaces de pago">Stripe-ready plan activation hooks prepared for checkout links</span></li>
       </ul>
-      <a href="pricing.html" class="btn-primary" style="margin-top:20px;width:100%;justify-content:center;" data-en="See monthly plans" data-es="Ver planes mensuales">See monthly plans</a>
+      <div class="model-actions">
+        <a href="pricing.html" class="btn-primary"><span data-en="See Monthly Plans" data-es="Ver Planes Mensuales">See Monthly Plans</span></a>
+        <a href="contact.html?intent=monthly&plan=standard-site&source=pricing" class="btn-secondary"><span data-en="Talk It Through" data-es="Hablarlo">Talk It Through</span></a>
+      </div>
     </div>
-    <div class="plan-card reveal">
-      <div class="plan-label" data-en="One-Time Project" data-es="Proyecto de Pago Único">One-Time Project</div>
-      <div class="plan-price" style="font-size:1.9rem;line-height:1.1;">$700<span style="font-size:1rem;font-weight:400;">+</span></div>
-      <p class="plan-desc" data-en="Pay in milestones, own it outright. Full IP transfer on final payment. No recurring fees required." data-es="Paga por hitos, sé el dueño total. Transferencia completa de propiedad intelectual al pago final. Sin tarifas recurrentes.">Pay in milestones, own it outright. Full IP transfer on final payment. No recurring fees required.</p>
-      <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> <span data-en="Website: $700–$900" data-es="Sitio Web: $700–$900">Website: $700–$900</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Software / Web App: $1,200–$4,500" data-es="Software / App Web: $1,200–$4,500">Software / Web App: $1,200–$4,500</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="AI &amp; Automations: $2,500–$8,000" data-es="IA y Automatizaciones: $2,500–$8,000">AI & Automations: $2,500–$8,000</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Full ownership on final payment" data-es="Propiedad total al pago final">Full ownership on final payment</span></li>
-      </ul>
-      <a href="pricing.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;" data-en="See one-time pricing" data-es="Ver precios de pago único">See one-time pricing</a>
-    </div>
-    <div class="plan-card reveal">
-      <div class="plan-label" data-en="Not sure yet?" data-es="¿No estás seguro?">Not sure yet?</div>
-      <div class="plan-price" style="font-size:1.5rem;line-height:1.2;padding-top:4px;" data-en="Free<br/>Demo" data-es="Demo<br/>Gratis">Free<br/>Demo</div>
-      <p class="plan-desc" data-en="We build a working demo of your site in 48 hours. See it, test it, and only pay if you move forward." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo, pruébalo y solo paga si decides continuar.">We build a working demo of your site in 48 hours. See it, test it, and only pay if you move forward.</p>
-      <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i> <span data-en="Real working preview — not a mockup" data-es="Vista previa funcional real — no un mockup">Real working preview — not a mockup</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="No payment until you approve" data-es="Sin pago hasta que apruebes">No payment until you approve</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="We confirm your price on the call" data-es="Confirmamos tu precio en la llamada">We confirm your price on the call</span></li>
-        <li><i class="fa-solid fa-check"></i> <span data-en="Zero commitment, zero pressure" data-es="Cero compromiso, cero presión">Zero commitment, zero pressure</span></li>
-      </ul>
-      <a href="contact.html" class="btn-outline" style="margin-top:20px;width:100%;justify-content:center;" data-en="Get your free demo" data-es="Obtén tu demo gratis">Get your free demo</a>
+    <div class="pricing-side">
+      <div class="pricing-model-card reveal">
+        <div class="model-eyebrow" data-en="Full Payment / Buyout" data-es="Pago Completo / Compra">Full Payment / Buyout</div>
+        <div class="model-title" data-en="One investment.<br />Ownership-focused delivery." data-es="Una sola inversion.<br />Entrega enfocada en propiedad.">One investment.<br />Ownership-focused delivery.</div>
+        <p class="model-summary" data-en="Best for businesses that want to pay once, own the build outright, and add support only if they need it later." data-es="Ideal para negocios que quieren pagar una vez, ser duenos del desarrollo y agregar soporte solo si luego lo necesitan.">Best for businesses that want to pay once, own the build outright, and add support only if they need it later.</p>
+        <ul class="model-prices">
+          <li><i class="fa-solid fa-circle-dot"></i> <span><strong data-en="Starter Website:" data-es="Sitio Starter:">Starter Website:</strong> <span data-en="from $800" data-es="desde $800">from $800</span></span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <span><strong data-en="Business Website:" data-es="Sitio de Negocio:">Business Website:</strong> <span data-en="from $1,500" data-es="desde $1,500">from $1,500</span></span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <span><strong data-en="E-commerce / Advanced Custom:" data-es="E-commerce / Desarrollo Avanzado:">E-commerce / Advanced Custom:</strong> <span data-en="from $2,500+" data-es="desde $2,500+">from $2,500+</span></span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <span><strong data-en="Software / AI / Automation:" data-es="Software / IA / Automatizacion:">Software / AI / Automation:</strong> <span data-en="custom quote" data-es="cotizacion personalizada">custom quote</span></span></li>
+        </ul>
+        <div class="model-actions">
+          <a href="pricing.html#buyout-pricing" class="btn-outline"><span data-en="See Buyout Pricing" data-es="Ver Precios de Compra">See Buyout Pricing</span></a>
+        </div>
+      </div>
+      <div class="pricing-model-card helper-card reveal">
+        <div class="model-eyebrow" data-en="Which Option Fits?" data-es="Que Opcion Encaja?">Which Option Fits?</div>
+        <p data-en="Choose monthly if you want a smaller upfront investment and ongoing support included. Choose buyout if you want a one-time project investment and a more ownership-focused model." data-es="Elige mensual si quieres una inversion inicial menor y soporte continuo incluido. Elige compra si quieres una inversion unica y un modelo mas enfocado en propiedad.">Choose monthly if you want a smaller upfront investment and ongoing support included. Choose buyout if you want a one-time project investment and a more ownership-focused model.</p>
+        <a href="contact.html?source=pricing" class="btn-secondary"><span data-en="Get a Recommendation" data-es="Obtener Recomendacion">Get a Recommendation</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -428,41 +585,41 @@
   <div class="process-grid">
     <div class="process-step reveal">
       <div class="step-num">01</div>
-      <h3 data-en="Conversation" data-es="Conversación">Conversation</h3>
-      <p data-en="Tell us about your business and goals. No tech jargon — just a straightforward chat." data-es="Cuéntanos sobre tu negocio y tus objetivos. Sin tecnicismos — solo una conversación directa.">Tell us about your business and goals. No tech jargon — just a straightforward chat.</p>
+      <h3 data-en="Discovery" data-es="Descubrimiento">Discovery</h3>
+      <p data-en="We learn about your business, your goals, and what needs to happen for the site or system to perform commercially." data-es="Conocemos tu negocio, tus objetivos y lo que debe ocurrir para que el sitio o sistema funcione comercialmente.">We learn about your business, your goals, and what needs to happen for the site or system to perform commercially.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">02</div>
-      <h3 data-en="Free Demo" data-es="Demo Gratis">Free Demo</h3>
-      <p data-en="We build a working demo of your site in 48 hours. See it in action before paying a dollar." data-es="Construimos un demo funcional de tu sitio en 48 horas. Míralo en acción antes de pagar un centavo.">We build a working demo of your site in 48 hours. See it in action before paying a dollar.</p>
+      <h3 data-en="Scope &amp; Pricing" data-es="Alcance y Precios">Scope & Pricing</h3>
+      <p data-en="We recommend the right monthly plan or buyout build, confirm scope, and keep the commercial terms clear before development starts." data-es="Recomendamos el plan mensual o desarrollo a compra correcto, confirmamos el alcance y dejamos claros los terminos comerciales antes de empezar.">We recommend the right monthly plan or buyout build, confirm scope, and keep the commercial terms clear before development starts.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">03</div>
-      <h3 data-en="Approval" data-es="Aprobación">Approval</h3>
-      <p data-en="You approve, we finalize every detail and prepare everything for launch." data-es="Tú apruebas, nosotros finalizamos cada detalle y preparamos todo para el lanzamiento.">You approve, we finalize every detail and prepare everything for launch.</p>
+      <h3 data-en="Build" data-es="Construccion">Build</h3>
+      <p data-en="RuutDev designs and develops the project with clean structure, responsive behavior, and conversion-focused details." data-es="RuutDev diseña y desarrolla el proyecto con estructura limpia, comportamiento responsivo y detalles enfocados en conversion.">RuutDev designs and develops the project with clean structure, responsive behavior, and conversion-focused details.</p>
     </div>
     <div class="process-step reveal">
       <div class="step-num">04</div>
-      <h3 data-en="Go Live" data-es="¡En Línea!">Go Live</h3>
-      <p data-en="Your site launches with domain, hosting, and optimization — ready to bring in clients." data-es="Tu sitio se lanza con dominio, hosting y optimización — listo para atraer clientes.">Your site launches with domain, hosting, and optimization — ready to bring in clients.</p>
+      <h3 data-en="Launch &amp; Support" data-es="Lanzamiento y Soporte">Launch & Support</h3>
+      <p data-en="You launch with the right support model in place, whether that means a managed monthly relationship or optional post-launch help." data-es="Lanzas con el modelo de soporte correcto, ya sea una relacion mensual administrada o ayuda opcional despues del lanzamiento.">You launch with the right support model in place, whether that means a managed monthly relationship or optional post-launch help.</p>
     </div>
   </div>
 </section>
 
 <!-- ── FINAL CTA ── -->
 <section class="cta-section">
-  <p class="cta-eyebrow reveal" data-en="Get started today" data-es="Comienza hoy">Get started today</p>
-  <h2 class="cta-title reveal" data-en="Your business deserves to be<br /><em>online right now</em>" data-es="Tu negocio merece estar<br /><em>en línea ahora mismo</em>">Your business deserves to be<br /><em>online right now</em></h2>
-  <p class="cta-sub reveal" data-en="The demo is free. No commitments. No fine print. Just results." data-es="El demo es gratis. Sin compromisos. Sin letra pequeña. Solo resultados.">The demo is free. No commitments. No fine print. Just results.</p>
+  <p class="cta-eyebrow reveal" data-en="Ready to move?" data-es="Listo para avanzar?">Ready to move?</p>
+  <h2 class="cta-title reveal" data-en="Choose a pricing path<br /><em>that matches your business</em>" data-es="Elige una ruta de precios<br /><em>que encaje con tu negocio</em>">Choose a pricing path<br /><em>that matches your business</em></h2>
+  <p class="cta-sub reveal" data-en="Start with a monthly plan, invest in a full custom build, or book a call and let us recommend the right route." data-es="Comienza con un plan mensual, invierte en un desarrollo personalizado a pago completo o agenda una llamada para que te recomendemos la mejor ruta.">Start with a monthly plan, invest in a full custom build, or book a call and let us recommend the right route.</p>
   <div class="cta-actions reveal">
-    <a href="contact.html" class="btn-primary"><i class="fa-solid fa-rocket"></i> <span data-en="Get my free demo" data-es="Obtén mi demo gratis">Get my free demo</span></a>
-    <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27m%20interested%20in%20a%20free%20demo." target="_blank" class="btn-secondary">
-      <i class="fa-brands fa-whatsapp"></i> <span data-en="Message on WhatsApp" data-es="Mensaje por WhatsApp">Message on WhatsApp</span>
+    <a href="pricing.html" class="btn-primary"><i class="fa-solid fa-tags"></i> <span data-en="See Pricing" data-es="Ver Precios">See Pricing</span></a>
+    <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27d%20like%20to%20talk%20about%20a%20website%20or%20software%20project." target="_blank" class="btn-secondary">
+      <i class="fa-brands fa-whatsapp"></i> <span data-en="Book a Call on WhatsApp" data-es="Agendar por WhatsApp">Book a Call on WhatsApp</span>
     </a>
   </div>
   <div class="cta-guarantee reveal">
     <i class="fa-solid fa-circle-check"></i>
-    <span data-en="Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract" data-es="Demo en 48 horas &nbsp;·&nbsp; Sin pago anticipado &nbsp;·&nbsp; Sin contrato">Demo in 48 hours &nbsp;·&nbsp; No upfront payment &nbsp;·&nbsp; No contract</span>
+    <span data-en="Monthly plans from $45/mo &nbsp;·&nbsp; Buyout builds from $800 &nbsp;·&nbsp; Clear next steps" data-es="Planes mensuales desde $45/mes &nbsp;·&nbsp; Desarrollos a compra desde $800 &nbsp;·&nbsp; Siguientes pasos claros">Monthly plans from $45/mo &nbsp;·&nbsp; Buyout builds from $800 &nbsp;·&nbsp; Clear next steps</span>
   </div>
 </section>
 
@@ -482,7 +639,7 @@
         <li><a href="services.html" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
         <li><a href="services.html" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
         <li><a href="services.html" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
-        <li><a href="pricing.html" data-en="Maintenance Plans" data-es="Planes de Mantenimiento">Maintenance Plans</a></li>
+        <li><a href="pricing.html" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
       </ul>
     </div>
     <div class="footer-col">
