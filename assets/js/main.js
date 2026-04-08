@@ -38,8 +38,16 @@ initNav();
 /* ── Mobile Menu ── */
 function toggleMenu() {
   const mobile = document.getElementById('nav-mobile');
+  const overlay = document.getElementById('nav-mobile-overlay');
+  const hamburger = document.querySelector('.hamburger');
   if (!mobile) return;
-  mobile.classList.toggle('open');
+  const isOpen = mobile.classList.toggle('open');
+  if (overlay) overlay.classList.toggle('open', isOpen);
+  if (hamburger) {
+    hamburger.classList.toggle('is-open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  }
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 /* ── Active Nav Link ── */
@@ -198,33 +206,6 @@ function initContactPrefill() {
   }
 }
 
-/* ── Swiper Instances ── */
-function initSwipers() {
-  // Portfolio swiper
-  if (document.querySelector('.portfolio-swiper')) {
-    new Swiper('.portfolio-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 24,
-      loop: false,
-      pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
-      navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
-      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
-    });
-  }
-
-  // Reviews swiper
-  if (document.querySelector('.reviews-swiper')) {
-    new Swiper('.reviews-swiper', {
-      slidesPerView: 1,
-      spaceBetween: 24,
-      loop: true,
-      autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
-      pagination: { el: '.reviews-swiper .swiper-pagination', clickable: true },
-      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
-    });
-  }
-}
-
 // Init on page load
 document.addEventListener('DOMContentLoaded', () => {
   // Apply saved language
@@ -238,17 +219,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#nav-mobile a').forEach(link => {
     link.addEventListener('click', () => {
       const mobile = document.getElementById('nav-mobile');
+      const overlay = document.getElementById('nav-mobile-overlay');
+      const hamburger = document.querySelector('.hamburger');
       if (mobile) mobile.classList.remove('open');
+      if (overlay) overlay.classList.remove('open');
+      if (hamburger) { hamburger.classList.remove('is-open'); hamburger.setAttribute('aria-expanded', 'false'); }
+      document.body.style.overflow = '';
     });
   });
 
   // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     const mobile = document.getElementById('nav-mobile');
+    const overlay = document.getElementById('nav-mobile-overlay');
     const hamburger = document.querySelector('.hamburger');
     if (mobile && mobile.classList.contains('open')) {
-      if (!mobile.contains(e.target) && !hamburger.contains(e.target)) {
+      if (!mobile.contains(e.target) && hamburger && !hamburger.contains(e.target)) {
         mobile.classList.remove('open');
+        if (overlay) overlay.classList.remove('open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       }
     }
   });
@@ -305,6 +296,30 @@ function initSwipers() {
     });
   }
 
+  // Portfolio swiper (index + portfolio page)
+  if (document.querySelector('.portfolio-swiper')) {
+    new Swiper('.portfolio-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: false,
+      pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
+      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+  }
+
+  // Reviews swiper (index)
+  if (document.querySelector('.reviews-swiper')) {
+    new Swiper('.reviews-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: '.reviews-swiper .swiper-pagination', clickable: true },
+      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+  }
+
   // Generic swipers for other pages
   ['about-swiper', 'buyout-swiper'].forEach(cls => {
     const el = document.querySelector('.' + cls);
@@ -319,13 +334,6 @@ function initSwipers() {
       });
     }
   });
-}
-
-// Initialize after Swiper script loads
-if (typeof Swiper !== 'undefined') {
-  initSwipers();
-} else {
-  window.addEventListener('load', initSwipers);
 }
 
 /* ── Contact Form (shared) ── */

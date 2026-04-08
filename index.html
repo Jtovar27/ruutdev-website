@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <script type="application/ld+json">
   {
@@ -80,6 +79,29 @@
     <div class="hero-grid"></div>
   </div>
 
+  <!-- Floating tech cards -->
+  <div class="hero-float-card hfc-1">
+    <div class="hfc-live-dot"></div>
+    <div class="hfc-body">
+      <strong data-en="Available now" data-es="Disponible ahora">Available now</strong>
+      <span data-en="Taking new projects" data-es="Aceptando proyectos">Taking new projects</span>
+    </div>
+  </div>
+  <div class="hero-float-card hfc-2">
+    <div class="hfc-icon"><i class="fa-solid fa-rocket"></i></div>
+    <div class="hfc-body">
+      <strong data-en="Delivered in days" data-es="Entregado en días">Delivered in days</strong>
+      <span data-en="Not months" data-es="No meses">Not months</span>
+    </div>
+  </div>
+  <div class="hero-float-card hfc-3">
+    <div class="hfc-icon"><i class="fa-solid fa-microchip"></i></div>
+    <div class="hfc-body">
+      <strong data-en="AI-integrated" data-es="Con IA integrada">AI-integrated</strong>
+      <span data-en="Modern stack" data-es="Stack moderno">Modern stack</span>
+    </div>
+  </div>
+
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
     Premium Websites, Software &amp; AI
@@ -94,16 +116,63 @@
 
   <div class="hero-actions">
     <a href="/pricing" class="btn-primary"><i class="fa-solid fa-tags"></i> <span data-en="See Pricing" data-es="Ver Precios">See Pricing</span></a>
-    <a href="/contact" class="btn-secondary" data-en="Book a Project Call" data-es="Reservar una Llamada">Book a Project Call</a>
+    <a href="/contact" class="btn-secondary"><i class="fa-solid fa-calendar-check"></i> <span data-en="Book a Project Call" data-es="Reservar una Llamada">Book a Project Call</span></a>
+  </div>
+
+  <!-- Tech stack marquee -->
+  <div class="hero-marquee" aria-hidden="true">
+    <div class="hero-marquee-track">
+      <span><i class="fa-solid fa-code"></i> Websites</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-layer-group"></i> Web Apps</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-microchip"></i> AI Integrations</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-bolt"></i> Automations</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-credit-card"></i> Stripe Ready</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-mobile-screen"></i> Mobile-First</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-language"></i> Bilingual EN/ES</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-shield-halved"></i> SEO-Optimized</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-server"></i> Vercel Hosted</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-database"></i> Supabase Backend</span>
+      <span class="hm-sep">·</span>
+      <!-- Duplicate for seamless loop -->
+      <span><i class="fa-solid fa-code"></i> Websites</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-layer-group"></i> Web Apps</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-microchip"></i> AI Integrations</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-bolt"></i> Automations</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-credit-card"></i> Stripe Ready</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-mobile-screen"></i> Mobile-First</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-language"></i> Bilingual EN/ES</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-shield-halved"></i> SEO-Optimized</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-server"></i> Vercel Hosted</span>
+      <span class="hm-sep">·</span>
+      <span><i class="fa-solid fa-database"></i> Supabase Backend</span>
+      <span class="hm-sep">·</span>
+    </div>
   </div>
 
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">$149</div>
-      <div class="stat-label" data-en="Monthly setup starts" data-es="Configuracion mensual desde">Monthly setup starts</div>
+      <div class="stat-num" data-count="149">$149</div>
+      <div class="stat-label" data-en="Monthly setup starts" data-es="Configuración mensual desde">Monthly setup starts</div>
     </div>
     <div class="stat">
-      <div class="stat-num">$45/mo</div>
+      <div class="stat-num">$45<span style="font-size:1.1rem">/mo</span></div>
       <div class="stat-label" data-en="Support-included plan" data-es="Plan con soporte incluido">Support-included plan</div>
     </div>
     <div class="stat">
@@ -112,7 +181,7 @@
     </div>
     <div class="stat">
       <div class="stat-num">1:1</div>
-      <div class="stat-label" data-en="Direct founder communication" data-es="Comunicacion directa con el fundador">Direct founder communication</div>
+      <div class="stat-label" data-en="Direct founder access" data-es="Acceso directo al fundador">Direct founder access</div>
     </div>
   </div>
 </section>

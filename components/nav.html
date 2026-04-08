@@ -14,10 +14,13 @@
       <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
     </div>
   </ul>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+    <span class="ham-line"></span>
+    <span class="ham-line"></span>
+    <span class="ham-line"></span>
+  </button>
 </nav>
+<div class="nav-mobile-overlay" id="nav-mobile-overlay" onclick="toggleMenu()"></div>
 <ul class="nav-mobile" id="nav-mobile">
   <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
   <li><a href="/portfolio"><span data-en="Portfolio" data-es="Portafolio">Portfolio</span></a></li>
@@ -25,6 +28,11 @@
   <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
   <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
   <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
-  <li><a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
-  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
+  <li class="mobile-nav-footer">
+    <a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
+  </li>
 </ul>
