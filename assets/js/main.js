@@ -11,6 +11,30 @@
 // };
 window.RUUTDEV_CHECKOUT_LINKS = window.RUUTDEV_CHECKOUT_LINKS || {};
 
+/* ── Nav Partial Loader ── */
+function initNav() {
+  const placeholder = document.getElementById('nav-placeholder');
+  if (!placeholder) return;
+
+  fetch('/components/nav.html')
+    .then(r => r.text())
+    .then(html => {
+      placeholder.outerHTML = html;
+      // Run nav-dependent functions AFTER nav is in the DOM
+      markActiveNavLink();
+      const saved = localStorage.getItem('ruutdev_lang') || 'en';
+      applyLang(saved);
+    })
+    .catch(() => {
+      // Nav fetch failed — log silently, page still usable
+      console.warn('RuutDev: nav partial failed to load');
+    });
+}
+
+// Initialize nav immediately (before DOMContentLoaded)
+// This starts the fetch early to minimize flash of missing nav
+initNav();
+
 /* ── Mobile Menu ── */
 function toggleMenu() {
   const mobile = document.getElementById('nav-mobile');
@@ -19,7 +43,7 @@ function toggleMenu() {
 }
 
 /* ── Active Nav Link ── */
-(function markActiveLink() {
+function markActiveNavLink() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, #nav-mobile a').forEach(a => {
     const href = a.getAttribute('href') || '';
@@ -27,7 +51,7 @@ function toggleMenu() {
       a.classList.add('active');
     }
   });
-})();
+}
 
 /* ── Scroll Reveal ── */
 const revealObserver = new IntersectionObserver((entries) => {
