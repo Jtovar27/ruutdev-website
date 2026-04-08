@@ -1,5 +1,12 @@
-node_modules/
+# Environment variable files — NEVER commit these
 .env
 .env.local
 .env.*.local
+.env.development
+.env.production
+
+# Vercel
 .vercel
+
+# Node
+node_modules/
