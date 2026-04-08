@@ -1934,3 +1934,4 @@ h1 em { font-style: normal; color: var(--blue); }
   #page-privacy .toc-list a { padding: 6px 12px; border-left: none; border: 1px solid var(--border); border-radius: 100px; font-size: 0.78rem; }
   #page-privacy .toc-list a.active { border-color: var(--blue); }
 }
+
