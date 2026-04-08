@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — RuutDev</title>
+  <meta name="description" content="Browse RuutDev's portfolio of completed client projects — websites, e-commerce stores, landing pages, and web apps built for real businesses." />
+  <link rel="canonical" href="https://ruutdev.com/portfolio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/portfolio" />
+  <meta property="og:title" content="Portfolio — RuutDev" />
+  <meta property="og:description" content="Browse RuutDev's portfolio of completed client projects — websites, e-commerce stores, landing pages, and web apps built for real businesses." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Portfolio — RuutDev" />
+  <meta name="twitter:description" content="Browse RuutDev's portfolio of completed client projects — real results for real businesses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    /* ── Portfolio page inline styles ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 0;
+    }
+    .portfolio-cta {
+      text-align: center;
+      padding: 80px 6%;
+      background: var(--bg2);
+    }
+    .portfolio-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .portfolio-cta h2 em { font-style: normal; color: var(--blue); }
+    .portfolio-cta p {
+      font-size: 1rem;
+      color: var(--text2);
+      font-weight: 300;
+      max-width: 440px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Our Work" data-es="Nuestro Trabajo">Our Work</div>
+    <h1 data-en="Projects That <em>Convert</em>" data-es="Proyectos Que <em>Convierten</em>">Projects That <em>Convert</em></h1>
+    <p data-en="Real businesses. Real results. Every site built to turn visitors into clients." data-es="Negocios reales. Resultados reales. Cada sitio construido para convertir visitantes en clientes.">Real businesses. Real results. Every site built to turn visitors into clients.</p>
+  </div>
+</div>
+
+<!-- ── PORTFOLIO ── -->
+<section style="background:var(--bg);">
+  <div class="container">
+
+    <!-- Filter buttons -->
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
+      <button class="filter-btn" data-filter="website" data-en="Websites" data-es="Sitios Web">Websites</button>
+      <button class="filter-btn" data-filter="ecommerce" data-en="E-Commerce" data-es="E-Commerce">E-Commerce</button>
+      <button class="filter-btn" data-filter="landing" data-en="Landing Pages" data-es="Landing Pages">Landing Pages</button>
+    </div>
+
+    <!-- Portfolio grid -->
+    <div class="portfolio-grid">
+
+      <!-- 1. AC.aballo Equestrian School -->
+      <div class="portfolio-card reveal" data-category="website">
+        <div class="portfolio-img">
+          <img
+            src="https://api.microlink.io/?url=https://www.acaballousa.com&screenshot=true&meta=false&embed=screenshot.url"
+            alt="AC.aballo Equestrian School website"
+            loading="lazy"
+          />
+          <div class="portfolio-overlay">
+            <a href="https://www.acaballousa.com/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <span data-en="View Live" data-es="Ver en Vivo">View Live</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">Website</span>
+            <span class="tag">Bilingual</span>
+            <span class="tag">Booking</span>
+          </div>
+          <h3>AC.aballo Equestrian School</h3>
+          <p data-en="Premium equestrian school website with booking, services, and bilingual support." data-es="Sitio web para escuela ecuestre con reservas, servicios y soporte bilingüe.">Premium equestrian school website with booking, services, and bilingual support.</p>
+        </div>
+      </div>
+
+      <!-- 2. La Cafebreria -->
+      <div class="portfolio-card reveal" data-category="website">
+        <div class="portfolio-img">
+          <img
+            src="https://api.microlink.io/?url=https://www.lacafebreria.com&screenshot=true&meta=false&embed=screenshot.url"
+            alt="La Cafebreria website"
+            loading="lazy"
+          />
+          <div class="portfolio-overlay">
+            <a href="https://www.lacafebreria.com/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <span data-en="View Live" data-es="Ver en Vivo">View Live</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">Website</span>
+            <span class="tag">Branding</span>
+            <span class="tag">Menu</span>
+          </div>
+          <h3>La Cafebreria</h3>
+          <p data-en="Café and bookstore brand site with menu, events, and online presence." data-es="Sitio de marca para café y librería con menú, eventos y presencia online.">Café and bookstore brand site with menu, events, and online presence.</p>
+        </div>
+      </div>
+
+      <!-- 3. Taxes Insurance Group -->
+      <div class="portfolio-card reveal" data-category="website">
+        <div class="portfolio-img">
+          <img
+            src="https://api.microlink.io/?url=https://www.taxesigroup.com&screenshot=true&meta=false&embed=screenshot.url"
+            alt="Taxes Insurance Group website"
+            loading="lazy"
+          />
+          <div class="portfolio-overlay">
+            <a href="https://www.taxesigroup.com/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              <span data-en="View Live" data-es="Ver en Vivo">View Live</span>
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">Website</span>
+            <span class="tag">Finance</span>
+            <span class="tag">Lead Gen</span>
+          </div>
+          <h3>Taxes Insurance Group</h3>
+          <p data-en="Professional tax and insurance services firm with lead capture and service pages." data-es="Firma de servicios fiscales y de seguros con captación de leads y páginas de servicios.">Professional tax and insurance services firm with lead capture and service pages.</p>
+        </div>
+      </div>
+
+      <!-- 4. Nomad Kitchen (demo) -->
+      <div class="portfolio-card reveal" data-category="website">
+        <div class="portfolio-img">
+          <div class="portfolio-placeholder">
+            <span>Nomad Kitchen</span>
+          </div>
+          <div class="portfolio-overlay">
+            <a href="/contact?intent=monthly&source=portfolio" class="btn-primary">
+              <span data-en="Similar Project?" data-es="¿Proyecto Similar?">Similar Project?</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">Website</span>
+            <span class="tag">Restaurant</span>
+            <span class="tag">Delivery</span>
+          </div>
+          <h3>Nomad Kitchen</h3>
+          <p data-en="Restaurant website with online menu, reservations, and delivery integration." data-es="Sitio de restaurante con menú online, reservaciones e integración de delivery.">Restaurant website with online menu, reservations, and delivery integration.</p>
+        </div>
+      </div>
+
+      <!-- 5. Luma Fashion (demo) -->
+      <div class="portfolio-card reveal" data-category="ecommerce">
+        <div class="portfolio-img">
+          <div class="portfolio-placeholder">
+            <span>Luma Fashion</span>
+          </div>
+          <div class="portfolio-overlay">
+            <a href="/contact?intent=buyout&plan=ecommerce-custom&source=portfolio" class="btn-primary">
+              <span data-en="Similar Project?" data-es="¿Proyecto Similar?">Similar Project?</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">E-Commerce</span>
+            <span class="tag">Fashion</span>
+            <span class="tag">Stripe</span>
+          </div>
+          <h3>Luma Fashion</h3>
+          <p data-en="Fashion e-commerce store with product catalog, cart, and Stripe checkout." data-es="Tienda de moda con catálogo de productos, carrito y pago con Stripe.">Fashion e-commerce store with product catalog, cart, and Stripe checkout.</p>
+        </div>
+      </div>
+
+      <!-- 6. Nexus Real Estate (demo) -->
+      <div class="portfolio-card reveal" data-category="landing">
+        <div class="portfolio-img">
+          <div class="portfolio-placeholder">
+            <span>Nexus Real Estate</span>
+          </div>
+          <div class="portfolio-overlay">
+            <a href="/contact?intent=buyout&source=portfolio" class="btn-primary">
+              <span data-en="Similar Project?" data-es="¿Proyecto Similar?">Similar Project?</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="tag">Landing Page</span>
+            <span class="tag">Real Estate</span>
+            <span class="tag">CRM</span>
+          </div>
+          <h3>Nexus Real Estate</h3>
+          <p data-en="Real estate landing page with property listings, contact forms, and CRM integration." data-es="Landing de bienes raíces con listados de propiedades, formularios y CRM.">Real estate landing page with property listings, contact forms, and CRM integration.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="portfolio-cta">
+  <h2 class="reveal" data-en="Ready to be <em>next</em>?" data-es="¿Listo para ser el <em>próximo</em>?">Ready to be <em>next</em>?</h2>
+  <p class="reveal" data-en="Let's build something that converts visitors into paying clients — just like we've done for businesses above." data-es="Construyamos algo que convierta visitantes en clientes pagadores, igual que hemos hecho para los negocios de arriba.">Let's build something that converts visitors into paying clients — just like we've done for businesses above.</p>
+  <div class="reveal">
+    <a href="/contact" class="btn-primary">
+      <i class="fa-solid fa-rocket"></i>
+      <span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
+      <ul>
+        <li><a href="/services" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="/services" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="/services" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="/pricing" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
+      <ul>
+        <li><a href="/about" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="/portfolio" data-en="Portfolio" data-es="Portafolio">Portfolio</a></li>
+        <li><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="/pay" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
+      <ul>
+        <li><a href="/terms" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="/privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/assets/js/effects.js" defer></script>
+<script>
+  /* ── Portfolio filter ── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.portfolio-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
