@@ -1935,3 +1935,46 @@ h1 em { font-style: normal; color: var(--blue); }
   #page-privacy .toc-list a.active { border-color: var(--blue); }
 }
 
+/* ── Swiper Overrides ── */
+
+.swiper {
+  width: 100%;
+  padding-bottom: 48px !important;
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+/* Make existing cards fill their slide */
+.swiper-slide .overview-card,
+.swiper-slide .process-step,
+.swiper-slide .pricing-card,
+.swiper-slide .service-card,
+.swiper-slide .maintenance-card,
+.swiper-slide .value-card {
+  height: 100%;
+  margin: 0;
+}
+
+/* Nav buttons use brand color */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--blue) !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+}
+
+/* Pagination dots use brand color */
+.swiper-pagination-bullet-active {
+  background: var(--blue) !important;
+}
+
+.swiper-pagination-bullet {
+  background: var(--border);
+  opacity: 1;
+}
+
