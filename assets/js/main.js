@@ -198,6 +198,33 @@ function initContactPrefill() {
   }
 }
 
+/* ── Swiper Instances ── */
+function initSwipers() {
+  // Portfolio swiper
+  if (document.querySelector('.portfolio-swiper')) {
+    new Swiper('.portfolio-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: false,
+      pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.portfolio-swiper .swiper-button-next', prevEl: '.portfolio-swiper .swiper-button-prev' },
+      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+  }
+
+  // Reviews swiper
+  if (document.querySelector('.reviews-swiper')) {
+    new Swiper('.reviews-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: '.reviews-swiper .swiper-pagination', clickable: true },
+      breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+  }
+}
+
 // Init on page load
 document.addEventListener('DOMContentLoaded', () => {
   // Apply saved language
@@ -205,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(saved);
   initStripeReadyCtas();
   initContactPrefill();
+  initSwipers();
 
   // Close mobile menu when a nav link is clicked
   document.querySelectorAll('#nav-mobile a').forEach(link => {
