@@ -139,79 +139,90 @@
     </div>
 
     <!-- Stripe-ready hook ids are wired in js/main.js via data-checkout-id. -->
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
-        <div class="card-name" data-en="Simple Site" data-es="Simple Site">Simple Site</div>
-        <div class="price-dual">
-          <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="$149 setup" data-es="$149 configuracion">$149 setup</span></div>
-          <div class="monthly-line">$45<span data-en="/month" data-es="/mes">/month</span></div>
+    <div class="swiper pricing-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="pricing-card reveal">
+            <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
+            <div class="card-name" data-en="Simple Site" data-es="Simple Site">Simple Site</div>
+            <div class="price-dual">
+              <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="$149 setup" data-es="$149 configuracion">$149 setup</span></div>
+              <div class="monthly-line">$45<span data-en="/month" data-es="/mes">/month</span></div>
+            </div>
+            <div class="card-meta" data-en="Up to 5 pages" data-es="Hasta 5 paginas">Up to 5 pages</div>
+            <p class="card-summary" data-en="For small businesses, freelancers, and local services that need a clean site with support included from the start." data-es="Para pequenos negocios, freelancers y servicios locales que necesitan un sitio limpio con soporte incluido desde el inicio.">For small businesses, freelancers, and local services that need a clean site with support included from the start.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Up to 5 core pages" data-es="Hasta 5 paginas principales">Up to 5 core pages</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Responsive custom design" data-es="Diseno responsive personalizado">Responsive custom design</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Contact form and WhatsApp or direct CTA integration" data-es="Formulario de contacto e integracion con WhatsApp o CTA directo">Contact form and WhatsApp or direct CTA integration</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Basic SEO structure and launch essentials" data-es="Estructura SEO basica y elementos esenciales de lanzamiento">Basic SEO structure and launch essentials</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Hosting guidance and maintenance included" data-es="Guia de hosting y mantenimiento incluidos">Hosting guidance and maintenance included</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Minor monthly edits included" data-es="Ediciones mensuales menores incluidas">Minor monthly edits included</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=monthly&plan=simple-site&source=pricing" class="btn-outline" data-checkout-id="monthly-simple-setup" data-fallback-href="/contact?intent=monthly&plan=simple-site&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
+              <a href="/contact?intent=monthly&plan=simple-site&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
+            </div>
+            <p class="price-footnote" data-en="Best when you need a polished website with a small monthly commitment." data-es="Ideal cuando necesitas un sitio bien resuelto con un compromiso mensual pequeno.">Best when you need a polished website with a small monthly commitment.</p>
+          </div>
         </div>
-        <div class="card-meta" data-en="Up to 5 pages" data-es="Hasta 5 paginas">Up to 5 pages</div>
-        <p class="card-summary" data-en="For small businesses, freelancers, and local services that need a clean site with support included from the start." data-es="Para pequenos negocios, freelancers y servicios locales que necesitan un sitio limpio con soporte incluido desde el inicio.">For small businesses, freelancers, and local services that need a clean site with support included from the start.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Up to 5 core pages" data-es="Hasta 5 paginas principales">Up to 5 core pages</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Responsive custom design" data-es="Diseno responsive personalizado">Responsive custom design</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Contact form and WhatsApp or direct CTA integration" data-es="Formulario de contacto e integracion con WhatsApp o CTA directo">Contact form and WhatsApp or direct CTA integration</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Basic SEO structure and launch essentials" data-es="Estructura SEO basica y elementos esenciales de lanzamiento">Basic SEO structure and launch essentials</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Hosting guidance and maintenance included" data-es="Guia de hosting y mantenimiento incluidos">Hosting guidance and maintenance included</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Minor monthly edits included" data-es="Ediciones mensuales menores incluidas">Minor monthly edits included</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=monthly&plan=simple-site&source=pricing" class="btn-outline" data-checkout-id="monthly-simple-setup" data-fallback-href="/contact?intent=monthly&plan=simple-site&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
-          <a href="/contact?intent=monthly&plan=simple-site&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
-        </div>
-        <p class="price-footnote" data-en="Best when you need a polished website with a small monthly commitment." data-es="Ideal cuando necesitas un sitio bien resuelto con un compromiso mensual pequeno.">Best when you need a polished website with a small monthly commitment.</p>
-      </div>
 
-      <div class="pricing-card featured reveal">
-        <div class="pricing-badge" data-en="Most Popular" data-es="Mas Popular">Most Popular</div>
-        <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
-        <div class="card-name" data-en="Standard Site" data-es="Standard Site">Standard Site</div>
-        <div class="price-dual">
-          <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="$249 setup" data-es="$249 configuracion">$249 setup</span></div>
-          <div class="monthly-line">$97<span data-en="/month" data-es="/mes">/month</span></div>
+        <div class="swiper-slide">
+          <div class="pricing-card featured reveal">
+            <div class="pricing-badge" data-en="Most Popular" data-es="Mas Popular">Most Popular</div>
+            <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
+            <div class="card-name" data-en="Standard Site" data-es="Standard Site">Standard Site</div>
+            <div class="price-dual">
+              <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="$249 setup" data-es="$249 configuracion">$249 setup</span></div>
+              <div class="monthly-line">$97<span data-en="/month" data-es="/mes">/month</span></div>
+            </div>
+            <div class="card-meta" data-en="Growing business site" data-es="Sitio para negocio en crecimiento">Growing business site</div>
+            <p class="card-summary" data-en="For businesses that need more pages, stronger layout customization, and a site that supports content, credibility, and lead capture better." data-es="Para negocios que necesitan mas paginas, una personalizacion de layout mas fuerte y un sitio que apoye mejor el contenido, la credibilidad y la captacion de leads.">For businesses that need more pages, stronger layout customization, and a site that supports content, credibility, and lead capture better.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="More pages and stronger content structure" data-es="Mas paginas y estructura de contenido mas fuerte">More pages and stronger content structure</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Higher layout customization" data-es="Mayor personalizacion del layout">Higher layout customization</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Blog, portfolio, or case study support" data-es="Soporte para blog, portafolio o casos de estudio">Blog, portfolio, or case study support</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Booking flow or advanced forms when relevant" data-es="Flujo de reservas o formularios avanzados cuando convenga">Booking flow or advanced forms when relevant</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Stronger SEO structure and conversion polish" data-es="Estructura SEO mas fuerte y mejor acabado de conversion">Stronger SEO structure and conversion polish</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Monthly edits, support, and maintenance included" data-es="Ediciones mensuales, soporte y mantenimiento incluidos">Monthly edits, support, and maintenance included</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=monthly&plan=standard-site&source=pricing" class="btn-primary" data-checkout-id="monthly-standard-setup" data-fallback-href="/contact?intent=monthly&plan=standard-site&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
+              <a href="/contact?intent=monthly&plan=standard-site&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
+            </div>
+            <p class="price-footnote" data-en="Best for service brands and growing businesses that need more than a basic brochure site." data-es="Ideal para marcas de servicios y negocios en crecimiento que necesitan mas que un sitio basico.">Best for service brands and growing businesses that need more than a basic brochure site.</p>
+          </div>
         </div>
-        <div class="card-meta" data-en="Growing business site" data-es="Sitio para negocio en crecimiento">Growing business site</div>
-        <p class="card-summary" data-en="For businesses that need more pages, stronger layout customization, and a site that supports content, credibility, and lead capture better." data-es="Para negocios que necesitan mas paginas, una personalizacion de layout mas fuerte y un sitio que apoye mejor el contenido, la credibilidad y la captacion de leads.">For businesses that need more pages, stronger layout customization, and a site that supports content, credibility, and lead capture better.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="More pages and stronger content structure" data-es="Mas paginas y estructura de contenido mas fuerte">More pages and stronger content structure</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Higher layout customization" data-es="Mayor personalizacion del layout">Higher layout customization</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Blog, portfolio, or case study support" data-es="Soporte para blog, portafolio o casos de estudio">Blog, portfolio, or case study support</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Booking flow or advanced forms when relevant" data-es="Flujo de reservas o formularios avanzados cuando convenga">Booking flow or advanced forms when relevant</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Stronger SEO structure and conversion polish" data-es="Estructura SEO mas fuerte y mejor acabado de conversion">Stronger SEO structure and conversion polish</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Monthly edits, support, and maintenance included" data-es="Ediciones mensuales, soporte y mantenimiento incluidos">Monthly edits, support, and maintenance included</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=monthly&plan=standard-site&source=pricing" class="btn-primary" data-checkout-id="monthly-standard-setup" data-fallback-href="/contact?intent=monthly&plan=standard-site&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
-          <a href="/contact?intent=monthly&plan=standard-site&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
-        </div>
-        <p class="price-footnote" data-en="Best for service brands and growing businesses that need more than a basic brochure site." data-es="Ideal para marcas de servicios y negocios en crecimiento que necesitan mas que un sitio basico.">Best for service brands and growing businesses that need more than a basic brochure site.</p>
-      </div>
 
-      <div class="pricing-card reveal">
-        <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
-        <div class="card-name" data-en="Growth / Advanced" data-es="Growth / Advanced">Growth / Advanced</div>
-        <div class="price-dual">
-          <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="From $399 setup" data-es="Desde $399 configuracion">From $399 setup</span></div>
-          <div class="monthly-line">$145<span data-en="/month" data-es="/mes">/month</span></div>
+        <div class="swiper-slide">
+          <div class="pricing-card reveal">
+            <div class="card-type" data-en="Monthly Plan" data-es="Plan Mensual">Monthly Plan</div>
+            <div class="card-name" data-en="Growth / Advanced" data-es="Growth / Advanced">Growth / Advanced</div>
+            <div class="price-dual">
+              <div class="setup-line"><i class="fa-solid fa-hammer"></i> <span data-en="From $399 setup" data-es="Desde $399 configuracion">From $399 setup</span></div>
+              <div class="monthly-line">$145<span data-en="/month" data-es="/mes">/month</span></div>
+            </div>
+            <div class="card-meta" data-en="For larger or more connected sites" data-es="Para sitios mas grandes o mas conectados">For larger or more connected sites</div>
+            <p class="card-summary" data-en="For larger business websites that need deeper customization, more flexibility, and support for integrations as the site grows." data-es="Para sitios de negocio mas amplios que necesitan mayor personalizacion, mas flexibilidad y soporte para integraciones a medida que crecen.">For larger business websites that need deeper customization, more flexibility, and support for integrations as the site grows.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Larger site architecture and more tailored UX" data-es="Arquitectura de sitio mas amplia y UX mas personalizada">Larger site architecture and more tailored UX</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Advanced integrations and workflow needs" data-es="Integraciones avanzadas y necesidades de flujo de trabajo">Advanced integrations and workflow needs</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Stronger support cadence for scaling businesses" data-es="Cadencia de soporte mas fuerte para negocios en crecimiento">Stronger support cadence for scaling businesses</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="More room for phased improvements over time" data-es="Mas margen para mejoras por fases con el tiempo">More room for phased improvements over time</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Maintenance and ongoing refinement included" data-es="Mantenimiento y refinamiento continuo incluidos">Maintenance and ongoing refinement included</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Quoted from a defined starting point depending on scope" data-es="Cotizado desde un punto de partida definido segun el alcance">Quoted from a defined starting point depending on scope</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=monthly&plan=growth-advanced&source=pricing" class="btn-outline" data-checkout-id="monthly-growth-setup" data-fallback-href="/contact?intent=monthly&plan=growth-advanced&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
+              <a href="/contact?intent=monthly&plan=growth-advanced&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
+            </div>
+            <p class="price-footnote" data-en="Best when your website needs more flexibility, support, and room to evolve." data-es="Ideal cuando tu sitio necesita mas flexibilidad, soporte y margen para evolucionar.">Best when your website needs more flexibility, support, and room to evolve.</p>
+          </div>
         </div>
-        <div class="card-meta" data-en="For larger or more connected sites" data-es="Para sitios mas grandes o mas conectados">For larger or more connected sites</div>
-        <p class="card-summary" data-en="For larger business websites that need deeper customization, more flexibility, and support for integrations as the site grows." data-es="Para sitios de negocio mas amplios que necesitan mayor personalizacion, mas flexibilidad y soporte para integraciones a medida que crecen.">For larger business websites that need deeper customization, more flexibility, and support for integrations as the site grows.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Larger site architecture and more tailored UX" data-es="Arquitectura de sitio mas amplia y UX mas personalizada">Larger site architecture and more tailored UX</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Advanced integrations and workflow needs" data-es="Integraciones avanzadas y necesidades de flujo de trabajo">Advanced integrations and workflow needs</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Stronger support cadence for scaling businesses" data-es="Cadencia de soporte mas fuerte para negocios en crecimiento">Stronger support cadence for scaling businesses</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="More room for phased improvements over time" data-es="Mas margen para mejoras por fases con el tiempo">More room for phased improvements over time</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Maintenance and ongoing refinement included" data-es="Mantenimiento y refinamiento continuo incluidos">Maintenance and ongoing refinement included</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Quoted from a defined starting point depending on scope" data-es="Cotizado desde un punto de partida definido segun el alcance">Quoted from a defined starting point depending on scope</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=monthly&plan=growth-advanced&source=pricing" class="btn-outline" data-checkout-id="monthly-growth-setup" data-fallback-href="/contact?intent=monthly&plan=growth-advanced&source=pricing"><span data-en="Choose Plan" data-es="Elegir Plan">Choose Plan</span></a>
-          <a href="/contact?intent=monthly&plan=growth-advanced&source=pricing" class="btn-secondary"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
-        </div>
-        <p class="price-footnote" data-en="Best when your website needs more flexibility, support, and room to evolve." data-es="Ideal cuando tu sitio necesita mas flexibilidad, soporte y margen para evolucionar.">Best when your website needs more flexibility, support, and room to evolve.</p>
       </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
@@ -239,71 +250,84 @@
       </div>
     </div>
 
-    <div class="buyout-grid">
-      <div class="pricing-card reveal">
-        <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
-        <div class="card-name" data-en="Starter Website" data-es="Starter Website">Starter Website</div>
-        <div class="buyout-line">$800<span data-en="starting point" data-es="punto de partida">starting point</span></div>
-        <div class="card-meta" data-en="Landing page or starter site" data-es="Landing page o sitio inicial">Landing page or starter site</div>
-        <p class="card-summary" data-en="For new businesses, focused offers, and straightforward websites that need to launch quickly with a professional foundation." data-es="Para negocios nuevos, ofertas enfocadas y sitios directos que necesitan lanzarse rapido con una base profesional.">For new businesses, focused offers, and straightforward websites that need to launch quickly with a professional foundation.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Tailored landing page or starter brochure site" data-es="Landing page o sitio informativo inicial a medida">Tailored landing page or starter brochure site</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="One-time payment structure" data-es="Estructura de pago unico">One-time payment structure</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Optional support after delivery" data-es="Soporte opcional despues de la entrega">Optional support after delivery</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=buyout&plan=starter-website&source=pricing" class="btn-outline"><span data-en="Get Started" data-es="Comenzar">Get Started</span></a>
+    <div class="swiper buyout-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="pricing-card reveal">
+            <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
+            <div class="card-name" data-en="Starter Website" data-es="Starter Website">Starter Website</div>
+            <div class="buyout-line">$800<span data-en="starting point" data-es="punto de partida">starting point</span></div>
+            <div class="card-meta" data-en="Landing page or starter site" data-es="Landing page o sitio inicial">Landing page or starter site</div>
+            <p class="card-summary" data-en="For new businesses, focused offers, and straightforward websites that need to launch quickly with a professional foundation." data-es="Para negocios nuevos, ofertas enfocadas y sitios directos que necesitan lanzarse rapido con una base profesional.">For new businesses, focused offers, and straightforward websites that need to launch quickly with a professional foundation.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Tailored landing page or starter brochure site" data-es="Landing page o sitio informativo inicial a medida">Tailored landing page or starter brochure site</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="One-time payment structure" data-es="Estructura de pago unico">One-time payment structure</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Optional support after delivery" data-es="Soporte opcional despues de la entrega">Optional support after delivery</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=buyout&plan=starter-website&source=pricing" class="btn-outline"><span data-en="Get Started" data-es="Comenzar">Get Started</span></a>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="pricing-card featured reveal">
-        <div class="pricing-badge" data-en="Best Value" data-es="Mejor Valor">Best Value</div>
-        <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
-        <div class="card-name" data-en="Business Website" data-es="Business Website">Business Website</div>
-        <div class="buyout-line">$1,500<span data-en="starting point" data-es="punto de partida">starting point</span></div>
-        <div class="card-meta" data-en="Professional multi-page site" data-es="Sitio profesional de varias paginas">Professional multi-page site</div>
-        <p class="card-summary" data-en="For established businesses that need stronger structure, more pages, and a site that can support trust, SEO, and conversions more effectively." data-es="Para negocios establecidos que necesitan mejor estructura, mas paginas y un sitio que sostenga mejor la confianza, el SEO y las conversiones.">For established businesses that need stronger structure, more pages, and a site that can support trust, SEO, and conversions more effectively.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Tailored business website scope" data-es="Alcance de sitio de negocio personalizado">Tailored business website scope</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="One-time payment with ownership on final payment" data-es="Pago unico con propiedad al finalizar el pago">One-time payment with ownership on final payment</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Optional maintenance after launch" data-es="Mantenimiento opcional despues del lanzamiento">Optional maintenance after launch</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=buyout&plan=business-website&source=pricing" class="btn-primary"><span data-en="Request Full Quote" data-es="Solicitar Cotizacion Completa">Request Full Quote</span></a>
+        <div class="swiper-slide">
+          <div class="pricing-card featured reveal">
+            <div class="pricing-badge" data-en="Best Value" data-es="Mejor Valor">Best Value</div>
+            <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
+            <div class="card-name" data-en="Business Website" data-es="Business Website">Business Website</div>
+            <div class="buyout-line">$1,500<span data-en="starting point" data-es="punto de partida">starting point</span></div>
+            <div class="card-meta" data-en="Professional multi-page site" data-es="Sitio profesional de varias paginas">Professional multi-page site</div>
+            <p class="card-summary" data-en="For established businesses that need stronger structure, more pages, and a site that can support trust, SEO, and conversions more effectively." data-es="Para negocios establecidos que necesitan mejor estructura, mas paginas y un sitio que sostenga mejor la confianza, el SEO y las conversiones.">For established businesses that need stronger structure, more pages, and a site that can support trust, SEO, and conversions more effectively.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Tailored business website scope" data-es="Alcance de sitio de negocio personalizado">Tailored business website scope</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="One-time payment with ownership on final payment" data-es="Pago unico con propiedad al finalizar el pago">One-time payment with ownership on final payment</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Optional maintenance after launch" data-es="Mantenimiento opcional despues del lanzamiento">Optional maintenance after launch</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=buyout&plan=business-website&source=pricing" class="btn-primary"><span data-en="Request Full Quote" data-es="Solicitar Cotizacion Completa">Request Full Quote</span></a>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="pricing-card reveal">
-        <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
-        <div class="card-name" data-en="E-commerce / Advanced Custom Build" data-es="E-commerce / Advanced Custom Build">E-commerce / Advanced Custom Build</div>
-        <div class="buyout-line">$2,500+<span data-en="starting point" data-es="punto de partida">starting point</span></div>
-        <div class="card-meta" data-en="Higher complexity and integrations" data-es="Mayor complejidad e integraciones">Higher complexity and integrations</div>
-        <p class="card-summary" data-en="For projects that need custom checkout flows, integrations, advanced user journeys, or broader technical scope than a standard website." data-es="Para proyectos que necesitan flujos de checkout personalizados, integraciones, recorridos avanzados de usuario o un alcance tecnico mas amplio que un sitio estandar.">For projects that need custom checkout flows, integrations, advanced user journeys, or broader technical scope than a standard website.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Advanced feature set and integrations" data-es="Conjunto avanzado de funcionalidades e integraciones">Advanced feature set and integrations</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Tailored quote based on scope" data-es="Cotizacion personalizada segun el alcance">Tailored quote based on scope</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Optional support after delivery" data-es="Soporte opcional despues de la entrega">Optional support after delivery</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=buyout&plan=ecommerce-custom&source=pricing" class="btn-outline"><span data-en="Request Full Quote" data-es="Solicitar Cotizacion Completa">Request Full Quote</span></a>
+        <div class="swiper-slide">
+          <div class="pricing-card reveal">
+            <div class="card-type" data-en="One-Time Project" data-es="Proyecto de Pago Unico">One-Time Project</div>
+            <div class="card-name" data-en="E-commerce / Advanced Custom Build" data-es="E-commerce / Advanced Custom Build">E-commerce / Advanced Custom Build</div>
+            <div class="buyout-line">$2,500+<span data-en="starting point" data-es="punto de partida">starting point</span></div>
+            <div class="card-meta" data-en="Higher complexity and integrations" data-es="Mayor complejidad e integraciones">Higher complexity and integrations</div>
+            <p class="card-summary" data-en="For projects that need custom checkout flows, integrations, advanced user journeys, or broader technical scope than a standard website." data-es="Para proyectos que necesitan flujos de checkout personalizados, integraciones, recorridos avanzados de usuario o un alcance tecnico mas amplio que un sitio estandar.">For projects that need custom checkout flows, integrations, advanced user journeys, or broader technical scope than a standard website.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Advanced feature set and integrations" data-es="Conjunto avanzado de funcionalidades e integraciones">Advanced feature set and integrations</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Tailored quote based on scope" data-es="Cotizacion personalizada segun el alcance">Tailored quote based on scope</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Optional support after delivery" data-es="Soporte opcional despues de la entrega">Optional support after delivery</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=buyout&plan=ecommerce-custom&source=pricing" class="btn-outline"><span data-en="Request Full Quote" data-es="Solicitar Cotizacion Completa">Request Full Quote</span></a>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="pricing-card reveal">
-        <div class="card-type" data-en="Custom Build" data-es="Desarrollo Personalizado">Custom Build</div>
-        <div class="card-name" data-en="Software / AI / Automation" data-es="Software / IA / Automatizacion">Software / AI / Automation</div>
-        <div class="buyout-line" data-en="Custom" data-es="Personalizado">Custom</div>
-        <div class="card-meta" data-en="Quoted around business workflow" data-es="Cotizado segun el flujo del negocio">Quoted around business workflow</div>
-        <p class="card-summary" data-en="For operational systems, AI-assisted flows, automations, and internal or customer-facing software that need a custom quote instead of a packaged website price." data-es="Para sistemas operativos, flujos asistidos por IA, automatizaciones y software interno o de cara al cliente que necesitan una cotizacion personalizada en lugar de un precio empaquetado de sitio web.">For operational systems, AI-assisted flows, automations, and internal or customer-facing software that need a custom quote instead of a packaged website price.</p>
-        <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <span data-en="Custom scope, integrations, and workflow mapping" data-es="Alcance personalizado, integraciones y mapeo de flujo de trabajo">Custom scope, integrations, and workflow mapping</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Quoted per objectives and technical complexity" data-es="Cotizado segun objetivos y complejidad tecnica">Quoted per objectives and technical complexity</span></li>
-          <li><i class="fa-solid fa-check"></i> <span data-en="Ownership-focused delivery with optional support" data-es="Entrega orientada a propiedad con soporte opcional">Ownership-focused delivery with optional support</span></li>
-        </ul>
-        <div class="cta-row">
-          <a href="/contact?intent=buyout&plan=software-ai&source=pricing" class="btn-outline"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
+        <div class="swiper-slide">
+          <div class="pricing-card reveal">
+            <div class="card-type" data-en="Custom Build" data-es="Desarrollo Personalizado">Custom Build</div>
+            <div class="card-name" data-en="Software / AI / Automation" data-es="Software / IA / Automatizacion">Software / AI / Automation</div>
+            <div class="buyout-line" data-en="Custom" data-es="Personalizado">Custom</div>
+            <div class="card-meta" data-en="Quoted around business workflow" data-es="Cotizado segun el flujo del negocio">Quoted around business workflow</div>
+            <p class="card-summary" data-en="For operational systems, AI-assisted flows, automations, and internal or customer-facing software that need a custom quote instead of a packaged website price." data-es="Para sistemas operativos, flujos asistidos por IA, automatizaciones y software interno o de cara al cliente que necesitan una cotizacion personalizada en lugar de un precio empaquetado de sitio web.">For operational systems, AI-assisted flows, automations, and internal or customer-facing software that need a custom quote instead of a packaged website price.</p>
+            <ul class="feature-list">
+              <li><i class="fa-solid fa-check"></i> <span data-en="Custom scope, integrations, and workflow mapping" data-es="Alcance personalizado, integraciones y mapeo de flujo de trabajo">Custom scope, integrations, and workflow mapping</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Quoted per objectives and technical complexity" data-es="Cotizado segun objetivos y complejidad tecnica">Quoted per objectives and technical complexity</span></li>
+              <li><i class="fa-solid fa-check"></i> <span data-en="Ownership-focused delivery with optional support" data-es="Entrega orientada a propiedad con soporte opcional">Ownership-focused delivery with optional support</span></li>
+            </ul>
+            <div class="cta-row">
+              <a href="/contact?intent=buyout&plan=software-ai&source=pricing" class="btn-outline"><span data-en="Book a Call" data-es="Reservar Llamada">Book a Call</span></a>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
 </section>
