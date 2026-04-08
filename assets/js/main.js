@@ -251,12 +251,11 @@ window.submitContactForm = async function() {
   const timeout = setTimeout(() => controller.abort(), 8000);
 
   try {
-    const res = await fetch('https://api.web3forms.com/submit', {
+    const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       signal: controller.signal,
       body: JSON.stringify({
-        access_key: '337075f5-4f51-4287-85f9-71d03aee9283',
         name, email, business, type, message
       })
     });
