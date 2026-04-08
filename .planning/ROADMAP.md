@@ -30,7 +30,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Web3Forms API key is gone from client-side JS and is sourced from a serverless function
   4. Supabase dashboard shows reviews, portfolio, prices, and content tables with RLS enabled
   5. A Vercel preview deploy responds with correct CORS and CSP headers on /api/* routes
-**Plans**: TBD
+**Plans**: 6 plans
+Plans:
+- [ ] 01-PLAN-01.md — Codebase reorganization into pages/ + assets/ + vercel.json with rewrites, CORS, CSP
+- [ ] 01-PLAN-02.md — Shared nav partial via fetch() + initNav() timing fix
+- [ ] 01-PLAN-03.md — api/contact.js Web3Forms proxy + api/_supabase.js shared client utility
+- [ ] 01-PLAN-04.md — package.json bootstrap with @supabase/supabase-js and stripe
+- [ ] 01-PLAN-05.md — Supabase provisioning (schema + RLS) + Vercel environment variables
+- [ ] 01-PLAN-06.md — Inline styles migration from HTML pages to assets/css/styles.css
 
 ### Phase 2: Public API + Dynamic Content
 **Goal**: Visitors see live testimonials, a real portfolio grid, and working Stripe payment CTAs — all sourced from Supabase
@@ -91,7 +98,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/? | Not started | - |
+| 1. Foundation | 0/6 | Not started | - |
 | 2. Public API + Dynamic Content | 0/? | Not started | - |
 | 3. Admin Panel + Review Moderation | 0/? | Not started | - |
 | 4. Admin CRUD + Review Submission | 0/? | Not started | - |

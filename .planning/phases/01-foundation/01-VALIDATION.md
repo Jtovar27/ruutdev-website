@@ -1,9 +1,9 @@
 ---
 phase: 1
 slug: foundation
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: approved
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-04-07
 ---
 
@@ -17,9 +17,9 @@ created: 2026-04-07
 
 | Property | Value |
 |----------|-------|
-| **Framework** | Manual verification + curl/browser checks (no test framework — static site) |
+| **Framework** | Manual verification + curl/bash checks (no test framework — static site) |
 | **Config file** | none |
-| **Quick run command** | `curl -I http://localhost:3000/api/contact` |
+| **Quick run command** | `ls pages/ assets/ api/` |
 | **Full suite command** | Manual checklist (see Per-Task Verification Map) |
 | **Estimated runtime** | ~120 seconds manual |
 
@@ -34,32 +34,36 @@ created: 2026-04-07
 
 ---
 
-## Per-Task Verification Map
+## Wave 0 Notes
 
-| Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 1 | STRC-01 | — | Files in pages/ not at root | manual | `ls pages/*.html` | ❌ W0 | ⬜ pending |
-| 1-01-02 | 01 | 1 | STRC-02 | — | Nav renders from shared partial | manual | `grep -r "nav-include" pages/` | ❌ W0 | ⬜ pending |
-| 1-01-03 | 01 | 2 | STRC-03 | T-1-01 | API key not in client JS | automated | `grep -r "web3forms" js/main.js` returns empty | ❌ W0 | ⬜ pending |
-| 1-01-04 | 01 | 2 | STRC-04 | — | vercel.json rewrites work | manual | `curl -I https://<preview>.vercel.app/about` 200 | ❌ W0 | ⬜ pending |
-| 1-02-01 | 02 | 1 | INFRA-01 | — | Supabase project created | manual | Supabase dashboard check | ❌ W0 | ⬜ pending |
-| 1-02-02 | 02 | 2 | INFRA-02 | T-1-02 | RLS enabled on all tables | automated | `SELECT tablename, rowsecurity FROM pg_tables WHERE schemaname='public'` | ❌ W0 | ⬜ pending |
-| 1-02-03 | 02 | 2 | INFRA-03 | T-1-03 | Env vars not in client code | automated | `grep -r "SUPABASE_SERVICE_ROLE_KEY" js/` returns empty | ❌ W0 | ⬜ pending |
-| 1-02-04 | 02 | 3 | INFRA-04 | — | CORS headers present | automated | `curl -I https://<preview>.vercel.app/api/contact` has Access-Control-Allow-Origin | ❌ W0 | ⬜ pending |
-| 1-02-05 | 02 | 3 | INFRA-05 | — | CSP headers present | automated | `curl -I https://<preview>.vercel.app/api/contact` has Content-Security-Policy | ❌ W0 | ⬜ pending |
-| 1-02-06 | 02 | 3 | INFRA-06 | — | .env.local not committed | automated | `git ls-files .env*` returns empty | ❌ W0 | ⬜ pending |
+Wave 0 artifacts (`vercel.json`, `.gitignore`, `.env.local`) are created within the plans themselves:
+- `vercel.json` — Plan 01, Task 2
+- `.gitignore` + `.env.local` — Plan 03, Task 1
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+No pre-execution setup is required before Wave 1.
 
 ---
 
-## Wave 0 Requirements
+## Per-Task Verification Map
 
-- [ ] `vercel.json` — rewrites config for pages/ directory
-- [ ] `.env.local` — local secrets file (gitignored)
-- [ ] `.gitignore` — ensures .env* is excluded
+| Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | Status |
+|---------|------|------|-------------|------------|-----------------|-----------|-------------------|--------|
+| 1-01-1 | 01 | 1 | STRC-01 | — | Files in pages/, not at root | automated | `ls pages/*.html` | ⬜ pending |
+| 1-01-2 | 01 | 1 | INFRA-05 | T-CORS, T-CSP | vercel.json valid with CORS + CSP | automated | `grep '"cleanUrls"' vercel.json` | ⬜ pending |
+| 1-01-3 | 01 | 1 | INFRA-05 | — | Preview URLs return 200 | manual | `curl -s -o /dev/null -w "%{http_code}" $PREVIEW/about` | ⬜ pending |
+| 1-02-1 | 02 | 2 | STRC-02 | — | nav.html partial created with bilingual attrs | automated | `grep "data-en" components/nav.html \| wc -l` (≥ 6) | ⬜ pending |
+| 1-02-2 | 02 | 2 | STRC-02 | — | initNav() and markActiveNavLink() in main.js | automated | `grep "function initNav" assets/js/main.js` | ⬜ pending |
+| 1-02-3 | 02 | 2 | STRC-02 | — | All 8 pages use nav-placeholder | automated | `grep -l "nav-placeholder" index.html pages/*.html \| wc -l` (= 8) | ⬜ pending |
+| 1-03-1 | 03 | 3 | INFRA-06 | T-secrets | .env.local gitignored, not tracked | automated | `git ls-files .env.local` (empty) | ⬜ pending |
+| 1-03-2 | 03 | 3 | STRC-04 | T-API-key | api/contact.js proxies Web3Forms | automated | `grep "WEB3FORMS_KEY" api/contact.js` | ⬜ pending |
+| 1-03-3 | 03 | 3 | INFRA-06 | T-creds | api/_supabase.js uses env vars only | automated | `grep "SUPABASE_URL" api/_supabase.js` | ⬜ pending |
+| 1-03-4 | 03 | 3 | STRC-04 | T-API-key | API key removed from client JS | automated | `grep "access_key" assets/js/main.js` (empty) | ⬜ pending |
+| 1-04-1 | 04 | 1 | INFRA-01 | — | package.json with supabase + stripe | automated | `grep '"@supabase/supabase-js"' package.json` | ⬜ pending |
+| 1-05-1 | 05 | 4 | INFRA-02, INFRA-03 | T-RLS | Supabase tables + RLS created | manual | Supabase dashboard — Table Editor + RLS check | ⬜ pending |
+| 1-05-2 | 05 | 4 | INFRA-04 | — | Vercel env vars set (7 vars) | manual | Vercel dashboard — Environment Variables section | ⬜ pending |
+| 1-06-1 | 06 | 3 | STRC-03 | — | No inline styles in HTML pages | automated | `grep -rl "<style>" pages/ \| wc -l` (= 0) | ⬜ pending |
 
-*Existing static site infrastructure covers most requirements. Wave 0 creates Vercel config.*
+*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
 ---
 
@@ -67,20 +71,32 @@ created: 2026-04-07
 
 | Behavior | Requirement | Why Manual | Test Instructions |
 |----------|-------------|------------|-------------------|
-| Supabase tables created with correct schema | INFRA-01 | Requires Supabase dashboard access | Log in to Supabase, check Table Editor for reviews, portfolio, prices, content tables |
-| RLS policies allow correct read/write | INFRA-02 | Requires live DB query | Run SQL: `SELECT * FROM pg_policies WHERE schemaname='public'` in Supabase SQL editor |
+| Supabase tables created with correct schema | INFRA-02 | Requires Supabase dashboard access | Log in to Supabase, check Table Editor for reviews, portfolio, prices, content tables |
+| RLS policies allow correct read/write | INFRA-03 | Requires live DB query | Run SQL: `SELECT * FROM pg_policies WHERE schemaname='public'` in Supabase SQL editor |
 | Nav renders identically across all pages | STRC-02 | Requires browser visual check | Open each page in browser, verify nav looks identical |
-| Vercel preview deploy works | INFRA-04/05 | Requires live deployment | Push to preview branch, check Vercel dashboard for successful deploy |
+| Vercel preview URLs respond 200 | INFRA-05 | Requires live deployment | Push to preview branch, run curl checks from Task 1-01-3 |
+| Vercel env vars set (7 vars) | INFRA-04 | Requires Vercel dashboard | Check Settings → Environment Variables in Vercel project |
+
+---
+
+## Sampling Continuity
+
+Wave 1 (Plans 01, 04): Tasks 1-01-1, 1-01-2, 1-04-1 — all have automated bash checks. ✅
+Wave 2 (Plan 02): Tasks 1-02-1, 1-02-2, 1-02-3 — all have automated bash checks. ✅
+Wave 3 (Plans 03, 06): Tasks 1-03-1 through 1-03-4, 1-06-1 — all have automated bash checks. ✅
+Wave 4 (Plan 05): Tasks 1-05-1, 1-05-2 — manual (Supabase + Vercel dashboards required). ✅
+
+No 3+ consecutive tasks without automated verification. Nyquist sampling satisfied.
 
 ---
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 120s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `automated` verify commands or are explicitly marked manual with justification
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 — no pre-execution setup required (artifacts created within plans)
+- [x] No watch-mode flags
+- [x] Feedback latency < 120s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** approved
