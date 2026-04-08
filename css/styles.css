@@ -687,3 +687,155 @@ h2.section-title {
   color: var(--text2); background: transparent;
 }
 .lang-btn.active { background: var(--blue); color: white; }
+
+/* ─────────────────────────────────────────
+   EFFECTS & ANIMATIONS
+   ───────────────────────────────────────── */
+
+/* ── Animated background mesh ── */
+.bg-animated {
+  background: var(--bg);
+  position: relative;
+}
+.bg-animated::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(26,109,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(26,109,255,0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(26,109,255,0.03) 0%, transparent 50%);
+  animation: meshShift 14s ease-in-out infinite alternate;
+}
+@keyframes meshShift {
+  0%   { background-position: 20% 10%, 80% 80%, 50% 50%; }
+  33%  { background-position: 30% 20%, 70% 70%, 55% 45%; }
+  66%  { background-position: 15% 30%, 85% 60%, 45% 55%; }
+  100% { background-position: 25% 15%, 75% 85%, 52% 48%; }
+}
+
+/* Ensure page content sits above mesh */
+nav, .nav-mobile, section, footer, .page-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Word reveal animation ── */
+.word-wrap {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.word {
+  display: inline-block;
+}
+
+/* ── Slide dots (mobile fullpage) ── */
+#slide-dots {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+#slide-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(26,109,255,0.25);
+  border: 1.5px solid rgba(26,109,255,0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+#slide-dots .dot.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  transform: scale(1.35);
+  box-shadow: 0 0 8px var(--blue-glow);
+}
+
+/* ── Cursor glow ── */
+#cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,109,255,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* ── Button shimmer ── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 80%
+  );
+  transform: skewX(-15deg);
+  transition: left 0.45s ease;
+  pointer-events: none;
+}
+.btn-primary:hover::after {
+  left: 140%;
+}
+
+/* ── Card hover glow ── */
+.overview-card,
+.pricing-card,
+.why-card,
+.value-card,
+.service-card {
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.overview-card:hover,
+.pricing-card:hover,
+.why-card:hover,
+.value-card:hover,
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 24px var(--blue-glow), 0 12px 32px rgba(0,0,0,0.06);
+  border-color: var(--blue-border);
+}
+
+/* ── Nav logo glow on hover ── */
+.nav-logo:hover span {
+  box-shadow: 0 0 18px rgba(26,109,255,0.55), 0 0 6px rgba(26,109,255,0.8);
+  transition: box-shadow 0.4s ease;
+}
+
+/* ── Fullpage slide container ── */
+.fp-slide {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-animated::before { animation: none; }
+  #cursor-glow { display: none; }
+  .btn-primary::after { display: none; }
+  .overview-card, .pricing-card, .why-card, .value-card, .service-card {
+    transition: none;
+  }
+}
