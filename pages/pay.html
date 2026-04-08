@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Make a Payment — RuutDev</title>
+  <meta name="description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <link rel="canonical" href="https://ruutdev.com/pay" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/pay" />
+  <meta property="og:title" content="Make a Payment — RuutDev" />
+  <meta property="og:description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Make a Payment — RuutDev" />
+  <meta name="twitter:description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    .payment-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .payment-types {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .payment-type-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .payment-type-option:hover { border-color: var(--blue-border); }
+    .payment-type-option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .payment-type-option .pt-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--blue);
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+    .payment-type-option.selected .pt-icon { background: var(--blue); color: white; border-color: var(--blue); }
+    .payment-type-option .pt-text { display: flex; flex-direction: column; gap: 2px; }
+    .payment-type-option .pt-text strong { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .payment-type-option .pt-text span { font-size: 0.78rem; color: var(--text2); }
+    .payment-type-option input[type="radio"] { display: none; }
+
+    .payment-form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+    }
+    .payment-form-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+    .payment-form-subtitle {
+      font-size: 0.875rem;
+      color: var(--text2);
+      font-weight: 300;
+      margin-bottom: 28px;
+    }
+
+    .amount-input-wrap { position: relative; }
+    .amount-input-wrap .currency-symbol {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .amount-input-wrap input { padding-left: 30px; font-size: 1.1rem; font-weight: 600; }
+
+    .plan-tiers {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin: -4px 0 10px 0;
+      padding: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .plan-tiers.visible { display: flex; }
+    .tier-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .tier-option:hover { border-color: var(--blue-border); }
+    .tier-option.selected { border-color: var(--blue); background: var(--blue-soft); }
+    .tier-option .tier-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .tier-option .tier-price { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
+    .tier-option input[type="radio"] { display: none; }
+    .tier-help {
+      display: none;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: var(--text2);
+      margin-top: -4px;
+      margin-bottom: 16px;
+    }
+    .tier-help.visible { display: block; }
+
+    .security-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .security-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--text2);
+    }
+    .security-badge i { color: #22c55e; }
+
+    .payment-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .info-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .info-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .info-card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .info-card ul li i {
+      color: var(--blue);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .info-card p {
+      font-size: 0.875rem;
+      color: var(--text2);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .alt-payment {
+      background: var(--text);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .alt-payment h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .alt-payment ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .alt-payment ul li {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .alt-payment ul li i { color: #60a5fa; font-size: 0.8rem; }
+    .alt-payment p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .payment-wrapper { grid-template-columns: 1fr; }
+      .payment-form-card { padding: 28px 24px; }
+      .tier-option {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+    <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="/contact" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+  <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
+</ul>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Client Payments" data-es="Pagos de Clientes">Client Payments</div>
+    <h1 data-en="Complete a <em>secure payment</em>" data-es="Completa un <em>pago seguro</em>">Complete a <em>secure payment</em></h1>
+    <p data-en="Use this page for monthly plan setup fees, recurring monthly plan payments, project deposits or milestones, and invoice-based payments." data-es="Usa esta pagina para tarifas de configuracion de planes mensuales, pagos mensuales recurrentes, depositos o hitos de proyecto y pagos por factura.">Use this page for monthly plan setup fees, recurring monthly plan payments, project deposits or milestones, and invoice-based payments.</p>
+  </div>
+</div>
+
+<section style="background:var(--bg);">
+  <div class="payment-wrapper">
+    <div class="payment-form-card reveal">
+      <div class="payment-form-title" data-en="Payment Details" data-es="Detalles del Pago">Payment Details</div>
+      <div class="payment-form-subtitle" data-en="Select the payment type, choose a plan if needed, and continue to secure checkout." data-es="Selecciona el tipo de pago, elige un plan si hace falta y continua al checkout seguro.">Select the payment type, choose a plan if needed, and continue to secure checkout.</div>
+
+      <div class="payment-types">
+        <label class="payment-type-option selected" onclick="selectPaymentType(this)">
+          <input type="radio" name="payment_type" value="monthly_setup" checked />
+          <div class="pt-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <div class="pt-text">
+            <strong data-en="Monthly Plan Setup" data-es="Configuracion de Plan Mensual">Monthly Plan Setup</strong>
+            <span data-en="One-time activation fee" data-es="Tarifa unica de activacion">One-time activation fee</span>
+          </div>
+        </label>
+
+        <label class="payment-type-option" onclick="selectPaymentType(this)">
+          <input type="radio" name="payment_type" value="monthly_recurring" />
+          <div class="pt-icon"><i class="fa-solid fa-repeat"></i></div>
+          <div class="pt-text">
+            <strong data-en="Monthly Plan Recurring" data-es="Pago Mensual Recurrente">Monthly Plan Recurring</strong>
+            <span data-en="Ongoing payment for your selected plan" data-es="Pago continuo para tu plan seleccionado">Ongoing payment for your selected plan</span>
+          </div>
+        </label>
+
+        <label class="payment-type-option" onclick="selectPaymentType(this)">
+          <input type="radio" name="payment_type" value="project" />
+          <div class="pt-icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <div class="pt-text">
+            <strong data-en="Project Deposit / Milestone" data-es="Deposito / Hito de Proyecto">Project Deposit / Milestone</strong>
+            <span data-en="For full-payment builds and approved scopes" data-es="Para desarrollos a pago completo y alcances aprobados">For full-payment builds and approved scopes</span>
+          </div>
+        </label>
+
+        <div class="plan-tiers visible" id="plan-tiers">
+          <label class="tier-option selected" onclick="selectTier(this, 'simple')">
+            <input type="radio" name="plan_tier" value="simple" checked />
+            <span class="tier-name" data-en="Simple Site" data-es="Simple Site">Simple Site</span>
+            <span class="tier-price" data-en="$149 setup / $45 mo" data-es="$149 configuracion / $45 mes">$149 setup / $45 mo</span>
+          </label>
+          <label class="tier-option" onclick="selectTier(this, 'standard')">
+            <input type="radio" name="plan_tier" value="standard" />
+            <span class="tier-name" data-en="Standard Site" data-es="Standard Site">Standard Site</span>
+            <span class="tier-price" data-en="$249 setup / $97 mo" data-es="$249 configuracion / $97 mes">$249 setup / $97 mo</span>
+          </label>
+          <label class="tier-option" onclick="selectTier(this, 'growth')">
+            <input type="radio" name="plan_tier" value="growth" />
+            <span class="tier-name" data-en="Growth / Advanced" data-es="Growth / Advanced">Growth / Advanced</span>
+            <span class="tier-price" data-en="$399 setup / $145 mo" data-es="$399 configuracion / $145 mes">$399 setup / $145 mo</span>
+          </label>
+        </div>
+        <p class="tier-help visible" id="tier-help" data-en="Choose the plan this payment is for. Amount auto-fills as a starting point and can still be adjusted if needed." data-es="Elige el plan al que corresponde este pago. El monto se completa automaticamente como punto de partida y aun puede ajustarse si hace falta.">Choose the plan this payment is for. Amount auto-fills as a starting point and can still be adjusted if needed.</p>
+
+        <label class="payment-type-option" onclick="selectPaymentType(this)">
+          <input type="radio" name="payment_type" value="invoice" />
+          <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
+          <div class="pt-text">
+            <strong data-en="Invoice / Other" data-es="Factura / Otro">Invoice / Other</strong>
+            <span data-en="Manual or custom payment" data-es="Pago manual o personalizado">Manual or custom payment</span>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label data-en="Payment amount (USD) *" data-es="Monto del pago (USD) *">Payment amount (USD) *</label>
+        <div class="amount-input-wrap">
+          <span class="currency-symbol">$</span>
+          <input type="number" id="pay-amount" placeholder="0.00" min="1" step="0.01" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-en="Your name *" data-es="Tu nombre *">Your name *</label>
+          <input type="text" id="pay-name" placeholder="John Smith" />
+        </div>
+        <div class="form-group">
+          <label data-en="Email address *" data-es="Correo electrónico *">Email address *</label>
+          <input type="email" id="pay-email" placeholder="hello@yourbusiness.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-en="Notes (optional)" data-es="Notas (opcional)">Notes (optional)</label>
+        <input type="text" id="pay-notes" placeholder="Project name, invoice number, or any reference" />
+      </div>
+
+      <button type="button" class="btn-primary" id="pay-btn" onclick="goToCheckout()" style="width:100%;justify-content:center;margin-bottom:16px;font-size:1rem;padding:16px 24px;">
+        <i class="fa-brands fa-stripe"></i> <span data-en="Proceed to Secure Checkout" data-es="Ir al Pago Seguro">Proceed to Secure Checkout</span>
+      </button>
+
+      <div class="security-row">
+        <div class="security-badge"><i class="fa-solid fa-lock"></i> SSL Encrypted</div>
+        <div class="security-badge"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</div>
+        <div class="security-badge"><i class="fa-brands fa-stripe"></i> Powered by Stripe</div>
+      </div>
+    </div>
+
+    <div class="payment-info">
+      <div class="info-card reveal">
+        <h3 data-en="Payment types explained" data-es="Tipos de pago explicados">Payment types explained</h3>
+        <ul>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Monthly Plan Setup:" data-es="Configuracion de Plan Mensual:">Monthly Plan Setup:</strong> <span data-en="One-time setup payment to activate the selected website plan." data-es="Pago unico de configuracion para activar el plan de sitio seleccionado.">One-time setup payment to activate the selected website plan.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Monthly Plan Recurring:" data-es="Pago Mensual Recurrente:">Monthly Plan Recurring:</strong> <span data-en="Recurring billing for the selected monthly plan once the site is live." data-es="Facturacion recurrente del plan mensual seleccionado una vez que el sitio esta en vivo.">Recurring billing for the selected monthly plan once the site is live.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Project Deposit / Milestone:" data-es="Deposito / Hito de Proyecto:">Project Deposit / Milestone:</strong> <span data-en="Quoted payment for full-payment projects, larger builds, or approved milestone schedules." data-es="Pago cotizado para proyectos a pago completo, desarrollos grandes o hitos aprobados.">Quoted payment for full-payment projects, larger builds, or approved milestone schedules.</span></li>
+          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Invoice / Other:" data-es="Factura / Otro:">Invoice / Other:</strong> <span data-en="Any other payment with a specific reference, invoice number, or manual amount." data-es="Cualquier otro pago con una referencia especifica, numero de factura o monto manual.">Any other payment with a specific reference, invoice number, or manual amount.</span></li>
+        </ul>
+      </div>
+
+      <div class="alt-payment reveal">
+        <h3 data-en="Alternative payment methods" data-es="Metodos de pago alternativos">Alternative payment methods</h3>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> <span data-en="Credit / Debit Card — via button above" data-es="Tarjeta de Credito / Debito — mediante el boton de arriba">Credit / Debit Card — via button above</span></li>
+          <li><i class="fa-solid fa-check"></i> Zelle — helloruutdev@hotmail.com</li>
+          <li><i class="fa-solid fa-check"></i> PayPal — helloruutdev@hotmail.com</li>
+          <li><i class="fa-solid fa-check"></i> <span data-en="Bank Transfer (USD) — details on request" data-es="Transferencia Bancaria (USD) — detalles bajo solicitud">Bank Transfer (USD) — details on request</span></li>
+        </ul>
+        <p data-en="All payments must be in US dollars. Include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation." data-es="Todos los pagos deben ser en dolares estadounidenses. Incluye tu nombre y referencia del proyecto al enviar. Contactanos por WhatsApp si necesitas confirmacion de pago.">All payments must be in US dollars. Include your name and project reference when sending. Contact us on WhatsApp if you need payment confirmation.</p>
+      </div>
+
+      <div class="info-card reveal">
+        <h3 data-en="Refund &amp; cancellation policy" data-es="Politica de reembolso y cancelacion">Refund &amp; cancellation policy</h3>
+        <p data-en="Project deposits are non-refundable after work begins. Monthly plan charges are non-refundable for the current billing period once the plan is active. See our" data-es="Los depositos del proyecto no son reembolsables una vez que comienza el trabajo. Los cargos de planes mensuales no son reembolsables para el periodo de facturacion actual una vez activo el plan. Consulta nuestros">Project deposits are non-refundable after work begins. Monthly plan charges are non-refundable for the current billing period once the plan is active. See our</p>
+        <p><a href="/terms" style="color:var(--blue);" data-en="Terms &amp; Conditions" data-es="Terminos y Condiciones">Terms & Conditions</a> <span data-en="for full details including the cancellation notice requirement." data-es="para todos los detalles incluyendo el requisito de aviso de cancelacion.">for full details including the cancellation notice requirement.</span></p>
+      </div>
+
+      <div class="info-card reveal">
+        <h3 data-en="Questions about your payment?" data-es="Preguntas sobre tu pago?">Questions about your payment?</h3>
+        <p style="margin-bottom:16px;" data-en="Contact us directly and we&apos;ll resolve it quickly." data-es="Contactanos directamente y lo resolveremos rapido.">Contact us directly and we'll resolve it quickly.</p>
+        <a href="https://wa.me/14076946371" target="_blank" class="whatsapp-btn" style="font-size:0.85rem;padding:10px 20px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-en="Chat on WhatsApp" data-es="Chatear por WhatsApp">Chat on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
+      <ul>
+        <li><a href="/services" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="/services" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="/services" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="/pricing" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
+      <ul>
+        <li><a href="/about" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="/pay" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
+      <ul>
+        <li><a href="/terms" data-en="Terms &amp; Conditions" data-es="Terminos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="/privacy" data-en="Privacy Policy" data-es="Politica de Privacidad">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+  const PLAN_AMOUNTS = {
+    simple:   { monthly_setup: '149', monthly_recurring: '45' },
+    standard: { monthly_setup: '249', monthly_recurring: '97' },
+    growth:   { monthly_setup: '399', monthly_recurring: '145' }
+  };
+
+  const STRIPE_LINKS = {
+    monthly_setup: {
+      simple:   'https://buy.stripe.com/REPLACE_MONTHLY_SIMPLE_SETUP',
+      standard: 'https://buy.stripe.com/REPLACE_MONTHLY_STANDARD_SETUP',
+      growth:   'https://buy.stripe.com/REPLACE_MONTHLY_GROWTH_SETUP',
+    },
+    monthly_recurring: {
+      simple:   'https://buy.stripe.com/REPLACE_MONTHLY_SIMPLE_RECURRING',
+      standard: 'https://buy.stripe.com/REPLACE_MONTHLY_STANDARD_RECURRING',
+      growth:   'https://buy.stripe.com/REPLACE_MONTHLY_GROWTH_RECURRING',
+    },
+    project: 'https://buy.stripe.com/REPLACE_PROJECT_PAYMENT_LINK',
+    invoice: 'https://buy.stripe.com/REPLACE_INVOICE_LINK'
+  };
+
+  let currentType = 'monthly_setup';
+  let currentTier = 'simple';
+
+  function updateSuggestedAmount() {
+    const amountInput = document.getElementById('pay-amount');
+    if (!amountInput) return;
+
+    if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
+      amountInput.value = PLAN_AMOUNTS[currentTier][currentType];
+      return;
+    }
+
+    amountInput.value = '';
+  }
+
+  function selectPaymentType(el) {
+    document.querySelectorAll('.payment-type-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    currentType = el.querySelector('input[type="radio"]').value;
+
+    const tiers = document.getElementById('plan-tiers');
+    const tierHelp = document.getElementById('tier-help');
+    if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
+      tiers.classList.add('visible');
+      tierHelp.classList.add('visible');
+      updateSuggestedAmount();
+    } else {
+      tiers.classList.remove('visible');
+      tierHelp.classList.remove('visible');
+    }
+  }
+
+  function selectTier(el, tier) {
+    document.querySelectorAll('.tier-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    currentTier = tier;
+    updateSuggestedAmount();
+  }
+
+  function applyQueryContext() {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+    const tier = params.get('tier');
+    const amount = params.get('amount');
+    const notes = params.get('notes');
+
+    if (type) {
+      const typeOption = document.querySelector(`.payment-type-option input[value="${type}"]`);
+      if (typeOption) {
+        typeOption.checked = true;
+        selectPaymentType(typeOption.closest('.payment-type-option'));
+      }
+    }
+
+    if (tier) {
+      const tierOption = document.querySelector(`.tier-option input[value="${tier}"]`);
+      if (tierOption) {
+        tierOption.checked = true;
+        selectTier(tierOption.closest('.tier-option'), tier);
+      }
+    }
+
+    if (amount) {
+      document.getElementById('pay-amount').value = amount;
+    }
+
+    if (notes) {
+      document.getElementById('pay-notes').value = notes;
+    }
+  }
+
+  function goToCheckout() {
+    const email = document.getElementById('pay-email').value.trim();
+    const name = document.getElementById('pay-name').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email) {
+      alert('Please enter your name and email before proceeding.');
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    let url;
+    if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
+      url = STRIPE_LINKS[currentType][currentTier];
+    } else {
+      url = STRIPE_LINKS[currentType];
+    }
+
+    if (!url || url.includes('REPLACE_')) {
+      alert('Payment checkout is not yet configured. Please contact us via WhatsApp to complete your payment.');
+      return;
+    }
+
+    url += '?prefilled_email=' + encodeURIComponent(email);
+    window.location.href = url;
+  }
+
+  updateSuggestedAmount();
+  applyQueryContext();
+</script>
+</body>
+</html>
