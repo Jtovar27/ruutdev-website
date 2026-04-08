@@ -65,6 +65,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   /* ── Section headings word reveal ── */
   gsap.utils.toArray('section h2.section-title').forEach(heading => {
     // Split words and wrap in spans for stagger animation
+    // Mark heading so applyLang skips it (avoids destroying span structure on lang toggle)
+    heading.classList.add('gsap-word-split');
     const words = heading.innerText.split(/\s+/);
     heading.innerHTML = words
       .map(w => `<span class="word-wrap"><span class="word">${w}</span></span>`)
@@ -239,12 +241,12 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   let touchStartY = 0;
   let touchStartTime = 0;
 
-  document.addEventListener('touchstart', e => {
+  function onTouchStart(e) {
     touchStartY = e.touches[0].clientY;
     touchStartTime = Date.now();
-  }, { passive: true });
+  }
 
-  document.addEventListener('touchend', e => {
+  function onTouchEnd(e) {
     const deltaY = touchStartY - e.changedTouches[0].clientY;
     const deltaTime = Date.now() - touchStartTime;
 
@@ -265,17 +267,25 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
       if (scrollTop > 2) return;
       goToSlide(currentSlide - 1);
     }
-  }, { passive: true });
+  }
 
   /* Keyboard navigation */
-  document.addEventListener('keydown', e => {
+  function onKeyDown(e) {
     if (e.key === 'ArrowDown') { e.preventDefault(); goToSlide(currentSlide + 1); }
     if (e.key === 'ArrowUp')   { e.preventDefault(); goToSlide(currentSlide - 1); }
-  });
+  }
+
+  document.addEventListener('touchstart', onTouchStart, { passive: true });
+  document.addEventListener('touchend', onTouchEnd, { passive: true });
+  document.addEventListener('keydown', onKeyDown);
 
   /* Restore normal flow on desktop resize */
-  window.addEventListener('resize', () => {
+  function handleResize() {
     if (window.innerWidth > 768) {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('keydown', onKeyDown);
       container.style.cssText = '';
       slides.forEach(slide => {
         slide.style.cssText = '';
@@ -285,7 +295,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
       container.remove();
       dotsContainer.remove();
     }
-  });
+  }
+  window.addEventListener('resize', handleResize);
 
 })();
 

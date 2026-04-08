@@ -312,6 +312,7 @@
   function goToCheckout() {
     const email = document.getElementById('pay-email').value.trim();
     const name = document.getElementById('pay-name').value.trim();
+    const amount = parseFloat(document.getElementById('pay-amount').value);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name || !email) {
@@ -320,6 +321,10 @@
     }
     if (!emailRegex.test(email)) {
       alert('Please enter a valid email address.');
+      return;
+    }
+    if (!amount || amount < 1) {
+      alert('Please enter a valid payment amount (minimum $1).');
       return;
     }
 
@@ -342,6 +347,6 @@
   updateSuggestedAmount();
   applyQueryContext();
 </script>
-<script src="js/effects.js" defer></script>
+<script src="/assets/js/effects.js" defer></script>
 </body>
 </html>

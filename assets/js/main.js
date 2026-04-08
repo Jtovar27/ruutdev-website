@@ -52,10 +52,11 @@ function toggleMenu() {
 
 /* ── Active Nav Link ── */
 function markActiveNavLink() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const pathname = window.location.pathname;
   document.querySelectorAll('.nav-links a, #nav-mobile a').forEach(a => {
     const href = a.getAttribute('href') || '';
-    if (href === path || (path === '' && href === 'index.html')) {
+    const isHome = (pathname === '/' || pathname === '/index.html') && (href === '/' || href === '/index.html');
+    if (isHome || (href !== '/' && pathname.startsWith(href))) {
       a.classList.add('active');
     }
   });
@@ -118,7 +119,14 @@ const LEAD_PLAN_LABELS = {
 function applyLang(lang) {
   document.documentElement.setAttribute('lang', lang === 'es' ? 'es' : 'en');
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.innerHTML = lang === 'es' ? (el.dataset.es || el.dataset.en) : el.dataset.en;
+    if (el.classList.contains('gsap-word-split')) return; // skip GSAP-animated headings
+    const val = lang === 'es' ? (el.dataset.es || el.dataset.en) : el.dataset.en;
+    // Use innerHTML only when value contains HTML tags (e.g. <em>, <br />)
+    if (val && val.includes('<')) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
   });
   // Update toggle button state
   document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -163,7 +171,8 @@ function initContactPrefill() {
   const params = new URLSearchParams(window.location.search);
   const intent = params.get('intent');
   const plan = params.get('plan');
-  const source = params.get('source');
+  const ALLOWED_SOURCES = ['pricing', 'services', 'about', 'index'];
+  const source = ALLOWED_SOURCES.includes(params.get('source')) ? params.get('source') : null;
   if (!intent && !plan && !source) return;
 
   const lang = document.documentElement.getAttribute('lang') === 'es' ? 'es' : 'en';
@@ -248,6 +257,10 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ── Swiper Carousels ── */
 
 function initSwipers() {
+  if (typeof Swiper === 'undefined') {
+    console.warn('RuutDev: Swiper not loaded, skipping carousel init');
+    return;
+  }
   // Services swiper (index)
   if (document.querySelector('.services-swiper')) {
     new Swiper('.services-swiper', {
@@ -466,7 +479,9 @@ window.submitLiveReview = async function() {
   if (!rating) return alert('Please select a star rating.');
   if (!text || text.length < 10) return alert('Please write at least 10 characters.');
 
-  if (btn) { btn.disabled = true; btn.querySelector('span').textContent = 'Sending…'; }
+  const btnSpan = btn ? btn.querySelector('span') : null;
+  if (btn) btn.disabled = true;
+  if (btnSpan) btnSpan.textContent = 'Sending…';
 
   try {
     const res = await fetch('/api/reviews', {
@@ -482,7 +497,7 @@ window.submitLiveReview = async function() {
     document.getElementById('rv-success').style.display = 'block';
   } catch (err) {
     alert(err.message || 'Could not submit. Please try again.');
-    if (btn) { btn.disabled = false; btn.querySelector('span').textContent = 'Submit Review'; }
+    if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = 'Submit Review'; }
   }
 };
 

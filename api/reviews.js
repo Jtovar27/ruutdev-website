@@ -9,8 +9,8 @@ const sbHeaders = () => ({
   'Content-Type': 'application/json'
 });
 
-module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ruutdev.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -34,12 +34,10 @@ module.exports = async (req, res) => {
     }
   }
 
-  /* ── POST — submit a review ── */
+  /* ── POST — submit a review (requires manual approval before appearing publicly) ── */
   if (req.method === 'POST') {
     try {
-      let body = '';
-      await new Promise(resolve => { req.on('data', c => (body += c)); req.on('end', resolve); });
-      const { name, business, rating, review } = JSON.parse(body || '{}');
+      const { name, business, rating, review } = req.body || {};
 
       if (!name?.trim() || !review?.trim() || !rating)
         return res.status(400).json({ error: 'Name, rating, and review are required.' });
@@ -56,7 +54,7 @@ module.exports = async (req, res) => {
           business:    (business || '').trim().slice(0, 100) || null,
           rating:      parseInt(rating),
           review:      review.trim().slice(0, 1000),
-          is_approved: true
+          is_approved: false  // requires manual approval before appearing publicly
         })
       });
       const data = await r.json();
@@ -68,4 +66,4 @@ module.exports = async (req, res) => {
   }
 
   return res.status(405).json({ error: 'Method not allowed.' });
-};
+}
