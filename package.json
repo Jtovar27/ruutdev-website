@@ -1,0 +1,17 @@
+{
+  "name": "ruutdev-website",
+  "version": "1.0.0",
+  "description": "RuutDev website v2 — serverless API functions",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2",
+    "stripe": "^17"
+  }
+}
