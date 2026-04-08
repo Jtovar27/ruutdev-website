@@ -657,6 +657,65 @@
   </div>
 </section>
 
+<!-- ── LIVE CLIENT REVIEWS ── -->
+<section id="client-reviews" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-label" data-en="Client Reviews" data-es="Reseñas de Clientes">Client Reviews</div>
+        <h2 class="section-title" data-en="Real feedback, <em>live</em>" data-es="Opiniones reales, <em>en vivo</em>">Real feedback, <em>live</em></h2>
+      </div>
+    </div>
+
+    <div class="reviews-layout">
+      <!-- Live reviews feed -->
+      <div class="reviews-feed" id="reviews-feed">
+        <div class="reviews-loading" id="reviews-loading">
+          <div class="rl-spinner"></div>
+          <span data-en="Loading reviews…" data-es="Cargando reseñas…">Loading reviews…</span>
+        </div>
+        <div class="reviews-empty" id="reviews-empty" style="display:none;">
+          <i class="fa-regular fa-star"></i>
+          <p data-en="Be the first to leave a review." data-es="Sé el primero en dejar una reseña.">Be the first to leave a review.</p>
+        </div>
+      </div>
+
+      <!-- Submission panel -->
+      <div class="review-submit-panel reveal">
+        <div class="rsp-header">
+          <div class="rsp-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+          <div>
+            <h3 data-en="Leave your review" data-es="Deja tu reseña">Leave your review</h3>
+            <p data-en="Your experience helps others decide." data-es="Tu experiencia ayuda a otros a decidir.">Your experience helps others decide.</p>
+          </div>
+        </div>
+
+        <div id="rv-form-body">
+          <div class="star-rating-input" id="star-input" aria-label="Rating">
+            <i class="fa-regular fa-star" data-val="1"></i>
+            <i class="fa-regular fa-star" data-val="2"></i>
+            <i class="fa-regular fa-star" data-val="3"></i>
+            <i class="fa-regular fa-star" data-val="4"></i>
+            <i class="fa-regular fa-star" data-val="5"></i>
+          </div>
+          <input type="hidden" id="rv-rating" value="0" />
+          <div class="rv-field"><input type="text" id="rv-name" maxlength="80" placeholder="Your name *" data-en="Your name *" data-es="Tu nombre *" /></div>
+          <div class="rv-field"><input type="text" id="rv-business" maxlength="100" placeholder="Your business (optional)" data-en="Your business (optional)" data-es="Tu negocio (opcional)" /></div>
+          <div class="rv-field"><textarea id="rv-text" rows="4" maxlength="1000" placeholder="Write your review…" data-en="Write your review…" data-es="Escribe tu reseña…"></textarea></div>
+          <button class="btn-primary rv-submit" onclick="submitLiveReview()" style="width:100%;justify-content:center;">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span data-en="Submit Review" data-es="Enviar Reseña">Submit Review</span>
+          </button>
+        </div>
+        <div id="rv-success" class="rv-success" style="display:none;">
+          <i class="fa-solid fa-circle-check"></i>
+          <p data-en="Thank you! Your review is now live." data-es="¡Gracias! Tu reseña ya está publicada.">Thank you! Your review is now live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── FINAL CTA ── -->
 <section class="cta-section">
   <p class="cta-eyebrow reveal" data-en="Ready to move?" data-es="Listo para avanzar?">Ready to move?</p>

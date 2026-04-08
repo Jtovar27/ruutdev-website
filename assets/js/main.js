@@ -382,3 +382,121 @@ window.submitContactForm = async function() {
     if (btn) { btn.textContent = 'Send Message'; btn.disabled = false; }
   }
 };
+
+/* ── Live Reviews ── */
+
+let _selectedRating = 0;
+
+function initLiveReviews() {
+  const feed = document.getElementById('reviews-feed');
+  if (!feed) return;
+
+  // Star input interaction
+  const stars = document.querySelectorAll('#star-input i');
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const val = +star.dataset.val;
+      stars.forEach(s => s.classList.toggle('hovered', +s.dataset.val <= val));
+    });
+    star.addEventListener('mouseleave', () => {
+      stars.forEach(s => s.classList.remove('hovered'));
+    });
+    star.addEventListener('click', () => {
+      _selectedRating = +star.dataset.val;
+      document.getElementById('rv-rating').value = _selectedRating;
+      stars.forEach(s => {
+        const v = +s.dataset.val;
+        s.className = v <= _selectedRating ? 'fa-solid fa-star selected' : 'fa-regular fa-star';
+      });
+    });
+  });
+
+  // Fetch reviews
+  fetch('/api/reviews')
+    .then(r => r.json())
+    .then(({ reviews }) => {
+      const loading = document.getElementById('reviews-loading');
+      const empty   = document.getElementById('reviews-empty');
+      if (loading) loading.style.display = 'none';
+      if (!reviews || reviews.length === 0) {
+        if (empty) empty.style.display = 'flex';
+        return;
+      }
+      reviews.forEach((rv, i) => prependReviewCard(rv, i * 60));
+    })
+    .catch(() => {
+      const loading = document.getElementById('reviews-loading');
+      if (loading) loading.style.display = 'none';
+    });
+}
+
+function prependReviewCard(rv, delayMs) {
+  const feed = document.getElementById('reviews-feed');
+  if (!feed) return;
+  const initials = (rv.name || '?').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  const stars    = '★'.repeat(rv.rating || 5) + '☆'.repeat(5 - (rv.rating || 5));
+  const ago      = timeAgo(rv.created_at);
+  const card = document.createElement('div');
+  card.className = 'lr-card';
+  card.style.animationDelay = delayMs + 'ms';
+  card.innerHTML = `
+    <div class="lr-stars">${stars}</div>
+    <p class="lr-text">&ldquo;${escHtml(rv.review)}&rdquo;</p>
+    <div class="lr-meta">
+      <div class="lr-avatar">${initials}</div>
+      <div class="lr-info">
+        <span class="lr-name">${escHtml(rv.name)}</span>
+        ${rv.business ? `<span class="lr-biz">${escHtml(rv.business)}</span>` : ''}
+      </div>
+      <span class="lr-date">${ago}</span>
+    </div>`;
+  feed.insertBefore(card, feed.firstChild);
+  const empty = document.getElementById('reviews-empty');
+  if (empty) empty.style.display = 'none';
+}
+
+window.submitLiveReview = async function() {
+  const name   = document.getElementById('rv-name')?.value.trim();
+  const biz    = document.getElementById('rv-business')?.value.trim();
+  const text   = document.getElementById('rv-text')?.value.trim();
+  const rating = _selectedRating;
+  const btn    = document.querySelector('.rv-submit');
+
+  if (!name)   return alert('Please enter your name.');
+  if (!rating) return alert('Please select a star rating.');
+  if (!text || text.length < 10) return alert('Please write at least 10 characters.');
+
+  if (btn) { btn.disabled = true; btn.querySelector('span').textContent = 'Sending…'; }
+
+  try {
+    const res = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, business: biz, rating, review: text })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Error');
+
+    prependReviewCard(data.review, 0);
+    document.getElementById('rv-form-body').style.display = 'none';
+    document.getElementById('rv-success').style.display = 'block';
+  } catch (err) {
+    alert(err.message || 'Could not submit. Please try again.');
+    if (btn) { btn.disabled = false; btn.querySelector('span').textContent = 'Submit Review'; }
+  }
+};
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const secs = Math.floor((Date.now() - new Date(iso)) / 1000);
+  if (secs < 60)   return 'Just now';
+  if (secs < 3600) return Math.floor(secs / 60) + 'm ago';
+  if (secs < 86400) return Math.floor(secs / 3600) + 'h ago';
+  return Math.floor(secs / 86400) + 'd ago';
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.addEventListener('DOMContentLoaded', initLiveReviews);
