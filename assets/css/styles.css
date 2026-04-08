@@ -2211,6 +2211,12 @@ h1 em { font-style: normal; color: var(--blue); }
 .mobile-nav-footer .nav-cta:hover { background: #1558e0 !important; }
 .mobile-nav-footer .lang-toggle { margin-left: 0; flex-shrink: 0; }
 
+/* ── Mobile: show hamburger, hide desktop nav links ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
 /* ── Hero: em text glow ── */
 @keyframes emGlow {
   0%, 100% { text-shadow: 0 0 30px rgba(26,109,255,0.25); }
