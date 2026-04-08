@@ -226,6 +226,80 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/* ── Swiper Carousels ── */
+
+function initSwipers() {
+  // Services swiper (index)
+  if (document.querySelector('.services-swiper')) {
+    new Swiper('.services-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      centeredSlides: false,
+      loop: false,
+      pagination: { el: '.services-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.services-swiper .swiper-button-next', prevEl: '.services-swiper .swiper-button-prev' },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+  }
+
+  // Process swiper (index + about)
+  if (document.querySelector('.process-swiper')) {
+    new Swiper('.process-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: false,
+      pagination: { el: '.process-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.process-swiper .swiper-button-next', prevEl: '.process-swiper .swiper-button-prev' },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 }
+      }
+    });
+  }
+
+  // Pricing swiper (monthly plans)
+  if (document.querySelector('.pricing-swiper')) {
+    new Swiper('.pricing-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      centeredSlides: true,
+      loop: false,
+      initialSlide: 1,
+      pagination: { el: '.pricing-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.pricing-swiper .swiper-button-next', prevEl: '.pricing-swiper .swiper-button-prev' },
+      breakpoints: {
+        768: { slidesPerView: 2, centeredSlides: false },
+        1100: { slidesPerView: 3, centeredSlides: false }
+      }
+    });
+  }
+
+  // Generic swipers for other pages
+  ['about-swiper', 'buyout-swiper'].forEach(cls => {
+    const el = document.querySelector('.' + cls);
+    if (el) {
+      new Swiper('.' + cls, {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        loop: false,
+        pagination: { el: '.' + cls + ' .swiper-pagination', clickable: true },
+        navigation: { nextEl: '.' + cls + ' .swiper-button-next', prevEl: '.' + cls + ' .swiper-button-prev' },
+        breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+      });
+    }
+  });
+}
+
+// Initialize after Swiper script loads
+if (typeof Swiper !== 'undefined') {
+  initSwipers();
+} else {
+  window.addEventListener('load', initSwipers);
+}
+
 /* ── Contact Form (shared) ── */
 window.submitContactForm = async function() {
   const name     = document.getElementById('fname')?.value;
