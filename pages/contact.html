@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — RuutDev</title>
+  <meta name="description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
+  <link rel="canonical" href="https://ruutdev.com/contact" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/contact" />
+  <meta property="og:title" content="Contact — RuutDev" />
+  <meta property="og:description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — RuutDev" />
+  <meta name="twitter:description" content="Book a project call, request a quote, or choose a monthly plan with RuutDev. Clear next steps for websites, software, AI, and automation projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    .contact-wrapper {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 64px; align-items: start;
+      margin-top: 56px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 32px; }
+    .contact-info h2 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; }
+    .contact-info > p { font-size: 0.95rem; color: var(--text2); line-height: 1.75; font-weight: 300; }
+
+    .contact-method {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 24px;
+      text-decoration: none; color: var(--text);
+      transition: all var(--transition);
+    }
+    .contact-method:hover { border-color: var(--blue-border); box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .contact-method-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--blue-soft); display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: var(--blue); flex-shrink: 0;
+    }
+    .contact-method.wa .contact-method-icon { background: rgba(37,211,102,0.1); color: #22c55e; }
+    .contact-method-text { display: flex; flex-direction: column; gap: 2px; }
+    .contact-method-text span { font-size: 0.78rem; font-weight: 600; color: var(--text2); letter-spacing: 0.04em; text-transform: uppercase; }
+    .contact-method-text strong { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+
+    .trust-badges { display: flex; flex-direction: column; gap: 10px; padding-top: 8px; }
+    .trust-badge {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.875rem; color: var(--text2); font-weight: 400;
+    }
+    .trust-badge i { color: var(--blue); font-size: 0.85rem; flex-shrink: 0; }
+
+    .contact-context {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-border);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .contact-context.visible { display: block; }
+
+    @media (max-width: 900px) {
+      .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+    <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="/contact" class="active"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="/contact" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+  <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
+</ul>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Project Intake" data-es="Inicio de Proyecto">Project Intake</div>
+    <h1 data-en="Talk through your<br /><em>next build</em>" data-es="Conversemos sobre tu<br /><em>proximo proyecto</em>">Talk through your<br /><em>next build</em></h1>
+    <p data-en="Tell us whether you need a monthly website plan or a full custom build. We&apos;ll recommend the right scope, timeline, and next step." data-es="Cuentanos si necesitas un plan mensual para tu sitio o un desarrollo a pago completo. Te recomendaremos el alcance, tiempo y siguiente paso correctos.">Tell us whether you need a monthly website plan or a full custom build. We'll recommend the right scope, timeline, and next step.</p>
+  </div>
+</div>
+
+<!-- ── CONTACT SECTION ── -->
+<section style="background:var(--bg);">
+  <div class="contact-wrapper">
+    <!-- LEFT: Info -->
+    <div class="contact-info reveal">
+      <div>
+        <h2 data-en="Share your goals" data-es="Comparte tus objetivos">Share your goals</h2>
+        <p style="margin-top:12px;" data-en="If you already know the plan you want, we&apos;ll confirm fit and next steps. If you&apos;re still deciding, we&apos;ll help you choose between a monthly plan and a one-time investment without wasting your time." data-es="Si ya sabes que plan quieres, confirmaremos si encaja y te diremos el siguiente paso. Si todavia estas decidiendo, te ayudaremos a elegir entre un plan mensual y una inversion a pago completo sin hacerte perder tiempo.">If you already know the plan you want, we'll confirm fit and next steps. If you're still deciding, we'll help you choose between a monthly plan and a one-time investment without wasting your time.</p>
+      </div>
+
+      <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%27m%20interested%20in%20a%20free%20demo." target="_blank" class="contact-method wa">
+        <div class="contact-method-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="contact-method-text">
+          <span>WhatsApp</span>
+          <strong>+1 (407) 694-6371</strong>
+        </div>
+      </a>
+
+      <a href="mailto:helloruutdev@hotmail.com" class="contact-method">
+        <div class="contact-method-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="contact-method-text">
+          <span>Email</span>
+          <strong>helloruutdev@hotmail.com</strong>
+        </div>
+      </a>
+
+      <div class="trust-badges">
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Clear monthly plans and buyout pricing paths" data-es="Rutas claras de planes mensuales y proyectos a pago completo">Clear monthly plans and buyout pricing paths</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Response within 1 business day" data-es="Respuesta dentro de 1 dia habil">Response within 1 business day</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Direct founder communication from scope to launch" data-es="Comunicacion directa con el fundador desde el alcance hasta el lanzamiento">Direct founder communication from scope to launch</span></div>
+        <div class="trust-badge"><i class="fa-solid fa-circle-check"></i> <span data-en="Bilingual support for USA and LATAM clients" data-es="Soporte bilingue para clientes en USA y LATAM">Bilingual support for USA and LATAM clients</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="form-card reveal">
+      <div id="form-body">
+        <div style="margin-bottom:28px;">
+          <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px;" data-en="Start your project" data-es="Comienza tu proyecto">Start your project</div>
+          <div style="font-size:0.875rem;color:var(--text2);font-weight:300;" data-en="Tell us what you&apos;re building and whether you want a monthly plan or a full custom build." data-es="Cuentanos que quieres construir y si prefieres un plan mensual o un desarrollo a pago completo.">Tell us what you're building and whether you want a monthly plan or a full custom build.</div>
+        </div>
+        <div class="contact-context" id="contact-context" hidden></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-en="Your name *" data-es="Tu nombre *">Your name *</label>
+            <input type="text" id="fname" placeholder="John Smith" />
+          </div>
+          <div class="form-group">
+            <label data-en="Business name" data-es="Nombre del negocio">Business name</label>
+            <input type="text" id="fbusiness" placeholder="Your Company" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-en="Email address *" data-es="Correo electrónico *">Email address *</label>
+          <input type="email" id="femail" placeholder="hello@yourbusiness.com" />
+        </div>
+        <div class="form-group">
+          <label data-en="Type of project" data-es="Tipo de proyecto">Type of project</label>
+          <select id="ftype">
+            <option value="" data-en="Select a type…" data-es="Selecciona un tipo…">Select a type…</option>
+            <option value="monthly_plan" data-en="Monthly Website Plan" data-es="Plan Mensual para Sitio Web">Monthly Website Plan</option>
+            <option value="buyout_project" data-en="Full Payment Website Project" data-es="Proyecto Web a Pago Completo">Full Payment Website Project</option>
+            <option value="ecommerce_custom" data-en="E-commerce / Advanced Custom Build" data-es="E-commerce / Desarrollo Personalizado Avanzado">E-commerce / Advanced Custom Build</option>
+            <option value="software_ai" data-en="Software / AI / Automation" data-es="Software / IA / Automatizacion">Software / AI / Automation</option>
+            <option value="support" data-en="Ongoing Support / Maintenance" data-es="Soporte Continuo / Mantenimiento">Ongoing Support / Maintenance</option>
+            <option value="not_sure" data-en="Not sure yet" data-es="Aun no estoy seguro">Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fmessage" data-en="Tell us about your project" data-es="Cuéntanos sobre tu proyecto">Tell us about your project</label>
+          <textarea id="fmessage" name="fmessage" placeholder="What does your business do? What do you need built? Do you have an existing site, target launch date, or budget range?"></textarea>
+        </div>
+        <button class="btn-primary form-submit" onclick="submitContactForm()">
+          <span data-en="Send Message" data-es="Enviar Mensaje">Send Message</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <p style="margin-top:12px;font-size:0.8rem;color:var(--text2);line-height:1.6;text-align:center;" data-en="If you&apos;re choosing a monthly plan, we&apos;ll confirm fit first and then send the secure checkout link." data-es="Si estas eligiendo un plan mensual, primero confirmaremos que encaje y luego te enviaremos el enlace de pago seguro.">If you're choosing a monthly plan, we'll confirm fit first and then send the secure checkout link.</p>
+        <p style="margin-top:14px;font-size:0.78rem;color:var(--text2);text-align:center;">
+          <span data-en="By submitting this form you agree to our" data-es="Al enviar este formulario aceptas nuestra">By submitting this form you agree to our</span> <a href="/privacy" style="color:var(--blue);" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="form-success" id="form-success">
+        <div style="font-size:2.5rem;margin-bottom:16px;">✅</div>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-bottom:10px;" data-en="Message received!" data-es="¡Mensaje recibido!">Message received!</div>
+        <div style="color:var(--text2);font-size:0.9rem;font-weight:300;line-height:1.7;" data-en="We'll be in touch within 24 hours. Check your email or WhatsApp." data-es="Nos pondremos en contacto en 24 horas. Revisa tu correo o WhatsApp.">We'll be in touch within 24 hours. Check your email or WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section style="background:var(--bg2);">
+  <div class="reveal">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title" data-en="Questions before reaching out" data-es="Preguntas antes de contactarnos">Questions before reaching out</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4 data-en="What exactly is the free demo?" data-es="¿Qué es exactamente el demo gratis?">What exactly is the free demo?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer" data-en="We build a real, working version of your site — live on the web — in 48 hours. Not a mockup or a screenshot. A real site you can click through and share. It's available for 30 days. You pay nothing to see it." data-es="Construimos una versión real y funcional de tu sitio — en vivo en la web — en 48 horas. No un mockup ni una captura de pantalla. Un sitio real que puedes navegar y compartir. Está disponible por 30 días. No pagas nada para verlo.">We build a real, working version of your site — live on the web — in 48 hours. Not a mockup or a screenshot. A real site you can click through and share. It's available for 30 days. You pay nothing to see it.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4 data-en="What do I need to provide?" data-es="¿Qué necesito proporcionar?">What do I need to provide?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer" data-en="Just tell us about your business — what you do, who your customers are, and what you want the site to accomplish. We handle the rest: design, copy, images, and setup." data-es="Solo cuéntanos sobre tu negocio — qué haces, quiénes son tus clientes y qué quieres que logre el sitio. Nosotros nos encargamos del resto: diseño, textos, imágenes y configuración.">Just tell us about your business — what you do, who your customers are, and what you want the site to accomplish. We handle the rest: design, copy, images, and setup.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4 data-en="How quickly do you respond?" data-es="¿Qué tan rápido responden?">How quickly do you respond?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer" data-en="Within 24 hours via email or form. For faster responses, WhatsApp is the best way to reach us — usually same day." data-es="En 24 horas por correo o formulario. Para respuestas más rápidas, WhatsApp es la mejor manera de contactarnos — generalmente el mismo día.">Within 24 hours via email or form. For faster responses, WhatsApp is the best way to reach us — usually same day.</p>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-question">
+        <h4 data-en="Do you work with businesses outside the US and Venezuela?" data-es="¿Trabajan con negocios fuera de EE.UU. y Venezuela?">Do you work with businesses outside the US and Venezuela?</h4>
+        <div class="faq-icon"><i class="fa-solid fa-plus"></i></div>
+      </div>
+      <p class="faq-answer" data-en="Yes. Our main markets are the US and Venezuela, but we work with clients anywhere. All projects are handled remotely, in USD, and we communicate in English and Spanish." data-es="Sí. Nuestros mercados principales son EE.UU. y Venezuela, pero trabajamos con clientes en cualquier lugar. Todos los proyectos se manejan de forma remota, en USD, y nos comunicamos en inglés y español.">Yes. Our main markets are the US and Venezuela, but we work with clients anywhere. All projects are handled remotely, in USD, and we communicate in English and Spanish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
+      <ul>
+        <li><a href="/services" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="/services" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="/services" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="/pricing" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
+      <ul>
+        <li><a href="/about" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="/pay" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
+      <ul>
+        <li><a href="/terms" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="/privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

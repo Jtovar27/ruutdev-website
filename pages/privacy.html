@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — RuutDev</title>
+  <meta name="description" content="RuutDev Privacy Policy — how we collect, use, and protect your personal information." />
+  <link rel="canonical" href="https://ruutdev.com/privacy" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/privacy" />
+  <meta property="og:title" content="Privacy Policy — RuutDev" />
+  <meta property="og:description" content="RuutDev Privacy Policy — how we collect, use, and protect your personal information." />
+  <meta property="og:site_name" content="RuutDev" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    .legal-wrapper { display:grid; grid-template-columns:220px 1fr; gap:64px; max-width:1000px; margin:0 auto; padding:64px 6% 100px; align-items:start; }
+    .toc-sidebar { position:sticky; top:90px; }
+    .toc-header { font-family:var(--font-display); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text2); margin-bottom:16px; }
+    .toc-list { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .toc-list a { display:block; padding:8px 12px; font-size:0.82rem; font-weight:500; color:var(--text2); text-decoration:none; border-radius:8px; border-left:2px solid transparent; transition:all var(--transition); line-height:1.4; }
+    .toc-list a:hover { color:var(--blue); background:var(--blue-soft); border-left-color:var(--blue-border); }
+    .toc-list a.active { color:var(--blue); background:var(--blue-soft); border-left-color:var(--blue); font-weight:600; }
+    .legal-content { max-width:660px; }
+    .legal-section { padding-bottom:44px; border-bottom:1px solid var(--border); margin-bottom:44px; }
+    .legal-section:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+    .legal-section-num { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue); margin-bottom:10px; }
+    .legal-section h2 { font-family:var(--font-display); font-size:1.4rem; font-weight:800; letter-spacing:-0.03em; color:var(--text); margin-bottom:18px; }
+    .legal-section p { font-size:0.9rem; color:var(--text2); line-height:1.8; margin-bottom:12px; }
+    .legal-section p:last-child { margin-bottom:0; }
+    .legal-section strong { color:var(--text); font-weight:600; }
+    .legal-section ul { margin:10px 0 14px 0; padding-left:20px; display:flex; flex-direction:column; gap:7px; }
+    .legal-section li { font-size:0.9rem; color:var(--text2); line-height:1.7; }
+    .legal-highlight { background:var(--blue-soft); border-left:3px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 18px; margin:16px 0; }
+    .legal-highlight p { margin:0; color:var(--text); font-size:0.875rem; }
+    @media (max-width:900px) { .legal-wrapper { grid-template-columns:1fr; padding:40px 4%; } .toc-sidebar { position:static; } .toc-list { flex-direction:row; flex-wrap:wrap; gap:6px; } .toc-list a { padding:6px 12px; border-left:none; border:1px solid var(--border); border-radius:100px; font-size:0.78rem; } .toc-list a.active { border-color:var(--blue); } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><span></span>RuutDev</a>
+  <ul class="nav-links">
+    <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+    <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+    <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+    <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+    <li><a href="/contact" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
+    </div>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<ul class="nav-mobile" id="nav-mobile">
+  <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
+  <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
+  <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
+  <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+  <li><a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
+  <li style="padding:8px 20px;"><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
+</ul>
+
+<div class="page-hero" style="padding-bottom:60px;">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Legal" data-es="Legal">Legal</div>
+    <h1 data-en="Privacy<br /><em>Policy</em>" data-es="Política de<br /><em>Privacidad</em>">Privacy<br /><em>Policy</em></h1>
+    <p data-en="We collect only what we need, we don't sell your data, and you can request deletion at any time." data-es="Recopilamos solo lo que necesitamos, no vendemos tus datos y puedes solicitar su eliminación en cualquier momento.">We collect only what we need, we don't sell your data, and you can request deletion at any time.</p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);"><strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Last Updated</strong>March 2026</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.35);"><strong style="display:block;color:rgba(255,255,255,0.65);margin-bottom:2px;">Controller</strong>Johan Tovar / RuutDev</div>
+    </div>
+  </div>
+</div>
+
+<div class="legal-wrapper">
+  <nav class="toc-sidebar">
+    <div class="toc-header">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#p-who">1. Who We Are</a></li>
+      <li><a href="#p-collect">2. Data We Collect</a></li>
+      <li><a href="#p-use">3. How We Use It</a></li>
+      <li><a href="#p-share">4. Data Sharing</a></li>
+      <li><a href="#p-retention">5. Retention</a></li>
+      <li><a href="#p-rights">6. Your Rights</a></li>
+      <li><a href="#p-cookies">7. Cookies</a></li>
+      <li><a href="#p-security">8. Security</a></li>
+      <li><a href="#p-children">9. Children</a></li>
+      <li><a href="#p-changes">10. Changes</a></li>
+      <li><a href="#p-contact">11. Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="legal-content">
+
+    <div class="legal-section" id="p-who">
+      <div class="legal-section-num" data-en="Section 1" data-es="Sección 1">Section 1</div>
+      <h2 data-en="Who We Are" data-es="Quiénes Somos">Who We Are</h2>
+      <p>RuutDev is operated by <strong>Johan Tovar</strong>, a web development and software services business based in Florida, USA, operating at ruutdev.com. This Privacy Policy explains how we handle personal information when you interact with our website or engage our services.</p>
+    </div>
+
+    <div class="legal-section" id="p-collect">
+      <div class="legal-section-num" data-en="Section 2" data-es="Sección 2">Section 2</div>
+      <h2 data-en="Data We Collect" data-es="Datos que Recopilamos">Data We Collect</h2>
+      <p>We only collect information you provide voluntarily. We do not use tracking pixels, behavioral analytics, or data brokers.</p>
+      <ul>
+        <li><strong>Contact form submissions:</strong> Name, business name, email, business type, and project description.</li>
+        <li><strong>Payment information:</strong> Processed directly by Stripe or other providers. We do not store card numbers.</li>
+        <li><strong>Communications:</strong> Emails, WhatsApp messages, and other correspondence you initiate.</li>
+        <li><strong>Project files:</strong> Content, images, and brand assets you provide for your project.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="p-use">
+      <div class="legal-section-num" data-en="Section 3" data-es="Sección 3">Section 3</div>
+      <h2 data-en="How We Use Your Data" data-es="Cómo Usamos Tus Datos">How We Use Your Data</h2>
+      <p>We use your information to: respond to inquiries; prepare proposals and invoices; deliver and manage your project; process payments; provide maintenance and support; and comply with legal obligations.</p>
+      <p>We do not use your data for advertising, remarketing, or sale to third parties.</p>
+    </div>
+
+    <div class="legal-section" id="p-share">
+      <div class="legal-section-num" data-en="Section 4" data-es="Sección 4">Section 4</div>
+      <h2 data-en="Data Sharing" data-es="Compartición de Datos">Data Sharing</h2>
+      <p>We do not sell, rent, or trade your personal information. We share data only with:</p>
+      <ul>
+        <li><strong>Web3Forms:</strong> Processes contact form submissions and forwards them to us.</li>
+        <li><strong>Stripe:</strong> Handles payment processing under PCI-DSS compliance.</li>
+        <li><strong>Vercel:</strong> Hosts our website and processes standard web traffic.</li>
+        <li><strong>Legal authorities:</strong> Only when required by law or valid legal process.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section" id="p-retention">
+      <div class="legal-section-num" data-en="Section 5" data-es="Sección 5">Section 5</div>
+      <h2 data-en="Data Retention" data-es="Retención de Datos">Data Retention</h2>
+      <p>Contact form data is retained for up to 2 years. Project files and communications are kept for the duration of the project and up to 2 years afterward. Payment records are kept as required by applicable tax law. You may request deletion at any time (see Section 6).</p>
+    </div>
+
+    <div class="legal-section" id="p-rights">
+      <div class="legal-section-num" data-en="Section 6" data-es="Sección 6">Section 6</div>
+      <h2 data-en="Your Rights" data-es="Tus Derechos">Your Rights</h2>
+      <p>You have the right to: access the data we hold about you; request correction of inaccurate data; request deletion ("right to be forgotten"); receive your data in a portable format; and object to our processing in certain circumstances.</p>
+      <p>To exercise any of these rights, email <a href="mailto:helloruutdev@hotmail.com" style="color:var(--blue);">helloruutdev@hotmail.com</a>. We respond within 30 days.</p>
+    </div>
+
+    <div class="legal-section" id="p-cookies">
+      <div class="legal-section-num">Section 7</div>
+      <h2>Cookies</h2>
+      <p>We use only session cookies necessary for basic site functionality. We do not use advertising cookies, retargeting, or third-party behavioral analytics. Third-party services embedded on our site (form processors, payment providers) may set their own cookies under their respective policies.</p>
+    </div>
+
+    <div class="legal-section" id="p-security">
+      <div class="legal-section-num">Section 8</div>
+      <h2>Security</h2>
+      <p>All data in transit is encrypted via HTTPS/TLS. Form submissions use secure encrypted channels. Payment data is handled by PCI-DSS compliant processors and never stored on our servers.</p>
+      <div class="legal-highlight">
+        <p>No electronic transmission or storage method is 100% secure. We use commercially reasonable measures to protect your data but cannot guarantee absolute security.</p>
+      </div>
+    </div>
+
+    <div class="legal-section" id="p-children">
+      <div class="legal-section-num">Section 9</div>
+      <h2>Children's Privacy</h2>
+      <p>Our services are intended for businesses and adults (18+). We do not knowingly collect data from individuals under 18. If you believe we have done so inadvertently, contact us immediately and we will delete it.</p>
+    </div>
+
+    <div class="legal-section" id="p-changes">
+      <div class="legal-section-num">Section 10</div>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this policy from time to time. The "Last Updated" date above reflects the most recent revision. For significant changes, active Clients will receive direct notice. Continued use of our services after changes are posted constitutes acceptance.</p>
+    </div>
+
+    <div class="legal-section" id="p-contact">
+      <div class="legal-section-num">Section 11</div>
+      <h2>Contact</h2>
+      <ul>
+        <li><strong>Business:</strong> RuutDev</li>
+        <li><strong>Operator:</strong> Johan Tovar</li>
+        <li><strong>Email:</strong> <a href="mailto:helloruutdev@hotmail.com" style="color:var(--blue);">helloruutdev@hotmail.com</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/14076946371" style="color:var(--blue);">+1 (407) 694-6371</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p>Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa"><i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services">Website Development</a></li>
+        <li><a href="/services">Software & Web Apps</a></li>
+        <li><a href="/services">AI Integrations</a></li>
+        <li><a href="/pricing">Maintenance Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/pay">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/terms">Terms & Conditions</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+  const sections = document.querySelectorAll('.legal-section[id]');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const l = document.querySelector(`.toc-list a[href="#${e.target.id}"]`);
+        if (l) l.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
