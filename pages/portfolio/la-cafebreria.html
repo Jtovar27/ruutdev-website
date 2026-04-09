@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Cafebreria — Case Study — RuutDev</title>
+  <meta name="description" content="How RuutDev built La Cafebreria a full-featured website with online ordering, event management, and a custom admin dashboard — delivered in days." />
+  <link rel="canonical" href="https://ruutdev.com/portfolio/la-cafebreria" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/portfolio/la-cafebreria" />
+  <meta property="og:title" content="La Cafebreria — Case Study — RuutDev" />
+  <meta property="og:description" content="How RuutDev built La Cafebreria a full-featured website with online ordering, event management, and a custom admin dashboard — delivered in days." />
+  <meta property="og:site_name" content="RuutDev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="La Cafebreria — Case Study — RuutDev" />
+  <meta name="twitter:description" content="How RuutDev built La Cafebreria a full-featured website with online ordering, event management, and a custom admin dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    /* ── Case Study inline styles ── */
+    .cs-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 6%;
+    }
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text2);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: var(--transition);
+    }
+    .cs-back:hover { color: var(--blue); }
+    .cs-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .cs-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .cs-block-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .cs-block h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .cs-block p {
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    .cs-quote {
+      background: var(--bg2);
+      border-left: 3px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .cs-quote blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .cs-quote cite {
+      font-size: 0.85rem;
+      color: var(--text2);
+      font-style: normal;
+    }
+    .cs-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .cs-stack span {
+      font-size: 0.78rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 12px;
+      color: var(--text2);
+    }
+    .cs-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .cs-img {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .cs-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .cs-body { padding: 48px 5%; }
+      .cs-block { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Case Study" data-es="Caso de Estudio">Case Study</div>
+    <h1 data-en="La <em>Cafebreria</em>" data-es="La <em>Cafebreria</em>">La <em>Cafebreria</em></h1>
+    <p data-en="Café, bookstore, and cultural space — built with a full brand presence, online ordering, and an admin dashboard their team actually uses." data-es="Café, librería y espacio cultural — construido con presencia de marca completa, pedidos en línea y un panel de administración que su equipo realmente usa.">Café, bookstore, and cultural space — built with a full brand presence, online ordering, and an admin dashboard their team actually uses.</p>
+  </div>
+</div>
+
+<!-- ── CASE STUDY BODY ── -->
+<div style="background:var(--bg);">
+  <div class="cs-body">
+
+    <a href="/portfolio" class="cs-back reveal">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span data-en="Back to Portfolio" data-es="Volver al Portafolio">Back to Portfolio</span>
+    </a>
+
+    <!-- Tags + live link -->
+    <div class="cs-tags reveal">
+      <span class="tag">Website</span>
+      <span class="tag">Branding</span>
+      <span class="tag">Online Ordering</span>
+      <span class="tag">Admin Dashboard</span>
+    </div>
+
+    <!-- Screenshot -->
+    <div class="cs-img reveal">
+      <img
+        src="/assets/img/portfolio/lacafebreria.png"
+        alt="La Cafebreria website screenshot"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Challenge -->
+    <div class="cs-block reveal">
+      <div class="cs-block-label" data-en="The Challenge" data-es="El Desafío">The Challenge</div>
+      <h2 data-en="A single ticket page — nothing more" data-es="Una sola página de tickets — nada más">A single ticket page — nothing more</h2>
+      <p data-en="La Cafebreria had a single-purpose ticket sales page — nothing more. No brand presence, no way for customers to explore their menu, discover events, or engage with the experience before walking in the door. For a café and bookstore with a full cultural identity, that gap was costing them visibility and walk-ins." data-es="La Cafebreria tenía una página de venta de tickets de un solo propósito — nada más. Sin presencia de marca, sin forma de que los clientes exploraran su menú, descubrieran eventos o se comprometieran con la experiencia antes de entrar. Para un café y librería con una identidad cultural completa, esa brecha les costaba visibilidad y clientes.">La Cafebreria had a single-purpose ticket sales page — nothing more. No brand presence, no way for customers to explore their menu, discover events, or engage with the experience before walking in the door. For a café and bookstore with a full cultural identity, that gap was costing them visibility and walk-ins.</p>
+    </div>
+
+    <!-- Solution -->
+    <div class="cs-block reveal">
+      <div class="cs-block-label" data-en="The Solution" data-es="La Solución">The Solution</div>
+      <h2 data-en="Built around how the business actually operates" data-es="Construido alrededor de cómo opera el negocio">Built around how the business actually operates</h2>
+      <p data-en="A full-featured website built around how the business actually operates. Customers can browse the food and drink menu, view upcoming events and live shows, and place orders directly through the site. Behind the scenes, the team manages everything through a custom admin dashboard — updating menus, adding events, and controlling content without touching a line of code." data-es="Un sitio web completo construido alrededor de cómo opera realmente el negocio. Los clientes pueden explorar el menú de comida y bebida, ver eventos próximos y shows en vivo, y realizar pedidos directamente desde el sitio. Entre bastidores, el equipo gestiona todo a través de un panel de administración personalizado — actualizando menús, añadiendo eventos y controlando contenido sin tocar una línea de código.">A full-featured website built around how the business actually operates. Customers can browse the food and drink menu, view upcoming events and live shows, and place orders directly through the site. Behind the scenes, the team manages everything through a custom admin dashboard — updating menus, adding events, and controlling content without touching a line of code.</p>
+      <div class="cs-stack">
+        <span>Next.js</span>
+        <span>Admin Dashboard</span>
+        <span>Online Ordering</span>
+        <span>Event Management</span>
+        <span>Mobile-First</span>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="cs-block reveal">
+      <div class="cs-block-label" data-en="The Result" data-es="El Resultado">The Result</div>
+      <h2 data-en="Delivered in days. Client's words: 'Quedó brutal.'" data-es="Entregado en días. Las palabras del cliente: 'Quedó brutal.'">Delivered in days. Client's words: 'Quedó brutal.'</h2>
+      <p data-en="Delivered in days, not weeks. The client's words on seeing the finished product: 'Quedó brutal.' The site launched and already reflects the full personality of the brand — something their old ticket page never could." data-es="Entregado en días, no semanas. Las palabras del cliente al ver el producto terminado: 'Quedó brutal.' El sitio se lanzó y ya refleja la personalidad completa de la marca — algo que su antigua página de tickets nunca pudo lograr.">Delivered in days, not weeks. The client's words on seeing the finished product: 'Quedó brutal.' The site launched and already reflects the full personality of the brand — something their old ticket page never could.</p>
+    </div>
+
+    <!-- Quote -->
+    <div class="cs-quote reveal">
+      <blockquote>"Quedó brutal."</blockquote>
+      <cite>David — La Cafebreria</cite>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cs-cta reveal">
+      <a href="https://www.lacafebreria.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <span data-en="View Live Site" data-es="Ver Sitio en Vivo">View Live Site</span>
+      </a>
+      <a href="/portfolio" class="btn-outline">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span data-en="Back to Portfolio" data-es="Volver al Portafolio">Back to Portfolio</span>
+      </a>
+      <a href="/contact" class="btn-outline">
+        <span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
+      <ul>
+        <li><a href="/services" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="/services" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software & Web Apps</a></li>
+        <li><a href="/services" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="/pricing" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing & Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
+      <ul>
+        <li><a href="/about" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="/portfolio" data-en="Portfolio" data-es="Portafolio">Portfolio</a></li>
+        <li><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="/pay" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
+      <ul>
+        <li><a href="/terms" data-en="Terms &amp; Conditions" data-es="Términos y Condiciones">Terms & Conditions</a></li>
+        <li><a href="/privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/effects.js" defer></script>
+</body>
+</html>
