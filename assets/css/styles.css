@@ -61,13 +61,16 @@ body {
    NAV
    ───────────────────────────────────────── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 6%;
+  width: calc(100% - 48px); max-width: 1120px;
+  padding: 12px 24px;
   background: rgba(240,243,248,0.88);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  transition: padding var(--transition);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  transition: padding var(--transition), box-shadow var(--transition), width var(--transition);
 }
 
 .nav-logo {
@@ -670,7 +673,7 @@ h2.section-title {
 }
 
 @media (max-width: 768px) {
-  nav { padding: 16px 4%; }
+  nav { top: 8px; width: calc(100% - 24px); padding: 10px 16px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
   section { padding: 72px 4%; }
