@@ -65,6 +65,12 @@ Recent decisions affecting current work:
 - Init: Master password admin auth via crypto.subtle, token in sessionStorage
 - Init: Admin panel at /admin route — clean separation from public site
 
+### Quick Tasks Completed
+
+| ID | Date | Description | Commits |
+|----|------|-------------|---------|
+| 260409-fch | 2026-04-09 | Fix 5 CSS design issues: transition:all sweep, cursor glow removal, floating pill nav, review-card hover, qualifier fonts | 1d646a1, 24e88ba |
+
 ### Pending Todos
 
 None yet.
