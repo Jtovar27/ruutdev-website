@@ -2464,3 +2464,909 @@ h1 em { animation: emGlow 3s ease-in-out infinite; }
   from { transform: scale(0.4); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
 }
+
+/* ─────────────────────────────────────────
+   GOOGLE ADS LANDING PAGE — AI Business OS
+   Scoped under body#page-google-ads-lp.
+   Dark theme, neon mint + electric purple.
+   Self-contained: does not affect other pages.
+   ───────────────────────────────────────── */
+body#page-google-ads-lp {
+  --gad-bg-deep: #07070A;
+  --gad-bg:      #0b0b11;
+  --gad-bg-elev: #15151d;
+  --gad-bg-card: #11111a;
+  --gad-mint:        #06FFA1;
+  --gad-mint-soft:   rgba(6,255,161,0.10);
+  --gad-mint-border: rgba(6,255,161,0.28);
+  --gad-mint-glow:   rgba(6,255,161,0.32);
+  --gad-purple:        #8A2AE3;
+  --gad-purple-soft:   rgba(138,42,227,0.12);
+  --gad-purple-border: rgba(138,42,227,0.34);
+  --gad-purple-glow:   rgba(138,42,227,0.40);
+  --gad-text:   #ffffff;
+  --gad-text-2: rgba(255,255,255,0.66);
+  --gad-text-3: rgba(255,255,255,0.42);
+  --gad-border: rgba(255,255,255,0.09);
+  --gad-border-strong: rgba(255,255,255,0.15);
+  background: var(--gad-bg-deep);
+  color: var(--gad-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+body#page-google-ads-lp a { color: inherit; text-decoration: none; }
+body#page-google-ads-lp p { color: var(--gad-text-2); line-height: 1.7; font-weight: 300; }
+
+/* ── GAD: top nav (minimal) ── */
+#page-google-ads-lp .gad-nav {
+  position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 80;
+  width: calc(100% - 32px); max-width: 1180px;
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: 10px 14px 10px 22px;
+  background: rgba(14,14,20,0.78);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--gad-border);
+  border-radius: 100px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+#page-google-ads-lp .gad-nav-logo {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--gad-text);
+}
+#page-google-ads-lp .gad-nav-logo .gad-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--gad-mint);
+  box-shadow: 0 0 12px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-nav-right {
+  display: flex; align-items: center; gap: 10px;
+}
+#page-google-ads-lp .gad-lang {
+  display: inline-flex; padding: 3px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--gad-border);
+  border-radius: 100px;
+}
+#page-google-ads-lp .gad-lang button {
+  background: transparent; border: 0; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--gad-text-3);
+  padding: 5px 12px; border-radius: 100px;
+  transition: background-color var(--transition), color var(--transition);
+}
+#page-google-ads-lp .gad-lang button.active {
+  background: var(--gad-mint); color: #001a0e;
+}
+#page-google-ads-lp .gad-nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gad-mint); color: #001a0e;
+  padding: 9px 18px; border-radius: 100px;
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 6px 20px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 28px var(--gad-mint-glow); }
+@media (max-width: 720px) {
+  #page-google-ads-lp .gad-nav { padding: 8px 10px 8px 16px; gap: 8px; }
+  #page-google-ads-lp .gad-nav-cta { padding: 8px 14px; font-size: 0.76rem; }
+  #page-google-ads-lp .gad-lang button { padding: 4px 9px; font-size: 0.7rem; }
+}
+
+/* ── GAD: section frame ── */
+#page-google-ads-lp section { padding: 96px 6%; position: relative; }
+#page-google-ads-lp .gad-shell { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+#page-google-ads-lp .gad-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gad-mint);
+  margin-bottom: 16px;
+}
+#page-google-ads-lp .gad-eyebrow::before {
+  content: ''; width: 18px; height: 2px;
+  background: var(--gad-mint); border-radius: 2px;
+}
+#page-google-ads-lp .gad-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-weight: 800; letter-spacing: -0.035em;
+  line-height: 1.08; color: var(--gad-text);
+  max-width: 760px;
+}
+#page-google-ads-lp .gad-h2 em {
+  font-style: normal;
+  background: linear-gradient(95deg, var(--gad-mint), var(--gad-purple));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#page-google-ads-lp .gad-section-intro {
+  font-size: 1.02rem; line-height: 1.75;
+  color: var(--gad-text-2); max-width: 620px; margin-top: 14px;
+}
+
+/* ── GAD: buttons ── */
+#page-google-ads-lp .gad-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 100px;
+  font-family: var(--font-body); font-size: 0.94rem; font-weight: 700;
+  letter-spacing: 0.005em; cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+#page-google-ads-lp .gad-btn:active { transform: scale(0.97); }
+#page-google-ads-lp .gad-btn-primary {
+  background: var(--gad-mint); color: #001a0e;
+  box-shadow: 0 8px 26px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px var(--gad-mint-glow); }
+#page-google-ads-lp .gad-btn-secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--gad-text);
+  border-color: var(--gad-border-strong);
+}
+#page-google-ads-lp .gad-btn-secondary:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: var(--gad-mint-border);
+}
+#page-google-ads-lp .gad-btn-ghost {
+  background: transparent; color: var(--gad-mint);
+  border-color: var(--gad-mint-border);
+  padding: 10px 22px; font-size: 0.86rem;
+}
+#page-google-ads-lp .gad-btn-ghost:hover {
+  background: var(--gad-mint-soft);
+  border-color: var(--gad-mint);
+}
+
+/* ── GAD: hero ── */
+#page-google-ads-lp .gad-hero {
+  padding: 140px 6% 80px;
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(138,42,227,0.18), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 90% 30%, rgba(6,255,161,0.10), transparent 70%),
+    var(--gad-bg-deep);
+}
+#page-google-ads-lp .gad-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black, transparent 80%);
+  pointer-events: none;
+}
+#page-google-ads-lp .gad-hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: 64px; align-items: center;
+  max-width: 1180px; margin: 0 auto;
+}
+#page-google-ads-lp .gad-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gad-mint-soft);
+  border: 1px solid var(--gad-mint-border);
+  color: var(--gad-mint);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 22px;
+}
+#page-google-ads-lp .gad-badge .gad-pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gad-mint);
+  box-shadow: 0 0 0 0 var(--gad-mint);
+  animation: gadPulse 1.8s infinite;
+}
+@keyframes gadPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(6,255,161,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(6,255,161,0); }
+  100% { box-shadow: 0 0 0 0 rgba(6,255,161,0); }
+}
+#page-google-ads-lp .gad-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 1.04;
+  color: var(--gad-text);
+  margin-bottom: 22px;
+}
+#page-google-ads-lp .gad-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(95deg, var(--gad-mint), var(--gad-purple) 80%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#page-google-ads-lp .gad-hero-sub {
+  font-size: 1.08rem; color: var(--gad-text-2);
+  line-height: 1.72; max-width: 540px; font-weight: 300;
+  margin-bottom: 32px;
+}
+#page-google-ads-lp .gad-hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+#page-google-ads-lp .gad-hero-trust {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  font-size: 0.84rem; color: var(--gad-text-3);
+}
+#page-google-ads-lp .gad-hero-trust .gad-check {
+  display: inline-flex; align-items: center; gap: 7px;
+}
+#page-google-ads-lp .gad-hero-trust i { color: var(--gad-mint); font-size: 0.78rem; }
+
+/* ── GAD: dashboard mockup (CSS-only, no external image) ── */
+#page-google-ads-lp .gad-mockup {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #161622 0%, #0d0d14 100%);
+  border: 1px solid var(--gad-border-strong);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(6,255,161,0.05);
+  padding: 14px;
+}
+#page-google-ads-lp .gad-mockup::before {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 22px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(6,255,161,0.55), transparent 35%, transparent 65%, rgba(138,42,227,0.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+#page-google-ads-lp .gad-mockup-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 4px 12px;
+}
+#page-google-ads-lp .gad-mockup-bar span {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+}
+#page-google-ads-lp .gad-mockup-bar span:nth-child(1) { background: #ff5f56; }
+#page-google-ads-lp .gad-mockup-bar span:nth-child(2) { background: #febc2e; }
+#page-google-ads-lp .gad-mockup-bar span:nth-child(3) { background: #28c840; }
+#page-google-ads-lp .gad-mockup-bar small {
+  margin-left: auto; font-size: 0.7rem; color: var(--gad-text-3);
+  font-family: ui-monospace, Menlo, monospace; letter-spacing: 0.04em;
+}
+#page-google-ads-lp .gad-mockup-body {
+  display: grid; grid-template-columns: 90px 1fr;
+  gap: 10px; min-height: 360px;
+}
+#page-google-ads-lp .gad-mockup-side {
+  background: rgba(255,255,255,0.025);
+  border-radius: 12px; padding: 12px 8px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+#page-google-ads-lp .gad-mock-side-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.7rem; color: var(--gad-text-3);
+  padding: 6px 8px; border-radius: 8px;
+}
+#page-google-ads-lp .gad-mock-side-item i { width: 12px; text-align: center; }
+#page-google-ads-lp .gad-mock-side-item.active {
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+}
+#page-google-ads-lp .gad-mockup-main {
+  background: rgba(255,255,255,0.025);
+  border-radius: 12px; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+#page-google-ads-lp .gad-mock-headerline {
+  display: flex; align-items: center; justify-content: space-between;
+}
+#page-google-ads-lp .gad-mock-title {
+  font-family: var(--font-display); font-size: 0.82rem; font-weight: 700;
+  color: var(--gad-text);
+}
+#page-google-ads-lp .gad-mock-pill {
+  font-size: 0.62rem; padding: 3px 8px; border-radius: 100px;
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+  border: 1px solid var(--gad-mint-border);
+  font-weight: 700; letter-spacing: 0.06em;
+}
+#page-google-ads-lp .gad-mock-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+#page-google-ads-lp .gad-mock-stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--gad-border);
+  border-radius: 9px; padding: 10px;
+}
+#page-google-ads-lp .gad-mock-stat .label {
+  font-size: 0.6rem; color: var(--gad-text-3);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
+}
+#page-google-ads-lp .gad-mock-stat .value {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
+  color: var(--gad-text);
+}
+#page-google-ads-lp .gad-mock-stat .delta {
+  font-size: 0.6rem; color: var(--gad-mint); margin-top: 2px;
+}
+#page-google-ads-lp .gad-mock-stat .delta.down { color: #ff8b8b; }
+#page-google-ads-lp .gad-mock-chart {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--gad-border);
+  border-radius: 9px; padding: 12px;
+  height: 96px; position: relative;
+}
+#page-google-ads-lp .gad-mock-chart svg { display: block; width: 100%; height: 100%; }
+#page-google-ads-lp .gad-mock-rows {
+  display: flex; flex-direction: column; gap: 6px;
+}
+#page-google-ads-lp .gad-mock-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 9px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--gad-border);
+  border-radius: 9px; font-size: 0.7rem;
+}
+#page-google-ads-lp .gad-mock-row .avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gad-purple), var(--gad-mint));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.62rem; font-weight: 700; color: #fff;
+}
+#page-google-ads-lp .gad-mock-row .name { color: var(--gad-text); font-weight: 600; }
+#page-google-ads-lp .gad-mock-row .meta { color: var(--gad-text-3); margin-left: auto; }
+#page-google-ads-lp .gad-mock-row .tag {
+  font-size: 0.6rem; padding: 2px 7px; border-radius: 100px;
+  background: rgba(138,42,227,0.18); color: #c39bff;
+  border: 1px solid var(--gad-purple-border);
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  #page-google-ads-lp .gad-hero-grid { grid-template-columns: 1fr; gap: 52px; }
+  #page-google-ads-lp .gad-mockup-body { min-height: 320px; }
+}
+@media (max-width: 520px) {
+  #page-google-ads-lp .gad-hero { padding: 120px 5% 60px; }
+  #page-google-ads-lp .gad-mockup-body { grid-template-columns: 70px 1fr; }
+  #page-google-ads-lp .gad-mock-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+}
+
+/* ── GAD: trust strip ── */
+#page-google-ads-lp .gad-trust-strip {
+  padding: 28px 6%;
+  background: var(--gad-bg);
+  border-top: 1px solid var(--gad-border);
+  border-bottom: 1px solid var(--gad-border);
+}
+#page-google-ads-lp .gad-trust-strip-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; gap: 18px 36px;
+  align-items: center; justify-content: center;
+  font-size: 0.85rem; color: var(--gad-text-2);
+}
+#page-google-ads-lp .gad-trust-strip-inner i { color: var(--gad-mint); margin-right: 7px; }
+#page-google-ads-lp .gad-trust-strip-inner span { display: inline-flex; align-items: center; }
+
+/* ── GAD: problem section ── */
+#page-google-ads-lp .gad-section--problem { background: var(--gad-bg); }
+#page-google-ads-lp .gad-problem-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px; margin-top: 48px;
+}
+#page-google-ads-lp .gad-problem-card {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 16px; padding: 26px 24px;
+  transition: border-color var(--transition), transform var(--transition), background-color var(--transition);
+}
+#page-google-ads-lp .gad-problem-card:hover {
+  border-color: var(--gad-mint-border);
+  transform: translateY(-2px);
+}
+#page-google-ads-lp .gad-problem-card .icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(255,107,107,0.10);
+  border: 1px solid rgba(255,107,107,0.25);
+  color: #ff8b8b;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.95rem; margin-bottom: 16px;
+}
+#page-google-ads-lp .gad-problem-card h4 {
+  font-family: var(--font-display); font-size: 1rem;
+  font-weight: 700; color: var(--gad-text);
+  letter-spacing: -0.01em; margin-bottom: 8px;
+}
+#page-google-ads-lp .gad-problem-card p {
+  font-size: 0.88rem; color: var(--gad-text-2); line-height: 1.65;
+}
+
+/* ── GAD: solution overview ── */
+#page-google-ads-lp .gad-section--solution { background: var(--gad-bg-deep); }
+#page-google-ads-lp .gad-solution-rows {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin-top: 40px;
+}
+#page-google-ads-lp .gad-solution-pill {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 20px;
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 14px;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+#page-google-ads-lp .gad-solution-pill:hover {
+  border-color: var(--gad-mint-border);
+  background: linear-gradient(180deg, var(--gad-bg-card), rgba(6,255,161,0.04));
+}
+#page-google-ads-lp .gad-solution-pill .icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+  border: 1px solid var(--gad-mint-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.88rem; flex-shrink: 0;
+}
+#page-google-ads-lp .gad-solution-pill .label {
+  font-family: var(--font-display); font-size: 0.92rem; font-weight: 700;
+  color: var(--gad-text); letter-spacing: -0.01em;
+}
+#page-google-ads-lp .gad-solution-pill .sublabel {
+  font-size: 0.76rem; color: var(--gad-text-3);
+}
+
+/* ── GAD: features grid ── */
+#page-google-ads-lp .gad-section--features { background: var(--gad-bg); }
+#page-google-ads-lp .gad-features-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px; margin-top: 48px;
+}
+#page-google-ads-lp .gad-feature-card {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 16px; padding: 28px 26px;
+  position: relative; overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+#page-google-ads-lp .gad-feature-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gad-mint), transparent);
+  opacity: 0; transition: opacity var(--transition);
+}
+#page-google-ads-lp .gad-feature-card:hover {
+  border-color: var(--gad-mint-border);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+#page-google-ads-lp .gad-feature-card:hover::before { opacity: 1; }
+#page-google-ads-lp .gad-feature-card .icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+  border: 1px solid var(--gad-mint-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; margin-bottom: 18px;
+}
+#page-google-ads-lp .gad-feature-card.alt .icon {
+  background: var(--gad-purple-soft);
+  color: #c39bff;
+  border-color: var(--gad-purple-border);
+}
+#page-google-ads-lp .gad-feature-card h3 {
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; letter-spacing: -0.02em;
+  color: var(--gad-text); margin-bottom: 8px;
+}
+#page-google-ads-lp .gad-feature-card p {
+  font-size: 0.9rem; color: var(--gad-text-2); line-height: 1.7;
+}
+#page-google-ads-lp .gad-feature-card .gad-usecase {
+  display: block; margin-top: 14px;
+  font-size: 0.78rem; color: var(--gad-text-3);
+  padding-top: 14px;
+  border-top: 1px dashed var(--gad-border-strong);
+}
+#page-google-ads-lp .gad-feature-card .gad-usecase strong {
+  color: var(--gad-mint); font-weight: 700;
+}
+
+/* ── GAD: industries ── */
+#page-google-ads-lp .gad-section--industry { background: var(--gad-bg-deep); }
+#page-google-ads-lp .gad-industry-cloud {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 40px;
+}
+#page-google-ads-lp .gad-industry-chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 18px; border-radius: 100px;
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  font-size: 0.9rem; color: var(--gad-text-2); font-weight: 500;
+  transition: border-color var(--transition), color var(--transition), background-color var(--transition);
+}
+#page-google-ads-lp .gad-industry-chip i { color: var(--gad-mint); font-size: 0.78rem; }
+#page-google-ads-lp .gad-industry-chip:hover {
+  border-color: var(--gad-mint-border);
+  color: var(--gad-text);
+  background: linear-gradient(180deg, var(--gad-bg-card), rgba(6,255,161,0.05));
+}
+
+/* ── GAD: how it works ── */
+#page-google-ads-lp .gad-section--how { background: var(--gad-bg); }
+#page-google-ads-lp .gad-how-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0; margin-top: 48px;
+  background: var(--gad-border);
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--gad-border);
+}
+#page-google-ads-lp .gad-how-step {
+  background: var(--gad-bg-card);
+  padding: 30px 26px;
+  position: relative;
+}
+#page-google-ads-lp .gad-how-step .num {
+  font-family: var(--font-display);
+  font-size: 2.4rem; font-weight: 800; line-height: 1;
+  color: rgba(6,255,161,0.2);
+  letter-spacing: -0.05em; margin-bottom: 12px;
+}
+#page-google-ads-lp .gad-how-step h4 {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--gad-text); margin-bottom: 8px; letter-spacing: -0.01em;
+}
+#page-google-ads-lp .gad-how-step p {
+  font-size: 0.86rem; color: var(--gad-text-2); line-height: 1.65;
+}
+
+/* ── GAD: pricing preview ── */
+#page-google-ads-lp .gad-section--pricing { background: var(--gad-bg-deep); }
+#page-google-ads-lp .gad-pricing-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px; margin-top: 44px;
+}
+#page-google-ads-lp .gad-pricing-card {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 18px; padding: 28px 24px;
+  position: relative;
+  display: flex; flex-direction: column;
+  transition: border-color var(--transition), transform var(--transition);
+}
+#page-google-ads-lp .gad-pricing-card.featured {
+  border-color: var(--gad-mint-border);
+  background: linear-gradient(180deg, var(--gad-bg-card), rgba(6,255,161,0.05));
+  box-shadow: 0 18px 50px rgba(6,255,161,0.10);
+}
+#page-google-ads-lp .gad-pricing-card:hover {
+  border-color: var(--gad-mint-border);
+  transform: translateY(-3px);
+}
+#page-google-ads-lp .gad-pricing-card .tier {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gad-mint);
+  margin-bottom: 8px;
+}
+#page-google-ads-lp .gad-pricing-card .name {
+  font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
+  color: var(--gad-text); letter-spacing: -0.02em; margin-bottom: 14px;
+}
+#page-google-ads-lp .gad-pricing-card .price {
+  font-family: var(--font-display); font-size: 2.1rem; font-weight: 800;
+  color: var(--gad-text); line-height: 1; margin-bottom: 4px;
+  letter-spacing: -0.03em;
+}
+#page-google-ads-lp .gad-pricing-card .price span {
+  font-size: 0.84rem; color: var(--gad-text-3); font-weight: 500;
+  letter-spacing: 0;
+}
+#page-google-ads-lp .gad-pricing-card .summary {
+  font-size: 0.85rem; color: var(--gad-text-2); line-height: 1.6;
+  margin-top: 10px; margin-bottom: 16px;
+}
+#page-google-ads-lp .gad-pricing-card ul {
+  list-style: none; padding: 0; margin: 0 0 22px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+#page-google-ads-lp .gad-pricing-card li {
+  font-size: 0.84rem; color: var(--gad-text-2); line-height: 1.55;
+  display: flex; align-items: flex-start; gap: 9px;
+}
+#page-google-ads-lp .gad-pricing-card li i { color: var(--gad-mint); font-size: 0.72rem; margin-top: 5px; }
+#page-google-ads-lp .gad-pricing-card .gad-btn { width: 100%; justify-content: center; margin-top: auto; }
+#page-google-ads-lp .gad-pricing-disclaimer {
+  margin-top: 28px; text-align: center;
+  font-size: 0.82rem; color: var(--gad-text-3);
+  padding: 14px 18px; border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed var(--gad-border-strong);
+  max-width: 760px; margin-left: auto; margin-right: auto;
+}
+#page-google-ads-lp .gad-pricing-disclaimer i { color: var(--gad-mint); margin-right: 6px; }
+#page-google-ads-lp .gad-pricing-disclaimer a { color: var(--gad-mint); text-decoration: underline; }
+
+/* ── GAD: trust / built-for ── */
+#page-google-ads-lp .gad-section--trust { background: var(--gad-bg); }
+#page-google-ads-lp .gad-trust-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px; margin-top: 44px;
+}
+#page-google-ads-lp .gad-trust-card {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 16px; padding: 26px;
+}
+#page-google-ads-lp .gad-trust-card .icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: var(--gad-purple-soft); color: #c39bff;
+  border: 1px solid var(--gad-purple-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; margin-bottom: 14px;
+}
+#page-google-ads-lp .gad-trust-card h4 {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+  color: var(--gad-text); margin-bottom: 6px;
+}
+#page-google-ads-lp .gad-trust-card p {
+  font-size: 0.86rem; color: var(--gad-text-2); line-height: 1.65;
+}
+
+/* ── GAD: FAQ ── */
+#page-google-ads-lp .gad-section--faq { background: var(--gad-bg-deep); }
+#page-google-ads-lp .gad-faq-list {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 44px; max-width: 880px;
+}
+#page-google-ads-lp .gad-faq-item {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border);
+  border-radius: 14px; padding: 20px 24px;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+#page-google-ads-lp .gad-faq-item:hover { border-color: var(--gad-mint-border); }
+#page-google-ads-lp .gad-faq-item[open] { border-color: var(--gad-mint); }
+#page-google-ads-lp .gad-faq-q {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+#page-google-ads-lp .gad-faq-q::-webkit-details-marker { display: none; }
+#page-google-ads-lp .gad-faq-q::marker { display: none; content: ''; }
+#page-google-ads-lp .gad-faq-q:focus-visible {
+  border-radius: 8px;
+  box-shadow: 0 0 0 3px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-faq-q h4 {
+  font-family: var(--font-display); font-size: 0.96rem;
+  font-weight: 700; color: var(--gad-text);
+  letter-spacing: -0.01em; line-height: 1.4;
+  margin: 0;
+}
+#page-google-ads-lp .gad-faq-icon {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+#page-google-ads-lp .gad-faq-item[open] .gad-faq-icon {
+  background: var(--gad-mint); color: #001a0e; transform: rotate(45deg);
+}
+#page-google-ads-lp .gad-faq-a {
+  font-size: 0.88rem; color: var(--gad-text-2); line-height: 1.7;
+  margin: 14px 0 0;
+  animation: gadFaqIn 0.32s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes gadFaqIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── GAD: final CTA + form ── */
+#page-google-ads-lp .gad-section--cta {
+  background:
+    radial-gradient(ellipse 50% 50% at 80% 0%, rgba(138,42,227,0.18), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(6,255,161,0.10), transparent 70%),
+    var(--gad-bg);
+  padding-bottom: 120px;
+}
+#page-google-ads-lp .gad-cta-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 56px; align-items: start;
+  max-width: 1180px; margin: 0 auto;
+}
+#page-google-ads-lp .gad-cta-side h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1.08;
+  color: var(--gad-text); margin-bottom: 20px;
+}
+#page-google-ads-lp .gad-cta-side h2 em {
+  font-style: normal;
+  background: linear-gradient(95deg, var(--gad-mint), var(--gad-purple) 80%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+#page-google-ads-lp .gad-cta-side .lead {
+  font-size: 1rem; color: var(--gad-text-2); line-height: 1.7;
+  margin-bottom: 24px; max-width: 480px;
+}
+#page-google-ads-lp .gad-cta-bullets {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+#page-google-ads-lp .gad-cta-bullets li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.92rem; color: var(--gad-text-2);
+}
+#page-google-ads-lp .gad-cta-bullets i { color: var(--gad-mint); font-size: 0.85rem; margin-top: 4px; }
+
+/* ── GAD: form ── */
+#page-google-ads-lp .gad-form-card {
+  background: var(--gad-bg-card);
+  border: 1px solid var(--gad-border-strong);
+  border-radius: 20px; padding: 32px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(6,255,161,0.05);
+  position: relative;
+}
+#page-google-ads-lp .gad-form-card::before {
+  content: ''; position: absolute; inset: -1px; border-radius: 21px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(6,255,161,0.4), transparent 40%, transparent 60%, rgba(138,42,227,0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+#page-google-ads-lp .gad-form-title {
+  font-family: var(--font-display); font-size: 1.2rem; font-weight: 800;
+  color: var(--gad-text); margin-bottom: 4px; letter-spacing: -0.02em;
+}
+#page-google-ads-lp .gad-form-sub {
+  font-size: 0.86rem; color: var(--gad-text-3); margin-bottom: 22px;
+}
+#page-google-ads-lp .gad-form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+#page-google-ads-lp .gad-form-field { margin-bottom: 12px; }
+#page-google-ads-lp .gad-form-field label {
+  display: block; font-size: 0.78rem; font-weight: 600;
+  color: var(--gad-text-2); margin-bottom: 6px; letter-spacing: 0.01em;
+}
+#page-google-ads-lp .gad-form-field input,
+#page-google-ads-lp .gad-form-field select,
+#page-google-ads-lp .gad-form-field textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gad-border-strong);
+  border-radius: 10px; padding: 11px 14px;
+  font-family: var(--font-body); font-size: 0.9rem; color: var(--gad-text);
+  outline: none; transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+  -webkit-appearance: none;
+}
+#page-google-ads-lp .gad-form-field select { appearance: none; -webkit-appearance: none; -moz-appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--gad-text-2) 50%), linear-gradient(135deg, var(--gad-text-2) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 32px;
+}
+#page-google-ads-lp .gad-form-field input::placeholder,
+#page-google-ads-lp .gad-form-field textarea::placeholder { color: var(--gad-text-3); }
+#page-google-ads-lp .gad-form-field input:focus,
+#page-google-ads-lp .gad-form-field select:focus,
+#page-google-ads-lp .gad-form-field textarea:focus {
+  border-color: var(--gad-mint);
+  background: rgba(6,255,161,0.04);
+  box-shadow: 0 0 0 3px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-form-field textarea { resize: vertical; min-height: 96px; }
+#page-google-ads-lp .gad-form-consent {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.78rem; color: var(--gad-text-3); line-height: 1.55;
+  margin-top: 6px; margin-bottom: 18px;
+}
+#page-google-ads-lp .gad-form-consent input {
+  margin-top: 2px; width: 16px; height: 16px;
+  accent-color: var(--gad-mint); flex-shrink: 0;
+}
+#page-google-ads-lp .gad-form-consent a { color: var(--gad-mint); text-decoration: underline; }
+#page-google-ads-lp .gad-form-submit {
+  width: 100%; justify-content: center;
+  font-size: 0.95rem; font-weight: 800;
+  padding: 14px 28px;
+}
+#page-google-ads-lp .gad-form-error {
+  display: none; margin-bottom: 14px;
+  background: rgba(255,107,107,0.10);
+  border: 1px solid rgba(255,107,107,0.34);
+  color: #ffb8b8;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 0.84rem;
+}
+#page-google-ads-lp .gad-form-error.visible { display: block; }
+#page-google-ads-lp .gad-form-success {
+  display: none; text-align: center; padding: 28px 12px;
+}
+#page-google-ads-lp .gad-form-success.visible { display: block; }
+#page-google-ads-lp .gad-form-success .check {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--gad-mint-soft); color: var(--gad-mint);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin: 0 auto 16px;
+  border: 1px solid var(--gad-mint-border);
+}
+#page-google-ads-lp .gad-form-success h3 {
+  font-family: var(--font-display); font-size: 1.2rem; font-weight: 800;
+  color: var(--gad-text); margin-bottom: 8px;
+}
+#page-google-ads-lp .gad-form-success p {
+  font-size: 0.9rem; color: var(--gad-text-2); line-height: 1.7;
+}
+@media (max-width: 980px) {
+  #page-google-ads-lp .gad-cta-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 540px) {
+  #page-google-ads-lp .gad-form-row { grid-template-columns: 1fr; }
+  #page-google-ads-lp .gad-form-card { padding: 24px 22px; }
+}
+
+/* ── GAD: footer ── */
+#page-google-ads-lp .gad-footer {
+  background: #050507;
+  color: var(--gad-text-3);
+  padding: 48px 6% 32px;
+  border-top: 1px solid var(--gad-border);
+}
+#page-google-ads-lp .gad-footer-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 36px; align-items: start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--gad-border);
+}
+#page-google-ads-lp .gad-footer-brand p {
+  font-size: 0.85rem; color: var(--gad-text-3); line-height: 1.7;
+  margin-top: 12px; max-width: 360px;
+}
+#page-google-ads-lp .gad-footer h5 {
+  font-family: var(--font-display); font-size: 0.74rem;
+  font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gad-text-2);
+  margin-bottom: 14px;
+}
+#page-google-ads-lp .gad-footer ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+#page-google-ads-lp .gad-footer ul a {
+  font-size: 0.86rem; color: var(--gad-text-3);
+  transition: color var(--transition);
+}
+#page-google-ads-lp .gad-footer ul a:hover { color: var(--gad-mint); }
+#page-google-ads-lp .gad-footer-bottom {
+  max-width: 1180px; margin: 28px auto 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  font-size: 0.76rem; color: var(--gad-text-3);
+}
+@media (max-width: 720px) {
+  #page-google-ads-lp .gad-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ── GAD: sticky mobile CTA ── */
+#page-google-ads-lp .gad-mobile-cta {
+  display: none;
+  position: fixed; left: 12px; right: 12px; bottom: 12px;
+  z-index: 70;
+  background: var(--gad-mint); color: #001a0e;
+  font-family: var(--font-body); font-size: 0.92rem; font-weight: 800;
+  letter-spacing: 0.005em;
+  padding: 14px 22px; border-radius: 100px;
+  text-align: center;
+  box-shadow: 0 14px 36px var(--gad-mint-glow), 0 0 0 1px rgba(0,0,0,0.4);
+}
+@media (max-width: 720px) {
+  #page-google-ads-lp .gad-mobile-cta { display: block; }
+  #page-google-ads-lp .gad-section--cta { padding-bottom: 120px; }
+  #page-google-ads-lp section { padding: 72px 6%; }
+  #page-google-ads-lp .gad-h2 { font-size: clamp(1.7rem, 7vw, 2.4rem); }
+}
+
+/* ── GAD: scroll reveal already shared via .reveal ── */
+/* Uses the shared IntersectionObserver in main.js */
+

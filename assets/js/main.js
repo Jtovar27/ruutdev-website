@@ -515,3 +515,202 @@ function escHtml(s) {
 }
 
 document.addEventListener('DOMContentLoaded', initLiveReviews);
+
+/* ─────────────────────────────────────────────────────────────
+   GOOGLE ADS LANDING PAGE (AI Business OS)
+   Self-contained init; only runs on body#page-google-ads-lp.
+   - Captures UTM params into hidden form inputs.
+   - Submits demo form via existing /api/contact endpoint.
+   - Fires conversion events ONLY when window.RUUTDEV_TRACKING
+     is configured. No external scripts loaded by default.
+   See docs/GOOGLE_ADS_LANDING_PAGE.md for setup.
+   ───────────────────────────────────────────────────────────── */
+
+window.RUUTDEV_TRACKING = window.RUUTDEV_TRACKING || {};
+
+function gadTrackEvent(eventName, params) {
+  try {
+    const cfg = window.RUUTDEV_TRACKING || {};
+    const payload = Object.assign({ event: eventName }, params || {});
+    if (typeof window.dataLayer !== 'undefined' && Array.isArray(window.dataLayer)) {
+      window.dataLayer.push(payload);
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params || {});
+    }
+    if (cfg.googleAdsId && cfg.conversionLabels && typeof window.gtag === 'function') {
+      const label = cfg.conversionLabels[eventName];
+      if (label) {
+        window.gtag('event', 'conversion', {
+          send_to: `${cfg.googleAdsId}/${label}`
+        });
+      }
+    }
+  } catch (err) {
+    // Tracking must never break the page
+  }
+}
+
+function gadCaptureUtm() {
+  const params = new URLSearchParams(window.location.search);
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+    const input = document.getElementById('gad-' + key);
+    const value = params.get(key);
+    if (input && value) input.value = value.slice(0, 200);
+  });
+}
+
+function gadValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function gadShowFormError(msgEn, msgEs) {
+  const box = document.getElementById('gad-form-error');
+  if (!box) return;
+  const lang = document.documentElement.getAttribute('lang') === 'es' ? 'es' : 'en';
+  box.textContent = (lang === 'es' && msgEs) ? msgEs : msgEn;
+  box.classList.add('visible');
+}
+
+function gadClearFormError() {
+  const box = document.getElementById('gad-form-error');
+  if (!box) return;
+  box.classList.remove('visible');
+  box.textContent = '';
+}
+
+function gadInitDemoForm() {
+  const form = document.getElementById('gad-demo-form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    gadClearFormError();
+
+    const name        = document.getElementById('gad-name').value.trim();
+    const email       = document.getElementById('gad-email').value.trim();
+    const business    = document.getElementById('gad-business').value.trim();
+    const industry    = document.getElementById('gad-industry').value;
+    const projectType = (document.getElementById('gad-project-type') || {}).value || '';
+    const phone       = document.getElementById('gad-phone').value.trim();
+    const contact     = document.getElementById('gad-contact-pref').value;
+    const challenge   = document.getElementById('gad-challenge').value.trim();
+    const consent     = document.getElementById('gad-consent').checked;
+
+    const utm = {
+      source:   document.getElementById('gad-utm_source').value,
+      medium:   document.getElementById('gad-utm_medium').value,
+      campaign: document.getElementById('gad-utm_campaign').value,
+      term:     document.getElementById('gad-utm_term').value,
+      content:  document.getElementById('gad-utm_content').value
+    };
+    const landing = document.getElementById('gad-landing_page').value;
+
+    if (!name || !email) {
+      gadShowFormError(
+        'Please fill in your name and email.',
+        'Por favor completa tu nombre y correo.'
+      );
+      return;
+    }
+    if (!gadValidEmail(email)) {
+      gadShowFormError(
+        'Please enter a valid email address.',
+        'Por favor ingresa un correo válido.'
+      );
+      return;
+    }
+    if (!consent) {
+      gadShowFormError(
+        'Please accept the privacy notice to continue.',
+        'Por favor acepta el aviso de privacidad para continuar.'
+      );
+      return;
+    }
+
+    const submitBtn = document.getElementById('gad-submit');
+    const submitSpan = submitBtn ? submitBtn.querySelector('span') : null;
+    const originalLabel = submitSpan ? submitSpan.textContent : '';
+    if (submitBtn) submitBtn.disabled = true;
+    if (submitSpan) submitSpan.textContent = '…';
+
+    // Pack landing-page-specific fields into the message body so the existing
+    // /api/contact endpoint contract stays unchanged (Web3Forms proxy).
+    const messageLines = [
+      '── Google Ads LP · Project Call Request ──',
+      `Looking for: ${projectType || '(not specified)'}`,
+      `Industry: ${industry || '(not provided)'}`,
+      `Phone: ${phone || '(not provided)'}`,
+      `Preferred contact: ${contact || 'email'}`,
+      `What the business needs: ${challenge || '(not provided)'}`,
+      '',
+      `Landing page: ${landing}`,
+      `UTM source/medium/campaign: ${utm.source || '-'} / ${utm.medium || '-'} / ${utm.campaign || '-'}`,
+      `UTM term/content: ${utm.term || '-'} / ${utm.content || '-'}`,
+      `Page URL: ${window.location.href}`,
+      `Referrer: ${document.referrer || '(direct)'}`
+    ];
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9000);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name,
+          email,
+          business,
+          type: projectType || 'gad_project_call',
+          message: messageLines.join('\n')
+        })
+      });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error('Upstream error');
+
+      const formBody    = document.getElementById('gad-form-body');
+      const formSuccess = document.getElementById('gad-form-success');
+      if (formBody)    formBody.style.display = 'none';
+      if (formSuccess) formSuccess.classList.add('visible');
+
+      gadTrackEvent('project_call_submit', {
+        project_type: projectType || 'unspecified',
+        industry:     industry || 'unknown',
+        contact_pref: contact || 'email',
+        utm_source:   utm.source || '',
+        utm_medium:   utm.medium || '',
+        utm_campaign: utm.campaign || ''
+      });
+    } catch (err) {
+      clearTimeout(timeout);
+      gadShowFormError(
+        'Something went wrong. Please try again or message us on WhatsApp.',
+        'Algo salió mal. Inténtalo de nuevo o escríbenos por WhatsApp.'
+      );
+      if (submitBtn)  submitBtn.disabled = false;
+      if (submitSpan) submitSpan.textContent = originalLabel;
+    }
+  });
+}
+
+function gadInitCtaTracking() {
+  document.querySelectorAll('[data-gad-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      const role = el.getAttribute('data-gad-cta') || 'unknown';
+      const eventName = role.startsWith('pricing') ? 'pricing_click' : 'primary_cta_click';
+      gadTrackEvent(eventName, { cta_role: role });
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.body.id !== 'page-google-ads-lp') return;
+  gadCaptureUtm();
+  gadInitDemoForm();
+  gadInitCtaTracking();
+  gadTrackEvent('landing_page_view', {
+    page: '/google-ads/ai-business-os'
+  });
+});

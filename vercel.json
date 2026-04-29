@@ -12,7 +12,8 @@
     { "source": "/terms",     "destination": "/pages/terms" },
     { "source": "/portfolio/la-cafebreria",              "destination": "/pages/portfolio/la-cafebreria" },
     { "source": "/portfolio/taxes-insurance-group",      "destination": "/pages/portfolio/taxes-insurance-group" },
-    { "source": "/portfolio/acaballo-equestrian-school", "destination": "/pages/portfolio/acaballo-equestrian-school" }
+    { "source": "/portfolio/acaballo-equestrian-school", "destination": "/pages/portfolio/acaballo-equestrian-school" },
+    { "source": "/google-ads/ai-business-os",            "destination": "/pages/google-ads/ai-business-os" }
   ],
   "headers": [
     {
