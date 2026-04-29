@@ -587,15 +587,16 @@ function gadInitDemoForm() {
     e.preventDefault();
     gadClearFormError();
 
-    const name        = document.getElementById('gad-name').value.trim();
-    const email       = document.getElementById('gad-email').value.trim();
-    const business    = document.getElementById('gad-business').value.trim();
-    const industry    = document.getElementById('gad-industry').value;
-    const projectType = (document.getElementById('gad-project-type') || {}).value || '';
-    const phone       = document.getElementById('gad-phone').value.trim();
-    const contact     = document.getElementById('gad-contact-pref').value;
-    const challenge   = document.getElementById('gad-challenge').value.trim();
-    const consent     = document.getElementById('gad-consent').checked;
+    const name         = document.getElementById('gad-name').value.trim();
+    const email        = document.getElementById('gad-email').value.trim();
+    const business     = document.getElementById('gad-business').value.trim();
+    const industry     = document.getElementById('gad-industry').value;
+    const projectType  = (document.getElementById('gad-project-type') || {}).value || '';
+    const phone        = document.getElementById('gad-phone').value.trim();
+    const contact      = document.getElementById('gad-contact-pref').value;
+    const challenge    = document.getElementById('gad-challenge').value.trim();
+    const saasWaitlist = !!(document.getElementById('gad-saas-waitlist') || {}).checked;
+    const consent      = document.getElementById('gad-consent').checked;
 
     const utm = {
       source:   document.getElementById('gad-utm_source').value,
@@ -643,6 +644,7 @@ function gadInitDemoForm() {
       `Phone: ${phone || '(not provided)'}`,
       `Preferred contact: ${contact || 'email'}`,
       `What the business needs: ${challenge || '(not provided)'}`,
+      `BUOS waitlist opt-in: ${saasWaitlist ? 'YES — add to early access list' : 'no'}`,
       '',
       `Landing page: ${landing}`,
       `UTM source/medium/campaign: ${utm.source || '-'} / ${utm.medium || '-'} / ${utm.campaign || '-'}`,
@@ -676,13 +678,19 @@ function gadInitDemoForm() {
       if (formSuccess) formSuccess.classList.add('visible');
 
       gadTrackEvent('project_call_submit', {
-        project_type: projectType || 'unspecified',
-        industry:     industry || 'unknown',
-        contact_pref: contact || 'email',
-        utm_source:   utm.source || '',
-        utm_medium:   utm.medium || '',
-        utm_campaign: utm.campaign || ''
+        project_type:  projectType || 'unspecified',
+        industry:      industry || 'unknown',
+        contact_pref:  contact || 'email',
+        saas_waitlist: saasWaitlist ? 'yes' : 'no',
+        utm_source:    utm.source || '',
+        utm_medium:    utm.medium || '',
+        utm_campaign:  utm.campaign || ''
       });
+      if (saasWaitlist) {
+        gadTrackEvent('buos_waitlist_optin', {
+          industry: industry || 'unknown'
+        });
+      }
     } catch (err) {
       clearTimeout(timeout);
       gadShowFormError(

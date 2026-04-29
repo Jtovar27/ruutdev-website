@@ -3367,6 +3367,102 @@ body#page-google-ads-lp p { color: var(--gad-text-2); line-height: 1.7; font-wei
   #page-google-ads-lp .gad-h2 { font-size: clamp(1.7rem, 7vw, 2.4rem); }
 }
 
+/* ── GAD: BUOS — coming soon section with logo ── */
+#page-google-ads-lp .gad-section--buos {
+  background:
+    radial-gradient(ellipse 50% 60% at 15% 50%, rgba(6,255,161,0.15), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 85% 30%, rgba(138,42,227,0.16), transparent 70%),
+    var(--gad-bg);
+}
+#page-google-ads-lp .gad-buos-grid {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 56px; align-items: center;
+}
+#page-google-ads-lp .gad-buos-mark {
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 36px 28px;
+  background: linear-gradient(180deg, var(--gad-bg-card), rgba(6,255,161,0.04));
+  border: 1px solid var(--gad-border-strong);
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+}
+#page-google-ads-lp .gad-buos-mark::before {
+  content: ''; position: absolute; inset: -1px; border-radius: 25px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(6,255,161,0.55), transparent 40%, transparent 60%, rgba(138,42,227,0.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+#page-google-ads-lp .gad-buos-logo {
+  display: block; width: 160px; height: 160px;
+  border-radius: 36px;
+  background: var(--gad-bg-deep);
+  filter: drop-shadow(0 12px 40px rgba(6,255,161,0.32));
+  object-fit: contain;
+}
+#page-google-ads-lp .gad-buos-mark-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 14px; border-radius: 100px;
+  background: var(--gad-mint-soft);
+  border: 1px solid var(--gad-mint-border);
+  color: var(--gad-mint);
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+#page-google-ads-lp .gad-buos-perk {
+  margin-top: 24px;
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 18px 20px;
+  background: rgba(6,255,161,0.06);
+  border: 1px solid var(--gad-mint-border);
+  border-radius: 14px;
+}
+#page-google-ads-lp .gad-buos-perk i {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--gad-mint); color: #001a0e;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px var(--gad-mint-glow);
+}
+#page-google-ads-lp .gad-buos-perk strong {
+  display: block; color: var(--gad-text);
+  font-family: var(--font-display);
+  font-size: 0.96rem; font-weight: 700;
+  letter-spacing: -0.01em; margin-bottom: 4px;
+}
+#page-google-ads-lp .gad-buos-perk span {
+  display: block; color: var(--gad-text-2);
+  font-size: 0.86rem; line-height: 1.65;
+}
+@media (max-width: 880px) {
+  #page-google-ads-lp .gad-buos-grid {
+    grid-template-columns: 1fr; gap: 40px;
+  }
+  #page-google-ads-lp .gad-buos-mark { max-width: 320px; margin: 0 auto; }
+}
+
+/* ── GAD: BUOS waitlist opt-in (form checkbox) ── */
+#page-google-ads-lp .gad-buos-optin {
+  background: rgba(6,255,161,0.05);
+  border: 1px solid var(--gad-mint-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 4px 0 18px;
+  font-size: 0.86rem;
+  color: var(--gad-text-2);
+  transition: background-color var(--transition), border-color var(--transition);
+}
+#page-google-ads-lp .gad-buos-optin:hover {
+  background: rgba(6,255,161,0.09);
+}
+#page-google-ads-lp .gad-buos-optin strong {
+  color: var(--gad-mint); font-weight: 700;
+}
+
 /* ── GAD: scroll reveal already shared via .reveal ── */
 /* Uses the shared IntersectionObserver in main.js */
 
