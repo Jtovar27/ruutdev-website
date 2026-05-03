@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Make a Payment — RuutDev</title>
-  <meta name="description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <meta name="description" content="Client payments for RuutDev monthly plans, project deposits, milestones, and recurring support." />
   <link rel="canonical" href="https://ruutdev.com/pay" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ruutdev.com/pay" />
   <meta property="og:title" content="Make a Payment — RuutDev" />
-  <meta property="og:description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <meta property="og:description" content="Client payments for RuutDev monthly plans, project deposits, milestones, and recurring support." />
   <meta property="og:site_name" content="RuutDev" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Make a Payment — RuutDev" />
-  <meta name="twitter:description" content="Client payments for RuutDev monthly plans, project deposits, recurring support, and invoice-based payments." />
+  <meta name="twitter:description" content="Client payments for RuutDev monthly plans, project deposits, milestones, and recurring support." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -35,7 +35,7 @@
   <div class="page-hero-content">
     <div class="hero-badge" data-en="Client Payments" data-es="Pagos de Clientes">Client Payments</div>
     <h1 data-en="Complete a <em>secure payment</em>" data-es="Completa un <em>pago seguro</em>">Complete a <em>secure payment</em></h1>
-    <p data-en="Use this page for monthly plan setup fees, recurring monthly plan payments, project deposits or milestones, and invoice-based payments." data-es="Usa esta pagina para tarifas de configuracion de planes mensuales, pagos mensuales recurrentes, depositos o hitos de proyecto y pagos por factura.">Use this page for monthly plan setup fees, recurring monthly plan payments, project deposits or milestones, and invoice-based payments.</p>
+    <p data-en="Use this page for monthly plan setup fees, recurring monthly plan payments, and project deposits or milestones." data-es="Usa esta pagina para tarifas de configuracion de planes mensuales, pagos mensuales recurrentes y depositos o hitos de proyecto.">Use this page for monthly plan setup fees, recurring monthly plan payments, and project deposits or milestones.</p>
   </div>
 </div>
 
@@ -105,15 +105,6 @@
           </label>
         </div>
         <p class="tier-help" id="project-kind-help" data-en="Choose the project type this deposit is for. The amount auto-fills with the standard deposit for that type — adjust it only if your milestone schedule already specifies a different amount." data-es="Elige el tipo de proyecto al que corresponde este deposito. El monto se completa automaticamente con el deposito estandar de ese tipo — ajustalo solo si tu plan de hitos ya especifica un monto distinto.">Choose the project type this deposit is for. The amount auto-fills with the standard deposit for that type — adjust it only if your milestone schedule already specifies a different amount.</p>
-
-        <label class="payment-type-option" onclick="selectPaymentType(this)">
-          <input type="radio" name="payment_type" value="invoice" />
-          <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
-          <div class="pt-text">
-            <strong data-en="Invoice / Other" data-es="Factura / Otro">Invoice / Other</strong>
-            <span data-en="Manual or custom payment" data-es="Pago manual o personalizado">Manual or custom payment</span>
-          </div>
-        </label>
       </div>
 
       <div class="form-group">
@@ -156,7 +147,6 @@
           <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Monthly Plan Setup:" data-es="Configuracion de Plan Mensual:">Monthly Plan Setup:</strong> <span data-en="One-time setup payment to activate the selected website plan." data-es="Pago unico de configuracion para activar el plan de sitio seleccionado.">One-time setup payment to activate the selected website plan.</span></li>
           <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Monthly Plan Recurring:" data-es="Pago Mensual Recurrente:">Monthly Plan Recurring:</strong> <span data-en="Recurring billing for the selected monthly plan once the site is live." data-es="Facturacion recurrente del plan mensual seleccionado una vez que el sitio esta en vivo.">Recurring billing for the selected monthly plan once the site is live.</span></li>
           <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Project Deposit / Milestone:" data-es="Deposito / Hito de Proyecto:">Project Deposit / Milestone:</strong> <span data-en="Quoted payment for full-payment projects, larger builds, or approved milestone schedules." data-es="Pago cotizado para proyectos a pago completo, desarrollos grandes o hitos aprobados.">Quoted payment for full-payment projects, larger builds, or approved milestone schedules.</span></li>
-          <li><i class="fa-solid fa-circle-dot"></i> <strong data-en="Invoice / Other:" data-es="Factura / Otro:">Invoice / Other:</strong> <span data-en="Any other payment with a specific reference, invoice number, or manual amount." data-es="Cualquier otro pago con una referencia especifica, numero de factura o monto manual.">Any other payment with a specific reference, invoice number, or manual amount.</span></li>
         </ul>
       </div>
 
@@ -255,8 +245,7 @@
     project: {
       website:     'https://buy.stripe.com/4gM3cw4nlfcgdTZaSc4Vy03',
       software_ai: 'https://buy.stripe.com/7sYaEY2fd1lq4jpf8s4Vy04',
-    },
-    invoice: 'https://buy.stripe.com/REPLACE_INVOICE_LINK'
+    }
   };
 
   const PROJECT_DEPOSIT_AMOUNTS = {
@@ -380,8 +369,6 @@
       url = STRIPE_LINKS[currentType][currentTier];
     } else if (currentType === 'project') {
       url = STRIPE_LINKS.project[currentProjectKind];
-    } else {
-      url = STRIPE_LINKS[currentType];
     }
 
     if (!url || url.includes('REPLACE_')) {
