@@ -101,10 +101,10 @@
           <label class="tier-option" onclick="selectProjectKind(this, 'software_ai')">
             <input type="radio" name="project_kind" value="software_ai" />
             <span class="tier-name" data-en="Software / AI Project" data-es="Proyecto Software / IA">Software / AI Project</span>
-            <span class="tier-price" data-en="Deposit $500" data-es="Deposito $500">Deposit $500</span>
+            <span class="tier-price" data-en="Deposit $750" data-es="Deposito $750">Deposit $750</span>
           </label>
         </div>
-        <p class="tier-help" id="project-kind-help" data-en="Choose the project type this deposit is for. The standard deposit is $500 — adjust the amount only if your milestone schedule already specifies a different amount." data-es="Elige el tipo de proyecto al que corresponde este deposito. El deposito estandar es $500 — ajusta el monto solo si tu plan de hitos ya especifica un monto distinto.">Choose the project type this deposit is for. The standard deposit is $500 — adjust the amount only if your milestone schedule already specifies a different amount.</p>
+        <p class="tier-help" id="project-kind-help" data-en="Choose the project type this deposit is for. The amount auto-fills with the standard deposit for that type — adjust it only if your milestone schedule already specifies a different amount." data-es="Elige el tipo de proyecto al que corresponde este deposito. El monto se completa automaticamente con el deposito estandar de ese tipo — ajustalo solo si tu plan de hitos ya especifica un monto distinto.">Choose the project type this deposit is for. The amount auto-fills with the standard deposit for that type — adjust it only if your milestone schedule already specifies a different amount.</p>
 
         <label class="payment-type-option" onclick="selectPaymentType(this)">
           <input type="radio" name="payment_type" value="invoice" />
@@ -259,7 +259,10 @@
     invoice: 'https://buy.stripe.com/REPLACE_INVOICE_LINK'
   };
 
-  const PROJECT_DEPOSIT_AMOUNT = '500';
+  const PROJECT_DEPOSIT_AMOUNTS = {
+    website:     '500',
+    software_ai: '750'
+  };
 
   let currentType = 'monthly_setup';
   let currentTier = 'simple';
@@ -275,7 +278,7 @@
     }
 
     if (currentType === 'project') {
-      amountInput.value = PROJECT_DEPOSIT_AMOUNT;
+      amountInput.value = PROJECT_DEPOSIT_AMOUNTS[currentProjectKind];
       return;
     }
 
@@ -309,6 +312,7 @@
     document.querySelectorAll('#project-kinds .tier-option').forEach(opt => opt.classList.remove('selected'));
     el.classList.add('selected');
     currentProjectKind = kind;
+    updateSuggestedAmount();
   }
 
   function applyQueryContext() {
