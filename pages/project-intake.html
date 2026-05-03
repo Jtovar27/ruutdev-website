@@ -36,6 +36,51 @@
       color: rgba(255,255,255,0.85);
     }
     .intake-radio-group input[type="radio"] { margin: 0; accent-color: var(--blue); }
+
+    /* File upload zones */
+    .ix-file-input { position: absolute; left: -9999px; opacity: 0; }
+    .ix-file-zone {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px 16px;
+      border: 1.5px dashed rgba(255,255,255,0.18);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      text-align: center;
+    }
+    .ix-file-zone:hover, .ix-file-zone.dragover {
+      border-color: var(--blue);
+      background: rgba(10,102,255,0.06);
+    }
+    .ix-file-zone i { font-size: 1.4rem; color: var(--blue); margin-bottom: 8px; }
+    .ix-file-zone-primary { font-size: 0.95rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+    .ix-file-zone-hint    { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+    .ix-file-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .ix-file-list:empty { display: none; }
+    .ix-file-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .ix-file-item i.ix-fi-icon { color: var(--blue); font-size: 0.95rem; }
+    .ix-file-item .ix-fi-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: rgba(255,255,255,0.9); }
+    .ix-file-item .ix-fi-size { color: rgba(255,255,255,0.45); font-size: 0.78rem; flex-shrink: 0; }
+    .ix-file-item .ix-fi-remove {
+      background: none; border: 0; color: rgba(255,255,255,0.55); cursor: pointer;
+      padding: 4px 6px; border-radius: 6px; font-size: 0.85rem;
+    }
+    .ix-file-item .ix-fi-remove:hover { color: #ff5b5b; background: rgba(255,91,91,0.08); }
+    .ix-file-item.uploading .ix-fi-name { color: rgba(255,255,255,0.55); }
+    .ix-file-item.uploading::after {
+      content: ''; width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--blue);
+      animation: ix-spin .8s linear infinite;
+    }
+    @keyframes ix-spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body id="page-project-intake">
@@ -127,12 +172,24 @@
         <input type="text" id="ix-colors" maxlength="200" placeholder="#0A66FF, white, charcoal — or describe the vibe" />
       </div>
       <div class="form-group">
-        <label data-en="Logo &amp; brand assets — shared folder link" data-es="Logo y assets de marca — link a carpeta compartida">Logo &amp; brand assets — shared folder link</label>
-        <input type="url" id="ix-assets" maxlength="300" placeholder="Google Drive / Dropbox / WeTransfer link" />
+        <label data-en="Logo &amp; brand assets" data-es="Logo y assets de marca">Logo &amp; brand assets</label>
+        <input type="file" class="ix-file-input" id="ix-logo-input" multiple accept="image/*,.svg,.pdf,.ai,.eps" />
+        <label for="ix-logo-input" class="ix-file-zone" id="ix-logo-zone">
+          <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+          <span class="ix-file-zone-primary" data-en="Tap to upload from your phone or drag here" data-es="Toca para subir desde tu telefono o arrastra aqui">Tap to upload from your phone or drag here</span>
+          <span class="ix-file-zone-hint" data-en="PNG, JPG, SVG, PDF, AI, EPS — up to 10 MB each" data-es="PNG, JPG, SVG, PDF, AI, EPS — hasta 10 MB cada uno">PNG, JPG, SVG, PDF, AI, EPS — up to 10 MB each</span>
+        </label>
+        <div class="ix-file-list" id="ix-logo-list"></div>
       </div>
       <div class="form-group">
         <label data-en="Photos / images for the site" data-es="Fotos / imagenes para el sitio">Photos / images for the site</label>
-        <input type="text" id="ix-photos" maxlength="300" placeholder="Shared folder link, or note that we'll need stock photography" />
+        <input type="file" class="ix-file-input" id="ix-photo-input" multiple accept="image/*" />
+        <label for="ix-photo-input" class="ix-file-zone" id="ix-photo-zone">
+          <i class="fa-solid fa-images" aria-hidden="true"></i>
+          <span class="ix-file-zone-primary" data-en="Tap to select photos from your gallery" data-es="Toca para seleccionar fotos de tu galeria">Tap to select photos from your gallery</span>
+          <span class="ix-file-zone-hint" data-en="JPG, PNG, HEIC, WEBP — up to 10 MB each. Skip if you'd like us to use stock photography." data-es="JPG, PNG, HEIC, WEBP — hasta 10 MB cada una. Omitelo si prefieres que usemos fotos de stock.">JPG, PNG, HEIC, WEBP — up to 10 MB each. Skip if you'd like us to use stock photography.</span>
+        </label>
+        <div class="ix-file-list" id="ix-photo-list"></div>
       </div>
       <div class="form-group">
         <label data-en="Services / products to feature *" data-es="Servicios / productos a destacar *">Services / products to feature *</label>
@@ -225,9 +282,159 @@
 
 <script src="/assets/js/main.js"></script>
 <script>
-  function ixVal(id) { return (document.getElementById(id)?.value || '').trim(); }
-  function ixRadio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+  /* ──────────── Helpers ──────────── */
+  const ixVal = id => (document.getElementById(id)?.value || '').trim();
+  const ixRadio = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
+  const isEs = () => document.documentElement.getAttribute('lang') === 'es';
+  const tr = (en, es) => isEs() ? es : en;
 
+  const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10 MB — matches Supabase bucket limit
+
+  /* ──────────── File selection state (in-memory until submit) ──────────── */
+  const filePools = { logo: [], photo: [] };
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+
+  function fileIcon(file) {
+    if (/^image\//.test(file.type)) return 'fa-image';
+    if (file.type === 'application/pdf') return 'fa-file-pdf';
+    return 'fa-file';
+  }
+
+  function renderFileList(kind) {
+    const list = document.getElementById(`ix-${kind}-list`);
+    if (!list) return;
+    list.innerHTML = '';
+    filePools[kind].forEach((entry, idx) => {
+      const li = document.createElement('div');
+      li.className = 'ix-file-item' + (entry.uploading ? ' uploading' : '');
+      li.innerHTML = `
+        <i class="fa-solid ${fileIcon(entry.file)} ix-fi-icon" aria-hidden="true"></i>
+        <span class="ix-fi-name">${escHtml(entry.file.name)}</span>
+        <span class="ix-fi-size">${formatBytes(entry.file.size)}</span>
+        <button type="button" class="ix-fi-remove" aria-label="Remove" data-kind="${kind}" data-idx="${idx}">
+          <i class="fa-solid fa-times" aria-hidden="true"></i>
+        </button>`;
+      list.appendChild(li);
+    });
+    list.querySelectorAll('.ix-fi-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const k = btn.dataset.kind;
+        const i = parseInt(btn.dataset.idx, 10);
+        filePools[k].splice(i, 1);
+        renderFileList(k);
+      });
+    });
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function addFiles(kind, fileList) {
+    const incoming = Array.from(fileList || []);
+    const oversized = incoming.filter(f => f.size > MAX_FILE_BYTES).map(f => f.name);
+    const valid = incoming.filter(f => f.size <= MAX_FILE_BYTES);
+    valid.forEach(file => filePools[kind].push({ file, uploading: false }));
+    renderFileList(kind);
+    if (oversized.length) {
+      alert(tr(
+        `These files are larger than 10 MB and were skipped: ${oversized.join(', ')}`,
+        `Estos archivos pasan los 10 MB y fueron omitidos: ${oversized.join(', ')}`
+      ));
+    }
+  }
+
+  /* Wire file inputs + drag-drop on each zone */
+  ['logo', 'photo'].forEach(kind => {
+    const input = document.getElementById(`ix-${kind}-input`);
+    const zone  = document.getElementById(`ix-${kind}-zone`);
+    if (input) {
+      input.addEventListener('change', e => {
+        addFiles(kind, e.target.files);
+        input.value = ''; // reset so re-selecting same filename re-triggers change
+      });
+    }
+    if (zone) {
+      ['dragenter', 'dragover'].forEach(ev => {
+        zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.add('dragover'); });
+      });
+      ['dragleave', 'drop'].forEach(ev => {
+        zone.addEventListener(ev, e => { e.preventDefault(); zone.classList.remove('dragover'); });
+      });
+      zone.addEventListener('drop', e => addFiles(kind, e.dataTransfer.files));
+    }
+  });
+
+  /* ──────────── Supabase SDK + config (lazy-loaded on submit) ──────────── */
+  let supabaseClientPromise = null;
+
+  async function getSupabaseClient() {
+    if (!supabaseClientPromise) {
+      supabaseClientPromise = (async () => {
+        if (!window.supabase) {
+          await new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+            s.onload = resolve;
+            s.onerror = () => reject(new Error('Could not load Supabase SDK'));
+            document.head.appendChild(s);
+          });
+        }
+        const cfgRes = await fetch('/api/public-config');
+        if (!cfgRes.ok) throw new Error('Could not load public config');
+        const cfg = await cfgRes.json();
+        return window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey);
+      })();
+    }
+    return supabaseClientPromise;
+  }
+
+  /* ──────────── Upload one file pool to Storage ──────────── */
+  async function uploadPool(client, kind, submissionId) {
+    const pool = filePools[kind];
+    if (!pool.length) return [];
+
+    const results = [];
+    for (let i = 0; i < pool.length; i++) {
+      const entry = pool[i];
+      entry.uploading = true;
+      renderFileList(kind);
+
+      const safeName = entry.file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_').slice(0, 100);
+      const fileId   = Math.random().toString(36).slice(2, 8);
+      const path     = `pending/${submissionId}/${kind}-${i}-${fileId}-${safeName}`;
+
+      const { error: upErr } = await client.storage
+        .from('intake-uploads')
+        .upload(path, entry.file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: entry.file.type || undefined
+        });
+
+      if (upErr) throw new Error(`Upload failed for ${entry.file.name}: ${upErr.message}`);
+
+      const { data: pub } = client.storage.from('intake-uploads').getPublicUrl(path);
+
+      results.push({
+        name: entry.file.name,
+        url:  pub.publicUrl,
+        size: entry.file.size,
+        type: entry.file.type
+      });
+
+      entry.uploading = false;
+      renderFileList(kind);
+    }
+    return results;
+  }
+
+  /* ──────────── Main submit handler ──────────── */
   async function submitIntake() {
     const business    = ixVal('ix-business');
     const name        = ixVal('ix-name');
@@ -239,16 +446,11 @@
     const lang        = ixRadio('ix-lang');
     const gbp         = ixRadio('ix-gbp');
     const colors      = ixVal('ix-colors');
-    const assets      = ixVal('ix-assets');
-    const photos      = ixVal('ix-photos');
     const services    = ixVal('ix-services');
     const social      = ixVal('ix-social');
     const inspiration = ixVal('ix-inspiration');
     const notes       = ixVal('ix-notes');
     const stage       = new URLSearchParams(window.location.search).get('stage') || '';
-
-    const isEs = document.documentElement.getAttribute('lang') === 'es';
-    const tr = (en, es) => isEs ? es : en;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!business || !name || !email) { alert(tr('Business name, contact name, and email are required.', 'Nombre del negocio, nombre de contacto y correo son obligatorios.')); return; }
@@ -259,73 +461,81 @@
     if (!gbp)                         { alert(tr('Please answer the Google Business Profile question.', 'Por favor responde la pregunta de Google Business Profile.')); return; }
     if (!services)                    { alert(tr('Please describe the services or products to feature.', 'Por favor describe los servicios o productos a destacar.')); return; }
 
-    const messageLines = [
-      '── Project Intake Form ──',
-      stage ? `Stage: ${stage}` : null,
-      '',
-      `Business: ${business}`,
-      `Contact: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone || '(not provided)'}`,
-      '',
-      `Current website: ${currentSite || '(none)'}`,
-      `Target domain: ${domain}`,
-      `Main objective: ${objective}`,
-      `Site language: ${lang}`,
-      `Google Business Profile: ${gbp}`,
-      '',
-      `Brand colors: ${colors || '(not provided)'}`,
-      `Logo & brand assets: ${assets || '(not provided)'}`,
-      `Photos: ${photos || '(not provided)'}`,
-      '',
-      'Services / products to feature:',
-      services,
-      '',
-      `Social media links: ${social || '(not provided)'}`,
-      '',
-      'Websites they like:',
-      inspiration || '(not provided)',
-      '',
-      'Notes:',
-      notes || '(none)',
-      '',
-      `Page URL: ${window.location.href}`,
-      `Referrer: ${document.referrer || '(direct)'}`
-    ].filter(line => line !== null);
-
     const btn = document.getElementById('ix-submit');
     const btnSpan = btn ? btn.querySelector('span') : null;
     const originalLabel = btnSpan ? btnSpan.textContent : '';
-    if (btn) btn.disabled = true;
-    if (btnSpan) btnSpan.textContent = tr('Sending…', 'Enviando…');
+    const setBtn = (label) => { if (btnSpan) btnSpan.textContent = label; };
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    if (btn) btn.disabled = true;
+
+    let logoFiles = [], photoFiles = [];
+    const totalFiles = filePools.logo.length + filePools.photo.length;
 
     try {
-      const res = await fetch('/api/contact', {
+      if (totalFiles > 0) {
+        setBtn(tr('Connecting…', 'Conectando…'));
+        const client = await getSupabaseClient();
+        const submissionId = (crypto.randomUUID && crypto.randomUUID()) || (Date.now() + '-' + Math.random().toString(36).slice(2));
+
+        setBtn(tr(`Uploading ${totalFiles} file${totalFiles > 1 ? 's' : ''}…`, `Subiendo ${totalFiles} archivo${totalFiles > 1 ? 's' : ''}…`));
+        logoFiles  = await uploadPool(client, 'logo',  submissionId);
+        photoFiles = await uploadPool(client, 'photo', submissionId);
+      }
+
+      setBtn(tr('Saving…', 'Guardando…'));
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+
+      const res = await fetch('/api/intakes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         signal: controller.signal,
         body: JSON.stringify({
-          name,
+          business_name:           business,
+          contact_name:            name,
           email,
-          business,
-          type: 'project_intake',
-          message: messageLines.join('\n')
+          phone,
+          current_site_url:        currentSite,
+          target_domain:           domain,
+          main_objective:          objective,
+          site_language:           lang,
+          google_business_profile: gbp,
+          brand_colors:            colors,
+          services_to_feature:     services,
+          social_media_links:      social,
+          inspiration,
+          notes,
+          logo_files:              logoFiles,
+          photo_files:             photoFiles,
+          stage,
+          page_url:                window.location.href,
+          referrer:                document.referrer || ''
         })
       });
       clearTimeout(timeout);
-      if (!res.ok) throw new Error('Server error');
+
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        throw new Error(errBody.error || `Server error (${res.status})`);
+      }
 
       document.getElementById('intake-form').style.display = 'none';
       document.getElementById('intake-success').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      clearTimeout(timeout);
-      alert(tr('There was an error submitting. Please try again, or message us on WhatsApp.', 'Hubo un error al enviar. Intentalo de nuevo o escribenos por WhatsApp.'));
+      console.error('Intake submit error:', err);
+      alert(tr(
+        `There was an error submitting: ${err.message || 'unknown error'}. Please try again or message us on WhatsApp.`,
+        `Hubo un error al enviar: ${err.message || 'error desconocido'}. Intentalo de nuevo o escribenos por WhatsApp.`
+      ));
       if (btn) btn.disabled = false;
-      if (btnSpan) btnSpan.textContent = originalLabel;
+      setBtn(originalLabel);
+      // reset uploading flags so the file list looks clean again
+      filePools.logo.forEach(e => e.uploading = false);
+      filePools.photo.forEach(e => e.uploading = false);
+      renderFileList('logo');
+      renderFileList('photo');
     }
   }
 </script>
