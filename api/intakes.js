@@ -109,20 +109,26 @@ export default async function handler(req, res) {
 }
 
 async function fireEmailNotification(intake) {
+  const adminUrl = `https://www.ruutdev.com/admin/intakes#${intake.id}`;
+
   const lines = [
+    `NEW PROJECT INTAKE — ${intake.business_name}`,
+    `→ Open in admin: ${adminUrl}`,
+    '',
     `Stage: ${intake.stage || 'direct visit'}`,
     '',
-    `Business: ${intake.business_name}`,
-    `Contact:  ${intake.contact_name}`,
-    `Email:    ${intake.email}`,
-    `Phone:    ${intake.phone || '(not provided)'}`,
+    '── CONTACT ──',
+    `${intake.contact_name} <${intake.email}>`,
+    `Phone: ${intake.phone || '(not provided)'}`,
     '',
+    '── WEBSITE ──',
     `Target domain:           ${intake.target_domain}`,
     `Current site:            ${intake.current_site_url || '(none)'}`,
     `Main objective:          ${intake.main_objective}`,
     `Site language:           ${intake.site_language}`,
     `Google Business Profile: ${intake.google_business_profile}`,
     '',
+    '── BRAND & CONTENT ──',
     `Brand colors: ${intake.brand_colors || '(not provided)'}`,
     '',
     'Services / products to feature:',
@@ -130,19 +136,21 @@ async function fireEmailNotification(intake) {
     '',
     `Social media: ${intake.social_media_links || '(not provided)'}`,
     '',
+    '── FILES ──',
     `Logos uploaded:  ${intake.logo_files?.length || 0}`,
     `Photos uploaded: ${intake.photo_files?.length || 0}`,
+    '(Click the admin link above to see thumbnails and download originals.)',
     '',
-    'Inspiration:',
+    '── INSPIRATION ──',
     intake.inspiration || '(not provided)',
     '',
-    'Notes:',
+    '── NOTES ──',
     intake.notes || '(none)',
     '',
-    `Page URL: ${intake.page_url || '(unknown)'}`,
-    `Referrer: ${intake.referrer || '(direct)'}`,
-    '',
+    '──────────',
     `Submitted: ${intake.created_at}`,
+    `Page URL:  ${intake.page_url || '(unknown)'}`,
+    `Referrer:  ${intake.referrer || '(direct)'}`,
     `Intake ID: ${intake.id}`
   ].join('\n');
 

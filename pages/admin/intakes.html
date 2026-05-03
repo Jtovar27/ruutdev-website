@@ -190,6 +190,69 @@
     .save-indicator.saved { color: var(--green); }
     .save-indicator.saving { color: var(--text-2); }
     .save-indicator.error { color: var(--red); }
+
+    /* TABS */
+    .admin-tabs {
+      display: flex; gap: 4px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 20px; margin-top: -8px;
+    }
+    .admin-tab-btn {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      color: var(--text-2); padding: 10px 16px; font-size: 0.92rem;
+      font-family: inherit; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color .15s, border-color .15s;
+      margin-bottom: -1px;
+    }
+    .admin-tab-btn:hover { color: var(--text-1); }
+    .admin-tab-btn.active { color: var(--text-1); border-bottom-color: var(--blue); }
+    .tab-count {
+      display: inline-block; font-size: 0.72rem;
+      background: rgba(255,255,255,0.06); padding: 2px 8px; border-radius: 10px;
+      color: var(--text-3); min-width: 18px; text-align: center;
+    }
+    .admin-tab-btn.active .tab-count { background: rgba(10,102,255,0.18); color: #6ea8ff; }
+    .tab-count:empty { display: none; }
+
+    /* REVIEW CARDS */
+    .review-card {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 10px;
+      padding: 16px 18px; margin-bottom: 12px; transition: border-color .15s;
+    }
+    .review-card:hover { border-color: rgba(255,255,255,0.14); }
+    .review-row1 {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 6px;
+    }
+    .review-meta strong { color: var(--text-1); font-weight: 600; }
+    .review-meta .muted { color: var(--text-2); }
+    .review-stars { color: #f5a623; font-size: 1.05rem; letter-spacing: 2px; margin-bottom: 8px; line-height: 1; }
+    .review-text { color: var(--text-1); line-height: 1.5; margin: 8px 0; font-size: 0.95rem; white-space: pre-wrap; }
+    .review-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; margin-top: 12px;
+    }
+    .review-date { color: var(--text-3); font-size: 0.82rem; }
+    .review-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .status-pending  { background: rgba(245,166,35,0.16); color: #f5a623; }
+    .status-approved { background: rgba(74,222,128,0.16); color: var(--green); }
+
+    .btn-danger {
+      background: rgba(255,91,91,0.14); border-color: rgba(255,91,91,0.3); color: #ff8a8a;
+    }
+    .btn-danger:hover { background: rgba(255,91,91,0.22); border-color: rgba(255,91,91,0.55); }
+
+    /* When deep-linked from email, briefly highlight the target card */
+    .intake-card.flash-target {
+      animation: card-flash 1.6s ease-out 1;
+    }
+    @keyframes card-flash {
+      0%   { box-shadow: 0 0 0 3px rgba(10,102,255,0); }
+      30%  { box-shadow: 0 0 0 3px rgba(10,102,255,0.55); }
+      100% { box-shadow: 0 0 0 3px rgba(10,102,255,0); }
+    }
   </style>
 </head>
 <body>
@@ -211,25 +274,52 @@
   <!-- DASHBOARD -->
   <div id="dashboard-state" style="display:none;">
     <div class="admin-header">
-      <h1>Project Intakes</h1>
+      <h1>Admin Dashboard</h1>
       <div class="admin-user">
         <span><i class="fa-solid fa-user-shield" style="color:var(--blue);"></i> <span id="current-email"></span></span>
         <button type="button" class="btn" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
       </div>
     </div>
 
-    <div class="admin-filters">
-      <button type="button" class="admin-filter-btn active" data-status="">All</button>
-      <button type="button" class="admin-filter-btn" data-status="new">New</button>
-      <button type="button" class="admin-filter-btn" data-status="reviewed">Reviewed</button>
-      <button type="button" class="admin-filter-btn" data-status="archived">Archived</button>
-      <input type="text" class="admin-search" id="admin-search" placeholder="Search business / contact / email…" />
-      <button type="button" class="admin-filter-btn" id="refresh-btn" title="Refresh">
-        <i class="fa-solid fa-rotate"></i>
+    <div class="admin-tabs">
+      <button type="button" class="admin-tab-btn active" data-tab="intakes">
+        <i class="fa-solid fa-folder-open"></i> Intakes
+        <span class="tab-count" id="tab-count-intakes"></span>
+      </button>
+      <button type="button" class="admin-tab-btn" data-tab="reviews">
+        <i class="fa-solid fa-star"></i> Reviews
+        <span class="tab-count" id="tab-count-reviews"></span>
       </button>
     </div>
 
-    <div id="intakes-list" class="admin-loading">Loading intakes…</div>
+    <!-- INTAKES TAB -->
+    <div class="tab-content" id="tab-intakes">
+      <div class="admin-filters">
+        <button type="button" class="admin-filter-btn active" data-status="">All</button>
+        <button type="button" class="admin-filter-btn" data-status="new">New</button>
+        <button type="button" class="admin-filter-btn" data-status="reviewed">Reviewed</button>
+        <button type="button" class="admin-filter-btn" data-status="archived">Archived</button>
+        <input type="text" class="admin-search" id="admin-search" placeholder="Search business / contact / email…" />
+        <button type="button" class="admin-filter-btn" id="refresh-btn" title="Refresh">
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+      <div id="intakes-list" class="admin-loading">Loading intakes…</div>
+    </div>
+
+    <!-- REVIEWS TAB -->
+    <div class="tab-content" id="tab-reviews" style="display:none;">
+      <div class="admin-filters">
+        <button type="button" class="admin-filter-btn active" data-rstatus="pending">Pending</button>
+        <button type="button" class="admin-filter-btn" data-rstatus="approved">Approved</button>
+        <button type="button" class="admin-filter-btn" data-rstatus="all">All</button>
+        <input type="text" class="admin-search" id="admin-search-reviews" placeholder="Search name / business / text…" />
+        <button type="button" class="admin-filter-btn" id="refresh-reviews-btn" title="Refresh">
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+      <div id="reviews-list" class="admin-loading">Loading reviews…</div>
+    </div>
   </div>
 
 </div>
@@ -239,9 +329,25 @@
   /* ──────────── State ──────────── */
   let supabaseClient = null;
   let currentSession = null;
+  let activeTab = 'intakes';
+
+  // Intakes
   let cachedIntakes = [];
   let activeStatus = '';
   let activeSearch = '';
+
+  // Reviews
+  let cachedReviews = [];
+  let activeReviewStatus = 'pending';
+  let activeReviewSearch = '';
+
+  // Stashed deep-link from URL hash (e.g. /admin/intakes#<intake-id> from email).
+  // Captured on script load before Supabase auth strips the hash on magic-link return.
+  const deepLinkIntakeId = (() => {
+    const h = (window.location.hash || '').replace(/^#/, '');
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(h) ? h : null;
+  })();
+  let deepLinkApplied = false;
 
   const $ = id => document.getElementById(id);
   const escHtml = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -313,6 +419,7 @@
     await supabaseClient.auth.signOut();
     currentSession = null;
     cachedIntakes = [];
+    cachedReviews = [];
     showLogin();
   }
 
@@ -328,9 +435,19 @@
     $('dashboard-state').style.display = 'block';
     $('current-email').textContent = currentSession.user.email;
     loadIntakes();
+    loadReviews(); // load both upfront so tab-count badges populate
   }
 
-  /* ──────────── Data ──────────── */
+  function switchTab(tab) {
+    if (tab === activeTab) return;
+    activeTab = tab;
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+    document.querySelectorAll('.tab-content').forEach(c => {
+      c.style.display = c.id === `tab-${tab}` ? 'block' : 'none';
+    });
+  }
+
+  /* ──────────── INTAKES ──────────── */
   async function loadIntakes() {
     if (!currentSession) return showLogin();
     const list = $('intakes-list');
@@ -356,6 +473,7 @@
       const data = await res.json();
       cachedIntakes = data.intakes || [];
       renderIntakes();
+      updateTabCounts();
     } catch (err) {
       console.error('Load intakes error:', err);
       list.className = 'empty-state';
@@ -382,6 +500,18 @@
     }
 
     list.innerHTML = filtered.map(intake => intakeCardHtml(intake)).join('');
+    maybeApplyDeepLink();
+  }
+
+  function maybeApplyDeepLink() {
+    if (!deepLinkIntakeId || deepLinkApplied) return;
+    const card = document.querySelector(`.intake-card[data-id="${deepLinkIntakeId}"]`);
+    if (!card) return;
+    deepLinkApplied = true;
+    if (activeTab !== 'intakes') switchTab('intakes');
+    card.classList.add('expanded', 'flash-target');
+    setTimeout(() => card.classList.remove('flash-target'), 1800);
+    setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
   }
 
   function intakeCardHtml(intake) {
@@ -480,6 +610,7 @@
       if (idx >= 0) cachedIntakes[idx] = data.intake;
       setIndicator(indicator, 'saved', 'Saved');
       setTimeout(() => setIndicator(indicator, '', ''), 1800);
+      updateTabCounts();
       return data.intake;
     } catch (err) {
       console.error('Patch error:', err);
@@ -494,11 +625,163 @@
     el.textContent = text;
   }
 
+  /* ──────────── REVIEWS ──────────── */
+  async function loadReviews() {
+    if (!currentSession) return showLogin();
+    const list = $('reviews-list');
+    list.className = 'admin-loading';
+    list.textContent = 'Loading reviews…';
+
+    try {
+      const url = '/api/admin/reviews?status=' + encodeURIComponent(activeReviewStatus);
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${currentSession.access_token}` }
+      });
+
+      if (res.status === 401) {
+        list.className = 'empty-state';
+        list.textContent = 'Access denied — your email is not on the admin allowlist.';
+        return;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      cachedReviews = data.reviews || [];
+      renderReviews();
+      updateTabCounts();
+    } catch (err) {
+      console.error('Load reviews error:', err);
+      list.className = 'empty-state';
+      list.textContent = 'Could not load reviews: ' + (err.message || 'unknown error');
+    }
+  }
+
+  function renderReviews() {
+    const list = $('reviews-list');
+    list.className = '';
+
+    const search = activeReviewSearch.toLowerCase();
+    const filtered = search
+      ? cachedReviews.filter(r =>
+          (r.name     || '').toLowerCase().includes(search) ||
+          (r.business || '').toLowerCase().includes(search) ||
+          (r.review   || '').toLowerCase().includes(search))
+      : cachedReviews;
+
+    if (filtered.length === 0) {
+      list.className = 'empty-state';
+      list.textContent = activeReviewSearch ? 'No matches.' : 'No reviews here.';
+      return;
+    }
+
+    list.innerHTML = filtered.map(reviewCardHtml).join('');
+  }
+
+  function reviewCardHtml(r) {
+    const date = new Date(r.created_at).toLocaleString();
+    const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+    const isApproved = !!r.is_approved;
+    return `
+      <div class="review-card" data-id="${escHtml(r.id)}">
+        <div class="review-row1">
+          <div class="review-meta">
+            <strong>${escHtml(r.name)}</strong>
+            ${r.business ? `<span class="muted"> · ${escHtml(r.business)}</span>` : ''}
+          </div>
+          <span class="status-badge ${isApproved ? 'status-approved' : 'status-pending'}">
+            ${isApproved ? 'Approved' : 'Pending'}
+          </span>
+        </div>
+        <div class="review-stars" aria-label="${r.rating} out of 5">${stars}</div>
+        <p class="review-text">${escHtml(r.review)}</p>
+        <div class="review-footer">
+          <span class="review-date"><i class="fa-regular fa-clock"></i> ${escHtml(date)}</span>
+          <div class="review-actions">
+            ${isApproved
+              ? `<button type="button" class="btn" data-review-action="unapprove" data-id="${escHtml(r.id)}"><i class="fa-solid fa-rotate-left"></i> Unapprove</button>`
+              : `<button type="button" class="btn btn-primary" data-review-action="approve" data-id="${escHtml(r.id)}"><i class="fa-solid fa-check"></i> Approve</button>`}
+            <button type="button" class="btn btn-danger" data-review-action="delete" data-id="${escHtml(r.id)}"><i class="fa-solid fa-trash"></i> Delete</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  async function performReviewAction(id, action) {
+    if (action === 'delete') {
+      if (!confirm('Delete this review permanently? This cannot be undone.')) return;
+      try {
+        const res = await fetch('/api/admin/reviews', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${currentSession.access_token}`
+          },
+          body: JSON.stringify({ id })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        cachedReviews = cachedReviews.filter(r => r.id !== id);
+        renderReviews();
+        updateTabCounts();
+      } catch (err) {
+        alert('Could not delete: ' + (err.message || 'unknown error'));
+      }
+      return;
+    }
+
+    const is_approved = action === 'approve';
+    try {
+      const res = await fetch('/api/admin/reviews', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${currentSession.access_token}`
+        },
+        body: JSON.stringify({ id, is_approved })
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const idx = cachedReviews.findIndex(r => r.id === id);
+      if (idx >= 0) cachedReviews[idx] = data.review;
+
+      // If we're filtering by pending and the review was just approved (or vice versa),
+      // it no longer matches the filter — drop it from the visible list.
+      if (activeReviewStatus === 'pending' && is_approved) {
+        cachedReviews = cachedReviews.filter(r => r.id !== id);
+      } else if (activeReviewStatus === 'approved' && !is_approved) {
+        cachedReviews = cachedReviews.filter(r => r.id !== id);
+      }
+
+      renderReviews();
+      updateTabCounts();
+    } catch (err) {
+      alert('Could not update: ' + (err.message || 'unknown error'));
+    }
+  }
+
+  /* ──────────── Tab counts ──────────── */
+  function updateTabCounts() {
+    const newIntakes = cachedIntakes.filter(i => i.status === 'new').length;
+    const intakesBadge = $('tab-count-intakes');
+    if (intakesBadge) intakesBadge.textContent = newIntakes > 0 ? newIntakes : '';
+
+    const pendingReviews = cachedReviews.filter(r => !r.is_approved).length;
+    const reviewsBadge = $('tab-count-reviews');
+    if (reviewsBadge) reviewsBadge.textContent = pendingReviews > 0 ? pendingReviews : '';
+  }
+
   /* ──────────── Event delegation ──────────── */
   const notesSaveTimers = {};
 
   document.addEventListener('click', (e) => {
-    // Filter buttons
+    // Tab buttons
+    const tabBtn = e.target.closest('.admin-tab-btn[data-tab]');
+    if (tabBtn) {
+      switchTab(tabBtn.dataset.tab);
+      return;
+    }
+
+    // Intakes filter buttons
     const fb = e.target.closest('.admin-filter-btn[data-status]');
     if (fb) {
       document.querySelectorAll('.admin-filter-btn[data-status]').forEach(b => b.classList.remove('active'));
@@ -507,7 +790,25 @@
       loadIntakes();
       return;
     }
-    // Card summary toggle (but ignore clicks on links inside the summary)
+
+    // Reviews filter buttons
+    const rfb = e.target.closest('.admin-filter-btn[data-rstatus]');
+    if (rfb) {
+      document.querySelectorAll('.admin-filter-btn[data-rstatus]').forEach(b => b.classList.remove('active'));
+      rfb.classList.add('active');
+      activeReviewStatus = rfb.dataset.rstatus || 'all';
+      loadReviews();
+      return;
+    }
+
+    // Review action buttons
+    const ra = e.target.closest('button[data-review-action]');
+    if (ra) {
+      performReviewAction(ra.dataset.id, ra.dataset.reviewAction);
+      return;
+    }
+
+    // Intake card summary toggle (ignore clicks on links inside)
     const summary = e.target.closest('.intake-card-summary');
     if (summary && !e.target.closest('a')) {
       summary.parentElement.classList.toggle('expanded');
@@ -547,13 +848,23 @@
   $('login-email').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMagicLink(); });
   $('logout-btn').addEventListener('click', logout);
   $('refresh-btn').addEventListener('click', loadIntakes);
+  $('refresh-reviews-btn').addEventListener('click', loadReviews);
 
-  let searchTimer;
+  let intakesSearchTimer;
   $('admin-search').addEventListener('input', (e) => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
+    clearTimeout(intakesSearchTimer);
+    intakesSearchTimer = setTimeout(() => {
       activeSearch = e.target.value.trim();
       renderIntakes();
+    }, 200);
+  });
+
+  let reviewsSearchTimer;
+  $('admin-search-reviews').addEventListener('input', (e) => {
+    clearTimeout(reviewsSearchTimer);
+    reviewsSearchTimer = setTimeout(() => {
+      activeReviewSearch = e.target.value.trim();
+      renderReviews();
     }, 200);
   });
 
