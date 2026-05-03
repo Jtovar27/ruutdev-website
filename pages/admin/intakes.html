@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · Intakes — RuutDev</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800\&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300\&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07070A;
+      --bg-2: #0E0E13;
+      --blue: #0A66FF;
+      --green: #4ade80;
+      --red: #ff5b5b;
+      --line: rgba(255,255,255,0.08);
+      --text-1: rgba(255,255,255,0.92);
+      --text-2: rgba(255,255,255,0.65);
+      --text-3: rgba(255,255,255,0.4);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+      font-size: 14.5px;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .admin-shell { max-width: 1200px; margin: 0 auto; padding: 24px 20px 80px; }
+
+    /* HEADER */
+    .admin-header {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+      margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line);
+    }
+    .admin-header h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.7rem; margin: 0; font-weight: 700; }
+    .admin-user { font-size: 0.85rem; color: var(--text-2); display: flex; align-items: center; gap: 12px; }
+    .btn {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--text-1);
+      padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; cursor: pointer;
+      font-family: inherit; transition: background .15s, border-color .15s, color .15s;
+    }
+    .btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); }
+    .btn-primary { background: var(--blue); border-color: var(--blue); color: white; font-weight: 500; }
+    .btn-primary:hover { background: #2a78ff; border-color: #2a78ff; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* FILTERS */
+    .admin-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+    .admin-filter-btn {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      color: var(--text-2); padding: 8px 14px; border-radius: 6px; font-size: 0.85rem;
+      font-family: inherit; cursor: pointer; transition: all .15s;
+    }
+    .admin-filter-btn:hover { color: var(--text-1); }
+    .admin-filter-btn.active {
+      background: rgba(10,102,255,0.14); border-color: var(--blue); color: var(--text-1);
+    }
+    .admin-search {
+      flex: 1; min-width: 220px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      color: var(--text-1); padding: 8px 14px; border-radius: 6px; font-size: 0.9rem;
+      font-family: inherit;
+    }
+    .admin-search:focus { outline: none; border-color: var(--blue); background: rgba(255,255,255,0.06); }
+    .admin-search::placeholder { color: var(--text-3); }
+
+    /* LOGIN */
+    #login-state {
+      max-width: 420px; margin: 80px auto; padding: 32px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 12px;
+      text-align: center;
+    }
+    #login-state h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.7rem; margin: 0 0 8px; }
+    #login-state p { color: var(--text-2); font-size: 0.92rem; margin: 0 0 24px; }
+    #login-state input {
+      width: 100%; padding: 12px 16px; margin-bottom: 12px; box-sizing: border-box;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 8px;
+      color: var(--text-1); font-size: 0.95rem; font-family: inherit;
+    }
+    #login-state input:focus { outline: none; border-color: var(--blue); }
+    #login-state button { width: 100%; padding: 12px 16px; }
+    #login-message { margin-top: 14px; font-size: 0.85rem; min-height: 20px; }
+    #login-message.success { color: var(--green); }
+    #login-message.error { color: var(--red); }
+
+    /* LOADING / EMPTY */
+    .admin-loading {
+      text-align: center; padding: 60px 20px; color: var(--text-3); font-size: 0.92rem;
+    }
+    .admin-loading::before {
+      content: ''; display: block; margin: 0 auto 12px;
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.12); border-top-color: var(--blue);
+      animation: ad-spin .8s linear infinite;
+    }
+    @keyframes ad-spin { to { transform: rotate(360deg); } }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-3); }
+
+    /* INTAKE CARDS */
+    .intake-card {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 10px;
+      margin-bottom: 12px; overflow: hidden; transition: border-color .15s;
+    }
+    .intake-card:hover { border-color: rgba(255,255,255,0.14); }
+    .intake-card.expanded { border-color: var(--blue); }
+    .intake-card-summary { padding: 14px 18px; cursor: pointer; }
+    .intake-card-summary .row1 {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .intake-card-summary .biz { font-weight: 600; font-size: 1.05rem; color: var(--text-1); }
+    .intake-card-summary .row2 {
+      display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.84rem; color: var(--text-2); margin-top: 6px;
+    }
+    .intake-card-summary .row2 span { display: inline-flex; align-items: center; gap: 6px; }
+    .intake-card-summary .row2 i { color: var(--text-3); width: 14px; text-align: center; }
+
+    .status-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 4px;
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .status-new { background: rgba(10,102,255,0.18); color: #6ea8ff; }
+    .status-reviewed { background: rgba(74,222,128,0.16); color: var(--green); }
+    .status-archived { background: rgba(255,255,255,0.08); color: var(--text-2); }
+
+    .intake-card-detail { display: none; padding: 0 18px 18px; border-top: 1px solid var(--line); }
+    .intake-card.expanded .intake-card-detail { display: block; }
+
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; padding: 18px 0; }
+    @media (max-width: 720px) { .detail-grid { grid-template-columns: 1fr; } }
+    .detail-field { display: grid; gap: 4px; }
+    .detail-field.full { grid-column: 1 / -1; }
+    .detail-field .label {
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-3); font-weight: 600;
+    }
+    .detail-field .value { font-size: 0.92rem; color: var(--text-1); word-break: break-word; }
+    .detail-field pre {
+      white-space: pre-wrap; font-family: inherit; font-size: 0.92rem; margin: 0;
+      color: var(--text-1); line-height: 1.5;
+    }
+
+    /* FILE GALLERY */
+    .file-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; margin-top: 4px; }
+    .file-tile {
+      display: block; aspect-ratio: 1; background: rgba(255,255,255,0.04);
+      border-radius: 6px; overflow: hidden; position: relative; border: 1px solid var(--line);
+      transition: border-color .15s, transform .15s;
+    }
+    .file-tile:hover { border-color: var(--blue); transform: scale(1.02); }
+    .file-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .file-tile .file-fallback {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 100%; color: var(--text-2); font-size: 1.5rem; gap: 4px;
+    }
+    .file-tile .file-fallback small { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .file-tile .file-name {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 8px 6px;
+      font-size: 0.7rem; color: white;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* ADMIN CONTROLS */
+    .admin-controls {
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start;
+      padding: 16px 0 4px; border-top: 1px solid var(--line); margin-top: 12px;
+    }
+    .admin-controls select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      color: var(--text-1); padding: 8px 12px; border-radius: 6px; font-size: 0.9rem;
+      font-family: inherit; cursor: pointer;
+    }
+    .admin-controls textarea {
+      flex: 1; min-width: 240px; min-height: 60px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--line);
+      color: var(--text-1); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem;
+      font-family: inherit; resize: vertical;
+    }
+    .admin-controls textarea:focus, .admin-controls select:focus { outline: none; border-color: var(--blue); }
+    .save-indicator { font-size: 0.78rem; color: var(--text-3); align-self: center; min-width: 60px; }
+    .save-indicator.saved { color: var(--green); }
+    .save-indicator.saving { color: var(--text-2); }
+    .save-indicator.error { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<div class="admin-shell">
+
+  <!-- LOGIN STATE -->
+  <div id="login-state" style="display:none;">
+    <h1>Admin login</h1>
+    <p>Enter your admin email — we'll send a magic link to sign you in.</p>
+    <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" />
+    <button type="button" class="btn btn-primary" id="login-btn">Send magic link</button>
+    <div id="login-message"></div>
+  </div>
+
+  <!-- LOADING (auth check on page load) -->
+  <div id="loading-state" class="admin-loading">Loading…</div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard-state" style="display:none;">
+    <div class="admin-header">
+      <h1>Project Intakes</h1>
+      <div class="admin-user">
+        <span><i class="fa-solid fa-user-shield" style="color:var(--blue);"></i> <span id="current-email"></span></span>
+        <button type="button" class="btn" id="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+
+    <div class="admin-filters">
+      <button type="button" class="admin-filter-btn active" data-status="">All</button>
+      <button type="button" class="admin-filter-btn" data-status="new">New</button>
+      <button type="button" class="admin-filter-btn" data-status="reviewed">Reviewed</button>
+      <button type="button" class="admin-filter-btn" data-status="archived">Archived</button>
+      <input type="text" class="admin-search" id="admin-search" placeholder="Search business / contact / email…" />
+      <button type="button" class="admin-filter-btn" id="refresh-btn" title="Refresh">
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+    </div>
+
+    <div id="intakes-list" class="admin-loading">Loading intakes…</div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  /* ──────────── State ──────────── */
+  let supabaseClient = null;
+  let currentSession = null;
+  let cachedIntakes = [];
+  let activeStatus = '';
+  let activeSearch = '';
+
+  const $ = id => document.getElementById(id);
+  const escHtml = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const PREVIEWABLE = new Set(['image/jpeg','image/jpg','image/png','image/gif','image/webp','image/svg+xml']);
+
+  /* ──────────── Init / auth ──────────── */
+  async function init() {
+    try {
+      const cfgRes = await fetch('/api/public-config');
+      if (!cfgRes.ok) throw new Error('Could not load Supabase config');
+      const cfg = await cfgRes.json();
+
+      supabaseClient = window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseAnonKey, {
+        auth: { detectSessionInUrl: true, persistSession: true, autoRefreshToken: true, flowType: 'pkce' }
+      });
+
+      supabaseClient.auth.onAuthStateChange((_event, session) => {
+        currentSession = session;
+        if (session) showDashboard();
+        else if (_event === 'SIGNED_OUT') showLogin();
+      });
+
+      const { data } = await supabaseClient.auth.getSession();
+      currentSession = data?.session || null;
+
+      if (currentSession) showDashboard();
+      else showLogin();
+    } catch (err) {
+      console.error('Init error:', err);
+      $('loading-state').textContent = 'Could not load admin: ' + (err.message || 'unknown error');
+    }
+  }
+
+  async function sendMagicLink() {
+    const emailInput = $('login-email');
+    const btn = $('login-btn');
+    const msg = $('login-message');
+    const email = emailInput.value.trim();
+
+    msg.className = '';
+    msg.textContent = '';
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.className = 'error';
+      msg.textContent = 'Enter a valid email.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const { error } = await supabaseClient.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: window.location.origin + '/admin/intakes' }
+      });
+      if (error) throw error;
+      msg.className = 'success';
+      msg.textContent = `Magic link sent to ${email}. Check your inbox (and spam folder).`;
+    } catch (err) {
+      msg.className = 'error';
+      msg.textContent = err.message || 'Could not send magic link.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send magic link';
+    }
+  }
+
+  async function logout() {
+    await supabaseClient.auth.signOut();
+    currentSession = null;
+    cachedIntakes = [];
+    showLogin();
+  }
+
+  /* ──────────── Views ──────────── */
+  function showLogin() {
+    $('login-state').style.display = 'block';
+    $('loading-state').style.display = 'none';
+    $('dashboard-state').style.display = 'none';
+  }
+  function showDashboard() {
+    $('login-state').style.display = 'none';
+    $('loading-state').style.display = 'none';
+    $('dashboard-state').style.display = 'block';
+    $('current-email').textContent = currentSession.user.email;
+    loadIntakes();
+  }
+
+  /* ──────────── Data ──────────── */
+  async function loadIntakes() {
+    if (!currentSession) return showLogin();
+    const list = $('intakes-list');
+    list.className = 'admin-loading';
+    list.textContent = 'Loading intakes…';
+
+    try {
+      const url = '/api/admin/intakes' + (activeStatus ? `?status=${encodeURIComponent(activeStatus)}` : '');
+      const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${currentSession.access_token}` }
+      });
+
+      if (res.status === 401) {
+        list.className = 'empty-state';
+        list.innerHTML = `<i class="fa-solid fa-shield-halved" style="font-size:2rem;color:var(--text-3);margin-bottom:12px;display:block;"></i>
+          <strong style="color:var(--text-1);">Access denied</strong><br />
+          <span>Your email is not on the admin allowlist.</span><br /><br />
+          <button class="btn" onclick="logout()">Sign out</button>`;
+        return;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      cachedIntakes = data.intakes || [];
+      renderIntakes();
+    } catch (err) {
+      console.error('Load intakes error:', err);
+      list.className = 'empty-state';
+      list.textContent = 'Could not load intakes: ' + (err.message || 'unknown error');
+    }
+  }
+
+  function renderIntakes() {
+    const list = $('intakes-list');
+    list.className = '';
+
+    const search = activeSearch.toLowerCase();
+    const filtered = search
+      ? cachedIntakes.filter(i =>
+          (i.business_name || '').toLowerCase().includes(search) ||
+          (i.contact_name  || '').toLowerCase().includes(search) ||
+          (i.email         || '').toLowerCase().includes(search))
+      : cachedIntakes;
+
+    if (filtered.length === 0) {
+      list.className = 'empty-state';
+      list.textContent = activeSearch ? 'No matches.' : 'No intakes yet.';
+      return;
+    }
+
+    list.innerHTML = filtered.map(intake => intakeCardHtml(intake)).join('');
+  }
+
+  function intakeCardHtml(intake) {
+    const date = new Date(intake.created_at).toLocaleString();
+    return `
+      <div class="intake-card" data-id="${escHtml(intake.id)}">
+        <div class="intake-card-summary">
+          <div class="row1">
+            <div class="biz">${escHtml(intake.business_name)}</div>
+            <span class="status-badge status-${escHtml(intake.status)}">${escHtml(intake.status)}</span>
+          </div>
+          <div class="row2">
+            <span><i class="fa-regular fa-user"></i> ${escHtml(intake.contact_name)}</span>
+            <span><i class="fa-regular fa-envelope"></i> <a href="mailto:${escHtml(intake.email)}">${escHtml(intake.email)}</a></span>
+            ${intake.phone ? `<span><i class="fa-regular fa-comment"></i> ${escHtml(intake.phone)}</span>` : ''}
+            <span><i class="fa-regular fa-clock"></i> ${escHtml(date)}</span>
+            ${intake.stage ? `<span><i class="fa-solid fa-tag"></i> ${escHtml(intake.stage)}</span>` : ''}
+          </div>
+        </div>
+        <div class="intake-card-detail">
+          <div class="detail-grid">
+            ${detailField('Target domain', intake.target_domain)}
+            ${detailField('Current site', intake.current_site_url, false, false, true)}
+            ${detailField('Main objective', intake.main_objective)}
+            ${detailField('Site language', intake.site_language)}
+            ${detailField('Google Business Profile', intake.google_business_profile)}
+            ${detailField('Brand colors', intake.brand_colors)}
+            ${detailField('Social media', intake.social_media_links, true)}
+            ${detailField('Services / products to feature', intake.services_to_feature, true, true)}
+            ${detailField('Inspiration', intake.inspiration, true, true)}
+            ${detailField('Customer notes', intake.notes, true, true)}
+            ${fileFieldHtml('Logo & brand assets', intake.logo_files)}
+            ${fileFieldHtml('Photos', intake.photo_files)}
+          </div>
+          <div class="admin-controls">
+            <select data-action="status" data-id="${escHtml(intake.id)}">
+              <option value="new"      ${intake.status === 'new'      ? 'selected' : ''}>Status: New</option>
+              <option value="reviewed" ${intake.status === 'reviewed' ? 'selected' : ''}>Status: Reviewed</option>
+              <option value="archived" ${intake.status === 'archived' ? 'selected' : ''}>Status: Archived</option>
+            </select>
+            <textarea data-action="notes" data-id="${escHtml(intake.id)}" placeholder="Admin notes (only you see these)…">${escHtml(intake.admin_notes || '')}</textarea>
+            <span class="save-indicator" id="save-${escHtml(intake.id)}"></span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function detailField(label, value, fullWidth = false, asPre = false, isLink = false) {
+    if (!value) return '';
+    const cls = 'detail-field' + (fullWidth ? ' full' : '');
+    let body;
+    if (asPre) body = `<pre>${escHtml(value)}</pre>`;
+    else if (isLink && /^https?:\/\//i.test(value)) body = `<span class="value"><a href="${escHtml(value)}" target="_blank" rel="noopener noreferrer">${escHtml(value)}</a></span>`;
+    else body = `<span class="value">${escHtml(value)}</span>`;
+    return `<div class="${cls}"><span class="label">${escHtml(label)}</span>${body}</div>`;
+  }
+
+  function fileFieldHtml(label, files) {
+    if (!Array.isArray(files) || files.length === 0) return '';
+    const items = files.map(f => {
+      const previewable = PREVIEWABLE.has((f.type || '').toLowerCase());
+      const ext = (f.name || '').split('.').pop().slice(0, 5).toUpperCase();
+      const inner = previewable
+        ? `<img src="${escHtml(f.url)}" alt="${escHtml(f.name)}" loading="lazy" />`
+        : `<div class="file-fallback"><i class="fa-solid fa-file"></i><small>${escHtml(ext || 'file')}</small></div>`;
+      return `<a class="file-tile" href="${escHtml(f.url)}" target="_blank" rel="noopener noreferrer" title="${escHtml(f.name)}">
+        ${inner}
+        <span class="file-name">${escHtml(f.name)}</span>
+      </a>`;
+    }).join('');
+    return `<div class="detail-field full">
+      <span class="label">${escHtml(label)} (${files.length})</span>
+      <div class="file-gallery">${items}</div>
+    </div>`;
+  }
+
+  /* ──────────── Card actions ──────────── */
+  async function patchIntake(id, payload, indicator) {
+    setIndicator(indicator, 'saving', 'Saving…');
+    try {
+      const res = await fetch('/api/admin/intakes', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${currentSession.access_token}`
+        },
+        body: JSON.stringify({ id, ...payload })
+      });
+      if (!res.ok) {
+        const e = await res.json().catch(() => ({}));
+        throw new Error(e.error || `HTTP ${res.status}`);
+      }
+      const data = await res.json();
+      const idx = cachedIntakes.findIndex(i => i.id === id);
+      if (idx >= 0) cachedIntakes[idx] = data.intake;
+      setIndicator(indicator, 'saved', 'Saved');
+      setTimeout(() => setIndicator(indicator, '', ''), 1800);
+      return data.intake;
+    } catch (err) {
+      console.error('Patch error:', err);
+      setIndicator(indicator, 'error', 'Failed');
+      return null;
+    }
+  }
+
+  function setIndicator(el, cls, text) {
+    if (!el) return;
+    el.className = 'save-indicator' + (cls ? ' ' + cls : '');
+    el.textContent = text;
+  }
+
+  /* ──────────── Event delegation ──────────── */
+  const notesSaveTimers = {};
+
+  document.addEventListener('click', (e) => {
+    // Filter buttons
+    const fb = e.target.closest('.admin-filter-btn[data-status]');
+    if (fb) {
+      document.querySelectorAll('.admin-filter-btn[data-status]').forEach(b => b.classList.remove('active'));
+      fb.classList.add('active');
+      activeStatus = fb.dataset.status || '';
+      loadIntakes();
+      return;
+    }
+    // Card summary toggle (but ignore clicks on links inside the summary)
+    const summary = e.target.closest('.intake-card-summary');
+    if (summary && !e.target.closest('a')) {
+      summary.parentElement.classList.toggle('expanded');
+    }
+  });
+
+  document.addEventListener('change', async (e) => {
+    const sel = e.target.closest('select[data-action="status"]');
+    if (sel) {
+      const id = sel.dataset.id;
+      const indicator = $(`save-${id}`);
+      const updated = await patchIntake(id, { status: sel.value }, indicator);
+      if (updated) {
+        const card = document.querySelector(`.intake-card[data-id="${id}"]`);
+        const badge = card?.querySelector('.status-badge');
+        if (badge) {
+          badge.className = `status-badge status-${updated.status}`;
+          badge.textContent = updated.status;
+        }
+      }
+    }
+  });
+
+  document.addEventListener('input', (e) => {
+    const ta = e.target.closest('textarea[data-action="notes"]');
+    if (ta) {
+      const id = ta.dataset.id;
+      const indicator = $(`save-${id}`);
+      setIndicator(indicator, '', 'Editing…');
+      clearTimeout(notesSaveTimers[id]);
+      notesSaveTimers[id] = setTimeout(() => patchIntake(id, { admin_notes: ta.value }, indicator), 800);
+    }
+  });
+
+  // Top-level button wiring
+  $('login-btn').addEventListener('click', sendMagicLink);
+  $('login-email').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMagicLink(); });
+  $('logout-btn').addEventListener('click', logout);
+  $('refresh-btn').addEventListener('click', loadIntakes);
+
+  let searchTimer;
+  $('admin-search').addEventListener('input', (e) => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      activeSearch = e.target.value.trim();
+      renderIntakes();
+    }, 200);
+  });
+
+  // expose logout for inline access-denied button
+  window.logout = logout;
+
+  init();
+</script>
+</body>
+</html>

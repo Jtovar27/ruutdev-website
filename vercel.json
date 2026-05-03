@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/about",            "destination": "/pages/about" },
+    { "source": "/admin/intakes",    "destination": "/pages/admin/intakes" },
     { "source": "/contact",          "destination": "/pages/contact" },
     { "source": "/pay",              "destination": "/pages/pay" },
     { "source": "/payment-success",  "destination": "/pages/payment-success" },
