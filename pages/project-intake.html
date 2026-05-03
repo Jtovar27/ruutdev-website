@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Intake — RuutDev</title>
+  <meta name="description" content="Project intake form for RuutDev clients. Tell us about your business, brand, and goals so we can start building." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://ruutdev.com/project-intake" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ruutdev.com/project-intake" />
+  <meta property="og:title" content="Project Intake — RuutDev" />
+  <meta property="og:description" content="Tell us about your business, brand, and goals so we can start building." />
+  <meta property="og:site_name" content="RuutDev" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800\&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300\&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <style>
+    .intake-section-h {
+      margin: 28px 0 14px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
+    }
+    .intake-section-h.first { margin-top: 0; padding-top: 0; border-top: none; }
+    .intake-radio-group { display: flex; gap: 18px; flex-wrap: wrap; padding: 4px 0; }
+    .intake-radio-group label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.92rem; font-weight: 400; cursor: pointer;
+      color: rgba(255,255,255,0.85);
+    }
+    .intake-radio-group input[type="radio"] { margin: 0; accent-color: var(--blue); }
+  </style>
+</head>
+<body id="page-project-intake">
+
+<div id="nav-placeholder"></div>
+
+<!-- ── PAGE HERO ── -->
+<div class="page-hero" style="padding-bottom:60px;">
+  <div class="page-hero-content">
+    <div class="hero-badge" data-en="Project Intake" data-es="Inicio de Proyecto">Project Intake</div>
+    <h1 data-en="Tell us about your<br /><em>business and project</em>" data-es="Cuentanos sobre tu<br /><em>negocio y proyecto</em>">Tell us about your<br /><em>business and project</em></h1>
+    <p data-en="Share the details we need to start building. Most clients finish in 5-10 minutes — paste shared-folder links for files where it helps." data-es="Comparte los detalles que necesitamos para empezar a construir. La mayoria termina en 5-10 minutos — pega enlaces a carpetas compartidas cuando convenga.">Share the details we need to start building. Most clients finish in 5-10 minutes — paste shared-folder links for files where it helps.</p>
+  </div>
+</div>
+
+<!-- ── INTAKE FORM ── -->
+<section style="background:var(--bg);">
+  <div style="max-width:780px; margin:0 auto; padding:0 20px;">
+    <div class="payment-form-card reveal" id="intake-form">
+      <div class="payment-form-title" data-en="Project Intake Form" data-es="Formulario de Inicio">Project Intake Form</div>
+      <div class="payment-form-subtitle" data-en="Required fields are marked with *. Optional fields help us build faster but are not required to start." data-es="Los campos obligatorios estan marcados con *. Los opcionales nos ayudan a construir mas rapido pero no son obligatorios.">Required fields are marked with *. Optional fields help us build faster but are not required to start.</div>
+
+      <!-- Section 1: Business & Contact -->
+      <div class="intake-section-h first" data-en="1 · Business &amp; Contact" data-es="1 · Negocio y Contacto">1 · Business &amp; Contact</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-en="Business name *" data-es="Nombre del negocio *">Business name *</label>
+          <input type="text" id="ix-business" maxlength="120" autocomplete="organization" placeholder="Acme Co." />
+        </div>
+        <div class="form-group">
+          <label data-en="Contact name *" data-es="Nombre del contacto *">Contact name *</label>
+          <input type="text" id="ix-name" maxlength="80" autocomplete="name" placeholder="Jane Doe" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-en="Email *" data-es="Correo electronico *">Email *</label>
+          <input type="email" id="ix-email" maxlength="120" autocomplete="email" placeholder="you@business.com" />
+        </div>
+        <div class="form-group">
+          <label data-en="Phone" data-es="Telefono">Phone</label>
+          <input type="tel" id="ix-phone" maxlength="40" autocomplete="tel" placeholder="+1 555 123 4567" />
+        </div>
+      </div>
+
+      <!-- Section 2: Website -->
+      <div class="intake-section-h" data-en="2 · Website" data-es="2 · Sitio Web">2 · Website</div>
+      <div class="form-group">
+        <label data-en="Current website URL (if you have one)" data-es="URL del sitio actual (si lo tienes)">Current website URL (if you have one)</label>
+        <input type="url" id="ix-current-site" maxlength="200" placeholder="https://" />
+      </div>
+      <div class="form-group">
+        <label data-en="Domain you want to use *" data-es="Dominio que quieres usar *">Domain you want to use *</label>
+        <input type="text" id="ix-domain" maxlength="120" placeholder="yourbusiness.com — owned or planned" />
+      </div>
+      <div class="form-group">
+        <label data-en="Main objective of the website *" data-es="Objetivo principal del sitio *">Main objective of the website *</label>
+        <select id="ix-objective">
+          <option value="" data-en="Select…" data-es="Selecciona…">Select…</option>
+          <option value="leads" data-en="Generate leads / inquiries" data-es="Generar leads / consultas">Generate leads / inquiries</option>
+          <option value="sell_online" data-en="Sell online (e-commerce)" data-es="Vender online (e-commerce)">Sell online (e-commerce)</option>
+          <option value="bookings" data-en="Take bookings / scheduling" data-es="Tomar reservas / agendar">Take bookings / scheduling</option>
+          <option value="credibility" data-en="Build credibility / portfolio" data-es="Credibilidad / portafolio">Build credibility / portfolio</option>
+          <option value="info" data-en="Information / brochure site" data-es="Informativo / brochure">Information / brochure site</option>
+          <option value="other" data-en="Other (describe in notes)" data-es="Otro (describe en notas)">Other (describe in notes)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-en="Site language *" data-es="Idioma del sitio *">Site language *</label>
+        <div class="intake-radio-group">
+          <label><input type="radio" name="ix-lang" value="en" /> <span data-en="English only" data-es="Solo ingles">English only</span></label>
+          <label><input type="radio" name="ix-lang" value="es" /> <span data-en="Spanish only" data-es="Solo espanol">Spanish only</span></label>
+          <label><input type="radio" name="ix-lang" value="bilingual" /> <span data-en="Bilingual EN + ES" data-es="Bilingue EN + ES">Bilingual EN + ES</span></label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-en="Google Business Profile? *" data-es="Google Business Profile? *">Google Business Profile? *</label>
+        <div class="intake-radio-group">
+          <label><input type="radio" name="ix-gbp" value="yes" /> <span data-en="Yes — already have one" data-es="Si — ya tengo uno">Yes — already have one</span></label>
+          <label><input type="radio" name="ix-gbp" value="no" /> <span data-en="No" data-es="No">No</span></label>
+          <label><input type="radio" name="ix-gbp" value="unsure" /> <span data-en="Not sure" data-es="No estoy seguro">Not sure</span></label>
+        </div>
+      </div>
+
+      <!-- Section 3: Brand & Content -->
+      <div class="intake-section-h" data-en="3 · Brand &amp; Content" data-es="3 · Marca y Contenido">3 · Brand &amp; Content</div>
+      <div class="form-group">
+        <label data-en="Brand colors" data-es="Colores de marca">Brand colors</label>
+        <input type="text" id="ix-colors" maxlength="200" placeholder="#0A66FF, white, charcoal — or describe the vibe" />
+      </div>
+      <div class="form-group">
+        <label data-en="Logo &amp; brand assets — shared folder link" data-es="Logo y assets de marca — link a carpeta compartida">Logo &amp; brand assets — shared folder link</label>
+        <input type="url" id="ix-assets" maxlength="300" placeholder="Google Drive / Dropbox / WeTransfer link" />
+      </div>
+      <div class="form-group">
+        <label data-en="Photos / images for the site" data-es="Fotos / imagenes para el sitio">Photos / images for the site</label>
+        <input type="text" id="ix-photos" maxlength="300" placeholder="Shared folder link, or note that we'll need stock photography" />
+      </div>
+      <div class="form-group">
+        <label data-en="Services / products to feature *" data-es="Servicios / productos a destacar *">Services / products to feature *</label>
+        <textarea id="ix-services" rows="3" maxlength="1500" placeholder="List the main services or products the site needs to feature."></textarea>
+      </div>
+      <div class="form-group">
+        <label data-en="Social media links" data-es="Redes sociales">Social media links</label>
+        <textarea id="ix-social" rows="2" maxlength="600" placeholder="Instagram, Facebook, LinkedIn, TikTok, Yelp, etc."></textarea>
+      </div>
+
+      <!-- Section 4: Inspiration -->
+      <div class="intake-section-h" data-en="4 · Inspiration" data-es="4 · Inspiracion">4 · Inspiration</div>
+      <div class="form-group">
+        <label data-en="Websites you like (examples)" data-es="Sitios web que te gustan (ejemplos)">Websites you like (examples)</label>
+        <textarea id="ix-inspiration" rows="3" maxlength="1000" placeholder="Paste 1-3 URLs and a short note on what you like about each."></textarea>
+      </div>
+
+      <!-- Section 5: Notes -->
+      <div class="intake-section-h" data-en="5 · Anything else" data-es="5 · Algo mas">5 · Anything else</div>
+      <div class="form-group">
+        <label data-en="Notes / additional context" data-es="Notas / contexto adicional">Notes / additional context</label>
+        <textarea id="ix-notes" rows="3" maxlength="1500" placeholder="Constraints, deadlines, integrations, anything else we should know."></textarea>
+      </div>
+
+      <button type="button" class="btn-primary" id="ix-submit" onclick="submitIntake()" style="width:100%; justify-content:center; margin-top:24px; font-size:1rem; padding:16px 24px;">
+        <i class="fa-solid fa-paper-plane"></i> <span data-en="Submit project intake" data-es="Enviar formulario">Submit project intake</span>
+      </button>
+
+      <p style="text-align:center; color:rgba(255,255,255,0.45); font-size:0.78rem; margin-top:14px;">
+        <span data-en="By submitting, you agree to be contacted about this project. See our " data-es="Al enviar aceptas ser contactado sobre este proyecto. Consulta nuestra ">By submitting, you agree to be contacted about this project. See our </span>
+        <a href="/privacy" style="color:var(--blue);" data-en="Privacy Policy" data-es="Politica de Privacidad">Privacy Policy</a>
+        <span data-en=" for details on how we handle your information." data-es=" para detalles del manejo de informacion."> for details on how we handle your information.</span>
+      </p>
+    </div>
+
+    <div class="payment-form-card reveal" id="intake-success" style="display:none; text-align:center;">
+      <div style="font-size:3.4rem; color:var(--blue); margin-bottom:14px; line-height:1;">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      </div>
+      <div class="payment-form-title" style="text-align:center;" data-en="Got it — thank you!" data-es="¡Recibido — gracias!">Got it — thank you!</div>
+      <div class="payment-form-subtitle" style="text-align:center; margin-bottom:24px;" data-en="We received your project intake. We&apos;ll review the details and reach out within 1 business day to confirm scope and next steps." data-es="Recibimos tu formulario. Revisaremos los detalles y te contactaremos en 1 dia habil para confirmar el alcance y los siguientes pasos.">We received your project intake. We'll review the details and reach out within 1 business day to confirm scope and next steps.</div>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="/" class="btn-primary"><i class="fa-solid fa-house"></i> <span data-en="Back to Home" data-es="Volver al Inicio">Back to Home</span></a>
+        <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%20just%20submitted%20my%20project%20intake%20form." class="btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> <span data-en="Message on WhatsApp" data-es="Mensaje por WhatsApp">Message on WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo"><span></span>RuutDev</a>
+      <p data-en="Professional web development, software, and AI solutions for businesses in the USA and Venezuela." data-es="Desarrollo web profesional, software y soluciones de IA para negocios en EE.UU. y Venezuela.">Professional web development, software, and AI solutions for businesses in the USA and Venezuela.</p>
+      <a href="https://wa.me/14076946371" target="_blank" rel="noopener noreferrer" class="footer-wa">
+        <i class="fa-brands fa-whatsapp"></i> +1 (407) 694-6371
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
+      <ul>
+        <li><a href="/services" data-en="Website Development" data-es="Desarrollo Web">Website Development</a></li>
+        <li><a href="/services" data-en="Software &amp; Web Apps" data-es="Software y Aplicaciones">Software &amp; Web Apps</a></li>
+        <li><a href="/services" data-en="AI Integrations" data-es="Integraciones de IA">AI Integrations</a></li>
+        <li><a href="/pricing" data-en="Pricing &amp; Plans" data-es="Precios y Planes">Pricing &amp; Plans</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Company" data-es="Empresa">Company</h4>
+      <ul>
+        <li><a href="/about" data-en="About Us" data-es="Sobre Nosotros">About Us</a></li>
+        <li><a href="/contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+        <li><a href="/pay" data-en="Make a Payment" data-es="Realizar un Pago">Make a Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-en="Legal" data-es="Legal">Legal</h4>
+      <ul>
+        <li><a href="/terms" data-en="Terms &amp; Conditions" data-es="Terminos y Condiciones">Terms &amp; Conditions</a></li>
+        <li><a href="/privacy" data-en="Privacy Policy" data-es="Politica de Privacidad">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2026 RuutDev. All rights reserved." data-es="© 2026 RuutDev. Todos los derechos reservados.">© 2026 RuutDev. All rights reserved.</p>
+    <p>USA &amp; Venezuela 🇺🇸🇻🇪</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+  function ixVal(id) { return (document.getElementById(id)?.value || '').trim(); }
+  function ixRadio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+
+  async function submitIntake() {
+    const business    = ixVal('ix-business');
+    const name        = ixVal('ix-name');
+    const email       = ixVal('ix-email');
+    const phone       = ixVal('ix-phone');
+    const currentSite = ixVal('ix-current-site');
+    const domain      = ixVal('ix-domain');
+    const objective   = ixVal('ix-objective');
+    const lang        = ixRadio('ix-lang');
+    const gbp         = ixRadio('ix-gbp');
+    const colors      = ixVal('ix-colors');
+    const assets      = ixVal('ix-assets');
+    const photos      = ixVal('ix-photos');
+    const services    = ixVal('ix-services');
+    const social      = ixVal('ix-social');
+    const inspiration = ixVal('ix-inspiration');
+    const notes       = ixVal('ix-notes');
+    const stage       = new URLSearchParams(window.location.search).get('stage') || '';
+
+    const isEs = document.documentElement.getAttribute('lang') === 'es';
+    const tr = (en, es) => isEs ? es : en;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!business || !name || !email) { alert(tr('Business name, contact name, and email are required.', 'Nombre del negocio, nombre de contacto y correo son obligatorios.')); return; }
+    if (!emailRegex.test(email))      { alert(tr('Please enter a valid email address.', 'Por favor ingresa un correo valido.')); return; }
+    if (!domain)                      { alert(tr('Please tell us the domain you want to use.', 'Por favor indica el dominio que quieres usar.')); return; }
+    if (!objective)                   { alert(tr('Please select the main objective.', 'Por favor selecciona el objetivo principal.')); return; }
+    if (!lang)                        { alert(tr('Please select the site language.', 'Por favor selecciona el idioma del sitio.')); return; }
+    if (!gbp)                         { alert(tr('Please answer the Google Business Profile question.', 'Por favor responde la pregunta de Google Business Profile.')); return; }
+    if (!services)                    { alert(tr('Please describe the services or products to feature.', 'Por favor describe los servicios o productos a destacar.')); return; }
+
+    const messageLines = [
+      '── Project Intake Form ──',
+      stage ? `Stage: ${stage}` : null,
+      '',
+      `Business: ${business}`,
+      `Contact: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone || '(not provided)'}`,
+      '',
+      `Current website: ${currentSite || '(none)'}`,
+      `Target domain: ${domain}`,
+      `Main objective: ${objective}`,
+      `Site language: ${lang}`,
+      `Google Business Profile: ${gbp}`,
+      '',
+      `Brand colors: ${colors || '(not provided)'}`,
+      `Logo & brand assets: ${assets || '(not provided)'}`,
+      `Photos: ${photos || '(not provided)'}`,
+      '',
+      'Services / products to feature:',
+      services,
+      '',
+      `Social media links: ${social || '(not provided)'}`,
+      '',
+      'Websites they like:',
+      inspiration || '(not provided)',
+      '',
+      'Notes:',
+      notes || '(none)',
+      '',
+      `Page URL: ${window.location.href}`,
+      `Referrer: ${document.referrer || '(direct)'}`
+    ].filter(line => line !== null);
+
+    const btn = document.getElementById('ix-submit');
+    const btnSpan = btn ? btn.querySelector('span') : null;
+    const originalLabel = btnSpan ? btnSpan.textContent : '';
+    if (btn) btn.disabled = true;
+    if (btnSpan) btnSpan.textContent = tr('Sending…', 'Enviando…');
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name,
+          email,
+          business,
+          type: 'project_intake',
+          message: messageLines.join('\n')
+        })
+      });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error('Server error');
+
+      document.getElementById('intake-form').style.display = 'none';
+      document.getElementById('intake-success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      clearTimeout(timeout);
+      alert(tr('There was an error submitting. Please try again, or message us on WhatsApp.', 'Hubo un error al enviar. Intentalo de nuevo o escribenos por WhatsApp.'));
+      if (btn) btn.disabled = false;
+      if (btnSpan) btnSpan.textContent = originalLabel;
+    }
+  }
+</script>
+</body>
+</html>
