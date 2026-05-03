@@ -2,14 +2,14 @@
    RuutDev — Shared JavaScript
    ───────────────────────────────────────── */
 
-// Populate these with live Stripe Checkout or Payment Link URLs when ready.
-// Example:
-// window.RUUTDEV_CHECKOUT_LINKS = {
-//   'monthly-simple-setup': 'https://buy.stripe.com/...',
-//   'monthly-standard-setup': 'https://buy.stripe.com/...',
-//   'monthly-growth-setup': 'https://buy.stripe.com/...'
-// };
-window.RUUTDEV_CHECKOUT_LINKS = window.RUUTDEV_CHECKOUT_LINKS || {};
+// Live Stripe Payment Links for pricing.html "Choose Plan" CTAs.
+// Each plan link is a Stripe subscription that bundles the one-time setup fee
+// (charged on first invoice) with the recurring monthly care subscription.
+window.RUUTDEV_CHECKOUT_LINKS = window.RUUTDEV_CHECKOUT_LINKS || {
+  'monthly-simple-setup':   'https://buy.stripe.com/aFafZi9HF6FK7vBd0k4Vy00',
+  'monthly-standard-setup': 'https://buy.stripe.com/6oU7sM8DB5BG5nt3pK4Vy01',
+  'monthly-growth-setup':   'https://buy.stripe.com/eVq6oI2fd4xC5nt7G04Vy02'
+};
 
 /* ── Nav Partial Loader ── */
 function initNav() {

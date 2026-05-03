@@ -92,6 +92,20 @@
         </div>
         <p class="tier-help visible" id="tier-help" data-en="Choose the plan this payment is for. Amount auto-fills as a starting point and can still be adjusted if needed." data-es="Elige el plan al que corresponde este pago. El monto se completa automaticamente como punto de partida y aun puede ajustarse si hace falta.">Choose the plan this payment is for. Amount auto-fills as a starting point and can still be adjusted if needed.</p>
 
+        <div class="plan-tiers" id="project-kinds">
+          <label class="tier-option selected" onclick="selectProjectKind(this, 'website')">
+            <input type="radio" name="project_kind" value="website" checked />
+            <span class="tier-name" data-en="Website Project" data-es="Proyecto Web">Website Project</span>
+            <span class="tier-price" data-en="Deposit $500" data-es="Deposito $500">Deposit $500</span>
+          </label>
+          <label class="tier-option" onclick="selectProjectKind(this, 'software_ai')">
+            <input type="radio" name="project_kind" value="software_ai" />
+            <span class="tier-name" data-en="Software / AI Project" data-es="Proyecto Software / IA">Software / AI Project</span>
+            <span class="tier-price" data-en="Deposit $500" data-es="Deposito $500">Deposit $500</span>
+          </label>
+        </div>
+        <p class="tier-help" id="project-kind-help" data-en="Choose the project type this deposit is for. The standard deposit is $500 — adjust the amount only if your milestone schedule already specifies a different amount." data-es="Elige el tipo de proyecto al que corresponde este deposito. El deposito estandar es $500 — ajusta el monto solo si tu plan de hitos ya especifica un monto distinto.">Choose the project type this deposit is for. The standard deposit is $500 — adjust the amount only if your milestone schedule already specifies a different amount.</p>
+
         <label class="payment-type-option" onclick="selectPaymentType(this)">
           <input type="radio" name="payment_type" value="invoice" />
           <div class="pt-icon"><i class="fa-solid fa-receipt"></i></div>
@@ -223,23 +237,33 @@
     growth:   { monthly_setup: '399', monthly_recurring: '145' }
   };
 
+  // Each monthly plan is one Stripe Payment Link that bundles the setup fee
+  // (one-time, first invoice) with the recurring monthly care subscription.
+  // The same URL is reused for the monthly_setup and monthly_recurring slots
+  // because Stripe handles both as a single subscription on that link.
   const STRIPE_LINKS = {
     monthly_setup: {
-      simple:   'https://buy.stripe.com/REPLACE_MONTHLY_SIMPLE_SETUP',
-      standard: 'https://buy.stripe.com/REPLACE_MONTHLY_STANDARD_SETUP',
-      growth:   'https://buy.stripe.com/REPLACE_MONTHLY_GROWTH_SETUP',
+      simple:   'https://buy.stripe.com/aFafZi9HF6FK7vBd0k4Vy00',
+      standard: 'https://buy.stripe.com/6oU7sM8DB5BG5nt3pK4Vy01',
+      growth:   'https://buy.stripe.com/eVq6oI2fd4xC5nt7G04Vy02',
     },
     monthly_recurring: {
-      simple:   'https://buy.stripe.com/REPLACE_MONTHLY_SIMPLE_RECURRING',
-      standard: 'https://buy.stripe.com/REPLACE_MONTHLY_STANDARD_RECURRING',
-      growth:   'https://buy.stripe.com/REPLACE_MONTHLY_GROWTH_RECURRING',
+      simple:   'https://buy.stripe.com/aFafZi9HF6FK7vBd0k4Vy00',
+      standard: 'https://buy.stripe.com/6oU7sM8DB5BG5nt3pK4Vy01',
+      growth:   'https://buy.stripe.com/eVq6oI2fd4xC5nt7G04Vy02',
     },
-    project: 'https://buy.stripe.com/REPLACE_PROJECT_PAYMENT_LINK',
+    project: {
+      website:     'https://buy.stripe.com/4gM3cw4nlfcgdTZaSc4Vy03',
+      software_ai: 'https://buy.stripe.com/7sYaEY2fd1lq4jpf8s4Vy04',
+    },
     invoice: 'https://buy.stripe.com/REPLACE_INVOICE_LINK'
   };
 
+  const PROJECT_DEPOSIT_AMOUNT = '500';
+
   let currentType = 'monthly_setup';
   let currentTier = 'simple';
+  let currentProjectKind = 'website';
 
   function updateSuggestedAmount() {
     const amountInput = document.getElementById('pay-amount');
@@ -247,6 +271,11 @@
 
     if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
       amountInput.value = PLAN_AMOUNTS[currentTier][currentType];
+      return;
+    }
+
+    if (currentType === 'project') {
+      amountInput.value = PROJECT_DEPOSIT_AMOUNT;
       return;
     }
 
@@ -258,29 +287,35 @@
     el.classList.add('selected');
     currentType = el.querySelector('input[type="radio"]').value;
 
-    const tiers = document.getElementById('plan-tiers');
-    const tierHelp = document.getElementById('tier-help');
-    if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
-      tiers.classList.add('visible');
-      tierHelp.classList.add('visible');
-      updateSuggestedAmount();
-    } else {
-      tiers.classList.remove('visible');
-      tierHelp.classList.remove('visible');
-    }
+    const isMonthly = currentType === 'monthly_setup' || currentType === 'monthly_recurring';
+    const isProject = currentType === 'project';
+
+    document.getElementById('plan-tiers').classList.toggle('visible', isMonthly);
+    document.getElementById('tier-help').classList.toggle('visible', isMonthly);
+    document.getElementById('project-kinds').classList.toggle('visible', isProject);
+    document.getElementById('project-kind-help').classList.toggle('visible', isProject);
+
+    updateSuggestedAmount();
   }
 
   function selectTier(el, tier) {
-    document.querySelectorAll('.tier-option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelectorAll('#plan-tiers .tier-option').forEach(opt => opt.classList.remove('selected'));
     el.classList.add('selected');
     currentTier = tier;
     updateSuggestedAmount();
+  }
+
+  function selectProjectKind(el, kind) {
+    document.querySelectorAll('#project-kinds .tier-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    currentProjectKind = kind;
   }
 
   function applyQueryContext() {
     const params = new URLSearchParams(window.location.search);
     const type = params.get('type');
     const tier = params.get('tier');
+    const kind = params.get('kind');
     const amount = params.get('amount');
     const notes = params.get('notes');
 
@@ -293,10 +328,18 @@
     }
 
     if (tier) {
-      const tierOption = document.querySelector(`.tier-option input[value="${tier}"]`);
+      const tierOption = document.querySelector(`#plan-tiers .tier-option input[value="${tier}"]`);
       if (tierOption) {
         tierOption.checked = true;
         selectTier(tierOption.closest('.tier-option'), tier);
+      }
+    }
+
+    if (kind) {
+      const kindOption = document.querySelector(`#project-kinds .tier-option input[value="${kind}"]`);
+      if (kindOption) {
+        kindOption.checked = true;
+        selectProjectKind(kindOption.closest('.tier-option'), kind);
       }
     }
 
@@ -331,6 +374,8 @@
     let url;
     if (currentType === 'monthly_setup' || currentType === 'monthly_recurring') {
       url = STRIPE_LINKS[currentType][currentTier];
+    } else if (currentType === 'project') {
+      url = STRIPE_LINKS.project[currentProjectKind];
     } else {
       url = STRIPE_LINKS[currentType];
     }
