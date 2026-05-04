@@ -57,6 +57,18 @@
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1 !important;transform:none !important;transition:none !important}
     }
+    /* Fix: select dropdown options were rendering white-on-white on some browsers
+       because the dark form select inherits OS dropdown colors. Force a dark
+       background + light text on the open <option> list. */
+    #page-google-ads-lp .gad-form-field select{color:#fff;background-color:#0d0e12}
+    #page-google-ads-lp .gad-form-field select option,
+    #page-google-ads-lp .gad-form-field select optgroup{
+      background-color:#11141a !important;color:#fff !important;
+    }
+    #page-google-ads-lp .gad-form-field select option:checked,
+    #page-google-ads-lp .gad-form-field select option:hover{
+      background-color:#1a1f28 !important;color:#06FFA1 !important;
+    }
     .gad-urgency-bar{
       display:flex;align-items:center;justify-content:center;gap:10px;
       padding:10px 16px;background:linear-gradient(90deg,#06FFA1,#00d97a);
