@@ -108,8 +108,14 @@ keyword-stuffing.
 
 ## 7. Conversion tracking architecture
 
-The page is wired for tracking but **does not load any external script by default**.
-This keeps the page CSP-safe out of the box.
+**GTM is now active site-wide.** Container ID `GTM-MGKZGHK7` is embedded in the
+`<head>` of every public HTML page (homepage, pricing, contact, services, portfolio,
+case studies, the Google Ads LP, and legal pages). Admin and qualifier pages are
+intentionally excluded so internal traffic does not skew conversion data.
+
+The container ID is hardcoded in HTML by design. GTM IDs are public (the script
+URL exposes them anyway) and there is no build step to inject env vars. To rotate
+the container, replace `GTM-MGKZGHK7` site-wide with the new ID.
 
 ### Tracking events emitted
 
@@ -119,6 +125,7 @@ This keeps the page CSP-safe out of the box.
 | `primary_cta_click`    | Any element with `data-gad-cta="primary"` or `"how"` or `"sticky-mobile"`. |
 | `pricing_click`        | Any pricing card CTA (`data-gad-cta="pricing-…"`). |
 | `project_call_submit`  | After a successful `/api/contact` response. Includes `project_type` (e.g. `monthly_plan`, `saas_waitlist`). |
+| `mockup_form_submit`   | After a successful `/api/contact` response on the LP form. Carries `conversionValue: 75` and `currency: 'USD'` — wire this to a Google Ads conversion in the GTM UI. |
 
 ### How events are dispatched
 
@@ -131,40 +138,20 @@ This keeps the page CSP-safe out of the box.
 
 All wrapped in try/catch so tracking never breaks the page.
 
-### To activate tracking
+### Wiring conversions in the GTM UI
 
-Inject a small inline script in `pages/google-ads/ai-business-os.html` **before**
-the `<script src="/assets/js/main.js"></script>` tag:
+The dataLayer events above are pushed by the site code; the actual Google Ads
+conversion firing happens in the GTM container UI:
 
-```html
-<script>
-  window.RUUTDEV_TRACKING = {
-    googleAdsId: 'AW-XXXXXXXXXX',
-    gtmId:       'GTM-XXXXXXX',
-    conversionLabels: {
-      project_call_submit: 'AbCdEfGh1234567890',
-      primary_cta_click:   'IjKlMnOp1234567890',
-      pricing_click:       'QrStUvWx1234567890'
-    }
-  };
-  // Optional: GTM bootstrap
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');
-</script>
-<!-- gtag-js loader if not using GTM:
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-XXXXXXXXXX');
-</script>
--->
-```
+1. In GTM (container `GTM-MGKZGHK7`), create a Google Ads Conversion Tracking tag.
+2. Trigger: **Custom Event** equal to `mockup_form_submit`.
+3. Conversion Value: `{{DLV - conversionValue}}` (Data Layer Variable on `conversionValue`).
+4. Conversion Currency: `{{DLV - currency}}`.
+5. Publish the container.
 
-You **must** also widen the CSP in `vercel.json` — see section 9.
+Optionally also tag `project_call_submit`, `primary_cta_click`, and `pricing_click`
+as additional Google Ads conversions or GA4 events. The site does not need any
+changes for those — the events already fire.
 
 ### Verification
 
@@ -197,26 +184,19 @@ campaign IDs unless you explicitly intend to share them publicly.
 
 ---
 
-## 9. CSP changes needed when enabling tracking
+## 9. CSP for tracking
 
-`vercel.json` currently sets:
-
-```
-default-src 'self';
-script-src  'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net;
-connect-src 'self' https://api.web3forms.com https://api.microlink.io;
-```
-
-When activating GTM + Google Ads conversion, add:
+The CSP in `vercel.json` already allows GTM and Google Ads:
 
 ```
-script-src  ... https://www.googletagmanager.com https://www.google-analytics.com;
-img-src     ... https://www.google.com https://www.google-analytics.com https://www.googletagmanager.com;
-connect-src ... https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
-frame-src   https://td.doubleclick.net;
+script-src  ... https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net;
+img-src     'self' data: https:;
+connect-src ... https://www.googletagmanager.com https://www.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net;
+frame-src   https://www.googletagmanager.com https://td.doubleclick.net;
 ```
 
-Apply edits in `vercel.json` headers and redeploy.
+If GTM later loads a tag that hits a domain not listed above (e.g. a third-party
+pixel), widen the corresponding directive and redeploy.
 
 ---
 
@@ -243,8 +223,12 @@ Before pointing a Google Ads campaign at this page:
 
 - [ ] Visit with UTMs → hidden inputs populate
 - [ ] Lead-submit packs UTMs into `message`
+- [ ] `gtm.js` request returns 200 in DevTools Network
+- [ ] `window.dataLayer` is defined as an array on every public page
 - [ ] `landing_page_view` appears in `dataLayer` on load
-- [ ] `primary_cta_click`, `pricing_click`, `demo_request_submit` fire correctly
+- [ ] `primary_cta_click`, `pricing_click`, `project_call_submit` fire correctly
+- [ ] `mockup_form_submit` fires on successful LP form submit with `conversionValue: 75`, `currency: 'USD'`
+- [ ] `mockup_form_submit` does NOT fire on validation errors or non-2xx API responses
 - [ ] No console errors
 
 **Mobile**
@@ -314,21 +298,29 @@ These steps happen inside the Google Ads UI and are **not** automated by this co
 This codebase does NOT automatically:
 
 - Provision a Google Ads account or campaign.
-- Create the GTM container or Google Ads conversion actions.
-- Write the inline `RUUTDEV_TRACKING` config block (intentional — IDs are
-  campaign-specific and should be added when the user is ready).
-- Update CSP for GTM/Google Analytics (intentional — page works without it).
-- Add the page to `sitemap.xml` (intentional — paid LP isolated from organic).
+- Create the Google Ads conversion actions inside the Google Ads UI.
+- Configure tags/triggers inside the GTM container UI.
+- Add the LP to `sitemap.xml` (intentional — paid LP isolated from organic).
+
+What the codebase *does* automatically (already done):
+
+- Loads GTM container `GTM-MGKZGHK7` on every public page.
+- Pushes `mockup_form_submit` (with `conversionValue: 75`, `currency: 'USD'`)
+  to `window.dataLayer` on a successful LP form submit, *before* UI updates,
+  so the tag fires even if the user navigates away during the success transition.
+- Pushes `project_call_submit`, `primary_cta_click`, `pricing_click`,
+  `landing_page_view` per section 7.
+- Allows the required Google domains in CSP.
 
 When you are ready to launch:
 
-1. Create the Google Ads conversion actions and capture the conversion labels.
-2. Create the GTM container if you want a wrapper layer.
-3. Inject the `RUUTDEV_TRACKING` script block per section 7.
-4. Update CSP per section 9.
-5. Deploy to production via `vercel --prod`.
-6. Smoke-test the full flow with Google Tag Assistant before pointing budget
-   at the page.
+1. Create the Google Ads conversion action ("Get Free Mockup — Lead").
+2. In GTM (`GTM-MGKZGHK7`), create the Google Ads Conversion Tracking tag
+   triggered by Custom Event `mockup_form_submit`. See section 7.
+3. Publish the GTM container.
+4. Deploy to production via `vercel --prod`.
+5. Smoke-test the full flow with Google Tag Assistant + GTM Preview Mode
+   before pointing budget at the page.
 
 ---
 

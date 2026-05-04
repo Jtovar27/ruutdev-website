@@ -674,6 +674,15 @@ function gadInitDemoForm() {
       clearTimeout(timeout);
       if (!res.ok) throw new Error('Upstream error');
 
+      // Pushed BEFORE UI updates so the GTM tag fires reliably even if the
+      // user navigates away during the success transition.
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'mockup_form_submit',
+        conversionValue: 75,
+        currency: 'USD'
+      });
+
       const formBody    = document.getElementById('gad-form-body');
       const formSuccess = document.getElementById('gad-form-success');
       if (formBody)    formBody.style.display = 'none';
