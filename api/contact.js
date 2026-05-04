@@ -98,19 +98,22 @@ function extractLeadFields({ name, email, business, type, message }) {
 }
 
 async function persistLead(payload) {
+  // Returns true if the row landed in public.leads, false otherwise.
   try {
     const row = extractLeadFields(payload);
-    if (!row.name || !row.email) return; // Already validated upstream, but be safe.
+    if (!row.name || !row.email) return false;
     const supabase = await getSupabase();
-    if (!supabase) return;
+    if (!supabase) return false;
     const { error } = await supabase.from('leads').insert(row);
     if (error) {
-      // Don't throw — email already sent, persistence is best-effort.
       // Common cause when first deploying: table doesn't exist yet (run the migration).
       console.error('Lead persistence failed:', error);
+      return false;
     }
+    return true;
   } catch (err) {
     console.error('Lead persistence threw:', err);
+    return false;
   }
 }
 
@@ -163,18 +166,25 @@ export default async function handler(req, res) {
   }
 
   // Run Web3Forms email and Supabase persistence in PARALLEL.
-  // Total latency = max(web3forms, supabase), not sum. Persistence never
-  // blocks or fails the response — only the email result decides 2xx vs 5xx.
+  // The lead is "captured" if EITHER channel succeeds:
+  //   - Supabase insert ok → lead is in /admin/intakes (Leads tab)
+  //   - Web3Forms ok       → email reached the inbox
+  // Only return an error to the user if BOTH fail (real lead loss).
   const payload = { name, email, business, type, message };
-  const [emailResult] = await Promise.all([
+  const [emailResult, persisted] = await Promise.all([
     sendToWeb3Forms(payload),
     persistLead(payload).catch(err => {
       console.error('persistLead unhandled:', err);
+      return false;
     })
   ]);
 
-  if (emailResult.ok) {
-    return res.status(200).json({ success: true });
+  if (emailResult.ok || persisted) {
+    return res.status(200).json({
+      success: true,
+      // Useful for ops debugging in browser devtools — never used by the LP UI.
+      delivered: { email: !!emailResult.ok, db: !!persisted }
+    });
   }
   if (emailResult.error?.name === 'AbortError') {
     return res.status(504).json({ error: 'Request timeout' });
