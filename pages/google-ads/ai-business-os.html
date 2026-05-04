@@ -26,6 +26,87 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
 
+  <!-- ── Google Ads Conversion Tracking ──
+       Replace AW-XXXXXXXXXX with your Google Ads ID and the conversion labels
+       with the ones from Google Ads → Tools → Conversions → Tag setup.
+       The tracking helper in /assets/js/main.js fires events on form submit
+       and CTA click; this snippet is what wires gtag() into the page.       -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'AW-XXXXXXXXXX');
+
+    window.RUUTDEV_TRACKING = {
+      googleAdsId: 'AW-XXXXXXXXXX',
+      conversionLabels: {
+        // Map each event name in main.js → its Google Ads conversion label
+        project_call_submit: 'XXXXXXXXXXXXXXXXXX',
+        primary_cta_click:   '',
+        pricing_click:       ''
+      }
+    };
+  </script>
+
+  <!-- Inline LP-only tweaks (urgency banner + hero proof grid) -->
+  <style>
+    /* Failsafe: ensure scroll-reveal content is visible for crawlers / users
+       on slow connections / users with reduced motion. The IntersectionObserver
+       in main.js still animates on scroll for everyone else. */
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+    }
+    .gad-urgency-bar{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 16px;background:linear-gradient(90deg,#06FFA1,#00d97a);
+      color:#04241a;font-weight:600;font-size:0.85rem;letter-spacing:.01em;
+      text-align:center;line-height:1.35;
+    }
+    .gad-urgency-bar i{font-size:0.9rem}
+    .gad-hero-stats{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+      margin:28px 0 8px;max-width:560px;
+    }
+    .gad-hero-stats .gh-stat{
+      padding:12px 14px;border:1px solid rgba(255,255,255,.10);
+      border-radius:14px;background:rgba(255,255,255,.03);
+    }
+    .gad-hero-stats .gh-num{font-weight:700;font-size:1.1rem;color:#fff;line-height:1.1}
+    .gad-hero-stats .gh-label{font-size:.72rem;color:rgba(255,255,255,.62);margin-top:2px}
+    .gad-portfolio-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .gad-portfolio-strip a{
+      display:block;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);
+      background:#0d0e12;transition:transform .25s ease, border-color .25s ease;
+    }
+    .gad-portfolio-strip a:hover{transform:translateY(-2px);border-color:rgba(6,255,161,.45)}
+    .gad-portfolio-strip img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+    .gad-hero-actions .gad-btn-wa{background:#25D366;color:#04241a;border-color:#25D366}
+    .gad-hero-actions .gad-btn-wa:hover{filter:brightness(1.05)}
+    .gad-social-proof{padding:64px 0;background:#0a0b0f}
+    .gad-social-proof .gad-shell{max-width:1180px;margin:0 auto;padding:0 24px}
+    .gad-testimonials-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;
+    }
+    .gad-tcard{
+      padding:22px;border-radius:18px;background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:14px;
+    }
+    .gad-tcard .stars{color:#FFD24A;font-size:.9rem;letter-spacing:2px}
+    .gad-tcard p{color:rgba(255,255,255,.86);font-size:.95rem;line-height:1.55;margin:0}
+    .gad-tcard .who{display:flex;align-items:center;gap:12px;margin-top:auto}
+    .gad-tcard .av{
+      width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(135deg,#06FFA1,#00d97a);color:#04241a;font-weight:700;font-size:.85rem;
+    }
+    .gad-tcard .who small{color:rgba(255,255,255,.55);display:block;font-size:.78rem;margin-top:2px}
+    @media (max-width: 860px){
+      .gad-hero-stats{grid-template-columns:repeat(2,1fr);max-width:100%}
+      .gad-portfolio-strip{grid-template-columns:repeat(3,1fr);gap:8px}
+      .gad-testimonials-grid{grid-template-columns:1fr}
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -143,6 +224,17 @@
 <body id="page-google-ads-lp">
 
 <!-- ────────────────────────────────────────────
+     URGENCY BANNER (top of page)
+     ──────────────────────────────────────────── -->
+<div class="gad-urgency-bar" role="note">
+  <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+  <span data-en="Only 5 builds accepted in May — book before slots fill"
+        data-es="Solo 5 desarrollos en mayo — agenda antes de que se llenen los cupos">
+    Only 5 builds accepted in May — book before slots fill
+  </span>
+</div>
+
+<!-- ────────────────────────────────────────────
      MINIMAL NAV
      ──────────────────────────────────────────── -->
 <header class="gad-nav" role="banner">
@@ -156,7 +248,7 @@
       <button class="lang-btn" data-lang="es" type="button" onclick="toggleLang('es')" aria-label="Cambiar a Español">ES</button>
     </div>
     <a href="#contact" class="gad-nav-cta" data-gad-cta="primary"
-       data-en="Book a Project Call" data-es="Agendar Llamada">Book a Project Call</a>
+       data-en="Get a Free Mockup" data-es="Mockup Gratis">Get a Free Mockup</a>
   </div>
 </header>
 
@@ -169,102 +261,66 @@
     <div class="gad-hero-copy reveal">
       <span class="gad-badge">
         <span class="gad-pulse" aria-hidden="true"></span>
-        <span data-en="Web Design · Business Systems · AI Business OS launching soon"
-              data-es="Diseño Web · Sistemas · AI Business OS muy pronto">
-          Web Design · Business Systems · AI Business OS launching soon
+        <span data-en="Custom websites for small business · USA &amp; LATAM"
+              data-es="Sitios web a medida para pequeños negocios · USA y LATAM">
+          Custom websites for small business · USA &amp; LATAM
         </span>
       </span>
 
-      <h1 data-en="Custom websites &amp; AI business systems <em>built around how you actually work</em>"
-          data-es="Sitios web y sistemas con IA <em>hechos a la medida de tu negocio</em>">
-        Custom websites &amp; AI business systems <em>built around how you actually work</em>
+      <h1 data-en="Get a website that turns visitors <em>into paying clients</em>"
+          data-es="Un sitio web que convierte visitantes <em>en clientes que pagan</em>">
+        Get a website that turns visitors <em>into paying clients</em>
       </h1>
 
       <p class="gad-hero-sub"
-         data-en="RuutDev designs and develops conversion-focused websites, web apps, and AI-powered business systems for small businesses. Plus: clients today get early access to the upcoming AI Business OS — our flagship SaaS product launching soon."
-         data-es="RuutDev diseña y desarrolla sitios enfocados en conversión, web apps y sistemas con IA para pequeños negocios. Más: los clientes de hoy reciben acceso anticipado al AI Business OS — nuestro producto estrella SaaS que se viene.">
-        RuutDev designs and develops conversion-focused websites, web apps, and AI-powered business systems for small businesses. Plus: clients today get early access to the upcoming AI Business OS — our flagship SaaS product launching soon.
+         data-en="RuutDev designs and develops conversion-focused websites for small businesses. Mobile-first, fast, and built around how your business actually operates — delivered in days, not months."
+         data-es="RuutDev diseña y desarrolla sitios enfocados en conversión para pequeños negocios. Mobile-first, rápidos y hechos a la medida de cómo opera tu negocio — entregados en días, no meses.">
+        RuutDev designs and develops conversion-focused websites for small businesses. Mobile-first, fast, and built around how your business actually operates — delivered in days, not months.
       </p>
 
       <div class="gad-hero-actions">
         <a href="#contact" class="gad-btn gad-btn-primary" data-gad-cta="primary">
-          <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-          <span data-en="Book a Project Call" data-es="Agendar Llamada">Book a Project Call</span>
+          <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          <span data-en="Get a Free Mockup in 48h" data-es="Recibe un Mockup Gratis en 48h">Get a Free Mockup in 48h</span>
         </a>
-        <a href="#pricing" class="gad-btn gad-btn-secondary" data-gad-cta="how">
-          <i class="fa-solid fa-tags" aria-hidden="true"></i>
-          <span data-en="See Pricing" data-es="Ver Precios">See Pricing</span>
+        <a href="https://wa.me/14076946371?text=Hi%20RuutDev%2C%20I%20saw%20your%20ad%20and%20want%20a%20free%20mockup%20for%20my%20website."
+           target="_blank" rel="noopener noreferrer"
+           class="gad-btn gad-btn-secondary gad-btn-wa" data-gad-cta="whatsapp">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          <span data-en="Chat on WhatsApp" data-es="Chatear por WhatsApp">Chat on WhatsApp</span>
         </a>
       </div>
 
+      <div class="gad-hero-stats" aria-label="Pricing snapshot">
+        <div class="gh-stat"><div class="gh-num">$149</div><div class="gh-label" data-en="Setup from" data-es="Setup desde">Setup from</div></div>
+        <div class="gh-stat"><div class="gh-num">$45/mo</div><div class="gh-label" data-en="Plans from" data-es="Planes desde">Plans from</div></div>
+        <div class="gh-stat"><div class="gh-num">$800+</div><div class="gh-label" data-en="Buyout from" data-es="Compra desde">Buyout from</div></div>
+        <div class="gh-stat"><div class="gh-num">1:1</div><div class="gh-label" data-en="Founder access" data-es="Con el fundador">Founder access</div></div>
+      </div>
+
       <div class="gad-hero-trust" aria-label="Trust details">
-        <span class="gad-check"><i class="fa-solid fa-check"></i> <span data-en="Built since 2024" data-es="Construyendo desde 2024">Built since 2024</span></span>
+        <span class="gad-check"><i class="fa-solid fa-check"></i> <span data-en="Free 48h mockup before you pay" data-es="Mockup gratis en 48h antes de pagar">Free 48h mockup before you pay</span></span>
         <span class="gad-check"><i class="fa-solid fa-check"></i> <span data-en="Direct founder access" data-es="Acceso directo al fundador">Direct founder access</span></span>
         <span class="gad-check"><i class="fa-solid fa-check"></i> <span data-en="Bilingual EN / ES" data-es="Bilingüe EN / ES">Bilingual EN / ES</span></span>
       </div>
     </div>
 
     <div class="gad-mockup reveal" role="img"
-         aria-label="Preview of a custom RuutDev website with leads, schedule, campaigns and AI recommendations">
+         aria-label="Recent RuutDev client websites — AC.aballo, La Cafebrería, Taxes Insurance Group">
       <div class="gad-mockup-bar" aria-hidden="true">
         <span></span><span></span><span></span>
-        <small>your-business.com / dashboard</small>
+        <small data-en="Recent client websites" data-es="Sitios recientes de clientes">Recent client websites</small>
       </div>
-      <div class="gad-mockup-body">
-        <aside class="gad-mockup-side" aria-hidden="true">
-          <div class="gad-mock-side-item active"><i class="fa-solid fa-gauge-high"></i> Dashboard</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-users"></i> CRM</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-calendar-check"></i> Schedule</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-pen-nib"></i> Content</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-bullhorn"></i> Campaigns</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-robot"></i> AI Agents</div>
-          <div class="gad-mock-side-item"><i class="fa-solid fa-list-check"></i> Tasks</div>
-        </aside>
-        <main class="gad-mockup-main" aria-hidden="true">
-          <div class="gad-mock-headerline">
-            <div class="gad-mock-title">Today · Operations Overview</div>
-            <span class="gad-mock-pill">AI Active</span>
-          </div>
-          <div class="gad-mock-stats">
-            <div class="gad-mock-stat"><div class="label">New leads</div><div class="value">14</div><div class="delta">+5 today</div></div>
-            <div class="gad-mock-stat"><div class="label">Bookings</div><div class="value">6</div><div class="delta">+2 vs avg</div></div>
-            <div class="gad-mock-stat"><div class="label">Tasks open</div><div class="value">9</div><div class="delta down">3 overdue</div></div>
-          </div>
-          <div class="gad-mock-chart">
-            <svg viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="gadCurve" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"  stop-color="#06FFA1" stop-opacity="0.55"/>
-                  <stop offset="100%" stop-color="#06FFA1" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,60 C40,40 70,55 100,42 C130,30 160,55 195,38 C225,24 255,46 285,30 C300,22 315,28 320,24 L320,80 L0,80 Z"
-                    fill="url(#gadCurve)" />
-              <path d="M0,60 C40,40 70,55 100,42 C130,30 160,55 195,38 C225,24 255,46 285,30 C300,22 315,28 320,24"
-                    fill="none" stroke="#06FFA1" stroke-width="1.6" />
-            </svg>
-          </div>
-          <div class="gad-mock-rows">
-            <div class="gad-mock-row">
-              <div class="avatar">CM</div>
-              <div><div class="name">Carla M.</div></div>
-              <span class="tag">Booked</span>
-              <span class="meta">9:30 AM</span>
-            </div>
-            <div class="gad-mock-row">
-              <div class="avatar">JR</div>
-              <div><div class="name">Jared R.</div></div>
-              <span class="tag">Lead</span>
-              <span class="meta">Follow up</span>
-            </div>
-            <div class="gad-mock-row">
-              <div class="avatar">AI</div>
-              <div><div class="name">AI Recommendation</div></div>
-              <span class="tag">Action</span>
-              <span class="meta">Send promo</span>
-            </div>
-          </div>
-        </main>
+      <div class="gad-portfolio-strip">
+        <a href="https://www.acaballousa.com/" target="_blank" rel="noopener noreferrer" aria-label="AC.aballo Equestrian School">
+          <img src="/assets/img/portfolio/acaballousa.png" alt="AC.aballo Equestrian School website" loading="lazy" decoding="async" />
+        </a>
+        <a href="https://www.lacafebreria.com/" target="_blank" rel="noopener noreferrer" aria-label="La Cafebrería">
+          <img src="/assets/img/portfolio/lacafebreria.png" alt="La Cafebrería website" loading="lazy" decoding="async" />
+        </a>
+        <a href="https://www.taxesigroup.com/" target="_blank" rel="noopener noreferrer" aria-label="Taxes Insurance Group">
+          <img src="/assets/img/portfolio/taxesigroup.png" alt="Taxes Insurance Group website" loading="lazy" decoding="async" />
+        </a>
       </div>
     </div>
 
@@ -283,6 +339,68 @@
     <span><i class="fa-solid fa-flag-usa"></i><span data-en="USA &amp; LATAM ready" data-es="Listo para USA y LATAM">USA &amp; LATAM ready</span></span>
   </div>
 </div>
+
+<!-- ────────────────────────────────────────────
+     SOCIAL PROOF — real testimonials
+     ──────────────────────────────────────────── -->
+<section class="gad-social-proof" aria-label="Client testimonials">
+  <div class="gad-shell">
+    <div class="reveal">
+      <div class="gad-eyebrow" data-en="What Clients Say" data-es="Lo Que Dicen Los Clientes">What Clients Say</div>
+      <h2 class="gad-h2"
+          data-en="Real businesses. <em>Real results.</em>"
+          data-es="Negocios reales. <em>Resultados reales.</em>">
+        Real businesses. <em>Real results.</em>
+      </h2>
+    </div>
+    <div class="gad-testimonials-grid">
+      <article class="gad-tcard reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p data-en='"We had no online presence before. RuutDev built us an amazing page in just a few days and we&apos;re already getting new customers through it. The free demo was key to convincing us."'
+           data-es='"Antes no teníamos presencia en línea. RuutDev nos construyó una página increíble en solo unos días y ya estamos consiguiendo nuevos clientes. El demo gratis fue clave para convencernos."'>
+          "We had no online presence before. RuutDev built us an amazing page in just a few days and we're already getting new customers through it. The free demo was key to convincing us."
+        </p>
+        <div class="who">
+          <div class="av">CM</div>
+          <div>
+            <strong>Carlos Mendoza</strong>
+            <small data-en="Restaurant Owner · Caracas, VE" data-es="Dueño de Restaurante · Caracas, VE">Restaurant Owner · Caracas, VE</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="gad-tcard reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p data-en='"Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."'
+           data-es='"Súper profesional y rápido. Entregaron exactamente lo que necesitaba para mi barbería. El sistema de reservas en línea redujo mis llamadas telefónicas y mis clientes lo adoran."'>
+          "Super professional and fast. They delivered exactly what I needed for my barbershop. The online booking system reduced my phone calls and my clients love it."
+        </p>
+        <div class="who">
+          <div class="av">MT</div>
+          <div>
+            <strong>Miguel Torres</strong>
+            <small data-en="Barbershop Owner · Orlando, FL" data-es="Dueño de Barbería · Orlando, FL">Barbershop Owner · Orlando, FL</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="gad-tcard reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p data-en='"What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."'
+           data-es='"Lo que más me gustó fue ver el demo antes de pagar. Pude ver que sabían lo que hacían y el resultado final superó mis expectativas. Muy recomendado."'>
+          "What I liked most was seeing the demo before paying. I could see they knew what they were doing and the final result exceeded my expectations. Highly recommended."
+        </p>
+        <div class="who">
+          <div class="av">AG</div>
+          <div>
+            <strong>Ana González</strong>
+            <small data-en="Clinic Director · Miami, FL" data-es="Directora de Clínica · Miami, FL">Clinic Director · Miami, FL</small>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- ────────────────────────────────────────────
      PROBLEM
@@ -738,53 +856,21 @@
 </section>
 
 <!-- ────────────────────────────────────────────
-     AI BUSINESS OS · COMING SOON · GRADUATION ARC
+     BONUS · BUOS early access (collapsed teaser, not a competing offer)
      ──────────────────────────────────────────── -->
-<section class="gad-section--buos" id="buos">
+<section class="gad-section--buos" id="buos" style="padding-top:48px;padding-bottom:48px;">
   <div class="gad-shell">
-    <div class="gad-buos-grid">
-      <div class="gad-buos-mark reveal">
-        <img src="/assets/img/buos-logo.png"
-             alt="BUOS — RuutDev AI Business OS logo"
-             class="gad-buos-logo"
-             width="160" height="160"
-             loading="lazy" decoding="async" />
-        <div class="gad-buos-mark-pill">
-          <span class="gad-pulse" aria-hidden="true"></span>
-          <span data-en="Coming Soon" data-es="Próximamente">Coming Soon</span>
-        </div>
-      </div>
-
-      <div class="gad-buos-copy reveal">
-        <div class="gad-eyebrow" data-en="Flagship Product · Coming Soon" data-es="Producto Estrella · Próximamente">Flagship Product · Coming Soon</div>
-        <h2 class="gad-h2"
-            data-en="Meet <em>BUOS</em> — the AI Business OS your business graduates into"
-            data-es="Conoce <em>BUOS</em> — el AI Business OS al que tu negocio graduará">
-          Meet <em>BUOS</em> — the AI Business OS your business graduates into
-        </h2>
-        <p class="gad-section-intro"
-           data-en="The website we build for you today is just the start. BUOS — RuutDev's flagship SaaS — turns the same building blocks (CRM, scheduling, content, campaigns, AI agents) into a self-serve platform you can run an entire small business from."
-           data-es="El sitio que te construimos hoy es solo el comienzo. BUOS — el SaaS estrella de RuutDev — convierte esos mismos bloques (CRM, agenda, contenido, campañas, agentes de IA) en una plataforma self-serve desde la que puedes correr un negocio pequeño completo.">
-          The website we build for you today is just the start. BUOS — RuutDev's flagship SaaS — turns the same building blocks (CRM, scheduling, content, campaigns, AI agents) into a self-serve platform you can run an entire small business from.
-        </p>
-
-        <ul class="gad-cta-bullets" style="margin-top:18px;">
-          <li><i class="fa-solid fa-circle-check"></i> <span data-en="One unified workspace — leads, schedule, content, campaigns" data-es="Un workspace unificado — leads, agenda, contenido, campañas">One unified workspace — leads, schedule, content, campaigns</span></li>
-          <li><i class="fa-solid fa-circle-check"></i> <span data-en="Specialized AI agents that act behind the scenes" data-es="Agentes de IA especializados que actúan en segundo plano">Specialized AI agents that act behind the scenes</span></li>
-          <li><i class="fa-solid fa-circle-check"></i> <span data-en="Industry-aware recommendations and templates" data-es="Recomendaciones y plantillas según industria">Industry-aware recommendations and templates</span></li>
-          <li><i class="fa-solid fa-circle-check"></i> <span data-en="Mobile-first — run the business from a phone" data-es="Mobile-first — maneja el negocio desde el celular">Mobile-first — run the business from a phone</span></li>
-        </ul>
-
-        <div class="gad-buos-perk">
-          <i class="fa-solid fa-key" aria-hidden="true"></i>
-          <div>
-            <strong data-en="Active RuutDev clients get priority early access" data-es="Los clientes activos de RuutDev reciben acceso anticipado prioritario">Active RuutDev clients get priority early access</strong>
-            <span data-en="When BUOS launches, the websites we build today will plug straight in — no rebuild needed. Mention BUOS waitlist on your project call to be on the early-access list."
-                  data-es="Cuando BUOS se lance, los sitios que construimos hoy se conectan directo — sin rehacer nada. Menciona BUOS waitlist en tu llamada para entrar a la lista de acceso anticipado.">
-              When BUOS launches, the websites we build today will plug straight in — no rebuild needed. Mention BUOS waitlist on your project call to be on the early-access list.
-            </span>
-          </div>
-        </div>
+    <div class="gad-buos-perk reveal" style="max-width:860px;margin:0 auto;">
+      <i class="fa-solid fa-key" aria-hidden="true"></i>
+      <div>
+        <strong data-en="Bonus: clients today get early access to BUOS, our upcoming AI Business OS"
+                data-es="Bonus: los clientes de hoy reciben acceso anticipado a BUOS, nuestro AI Business OS que viene">
+          Bonus: clients today get early access to BUOS, our upcoming AI Business OS
+        </strong>
+        <span data-en="The websites we build today are designed to plug straight into BUOS when it launches — no rebuild needed. Just mention it on your call."
+              data-es="Los sitios que construimos hoy se conectan directo con BUOS cuando se lance — sin rehacer nada. Menciónalo en tu llamada.">
+          The websites we build today are designed to plug straight into BUOS when it launches — no rebuild needed. Just mention it on your call.
+        </span>
       </div>
     </div>
   </div>
@@ -983,18 +1069,18 @@
     <div class="gad-cta-grid">
 
       <div class="gad-cta-side reveal">
-        <div class="gad-eyebrow" data-en="Ready to build it?" data-es="¿Listo para construirlo?">Ready to build it?</div>
-        <h2 data-en="Book a project call. <em>We'll recommend the right path.</em>"
-            data-es="Agenda una llamada. <em>Te recomendamos la ruta correcta.</em>">
-          Book a project call. <em>We'll recommend the right path.</em>
+        <div class="gad-eyebrow" data-en="Ready to start?" data-es="¿Listo para empezar?">Ready to start?</div>
+        <h2 data-en="Free 48h mockup. <em>Zero commitment.</em>"
+            data-es="Mockup gratis en 48h. <em>Sin compromiso.</em>">
+          Free 48h mockup. <em>Zero commitment.</em>
         </h2>
         <p class="lead"
-           data-en="Tell us about your business and we'll recommend the right model — monthly plan, buyout build, custom AI / automation system, or the BUOS waitlist. Most calls take less than 20 minutes."
-           data-es="Cuéntanos sobre tu negocio y te recomendamos el modelo correcto — plan mensual, desarrollo a compra, sistema custom con IA / automatización o el waitlist de BUOS. La mayoría de las llamadas dura menos de 20 minutos.">
-          Tell us about your business and we'll recommend the right model — monthly plan, buyout build, custom AI / automation system, or the BUOS waitlist. Most calls take less than 20 minutes.
+           data-en="Tell us about your business and we'll send a free 1-page mockup within 48 hours. No payment, no contract — see what your future website could look like before you decide anything."
+           data-es="Cuéntanos sobre tu negocio y te enviamos un mockup de 1 página gratis en 48 horas. Sin pago, sin contrato — ve cómo se vería tu futuro sitio antes de decidir nada.">
+          Tell us about your business and we'll send a free 1-page mockup within 48 hours. No payment, no contract — see what your future website could look like before you decide anything.
         </p>
         <ul class="gad-cta-bullets">
-          <li><i class="fa-solid fa-circle-check"></i> <span data-en="Free consultation — no commitment" data-es="Consulta gratuita — sin compromiso">Free consultation — no commitment</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span data-en="Free 1-page custom mockup before you pay anything" data-es="Mockup personalizado de 1 página, gratis antes de pagar">Free 1-page custom mockup before you pay anything</span></li>
           <li><i class="fa-solid fa-circle-check"></i> <span data-en="Bilingual EN / ES — communication in your language" data-es="Bilingüe EN / ES — comunicación en tu idioma">Bilingual EN / ES — communication in your language</span></li>
           <li><i class="fa-solid fa-circle-check"></i> <span data-en="Real human follow-up within 1 business day" data-es="Seguimiento humano real en 1 día hábil">Real human follow-up within 1 business day</span></li>
           <li><i class="fa-solid fa-circle-check"></i> <span data-en="Industry-specific recommendation — not a generic pitch" data-es="Recomendación por industria — no un pitch genérico">Industry-specific recommendation — not a generic pitch</span></li>
@@ -1004,11 +1090,11 @@
       <div class="gad-form-card reveal" aria-labelledby="gad-form-title">
         <div id="gad-form-body">
           <div class="gad-form-title" id="gad-form-title"
-               data-en="Book your project call" data-es="Agenda tu llamada">Book your project call</div>
+               data-en="Get your free 48h mockup" data-es="Recibe tu mockup gratis en 48h">Get your free 48h mockup</div>
           <div class="gad-form-sub"
-               data-en="Takes about 60 seconds. We'll get back within 1 business day."
-               data-es="Toma unos 60 segundos. Respondemos en 1 día hábil.">
-            Takes about 60 seconds. We'll get back within 1 business day.
+               data-en="4 quick fields. We respond within 1 business day with a free mockup before you commit to anything."
+               data-es="4 campos rápidos. Respondemos en 1 día hábil con un mockup gratis antes de que te comprometas a nada.">
+            4 quick fields. We respond within 1 business day with a free mockup before you commit to anything.
           </div>
 
           <div class="gad-form-error" id="gad-form-error" role="alert" aria-live="assertive"></div>
@@ -1025,72 +1111,37 @@
               </div>
             </div>
 
-            <div class="gad-form-row">
-              <div class="gad-form-field">
-                <label for="gad-business" data-en="Business name" data-es="Nombre del negocio">Business name</label>
-                <input type="text" id="gad-business" name="business" autocomplete="organization" maxlength="100" placeholder="Acme Co." />
-              </div>
-              <div class="gad-form-field">
-                <label for="gad-industry" data-en="Industry" data-es="Industria">Industry</label>
-                <select id="gad-industry" name="industry">
-                  <option value="" data-en="Select your industry…" data-es="Selecciona tu industria…">Select your industry…</option>
-                  <option value="florist" data-en="Florist" data-es="Florería">Florist</option>
-                  <option value="restaurant" data-en="Restaurant" data-es="Restaurante">Restaurant</option>
-                  <option value="med-spa" data-en="Med Spa" data-es="Med Spa">Med Spa</option>
-                  <option value="real-estate" data-en="Real Estate" data-es="Real Estate">Real Estate</option>
-                  <option value="coach" data-en="Coach / Consultant" data-es="Coach / Consultor">Coach / Consultant</option>
-                  <option value="agency" data-en="Agency" data-es="Agencia">Agency</option>
-                  <option value="insurance" data-en="Insurance" data-es="Seguros">Insurance</option>
-                  <option value="local-services" data-en="Local Services" data-es="Servicios Locales">Local Services</option>
-                  <option value="ecommerce" data-en="E-commerce" data-es="E-commerce">E-commerce</option>
-                  <option value="events" data-en="Events" data-es="Eventos">Events</option>
-                  <option value="salon-barber" data-en="Salon / Barber" data-es="Salón / Barbería">Salon / Barber</option>
-                  <option value="other" data-en="Other" data-es="Otro">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="gad-form-row">
-              <div class="gad-form-field">
-                <label for="gad-project-type" data-en="What you're looking for" data-es="Qué estás buscando">What you're looking for</label>
-                <select id="gad-project-type" name="project_type">
-                  <option value="" data-en="Select an option…" data-es="Selecciona una opción…">Select an option…</option>
-                  <option value="monthly_plan" data-en="Monthly Website Plan" data-es="Plan Mensual para Sitio">Monthly Website Plan</option>
-                  <option value="buyout_project" data-en="Buyout / One-Time Build" data-es="Desarrollo a Pago Único">Buyout / One-Time Build</option>
-                  <option value="ecommerce_custom" data-en="E-commerce / Advanced Custom" data-es="E-commerce / Personalizado Avanzado">E-commerce / Advanced Custom</option>
-                  <option value="software_ai" data-en="Custom Software / AI / Automation" data-es="Software / IA / Automatización">Custom Software / AI / Automation</option>
-                  <option value="not_sure" data-en="Not sure yet — recommend something" data-es="Aún no estoy seguro — recomiéndame">Not sure yet — recommend something</option>
-                </select>
-              </div>
-              <div class="gad-form-field">
-                <label for="gad-contact-pref" data-en="Preferred contact" data-es="Contacto preferido">Preferred contact</label>
-                <select id="gad-contact-pref" name="contact_pref">
-                  <option value="email" data-en="Email" data-es="Correo">Email</option>
-                  <option value="whatsapp" data-en="WhatsApp" data-es="WhatsApp">WhatsApp</option>
-                  <option value="phone" data-en="Phone" data-es="Teléfono">Phone</option>
-                </select>
-              </div>
+            <div class="gad-form-field">
+              <label for="gad-industry" data-en="Industry" data-es="Industria">Industry</label>
+              <select id="gad-industry" name="industry">
+                <option value="" data-en="Select your industry…" data-es="Selecciona tu industria…">Select your industry…</option>
+                <option value="florist" data-en="Florist" data-es="Florería">Florist</option>
+                <option value="restaurant" data-en="Restaurant" data-es="Restaurante">Restaurant</option>
+                <option value="med-spa" data-en="Med Spa" data-es="Med Spa">Med Spa</option>
+                <option value="real-estate" data-en="Real Estate" data-es="Real Estate">Real Estate</option>
+                <option value="coach" data-en="Coach / Consultant" data-es="Coach / Consultor">Coach / Consultant</option>
+                <option value="agency" data-en="Agency" data-es="Agencia">Agency</option>
+                <option value="insurance" data-en="Insurance" data-es="Seguros">Insurance</option>
+                <option value="local-services" data-en="Local Services" data-es="Servicios Locales">Local Services</option>
+                <option value="ecommerce" data-en="E-commerce" data-es="E-commerce">E-commerce</option>
+                <option value="events" data-en="Events" data-es="Eventos">Events</option>
+                <option value="salon-barber" data-en="Salon / Barber" data-es="Salón / Barbería">Salon / Barber</option>
+                <option value="other" data-en="Other" data-es="Otro">Other</option>
+              </select>
             </div>
 
             <div class="gad-form-field">
-              <label for="gad-phone" data-en="Phone (optional)" data-es="Teléfono (opcional)">Phone (optional)</label>
-              <input type="tel" id="gad-phone" name="phone" autocomplete="tel" maxlength="40" placeholder="+1 555 123 4567" inputmode="tel" />
-            </div>
-
-            <div class="gad-form-field">
-              <label for="gad-challenge" data-en="What does your business need?" data-es="¿Qué necesita tu negocio?">What does your business need?</label>
+              <label for="gad-challenge" data-en="What do you need? (optional)" data-es="¿Qué necesitas? (opcional)">What do you need? (optional)</label>
               <textarea id="gad-challenge" name="challenge" maxlength="800" rows="3"
-                placeholder="Briefly describe what you want built — website, leads, scheduling, content, AI flows, automations…"></textarea>
+                placeholder="A new website, redesign, online bookings, ecommerce, etc."></textarea>
             </div>
 
-            <!-- BUOS waitlist opt-in (Option C: secondary path on the same form) -->
-            <label class="gad-form-consent gad-buos-optin">
-              <input type="checkbox" id="gad-saas-waitlist" name="saas_waitlist" />
-              <span data-en='Also add me to the <strong>BUOS waitlist</strong> — early access to the upcoming AI Business OS SaaS.'
-                    data-es='También agrégame al <strong>waitlist de BUOS</strong> — acceso anticipado al AI Business OS SaaS.'>
-                Also add me to the <strong>BUOS waitlist</strong> — early access to the upcoming AI Business OS SaaS.
-              </span>
-            </label>
+            <!-- Hidden fields (kept for compatibility with main.js handler) -->
+            <input type="hidden" id="gad-business" value="" />
+            <input type="hidden" id="gad-project-type" value="not_sure" />
+            <input type="hidden" id="gad-contact-pref" value="email" />
+            <input type="hidden" id="gad-phone" value="" />
+            <input type="hidden" id="gad-saas-waitlist" value="" />
 
             <!-- Hidden tracking fields populated by /assets/js/main.js on load -->
             <input type="hidden" id="gad-utm_source"   name="utm_source" />
@@ -1109,8 +1160,8 @@
             </label>
 
             <button type="submit" class="gad-btn gad-btn-primary gad-form-submit" id="gad-submit">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-              <span data-en="Book a Project Call" data-es="Agendar Llamada">Book a Project Call</span>
+              <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+              <span data-en="Get My Free Mockup" data-es="Quiero Mi Mockup Gratis">Get My Free Mockup</span>
             </button>
           </form>
         </div>
@@ -1171,8 +1222,16 @@
 
 <!-- Sticky mobile CTA -->
 <a href="#contact" class="gad-mobile-cta" data-gad-cta="sticky-mobile"
-   data-en="Book a Project Call" data-es="Agendar Llamada">Book a Project Call</a>
+   data-en="Get Free Mockup" data-es="Mockup Gratis">Get Free Mockup</a>
 
 <script src="/assets/js/main.js"></script>
+<script>
+  // Failsafe: after 1.5s force-reveal anything the IntersectionObserver missed.
+  // Protects against Google Ads / SEO crawlers that don't fire IO and against
+  // any race where the observer is created after .reveal nodes are added.
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 1500);
+</script>
 </body>
 </html>
