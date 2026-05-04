@@ -654,7 +654,9 @@ function gadInitDemoForm() {
     ];
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 9000);
+    // 12s — gives the serverless function room for Web3Forms (max 8s) plus
+    // any cold-start latency without aborting the user's request.
+    const timeout = setTimeout(() => controller.abort(), 12000);
 
     try {
       const res = await fetch('/api/contact', {
