@@ -1,134 +1,43 @@
-# AGENTS.md — RuutDev Engineering Team
+# AGENTS.md — RuutDev Website
 
-> **For humans.** Filosofía y composición del equipo.
-> Para reglas operativas que Claude Code lee, ver `CLAUDE.md`.
+## Project map
 
-## Filosofía
+Commercial bilingual website for an independent Florida development studio. The application is static HTML/CSS/JavaScript deployed on Vercel with Node ESM serverless APIs. It is not a Next.js project.
 
-Cuatro principios tomados de las mejores empresas de ingeniería del mundo:
+- `index.html`: homepage.
+- `pages/`: public, legal, payment, intake, admin, and case-study documents.
+- `assets/css/`: legacy styles plus rebuild tokens/components.
+- `assets/js/`: site config, shared behavior, and legacy behavior.
+- `api/`: Vercel functions using Supabase and Web3Forms.
+- `migrations/`: reviewable database migrations.
+- `vercel.json`: routes, redirects, CORS, CSP, and security headers.
 
-1. **Craft & Taste (Apple).** Cada detalle importa. Si algo se ve descuidado, se rechaza.
-2. **Engineering Rigor (Google).** Diseño antes de código. ADRs, code reviews exhaustivos, testing como ciudadano de primera clase.
-3. **Customer Obsession (Amazon).** Cada decisión vuelve al usuario. Working backwards.
-4. **Move Fast, Stable Infra (Meta).** Iterar rápido sobre cimientos sólidos. Feature flags, observabilidad desde el día uno.
+## Commands
 
-**Lema operativo:** Plan → Design → Build → Review → Ship → Measure → Iterate.
+- Install: `npm install`
+- Develop: `npm run dev` (requires Vercel CLI and environment variables)
+- Lint: not configured; do not claim it passed.
+- Type check: not configured; use JSDoc and syntax checks until a reviewed tool is added.
+- Tests: not configured; do not send real forms/payments as tests.
+- Build: Vercel serves static files/functions; validate with a Vercel preview.
 
-## El equipo (10 agentes)
+## Conventions
 
-| Agente | Rol equivalente FAANG | Cuándo invocar |
-|---|---|---|
-| `tech-lead` | Principal Engineer | Decisiones arquitectónicas, ADRs, RFCs |
-| `product-manager` | Senior PM | Specs, user stories, métricas de éxito |
-| `ux-designer` | Product Designer | Diseño de UI, design system, accesibilidad |
-| `frontend-engineer` | Senior FE SWE | Implementar React/Next.js, hooks, estado |
-| `backend-engineer` | Senior BE SWE | Implementar APIs, services, integraciones |
-| `database-engineer` | Data Engineer / DBA | Schemas, queries, índices, migraciones |
-| `devops-engineer` | SRE | Deploy, CI/CD, monitoring, runbooks |
-| `qa-engineer` | SDET | Test plans, automatización, regresiones |
-| `security-engineer` | AppSec Engineer | OWASP, auth, secretos, threat modeling |
-| `code-reviewer` | Staff Engineer (review) | Review de PRs antes de merge |
+- English in code, commits, and repository docs; EN/ES parity in public content.
+- Reuse `rebuild.css`, `rebuild.js`, and `site-config.js`; do not duplicate business, pricing, project, analytics, or feature data.
+- Components use semantic HTML, visible labels, logical headings, keyboard support, 44px targets, visible focus, and reduced-motion support.
+- Content is direct and business-oriented. No invented customers, metrics, testimonials, guarantees, team size, or capabilities.
+- Every public page needs a unique title/description, canonical URL, correct indexation, internal links, and accurate structured data only.
+- Never expose secrets or log form bodies. Validate and limit data on client and server. Preserve payment links and production integrations unless explicitly approved.
 
-## Workflow estándar
+## Sensitive data and environment
 
-```
-┌─────────────────┐
-│ product-manager │  → spec.md
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│   tech-lead     │  → ADR.md
-└────────┬────────┘
-         ↓
-┌─────────────────┐
-│  ux-designer    │  → design.md  (si hay UI)
-└────────┬────────┘
-         ↓
-   ┌─────┴──────┬──────────┐
-   ↓            ↓          ↓
-┌─────┐    ┌───────┐   ┌──────┐
-│ FE  │    │  BE   │   │ DB   │
-└──┬──┘    └───┬───┘   └──┬───┘
-   └───────────┴──────────┘
-               ↓
-   ┌──────────────────────┐
-   │  qa + security pass  │
-   └──────────┬───────────┘
-              ↓
-   ┌────────────────────┐
-   │   code-reviewer    │  → review.md
-   └──────────┬─────────┘
-              ↓
-   ┌────────────────────┐
-   │  devops-engineer   │  → ship + runbook.md
-   └────────────────────┘
-```
+Server-only variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_ANON_KEY`, `ADMIN_EMAILS`, `WEB3FORMS_KEY`. `api/_supabase.js`, admin APIs, Vercel environment settings, Supabase policies/storage, payment URLs, and legal/payment documents require security review. Never put real secrets in tracked files.
 
-## Anatomía de un agente bien escrito
+## Must not break
 
-Cada agente sigue un mismo patrón (basado en best practices de Anthropic y la comunidad):
+Contact dual delivery, project intake, admin magic-link/allowlist, approved review moderation, `/pay`, payment success, privacy/terms, current prices, current Stripe Payment Links, and indexed-route redirects. `futureProductEnabled` must remain `false`; do not name or publish a future product.
 
-```markdown
----
-name: <kebab-case>
-description: Use PROACTIVELY when <trigger>. Produces <artifact>. MUST BE USED <when blocking>.
-tools: <minimum necessary>
-model: opus | sonnet (per role)
-permissionMode: plan | acceptEdits  (cuando aplica)
-color: <visual indicator>
----
+## Definition of done
 
-# Identity (one paragraph)
-
-## When invoked (numbered steps)
-1. Read X
-2. Apply Y
-3. Produce Z
-
-## Output format (template)
-
-## Quality bar (checklist)
-
-## Don't (anti-patterns)
-
-## Communication (idioma)
-```
-
-## Por qué este orden importa
-
-El research interno de Anthropic muestra patrones consistentes en equipos de alto rendimiento:
-
-1. **Plan antes de codear.** El equipo de Claude Code mismo dice: *"Letting Claude jump straight to coding can produce code that solves the wrong problem."* Por eso `product-manager` y `tech-lead` van primero.
-
-2. **Test-first se volvió default.** Equipos como Security Engineering en Anthropic pasaron de *"design doc → janky code → refactor → give up on tests"* a *"pseudocode → guide through TDD → check in periodically"*. Por eso `qa-engineer` define criterios antes de que se codee.
-
-3. **Small PRs.** El equipo de Claude Code tiene un p50 de 118 líneas por PR, ~5 PRs/dev/día. Nuestra "Definition of Done" en CLAUDE.md refleja esto.
-
-4. **Subagentes para preservar contexto.** El research de Anthropic confirma: *"context degradation is the primary failure mode."* Cada subagente trabaja en su propio contexto y solo el resumen vuelve al main thread.
-
-5. **Artifacts persistentes.** *"Have the agent produce a durable artifact like research.md, plan.md, or review-notes.md."* Por eso cada agente escribe a `.claude/work/`.
-
-6. **Descripciones accionables.** *"Reviews code for security issues before commits"* enruta mejor que *"security expert"*. Por eso cada `description` empieza con "Use PROACTIVELY when…".
-
-## Cómo evolucionar el equipo
-
-Cuando RuutDev crezca, considera añadir:
-
-- `mobile-engineer` — para iOS/Android nativo o React Native
-- `ml-engineer` — cuando AI integrations crezca como línea
-- `data-analyst` — cuando midas decisiones por métricas
-- `technical-writer` — para docs públicas / SDK
-- `growth-engineer` — SEO / analytics / A/B testing dedicado
-
-Para añadir un agente nuevo: copia la plantilla de cualquiera, ajusta el `description`, los `tools` y el system prompt. Commitéalo con `feat(agents): add <name>`.
-
-## Cómo mejorar agentes existentes
-
-1. Cuando un agente falla en un caso, edita su `.md` y agrega instrucción.
-2. Cuando un agente repite el mismo error, el problema suele estar en la `description`, no en el cuerpo. Reescribe la descripción para enrutarlo mejor.
-3. Cada vez que descubras una convención del codebase, agrégala a `CLAUDE.md` (no a cada agente).
-4. Mantén cada agente bajo ~200 líneas. Más allá de eso, divide en agentes especializados.
-
----
-
-*Este documento es parte del cuarteto vivo `PLANNING.md` / `DESIGN.md` / `DEVELOP.md` / `AGENTS.md`. Más `CLAUDE.md` que es leído automáticamente por Claude Code al iniciar.*
+Reproducible install; relevant checks actually executed and reported; critical routes and links verified in preview; EN/ES parity; keyboard/mobile/form QA; no unverified claims; no new secrets; no production submissions; review of security-sensitive changes; documentation updated; conventional commit on a dedicated branch, pushed without merging.

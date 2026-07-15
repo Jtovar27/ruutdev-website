@@ -25,6 +25,7 @@ async function getSupabase() {
 }
 
 const LP_MARKER = '── Google Ads LP';
+const recentRequests = new Map();
 
 function pick(text, label) {
   // Extracts "Label: value" lines from the LP-formatted message body.
@@ -158,11 +159,50 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, business, type, message } = req.body || {};
+  const { name, email, business = '', type = '', message = '', consent, website } = req.body || {};
+
+  // Honeypot: return a generic success without forwarding or persisting spam.
+  if (typeof website === 'string' && website.trim()) {
+    return res.status(200).json({ success: true });
+  }
+
+  if (typeof name !== 'string' || typeof email !== 'string' ||
+      typeof business !== 'string' || typeof type !== 'string' || typeof message !== 'string') {
+    return res.status(400).json({ error: 'Invalid field types' });
+  }
+
+  const normalized = {
+    name: name.trim(), email: email.trim(), business: business.trim(),
+    type: type.trim(), message: message.trim()
+  };
+
+  // Per-instance burst protection with bounded memory. Persistent distributed
+  // limiting remains an infrastructure follow-up for coordinated abuse.
+  const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0].trim();
+  const now = Date.now();
+  if (recentRequests.size > 1000) {
+    for (const [key, times] of recentRequests) {
+      if (!times.some((time) => now - time < 60_000)) recentRequests.delete(key);
+    }
+    if (recentRequests.size > 1000) recentRequests.delete(recentRequests.keys().next().value);
+  }
+  const recent = (recentRequests.get(ip) || []).filter((time) => now - time < 60_000);
+  if (recent.length >= 5) return res.status(429).json({ error: 'Too many requests' });
+  recent.push(now); recentRequests.set(ip, recent);
 
   // Basic field validation — mirrors client-side validation in main.js
-  if (!name || !email) {
+  if (!normalized.name || !normalized.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized.email) ||
+      normalized.name.length > 120 || normalized.email.length > 200 ||
+      normalized.business.length > 160 || normalized.type.length > 160 ||
+      normalized.message.length > 6000) {
     return res.status(400).json({ error: 'name and email are required' });
+  }
+
+  // The rebuilt commercial form requires explicit consent. Legacy landing
+  // pages remain compatible until they are retired from production.
+  const isLegacyLanding = normalized.message.includes(LP_MARKER);
+  if (!isLegacyLanding && consent !== true) {
+    return res.status(400).json({ error: 'consent is required' });
   }
 
   // Run Web3Forms email and Supabase persistence in PARALLEL.
@@ -170,7 +210,7 @@ export default async function handler(req, res) {
   //   - Supabase insert ok → lead is in /admin/intakes (Leads tab)
   //   - Web3Forms ok       → email reached the inbox
   // Only return an error to the user if BOTH fail (real lead loss).
-  const payload = { name, email, business, type, message };
+  const payload = normalized;
   const [emailResult, persisted] = await Promise.all([
     sendToWeb3Forms(payload),
     persistLead(payload).catch(err => {

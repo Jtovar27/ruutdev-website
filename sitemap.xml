@@ -1,48 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://ruutdev.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/services</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/portfolio</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/pricing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/pay</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://ruutdev.com/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+<url><loc>https://ruutdev.com/</loc><priority>1.0</priority></url>
+<url><loc>https://ruutdev.com/solutions</loc><priority>0.9</priority></url>
+<url><loc>https://ruutdev.com/solutions/websites</loc><priority>0.8</priority></url>
+<url><loc>https://ruutdev.com/solutions/business-systems</loc><priority>0.8</priority></url>
+<url><loc>https://ruutdev.com/solutions/automation-ai</loc><priority>0.8</priority></url>
+<url><loc>https://ruutdev.com/work</loc><priority>0.8</priority></url>
+<url><loc>https://ruutdev.com/process</loc><priority>0.7</priority></url>
+<url><loc>https://ruutdev.com/about</loc><priority>0.7</priority></url>
+<url><loc>https://ruutdev.com/pricing</loc><priority>0.6</priority></url>
+<url><loc>https://ruutdev.com/contact</loc><priority>0.8</priority></url>
+<url><loc>https://ruutdev.com/privacy</loc><priority>0.3</priority></url>
+<url><loc>https://ruutdev.com/terms</loc><priority>0.3</priority></url>
 </urlset>
