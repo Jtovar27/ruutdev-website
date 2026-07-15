@@ -5,4 +5,4 @@ Disallow: /admin/
 Disallow: /project-intake
 Disallow: /payment-success
 
-Sitemap: https://ruutdev.com/sitemap.xml
+Sitemap: https://www.ruutdev.com/sitemap.xml

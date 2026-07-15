@@ -337,7 +337,7 @@
           <i class="fa-solid fa-rotate"></i>
         </button>
       </div>
-      <div id="reviews-list" class="admin-loading">Loading reviews…</div>
+      <div id="reviews-list" class="admin-loading">Loading moderation queue…</div>
     </div>
   </div>
 
@@ -786,7 +786,7 @@
     if (!currentSession) return showLogin();
     const list = $('reviews-list');
     list.className = 'admin-loading';
-    list.textContent = 'Loading reviews…';
+    list.textContent = 'Loading moderation queue…';
 
     try {
       const url = '/api/admin/reviews?status=' + encodeURIComponent(activeReviewStatus);

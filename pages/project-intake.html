@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MGKZGHK7');</script>
-  <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Intake — RuutDev</title>
   <meta name="description" content="Project intake form for RuutDev clients. Tell us about your business, brand, and goals so we can start building." />
   <meta name="robots" content="noindex, nofollow" />
-  <link rel="canonical" href="https://ruutdev.com/project-intake" />
+  <link rel="canonical" href="https://www.ruutdev.com/project-intake" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ruutdev.com/project-intake" />
+  <meta property="og:url" content="https://www.ruutdev.com/project-intake" />
   <meta property="og:title" content="Project Intake — RuutDev" />
   <meta property="og:description" content="Tell us about your business, brand, and goals so we can start building." />
   <meta property="og:site_name" content="RuutDev" />
@@ -24,6 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800\&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,300\&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="/assets/css/rebuild.css" />
   <style>
     .intake-section-h {
       margin: 28px 0 14px;
@@ -92,14 +86,13 @@
 </head>
 <body id="page-project-intake">
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MGKZGHK7"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <div id="nav-placeholder"></div>
 
 <!-- ── PAGE HERO ── -->
-<div class="page-hero" style="padding-bottom:60px;">
+<main id="main"><div class="page-hero" style="padding-bottom:60px;">
   <div class="page-hero-content">
     <div class="hero-badge" data-en="Project Intake" data-es="Inicio de Proyecto">Project Intake</div>
     <h1 data-en="Tell us about your<br /><em>business and project</em>" data-es="Cuentanos sobre tu<br /><em>negocio y proyecto</em>">Tell us about your<br /><em>business and project</em></h1>
@@ -251,7 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ── FOOTER ── -->
-<footer class="site-footer">
+</main><footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="/" class="footer-logo"><span></span>RuutDev</a>
@@ -291,7 +284,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/site-config.js"></script>
+<script src="/assets/js/rebuild.js"></script>
 <script>
   /* ──────────── Helpers ──────────── */
   const ixVal = id => (document.getElementById(id)?.value || '').trim();

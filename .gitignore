@@ -11,6 +11,7 @@
 # Node
 node_modules/
 public/
+.qa/
 
 # Claude Code per-user settings (permissions are personal, not team-wide)
 .claude/settings.local.json

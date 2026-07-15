@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://ruutdev.com/</loc><priority>1.0</priority></url>
-<url><loc>https://ruutdev.com/solutions</loc><priority>0.9</priority></url>
-<url><loc>https://ruutdev.com/solutions/websites</loc><priority>0.8</priority></url>
-<url><loc>https://ruutdev.com/solutions/business-systems</loc><priority>0.8</priority></url>
-<url><loc>https://ruutdev.com/solutions/automation-ai</loc><priority>0.8</priority></url>
-<url><loc>https://ruutdev.com/work</loc><priority>0.8</priority></url>
-<url><loc>https://ruutdev.com/process</loc><priority>0.7</priority></url>
-<url><loc>https://ruutdev.com/about</loc><priority>0.7</priority></url>
-<url><loc>https://ruutdev.com/pricing</loc><priority>0.6</priority></url>
-<url><loc>https://ruutdev.com/contact</loc><priority>0.8</priority></url>
-<url><loc>https://ruutdev.com/privacy</loc><priority>0.3</priority></url>
-<url><loc>https://ruutdev.com/terms</loc><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://www.ruutdev.com/</loc><xhtml:link rel="alternate" hreflang="en" href="https://www.ruutdev.com/"/><xhtml:link rel="alternate" hreflang="es" href="https://www.ruutdev.com/?lang=es"/><priority>1.0</priority></url>
+  <url><loc>https://www.ruutdev.com/solutions</loc><priority>0.9</priority></url>
+  <url><loc>https://www.ruutdev.com/solutions/websites</loc><priority>0.8</priority></url>
+  <url><loc>https://www.ruutdev.com/solutions/business-systems</loc><priority>0.8</priority></url>
+  <url><loc>https://www.ruutdev.com/solutions/automation-ai</loc><priority>0.8</priority></url>
+  <url><loc>https://www.ruutdev.com/work</loc><priority>0.6</priority></url>
+  <url><loc>https://www.ruutdev.com/process</loc><priority>0.7</priority></url>
+  <url><loc>https://www.ruutdev.com/about</loc><priority>0.7</priority></url>
+  <url><loc>https://www.ruutdev.com/pricing</loc><priority>0.6</priority></url>
+  <url><loc>https://www.ruutdev.com/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://www.ruutdev.com/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://www.ruutdev.com/terms</loc><priority>0.3</priority></url>
 </urlset>
