@@ -1,40 +1,22 @@
-<!-- ── NAV ── -->
-<nav>
+<nav aria-label="Primary navigation">
   <a href="/" class="nav-logo"><span></span>RuutDev</a>
   <ul class="nav-links">
-    <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
-    <li><a href="/portfolio"><span data-en="Portfolio" data-es="Portafolio">Portfolio</span></a></li>
-    <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
-    <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
-    <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+    <li><a href="/solutions"><span data-en="Solutions" data-es="Soluciones">Solutions</span></a></li>
+    <li><a href="/work"><span data-en="Work" data-es="Proyectos">Work</span></a></li>
+    <li><a href="/process"><span data-en="Process" data-es="Proceso">Process</span></a></li>
+    <li><a href="/about"><span data-en="About" data-es="Acerca de">About</span></a></li>
     <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
-    <li><a href="/contact" class="nav-cta"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a></li>
-    <li class="nav-lang-item">
-      <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
-        <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
-      </div>
-    </li>
+    <li><a href="/contact" class="nav-cta"><span data-en="Start a Project" data-es="Iniciar un proyecto">Start a Project</span></a></li>
+    <li class="nav-lang-item"><div class="lang-toggle" role="group" aria-label="Language"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
   </ul>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
-    <span class="ham-line"></span>
-    <span class="ham-line"></span>
-    <span class="ham-line"></span>
-  </button>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-controls="nav-mobile" aria-expanded="false"><span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span></button>
 </nav>
 <div class="nav-mobile-overlay" id="nav-mobile-overlay" onclick="toggleMenu()"></div>
 <ul class="nav-mobile" id="nav-mobile">
-  <li><a href="/services"><span data-en="Services" data-es="Servicios">Services</span></a></li>
-  <li><a href="/portfolio"><span data-en="Portfolio" data-es="Portafolio">Portfolio</span></a></li>
-  <li><a href="/pricing"><span data-en="Pricing" data-es="Precios">Pricing</span></a></li>
-  <li><a href="/pay"><span data-en="Pay" data-es="Pagar">Pay</span></a></li>
-  <li><a href="/about"><span data-en="About" data-es="Nosotros">About</span></a></li>
+  <li><a href="/solutions"><span data-en="Solutions" data-es="Soluciones">Solutions</span></a></li>
+  <li><a href="/work"><span data-en="Work" data-es="Proyectos">Work</span></a></li>
+  <li><a href="/process"><span data-en="Process" data-es="Proceso">Process</span></a></li>
+  <li><a href="/about"><span data-en="About" data-es="Acerca de">About</span></a></li>
   <li><a href="/contact"><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
-  <li class="mobile-nav-footer">
-    <a href="/contact" class="nav-cta btn-primary"><span data-en="Start Your Project" data-es="Comienza Tu Proyecto">Start Your Project</span></a>
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button>
-      <button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button>
-    </div>
-  </li>
+  <li class="mobile-nav-footer"><a href="/contact" class="nav-cta btn-primary"><span data-en="Start a Project" data-es="Iniciar un proyecto">Start a Project</span></a><div class="lang-toggle"><button class="lang-btn active" data-lang="en" onclick="toggleLang('en')">EN</button><button class="lang-btn" data-lang="es" onclick="toggleLang('es')">ES</button></div></li>
 </ul>
