@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /qualifier.html
+Disallow: /admin/
+Disallow: /project-intake
+Disallow: /payment-success
 
 Sitemap: https://ruutdev.com/sitemap.xml
