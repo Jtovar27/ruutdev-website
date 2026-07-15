@@ -8,5 +8,10 @@ for (const file of files) {
     if (!html.includes(required)) throw new Error(`${file}: missing ${required}`);
   }
 }
+for (const file of ['pages/pricing.html', 'pages/privacy.html', 'pages/terms.html']) {
+  const html = await readFile(file, 'utf8');
+  if (!html.includes('/assets/css/rebuild.css')) throw new Error(`${file}: rebuilt design system is not loaded`);
+  if (!html.includes('id="nav-placeholder"')) throw new Error(`${file}: shared navigation placeholder is missing`);
+}
 JSON.parse(await readFile('vercel.json', 'utf8'));
 console.log(`Static checks passed for ${files.length} critical pages.`);

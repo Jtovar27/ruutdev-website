@@ -31,3 +31,11 @@ test('contact has consent and spam controls', async () => {
   assert.match(api, /!isLegacyLanding && consent !== true/);
   assert.match(api, /429/);
 });
+
+test('pricing and legal pages use the rebuilt design system', async () => {
+  for (const file of ['pages/pricing.html', 'pages/privacy.html', 'pages/terms.html']) {
+    const html = await readFile(file, 'utf8');
+    assert.match(html, /assets\/css\/rebuild\.css/);
+    assert.match(html, /id="nav-placeholder"/);
+  }
+});
