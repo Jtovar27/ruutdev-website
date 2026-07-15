@@ -24,77 +24,24 @@ async function getSupabase() {
   }
 }
 
-const LP_MARKER = '── Google Ads LP';
 const recentRequests = new Map();
 
-function pick(text, label) {
-  // Extracts "Label: value" lines from the LP-formatted message body.
-  const re = new RegExp(`^${label}:\\s*(.*?)\\s*$`, 'mi');
-  const m = (text || '').match(re);
-  if (!m) return null;
-  const v = (m[1] || '').trim();
-  if (!v || v === '-' || v === '(not specified)' || v === '(not provided)') return null;
-  return v;
-}
-
-function pickUtm(text, key) {
-  // The LP packs UTMs as: `UTM source/medium/campaign: a / b / c` and `UTM term/content: x / y`
-  if (!text) return null;
-  const m1 = text.match(/UTM source\/medium\/campaign:\s*([^\n]+)/i);
-  const m2 = text.match(/UTM term\/content:\s*([^\n]+)/i);
-  let source = null, medium = null, campaign = null, term = null, content = null;
-  if (m1) {
-    const parts = m1[1].split('/').map(s => s.trim());
-    [source, medium, campaign] = parts;
-  }
-  if (m2) {
-    const parts = m2[1].split('/').map(s => s.trim());
-    [term, content] = parts;
-  }
-  const map = { source, medium, campaign, term, content };
-  const v = map[key];
-  if (!v || v === '-') return null;
-  return v;
-}
-
 function extractLeadFields({ name, email, business, type, message }) {
-  const isLpLead = typeof message === 'string' && message.includes(LP_MARKER);
-
-  if (!isLpLead) {
-    // Generic /contact submission — store the bare minimum so it still shows up.
-    return {
-      name: name?.slice(0, 200) || '',
-      email: email?.slice(0, 200) || '',
-      business: business?.slice(0, 200) || null,
-      industry: null,
-      message: (message || '').slice(0, 4000) || null,
-      source: type || 'website',
-      landing_page: null,
-      page_url: null,
-      referrer: null,
-      utm_source: null,
-      utm_medium: null,
-      utm_campaign: null,
-      utm_term: null,
-      utm_content: null
-    };
-  }
-
   return {
     name: name?.slice(0, 200) || '',
     email: email?.slice(0, 200) || '',
     business: business?.slice(0, 200) || null,
-    industry: pick(message, 'Industry'),
-    message: pick(message, 'What the business needs'),
-    source: 'google_ads_lp',
-    landing_page: pick(message, 'Landing page'),
-    page_url: pick(message, 'Page URL'),
-    referrer: pick(message, 'Referrer'),
-    utm_source: pickUtm(message, 'source'),
-    utm_medium: pickUtm(message, 'medium'),
-    utm_campaign: pickUtm(message, 'campaign'),
-    utm_term: pickUtm(message, 'term'),
-    utm_content: pickUtm(message, 'content')
+    industry: null,
+    message: (message || '').slice(0, 4000) || null,
+    source: type || 'website',
+    landing_page: null,
+    page_url: null,
+    referrer: null,
+    utm_source: null,
+    utm_medium: null,
+    utm_campaign: null,
+    utm_term: null,
+    utm_content: null
   };
 }
 
@@ -149,7 +96,7 @@ async function sendToWeb3Forms({ name, email, business, type, message }) {
 export default async function handler(req, res) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', 'https://ruutdev.com');
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.ruutdev.com');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(200).end();
@@ -171,9 +118,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid field types' });
   }
 
+  const clean = (value) => value.trim().replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, ' ');
   const normalized = {
-    name: name.trim(), email: email.trim(), business: business.trim(),
-    type: type.trim(), message: message.trim()
+    name: clean(name), email: clean(email), business: clean(business),
+    type: clean(type), message: clean(message)
   };
 
   // Per-instance burst protection with bounded memory. Persistent distributed
@@ -190,7 +138,7 @@ export default async function handler(req, res) {
   if (recent.length >= 5) return res.status(429).json({ error: 'Too many requests' });
   recent.push(now); recentRequests.set(ip, recent);
 
-  // Basic field validation — mirrors client-side validation in main.js
+  // Basic field validation mirrors the commercial form in rebuild.js.
   if (!normalized.name || !normalized.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized.email) ||
       normalized.name.length > 120 || normalized.email.length > 200 ||
       normalized.business.length > 160 || normalized.type.length > 160 ||
@@ -198,10 +146,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'name and email are required' });
   }
 
-  // The rebuilt commercial form requires explicit consent. Legacy landing
-  // pages remain compatible until they are retired from production.
-  const isLegacyLanding = normalized.message.includes(LP_MARKER);
-  if (!isLegacyLanding && consent !== true) {
+  if (consent !== true) {
     return res.status(400).json({ error: 'consent is required' });
   }
 
@@ -222,8 +167,7 @@ export default async function handler(req, res) {
   if (emailResult.ok || persisted) {
     return res.status(200).json({
       success: true,
-      // Useful for ops debugging in browser devtools — never used by the LP UI.
-      delivered: { email: !!emailResult.ok, db: !!persisted }
+      delivered: true
     });
   }
   if (emailResult.error?.name === 'AbortError') {

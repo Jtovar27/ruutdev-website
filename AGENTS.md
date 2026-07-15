@@ -16,10 +16,10 @@ Commercial bilingual website for an independent Florida development studio. The 
 
 - Install: `npm install`
 - Develop: `npm run dev` (requires Vercel CLI and environment variables)
-- Lint: not configured; do not claim it passed.
-- Type check: not configured; use JSDoc and syntax checks until a reviewed tool is added.
-- Tests: not configured; do not send real forms/payments as tests.
-- Build: Vercel serves static files/functions; validate with a Vercel preview.
+- Lint/static validation: `npm run lint`
+- JavaScript syntax/type proxy: `npm run typecheck` (syntax checks, not a TypeScript compiler)
+- Tests: `npm test` (builds first; mocks contact validation and never sends real forms/payments)
+- Build: `npm run build` (creates the allowlisted `public/` deployment artifact)
 
 ## Conventions
 
