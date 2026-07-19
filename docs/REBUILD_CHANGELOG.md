@@ -8,3 +8,4 @@
 - Added redirects, sitemap, robots exclusions, and security headers.
 - Removed the named future-product campaign from public routing without deleting historical source.
 - Preserved payment links, legal content, prices, contact details, admin, intake, and production integrations.
+- Restored public IA consistency: retired `/services`, aligned copy to Florida/U.S., replaced public Hotmail references with `hello@ruutdev.com`, removed public portfolio verification labels, and added lightweight GTM loading to rebuilt pages.

@@ -1,7 +1,35 @@
 (() => {
   const root = document.documentElement;
+  const GTM_ID = 'GTM-MGKZGHK7';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const saved = localStorage.getItem('ruutdev_lang');
   const lang = saved === 'es' ? 'es' : 'en';
+
+  function ensureGtm() {
+    window.dataLayer = window.dataLayer || [];
+    if (document.querySelector(`script[src*="${GTM_ID}"]`)) return;
+    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(script);
+  }
+
+  function splitHeroHeadlines() {
+    document.querySelectorAll('[data-split-hero]').forEach((headline) => {
+      const text = headline.dataset[root.lang] || headline.textContent.trim();
+      headline.setAttribute('aria-label', text);
+      headline.textContent = '';
+      text.split(' ').forEach((word, index) => {
+        const span = document.createElement('span');
+        span.className = 'split-word';
+        span.setAttribute('aria-hidden', 'true');
+        span.style.setProperty('--i', String(index));
+        span.textContent = word;
+        headline.append(span, document.createTextNode(' '));
+      });
+    });
+  }
 
   function applyLanguage(next) {
     root.lang = next;
@@ -13,9 +41,11 @@
       el.placeholder = el.dataset[`placeholder${next === 'es' ? 'Es' : 'En'}`];
     });
     document.querySelectorAll('[data-lang]').forEach((button) => {
-      button.setAttribute('aria-pressed', String(button.dataset.lang === next));
-      button.textContent = next === 'en' ? 'ES' : 'EN';
+      const explicit = button.dataset.lang === 'en' || button.dataset.lang === 'es';
+      button.setAttribute('aria-pressed', String(explicit ? button.dataset.lang === next : next === 'es'));
+      if (!explicit) button.textContent = next === 'en' ? 'ES' : 'EN';
     });
+    splitHeroHeadlines();
     document.dispatchEvent(new CustomEvent('ruutdev:language', { detail: next }));
   }
 
@@ -26,12 +56,28 @@
   }
   window.ruutdevTrack = track;
 
+  ensureGtm();
+
   document.querySelectorAll('[data-lang]').forEach((button) => button.addEventListener('click', () => {
-    const next = root.lang === 'en' ? 'es' : 'en';
+    const explicit = button.dataset.lang === 'en' || button.dataset.lang === 'es';
+    const next = explicit ? button.dataset.lang : (root.lang === 'en' ? 'es' : 'en');
     applyLanguage(next);
     track('language_switch', { language: next });
   }));
   applyLanguage(lang);
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
+  }
 
   const menu = document.querySelector('[data-menu]');
   const panel = document.getElementById('site-nav');

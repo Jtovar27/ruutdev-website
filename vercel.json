@@ -18,7 +18,6 @@
     { "source": "/portfolio",        "destination": "/pages/portfolio" },
     { "source": "/pricing",          "destination": "/pages/pricing" },
     { "source": "/privacy",          "destination": "/pages/privacy" },
-    { "source": "/services",         "destination": "/pages/services" },
     { "source": "/terms",            "destination": "/pages/terms" },
     { "source": "/portfolio/la-cafebreria",              "destination": "/pages/portfolio/la-cafebreria" },
     { "source": "/portfolio/taxes-insurance-group",      "destination": "/pages/portfolio/taxes-insurance-group" },

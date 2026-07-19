@@ -269,7 +269,7 @@ These steps happen inside the Google Ads UI and are **not** automated by this co
    - "AI Business OS for Small Business"
    - "CRM, Scheduling & Marketing — One App"
    - "Run Your Business with AI Agents"
-   - "Bilingual Business OS · USA & LATAM"
+   - "Bilingual Business OS · Florida"
    - "Request a Free Demo Today"
 4. **Final URL:** `https://ruutdev.com/google-ads/ai-business-os`
 5. **Tracking template (optional):**

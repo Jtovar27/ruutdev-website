@@ -9,12 +9,12 @@
 ## Commercial/legal
 
 - Confirm every price, cancellation rule, ownership transfer, hosting/maintenance obligation, and third-party cost.
-- Confirm Stripe/PayPal/Zelle behavior and Payment Links; `/pay` was not altered.
+- Confirm Stripe/PayPal/Zelle behavior and Payment Links after the public email change to `hello@ruutdev.com`.
 - Review privacy/terms and whether a residential address exists or is legally necessary.
 
 ## Operations
 
-- Configure a domain email; current Hotmail remains functional and was not replaced.
-- Confirm WhatsApp/phone, social links, business hours, and Florida/Venezuela market language.
+- Confirm `hello@ruutdev.com` is fully configured for contact, PayPal, and Zelle before relying on alternative payment methods.
+- Confirm WhatsApp/phone, social links, business hours, and Florida/U.S. market language.
 - Provide analytics/consent requirements and IDs. Do not invent IDs.
 - Review Supabase RLS/storage policies, private uploads, cleanup, and durable rate limiting.

@@ -4,7 +4,7 @@
 window.RUUTDEV = Object.freeze({
   business: Object.freeze({
     name: 'RuutDev',
-    email: 'helloruutdev@hotmail.com',
+    email: 'hello@ruutdev.com',
     phoneDisplay: '+1 (407) 694-6371',
     phone: '+14076946371',
     whatsapp: 'https://wa.me/14076946371',
@@ -28,7 +28,7 @@ window.RUUTDEV = Object.freeze({
     oneTime: Object.freeze({ starter: 800, business: 1500, advanced: 2500 })
   }),
   projects: Object.freeze([
-    { slug: 'taxes-insurance-group', title: 'Taxes Insurance Group', status: 'client', industry: 'Tax and insurance services', services: ['Website', 'Bilingual experience'], featured: true, liveUrl: null },
+    { slug: 'taxes-insurance-group', title: 'Taxes Insurance Group', status: 'client', industry: 'Tax and insurance services', services: ['Website', 'Bilingual service journey'], featured: true, liveUrl: null },
     { slug: 'la-cafebreria', title: 'La Cafebrería', status: 'client', industry: 'Hospitality', services: ['Website', 'Content structure'], featured: true, liveUrl: null },
     { slug: 'acaballo-equestrian-school', title: 'AC.aballo Equestrian School', status: 'client', industry: 'Equestrian education', services: ['Website', 'Lead capture'], featured: true, liveUrl: null }
   ]),

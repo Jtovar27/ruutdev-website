@@ -3,11 +3,11 @@
 | Area | Current disposition |
 |---|---|
 | Home | Rebuilt around positioning, problems, three solutions, process, founder, CTA |
-| Services | Redirect to Solutions; legacy file retained for rollback |
+| Services | Retired; `/services` permanently redirects to `/solutions` |
 | Solutions | New overview plus three detail pages |
-| Portfolio | Public alias Work; status/evidence requires owner verification before full migration |
-| About | Preserved; founder-led copy migration remains |
-| Pricing | Preserved amounts and links; centralized reference added |
+| Portfolio | Public alias Work; internal verification language removed from public copy |
+| About | Rewritten around founder-led Florida/U.S. positioning |
+| Pricing | Rebuilt with monthly and buyout models; approved amounts and Stripe links preserved |
 | Contact | Rebuilt as problem-first bilingual form |
 | Pay / success | Preserved and kept outside primary navigation |
 | Intake / admin | Preserved; security follow-up required |

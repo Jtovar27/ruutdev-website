@@ -400,9 +400,9 @@ const questions = [
     hint: 'Esto determina el mercado y el rango de precios.',
     type: 'single',
     options: [
-      { value: 'usa',       icon: '🇺🇸', title: 'Estados Unidos',              desc: 'Cualquier ciudad o estado de USA' },
-      { value: 'venezuela', icon: '🇻🇪', title: 'Venezuela',                   desc: 'Cualquier ciudad de Venezuela' },
-      { value: 'latam',     icon: '🌎', title: 'Otro país de Latinoamérica',   desc: 'Colombia, México, Argentina, etc.' },
+      { value: 'usa',       icon: '🇺🇸', title: 'Florida / Estados Unidos',     desc: 'Mercado principal de RuutDev' },
+      { value: 'venezuela', icon: '🇺🇸', title: 'Otro estado de EE.UU.',        desc: 'Fuera de Florida, revisar alcance' },
+      { value: 'latam',     icon: '🌎', title: 'Mercado fuera de EE.UU.',       desc: 'Revisar manualmente antes de cotizar' },
     ],
   },
 
@@ -1035,8 +1035,8 @@ function computeResult(){
     notes.push('Tiene un sitio malo — muéstrale el contraste con la demo para que vea la diferencia.');
   if((multi.clients_source || []).includes('word_mouth') && !(multi.clients_source || []).includes('google'))
     notes.push('Depende del boca a boca — explica que un sitio web multiplica ese alcance sin esfuerzo extra.');
-  if(features.includes('payments') && location === 'venezuela')
-    notes.push('Pagos online en Venezuela — confirmar qué métodos de pago acepta (Zelle, Binance, etc.).');
+  if(features.includes('payments') && location !== 'usa')
+    notes.push('Pagos online fuera del mercado principal — confirmar método de pago y alcance antes de cotizar.');
 
   // V2 notes
   if(a.primary_cta === 'whatsapp')
@@ -1093,7 +1093,7 @@ function renderResult(){
   };
   const urg = urgencyConfig[urgency] || urgencyConfig.soon;
 
-  const locationLabels = { usa: '🇺🇸 USA', venezuela: '🇻🇪 Venezuela', latam: '🌎 Latinoamérica' };
+  const locationLabels = { usa: '🇺🇸 Florida / USA', venezuela: '🇺🇸 Otro estado de EE.UU.', latam: '🌎 Fuera de EE.UU.' };
 
   // ── Label mappers ──
   const industryLabel    = { restaurant:'Restaurante/Comida', health:'Salud/Bienestar', beauty:'Belleza', retail:'Tienda/Comercio', services:'Servicios profesionales', real_estate:'Inmobiliaria', education:'Educación', other:'Otro' }[a.industry] || a.industry;
@@ -1212,7 +1212,7 @@ function copyBrief(){
   const a   = answers;
   const ms  = multiSelections;
   const { product, priceRange, notes } = computeResult();
-  const locationLabels = { usa:'USA', venezuela:'Venezuela', latam:'Latinoamérica' };
+  const locationLabels = { usa:'Florida / USA', venezuela:'Otro estado de EE.UU.', latam:'Fuera de EE.UU.' };
 
   // INYECCIÓN: Formateo para portapapeles
   const fontLabel        = { serif:'Serif (Clásico)', sans:'Sans-Serif (Moderno)', display:'Display (Impactante)', mono:'Monospace (Técnico)' }[a.font_style] || '—';
